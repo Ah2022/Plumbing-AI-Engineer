@@ -55,7 +55,7 @@ def test_create_project_succeeds(fresh_app):
 
 
 @pytest.mark.parametrize("page", [
-    "Code Profiles", "Network Review",
+    "Code Profiles", "Network Review", "Calculation Sheets",
     "Design Basis", "Fixtures & Water", "Drainage & Vent",
     "Hot Water", "Tanks", "Pumps", "Stormwater",
     "Code Compliance / QA-QC", "QA/QC Dashboard", "Report / Export",

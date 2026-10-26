@@ -780,15 +780,16 @@ def _project_code(conn, project_id) -> str:
 # -------------------------------------------------------------------- main
 
 def main():
+    from app.workbook_page import page_calculation_sheets
     if "conn" not in st.session_state:
         st.session_state.conn = get_conn()
 
     st.sidebar.title("🔧 Plumbing Design Engine")
-    st.sidebar.caption("v0.6.2 — Phases 3–5 network review build")
+    st.sidebar.caption("v0.6.2 — Network and reference workbook review")
     st.warning("Review build: calculation benchmarks pass, but code adoption, numeric-table applicability, "
                "model completeness and engineering acceptance still require review.")
     page = st.sidebar.radio("Navigate", [
-        "Project", "Code Profiles", "Network Review", "Design Basis", "Fixtures & Water", "Drainage & Vent",
+        "Project", "Code Profiles", "Network Review", "Calculation Sheets", "Design Basis", "Fixtures & Water", "Drainage & Vent",
         "Hot Water", "Tanks", "Pumps", "Stormwater",
         "Code Compliance / QA-QC", "QA/QC Dashboard", "Report / Export",
     ])
@@ -813,6 +814,7 @@ def main():
         "Project": page_project,
         "Code Profiles": page_code_profiles,
         "Network Review": page_network_review,
+        "Calculation Sheets": page_calculation_sheets,
         "Design Basis": page_design_basis,
         "Fixtures & Water": page_water,
         "Drainage & Vent": page_drainage_vent,

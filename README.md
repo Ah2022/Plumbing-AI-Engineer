@@ -6,7 +6,7 @@ Python/SQLite plumbing calculation engine with a Streamlit interface, code-rule 
 
 ## Test the engine
 
-**[Open the updated Phases 3–5 Streamlit app](http://localhost:8503)** — works on the computer running Streamlit. This is a local URL, not an internet deployment.
+**[Open the updated calculation-sheet and network Streamlit app](http://localhost:8504)** — works on the computer running Streamlit. This is a local URL, not an internet deployment.
 
 ```bash
 git clone https://github.com/Ah2022/Plumbing-AI-Engineer.git
@@ -15,7 +15,7 @@ python -m venv .venv
 # Windows: .venv\Scripts\activate
 # macOS/Linux: source .venv/bin/activate
 python -m pip install -r requirements.txt
-python -m streamlit run app/streamlit_app.py --server.port 8503
+python -m streamlit run app/streamlit_app.py --server.port 8504
 ```
 
 The app initializes a database on first use. After each implementation, pull the latest `main` and refresh the page; restart if dependencies changed. Streamlit reloads saved source changes. Use synthetic review projects while audit findings remain open.
@@ -43,6 +43,12 @@ Once deployed, add its actual URL here as the permanent test link. Community Clo
 - `Egyptian_Plumbing_Design_Data.xlsx`
 - `SBC701_Saudi_Plumbing_Design_Data.xlsx`
 
+## Calculation sheets
+
+The supplied 48 workbooks are registered by system, worksheet, code/reference family and source hash. Open **Calculation Sheets** to inspect references and source formulas, choose output cells, change inputs as JSON and save fresh calculation traces. This includes IPC/UPC/NSPC, ASHRAE/ASPE, Egyptian/Qatar, NFPA, HTM and manufacturer methods; it is not a single IPC 2024 dataset. See the [source review and complete attribution](docs/CALCULATION_SHEETS_REVIEW.md).
+
+Original XLSM packages stay local in `local_sources/calculation_sheets/` and are excluded from Git. To install them in another checkout, run `python -m workbooks.library FIRST_ZIP SECOND_ZIP`. The public catalogue remains browsable without them. VBA, external links and unsupported formulas are never executed or replaced by cached values. Formula reproduction is distinct from engineering/code approval.
+
 ## Review workflow
 
 1. Create a project; IPC 2024 is the default first verification target.
@@ -55,7 +61,7 @@ Once deployed, add its actual URL here as the permanent test link. Community Clo
 
 The ten defect reproductions left after Phase 2 now pass. Numeric dataset editions and project applicability still require review. US customary/SI selection records the design basis; calculation forms and mapped network JSON retain explicitly labeled units.
 
-For local comparison, retained [Phase 1](http://localhost:8501) and [Phase 2](http://localhost:8502) apps run separately from the [current build](http://localhost:8503). These services must be running on your computer.
+For local comparison, retained [Phase 1](http://localhost:8501) and [Phase 2](http://localhost:8502) apps run separately from the [current build](http://localhost:8504). These services must be running on your computer.
 
 ## Verification
 
@@ -64,7 +70,7 @@ For local comparison, retained [Phase 1](http://localhost:8501) and [Phase 2](ht
 python -m pytest tests/ -q
 
 # Public-checkout checks
-python -m pytest tests/test_audit_benchmarks.py tests/test_bim_exchange.py tests/test_reports.py tests/test_runtime_safety.py tests/test_governance.py tests/test_governance_ui.py tests/test_foundations.py tests/test_networks.py tests/test_network_ui.py -q
+python -m pytest tests/test_audit_benchmarks.py tests/test_bim_exchange.py tests/test_reports.py tests/test_runtime_safety.py tests/test_governance.py tests/test_governance_ui.py tests/test_foundations.py tests/test_networks.py tests/test_network_ui.py tests/test_workbooks.py tests/test_workbook_ui.py -q
 
 # Inventory; uses an in-memory database and prints no workbook values
 python -m tools.baseline_inventory
@@ -73,7 +79,7 @@ python -m tools.baseline_inventory
 python -m tests.demo_project
 ```
 
-Verified on Windows/Python 3.12.14 with Streamlit 1.66.1: **241 passed, no expected failures**. Synthetic network tests cover independent pressure-path calculations, catalogue constraints, invalid topology, drainage/vent boundaries and model-import isolation. The [current inventory](docs/PHASE345_INVENTORY.json) records dependency versions, source-file fingerprints, and rule coverage. `requirements-lock.txt` records tested package versions.
+The current full local suite passed **288 tests**, with no expected failures. The Phases 3–5 baseline passed **241 tests** on Windows/Python 3.12.14 with Streamlit 1.66.1. The added workbook suite validates formula semantics, macro-free reading, failure handling, provenance, and interface scenarios. Synthetic network tests cover independent pressure-path calculations, catalogue constraints, invalid topology, drainage/vent boundaries and model-import isolation. The [Phases 3–5 inventory](docs/PHASE345_INVENTORY.json) records dependency versions, source-file fingerprints, and rule coverage. `requirements-lock.txt` records tested package versions.
 
 GitHub Actions runs public-checkout regression and interface-navigation checks after pushes and pull requests. It does not claim full workbook or live Revit validation.
 

@@ -1,0 +1,861 @@
+{
+  "method": "Fresh formula evaluation versus supplied saved caches; reproduction evidence, not engineering/code verification",
+  "totals": {
+    "matched_cache": 9940,
+    "unavailable": 72,
+    "cache_difference": 1,
+    "unsupported": 5
+  },
+  "workbooks": [
+    {
+      "workbook_id": "b10d98a24e094509",
+      "filename": "01-Water Supply System/Boiler Hot Water Circulation Pump.xlsm",
+      "sha256": "b10d98a24e094509b72a9b13d03a6ea14a77861d5c8dd56fbf67415d99853400",
+      "counts": {
+        "matched_cache": 46
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "df0c4f45cb3c7af8",
+      "filename": "01-Water Supply System/Central EWH Mixed Use.xlsm",
+      "sha256": "df0c4f45cb3c7af86ee59645dfc200f27ad92c104edcb123f5af5721ca78240a",
+      "counts": {
+        "matched_cache": 168
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "723149d9de367628",
+      "filename": "01-Water Supply System/Central Water Heater Sizing - ASHRAE Method.xlsm",
+      "sha256": "723149d9de3676287b5f4e1f37ab8bf45240e24311c80106d0c858eaaa7f27cd",
+      "counts": {
+        "matched_cache": 390
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "3b57f80a3f389a6f",
+      "filename": "01-Water Supply System/Central Water Heater Sizing - Dr. Steel Method.xlsm",
+      "sha256": "3b57f80a3f389a6fabb3da71e057b83deb64b7cc19a02fa4af7ff3c7e4d0917a",
+      "counts": {
+        "matched_cache": 172
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "4c9356d145211d27",
+      "filename": "01-Water Supply System/Drinking Chilled Water Sizing.xlsm",
+      "sha256": "4c9356d145211d27fc9a571cf66d11795441ef8634500e7f7947ddebfb65d9d3",
+      "counts": {
+        "matched_cache": 96,
+        "unavailable": 4
+      },
+      "issues": [
+        {
+          "cell": "Drinking CHW Pipe Sizing!AE19",
+          "kind": "unavailable",
+          "reason": "LOOKUP vectors differ in length"
+        },
+        {
+          "cell": "Drinking CHW Pipe Sizing!AE21",
+          "kind": "unavailable",
+          "reason": "LOOKUP vectors differ in length"
+        },
+        {
+          "cell": "Drinking CHW Pipe Sizing!AE23",
+          "kind": "unavailable",
+          "reason": "LOOKUP vectors differ in length"
+        },
+        {
+          "cell": "Drinking CHW Pipe Sizing!AE24",
+          "kind": "unavailable",
+          "reason": "LOOKUP vectors differ in length"
+        }
+      ]
+    },
+    {
+      "workbook_id": "d5c8a861e323b30e",
+      "filename": "01-Water Supply System/Hot Water Circulation Pump.xlsm",
+      "sha256": "d5c8a861e323b30eac197e421d9b6544de5acf5664050248902c63138aa2b162",
+      "counts": {
+        "matched_cache": 27
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "b8b36305ffcca1d9",
+      "filename": "01-Water Supply System/Individual Storage Water Heater Sizing.xlsm",
+      "sha256": "b8b36305ffcca1d92a464e547150f5b2f012ebe8b864f5a0bfcc67f7a2622330",
+      "counts": {
+        "matched_cache": 67
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "c752adaa024bbf07",
+      "filename": "01-Water Supply System/Instantaneous Water Heater Sizing.xlsm",
+      "sha256": "c752adaa024bbf077c2aaaf7efabb33a80844516d1a9dee122f0dbaeef0ff7e1",
+      "counts": {
+        "matched_cache": 25
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "2d39809cccd5b0c6",
+      "filename": "01-Water Supply System/Thermal Expansion Tank Sizing.xlsm",
+      "sha256": "2d39809cccd5b0c630944584d71724c12958842657e41b2e48547dee343b972a",
+      "counts": {
+        "matched_cache": 20
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "38f78293b9d26718",
+      "filename": "01-Water Supply System/Water Meter Sizing For Qatar.xlsm",
+      "sha256": "38f78293b9d26718968ee8cc65e067e97c75e71e682c9ee064744f8711a32318",
+      "counts": {
+        "matched_cache": 149
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "6d388c940bcaf561",
+      "filename": "01-Water Supply System/Water Supply Booster Pump.xlsm",
+      "sha256": "6d388c940bcaf561a5c98ac2ec3a0347cba4c7542bad1f557f3f3d30f1b1aee6",
+      "counts": {
+        "matched_cache": 154,
+        "unavailable": 15
+      },
+      "issues": [
+        {
+          "cell": "Calculations!AE50",
+          "kind": "unavailable",
+          "reason": "LOOKUP vectors differ in length"
+        },
+        {
+          "cell": "Calculations!AG50",
+          "kind": "unavailable",
+          "reason": "LOOKUP vectors differ in length"
+        },
+        {
+          "cell": "Calculations!AI50",
+          "kind": "unavailable",
+          "reason": "LOOKUP vectors differ in length"
+        },
+        {
+          "cell": "Calculations!T54",
+          "kind": "unavailable",
+          "reason": "LOOKUP vectors differ in length"
+        },
+        {
+          "cell": "Calculations!T55",
+          "kind": "unavailable",
+          "reason": "LOOKUP vectors differ in length"
+        },
+        {
+          "cell": "Calculations!T57",
+          "kind": "unavailable",
+          "reason": "LOOKUP vectors differ in length"
+        },
+        {
+          "cell": "Calculations!T58",
+          "kind": "unavailable",
+          "reason": "LOOKUP vectors differ in length"
+        },
+        {
+          "cell": "Calculations!T59",
+          "kind": "unavailable",
+          "reason": "LOOKUP vectors differ in length"
+        },
+        {
+          "cell": "Calculations!T60",
+          "kind": "unavailable",
+          "reason": "LOOKUP vectors differ in length"
+        },
+        {
+          "cell": "Calculations!T61",
+          "kind": "unavailable",
+          "reason": "LOOKUP vectors differ in length"
+        },
+        {
+          "cell": "Calculations!Q66",
+          "kind": "unavailable",
+          "reason": "LOOKUP vectors differ in length"
+        },
+        {
+          "cell": "Calculations!AI66",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Calculations!Q74",
+          "kind": "unavailable",
+          "reason": "LOOKUP vectors differ in length"
+        },
+        {
+          "cell": "Calculations!Q75",
+          "kind": "unavailable",
+          "reason": "LOOKUP vectors differ in length"
+        },
+        {
+          "cell": "Calculations!Q76",
+          "kind": "unavailable",
+          "reason": "LOOKUP vectors differ in length"
+        }
+      ]
+    },
+    {
+      "workbook_id": "cc7141ffa5a02caa",
+      "filename": "01-Water Supply System/Water Supply Filter.xlsm",
+      "sha256": "cc7141ffa5a02caaec6b543ad33ce6cabf41a2276af2801f8334bb673fffb1da",
+      "counts": {
+        "matched_cache": 14
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "374f35bee39c7a8b",
+      "filename": "01-Water Supply System/Water Supply Pipes Sizing.xlsm",
+      "sha256": "374f35bee39c7a8ba931927c28841c9396b76889ae69b147f693d4fa901ad2dc",
+      "counts": {
+        "matched_cache": 125,
+        "unavailable": 12
+      },
+      "issues": [
+        {
+          "cell": "Calculations!AE47",
+          "kind": "unavailable",
+          "reason": "#N/A: lookup has no matching entry"
+        },
+        {
+          "cell": "Calculations!AG47",
+          "kind": "unavailable",
+          "reason": "#N/A: lookup has no matching entry"
+        },
+        {
+          "cell": "Calculations!AI47",
+          "kind": "unavailable",
+          "reason": "#N/A: lookup has no matching entry"
+        },
+        {
+          "cell": "Calculations!AE49",
+          "kind": "unavailable",
+          "reason": "#N/A: lookup has no matching entry"
+        },
+        {
+          "cell": "Calculations!AG49",
+          "kind": "unavailable",
+          "reason": "#N/A: lookup has no matching entry"
+        },
+        {
+          "cell": "Calculations!AI49",
+          "kind": "unavailable",
+          "reason": "#N/A: lookup has no matching entry"
+        },
+        {
+          "cell": "Calculations!AE51",
+          "kind": "unavailable",
+          "reason": "#N/A: lookup has no matching entry"
+        },
+        {
+          "cell": "Calculations!AG51",
+          "kind": "unavailable",
+          "reason": "#N/A: lookup has no matching entry"
+        },
+        {
+          "cell": "Calculations!AI51",
+          "kind": "unavailable",
+          "reason": "#N/A: lookup has no matching entry"
+        },
+        {
+          "cell": "Calculations!AE52",
+          "kind": "unavailable",
+          "reason": "#N/A: lookup has no matching entry"
+        },
+        {
+          "cell": "Calculations!AG52",
+          "kind": "unavailable",
+          "reason": "#N/A: lookup has no matching entry"
+        },
+        {
+          "cell": "Calculations!AI52",
+          "kind": "unavailable",
+          "reason": "#N/A: lookup has no matching entry"
+        }
+      ]
+    },
+    {
+      "workbook_id": "864f66d4e5bd77c6",
+      "filename": "01-Water Supply System/Water Supply Softener Sizing.xlsm",
+      "sha256": "864f66d4e5bd77c62a9b99ebf736a11101aa5b47c7629d3c72dcf196810a16a2",
+      "counts": {
+        "matched_cache": 43
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "facae6074f8ee48e",
+      "filename": "02-Drainage System/Condensate Drain Pipe Sizing.xlsm",
+      "sha256": "facae6074f8ee48ebfb75f4c5e07581f1ed2b9aa822ac3c20c13ba18d0244845",
+      "counts": {
+        "matched_cache": 4
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "9fec6e49ce6aa038",
+      "filename": "02-Drainage System/Gravity Grease Interceptor Sizing.xlsm",
+      "sha256": "9fec6e49ce6aa03894ee685cf213215cd2b9866e8c6e5d1c562c650be9cc6bc9",
+      "counts": {
+        "matched_cache": 36
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "cf09b7192a4e83e3",
+      "filename": "02-Drainage System/Gray Water Tank Sizing.xlsm",
+      "sha256": "cf09b7192a4e83e3275db859bc4bf2dc1ff7ff9085730d55faf8a2972214fcd1",
+      "counts": {
+        "matched_cache": 624,
+        "cache_difference": 1
+      },
+      "issues": [
+        {
+          "cell": "ASPE!T39",
+          "kind": "cache_difference",
+          "reason": "Fresh value differs from saved cache"
+        }
+      ]
+    },
+    {
+      "workbook_id": "bc735ff4c1f693a9",
+      "filename": "02-Drainage System/Hydromechanical Grease Interceptor Sizing.xlsm",
+      "sha256": "bc735ff4c1f693a9920b826fa1352d05bf02aa8675749ca7cdc451ef35ad0766",
+      "counts": {
+        "matched_cache": 67
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "5bc2a670d12ed91f",
+      "filename": "02-Drainage System/Lint Interceptor Sizing.xlsm",
+      "sha256": "5bc2a670d12ed91f56953a4a68063e0855f4adebea7ee06acd9f9e46f61a1f67",
+      "counts": {
+        "matched_cache": 17
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "a531c3bfad01f4fe",
+      "filename": "02-Drainage System/Neutralization Tank Sizing.xlsm",
+      "sha256": "a531c3bfad01f4fe31c76a3decdd65ef6c60a0d5069f5e5674baf2076b99758f",
+      "counts": {
+        "matched_cache": 15
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "b63a5c1260783651",
+      "filename": "02-Drainage System/Non Potable Water Tank Sizing.xlsm",
+      "sha256": "b63a5c12607836517a90afa7ec29eb1d8cbcef9d9ed026032731349f84aac3c4",
+      "counts": {
+        "matched_cache": 641
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "ceaa69c302f7343f",
+      "filename": "02-Drainage System/Oil Interceptor Sizing.xlsm",
+      "sha256": "ceaa69c302f7343fb5c7bdd294dead86402ea3442e6180f94a69bd5dfb030038",
+      "counts": {
+        "matched_cache": 50
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "54ce196dce3e61ea",
+      "filename": "02-Drainage System/Sand Interceptor Sizing.xlsm",
+      "sha256": "54ce196dce3e61eafc22f4e12e8f8b1cf8d1f976996ede79d2e8c0d650ccded5",
+      "counts": {
+        "matched_cache": 10
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "7e57ede3208fae58",
+      "filename": "02-Drainage System/Sanitary Drainage - Tie In.xlsm",
+      "sha256": "7e57ede3208fae58be903b466b2857a4fe7f31ceecb28e6d4da0346d36488658",
+      "counts": {
+        "matched_cache": 122
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "a29b545f6ca422f4",
+      "filename": "02-Drainage System/Sanitary Drainage Pipe Sizing.xlsm",
+      "sha256": "a29b545f6ca422f479f86ede4d7db93c26d84ddc7520c3926f71074c1104709c",
+      "counts": {
+        "matched_cache": 33
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "d6914b155f39571e",
+      "filename": "02-Drainage System/Septic Tank Sizing.xlsm",
+      "sha256": "d6914b155f39571e205c5c6b9dc9cc3843d8f50215b2175b853369909e819bf2",
+      "counts": {
+        "matched_cache": 12
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "fc29161059f4a91e",
+      "filename": "02-Drainage System/Soakaway Sizing.xlsm",
+      "sha256": "fc29161059f4a91ec0e7aa2f71e4b4123eaf1c990e871e6ebe5e28b634d2f26b",
+      "counts": {
+        "matched_cache": 7
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "98acf9373a05531e",
+      "filename": "02-Drainage System/Storm Catch Basin Sizing.xlsm",
+      "sha256": "98acf9373a05531eda3e3045e0f3ebb257eec44fe1c14cecd7ae5b0e78174f3a",
+      "counts": {
+        "matched_cache": 14
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "a113b529d9567df2",
+      "filename": "02-Drainage System/Storm Drainage - Tie In.xlsm",
+      "sha256": "a113b529d9567df236d0c969788136ed4401a03317dc268df31e4f4dbfcd4c42",
+      "counts": {
+        "matched_cache": 9,
+        "unavailable": 1
+      },
+      "issues": [
+        {
+          "cell": "Storm Tie In!AE18",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        }
+      ]
+    },
+    {
+      "workbook_id": "eb20d69abbcb8b2e",
+      "filename": "02-Drainage System/Storm Drainage Pipe Sizing.xlsm",
+      "sha256": "eb20d69abbcb8b2eab252d0d276cca55d8cca237c7b2f380f284173bd1e30c7f",
+      "counts": {
+        "matched_cache": 7,
+        "unavailable": 1
+      },
+      "issues": [
+        {
+          "cell": "Storm Pipe Sizing!AE18",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        }
+      ]
+    },
+    {
+      "workbook_id": "9e6e0963e7d9c1cf",
+      "filename": "02-Drainage System/Storm Roof Gutter Sizing.xlsm",
+      "sha256": "9e6e0963e7d9c1cf08547fbd9dfba1e2449997dbe54b103188e3c739b30d8bac",
+      "counts": {
+        "matched_cache": 2,
+        "unsupported": 5
+      },
+      "issues": [
+        {
+          "cell": "Roof Gutter!AE17",
+          "kind": "unsupported",
+          "reason": "Implicit intersection/array result unsupported"
+        },
+        {
+          "cell": "Roof Gutter!AE18",
+          "kind": "unsupported",
+          "reason": "Implicit intersection/array result unsupported"
+        },
+        {
+          "cell": "Roof Gutter!AE19",
+          "kind": "unsupported",
+          "reason": "Implicit intersection/array result unsupported"
+        },
+        {
+          "cell": "Roof Gutter!R23",
+          "kind": "unsupported",
+          "reason": "Implicit intersection/array result unsupported"
+        },
+        {
+          "cell": "Roof Gutter!Z23",
+          "kind": "unsupported",
+          "reason": "Implicit intersection/array result unsupported"
+        }
+      ]
+    },
+    {
+      "workbook_id": "cd3ce43396b5ebea",
+      "filename": "02-Drainage System/Storm Tank Sizing.xlsm",
+      "sha256": "cd3ce43396b5ebea28bf9b5201ce8d3e5fdbf7046b235f31bc634952a2a05129",
+      "counts": {
+        "matched_cache": 65
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "1d6c1f8b18a86248",
+      "filename": "02-Drainage System/Sump Pit Sizing.xlsm",
+      "sha256": "1d6c1f8b18a86248b8abc2a0fa461ec53ffc75bcda4d2839bfea3bef9a494abc",
+      "counts": {
+        "matched_cache": 59
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "78b4240980da37fa",
+      "filename": "03-Pools & Water Features/Fountain Sizing.xlsm",
+      "sha256": "78b4240980da37fa8e72a237b6fafb5c78f5872ccc6a1e7773932ac594920f72",
+      "counts": {
+        "matched_cache": 134
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "7d6d6cc7ae9b8796",
+      "filename": "03-Pools & Water Features/Jacuzzi Sizing.xlsm",
+      "sha256": "7d6d6cc7ae9b8796f79be0286c20c44ad341a759d64a49a306fd5defc7068340",
+      "counts": {
+        "matched_cache": 113,
+        "unavailable": 5
+      },
+      "issues": [
+        {
+          "cell": "Jacuzzi Sizing!Z139",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Jacuzzi Sizing!Z140",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Jacuzzi Sizing!Z141",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Jacuzzi Sizing!Z142",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Jacuzzi Sizing!Z143",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        }
+      ]
+    },
+    {
+      "workbook_id": "782e67e9999758ce",
+      "filename": "03-Pools & Water Features/Lake Sizing.xlsm",
+      "sha256": "782e67e9999758cee356505f067b54a2824e136eceeed29ba87e9f373d10ab6d",
+      "counts": {
+        "matched_cache": 165,
+        "unavailable": 10
+      },
+      "issues": [
+        {
+          "cell": "Overflow Lake Sizing!Z126",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Overflow Lake Sizing!Z127",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Overflow Lake Sizing!Z128",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Overflow Lake Sizing!Z129",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Overflow Lake Sizing!Z130",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Skimmer Lake Sizing!Z108",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Skimmer Lake Sizing!Z109",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Skimmer Lake Sizing!Z110",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Skimmer Lake Sizing!Z111",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Skimmer Lake Sizing!Z112",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        }
+      ]
+    },
+    {
+      "workbook_id": "41d5bd478d3d2a6b",
+      "filename": "03-Pools & Water Features/Lazy River Sizing.xlsm",
+      "sha256": "41d5bd478d3d2a6be8a7b15d4f50608e157c0ec09ad446dc5a7088df34ebe5f7",
+      "counts": {
+        "matched_cache": 77,
+        "unavailable": 5
+      },
+      "issues": [
+        {
+          "cell": "Lazy River Sizing!Z112",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Lazy River Sizing!Z113",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Lazy River Sizing!Z114",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Lazy River Sizing!Z115",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Lazy River Sizing!Z116",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        }
+      ]
+    },
+    {
+      "workbook_id": "88b4024681ce4d03",
+      "filename": "03-Pools & Water Features/Swimming Pool Sizing.xlsm",
+      "sha256": "88b4024681ce4d03b65fff701df507cf21e0dc91d1224c2d1539f05bacf45413",
+      "counts": {
+        "matched_cache": 169,
+        "unavailable": 10
+      },
+      "issues": [
+        {
+          "cell": "Overflow Pool Sizing!Z130",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Overflow Pool Sizing!Z131",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Overflow Pool Sizing!Z132",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Overflow Pool Sizing!Z133",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Overflow Pool Sizing!Z134",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Skimmer Pool Sizing!Z112",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Skimmer Pool Sizing!Z113",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Skimmer Pool Sizing!Z114",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Skimmer Pool Sizing!Z115",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Skimmer Pool Sizing!Z116",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        }
+      ]
+    },
+    {
+      "workbook_id": "f45d044659b0f1a0",
+      "filename": "03-Pools & Water Features/Waterslide Sizing.xlsm",
+      "sha256": "f45d044659b0f1a015058fe6002de37fe51a7705a63e9d3c6f1cdcd37917fe78",
+      "counts": {
+        "matched_cache": 89,
+        "unavailable": 5
+      },
+      "issues": [
+        {
+          "cell": "Waterslide Sizing!Z127",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Waterslide Sizing!Z128",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Waterslide Sizing!Z129",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Waterslide Sizing!Z130",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "Waterslide Sizing!Z131",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        }
+      ]
+    },
+    {
+      "workbook_id": "bd5b1f01c44a503e",
+      "filename": "05-Gas System/LPG Pipe Sizing.xlsm",
+      "sha256": "bd5b1f01c44a503eb731a37dcac5711a6a86b62a78d8f5de17f3210c23480096",
+      "counts": {
+        "matched_cache": 103,
+        "unavailable": 2
+      },
+      "issues": [
+        {
+          "cell": "LPG!Z15",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "LPG!AE15",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        }
+      ]
+    },
+    {
+      "workbook_id": "419d752b2e92bf7b",
+      "filename": "05-Gas System/LPG Tank Sizing.xlsm",
+      "sha256": "419d752b2e92bf7b37e3d443b04c9d3ef64d4ca3f5758ccbada38c4fb2198c43",
+      "counts": {
+        "matched_cache": 254
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "3af40ee97760381b",
+      "filename": "05-Gas System/Natural Gas Pipe Sizing.xlsm",
+      "sha256": "3af40ee97760381b8e992c0a969749dcf88698dea8da5b2c4edb6c8000aad77b",
+      "counts": {
+        "matched_cache": 104,
+        "unavailable": 2
+      },
+      "issues": [
+        {
+          "cell": "NG Pipe Sizing!Z18",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        },
+        {
+          "cell": "NG Pipe Sizing!AE18",
+          "kind": "unavailable",
+          "reason": "Approximate lookup vector is not sorted"
+        }
+      ]
+    },
+    {
+      "workbook_id": "5a4b5de2b9d118e5",
+      "filename": "06-Fuel System/Fuel Equipment Sizing.xlsm",
+      "sha256": "5a4b5de2b9d118e58f70d334c6335eef91a63604dbd0bada89cbb38bb99fe6e8",
+      "counts": {
+        "matched_cache": 85
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "8eaa637d6dc6c812",
+      "filename": "06-Fuel System/Petrol Station Sizing.xlsm",
+      "sha256": "8eaa637d6dc6c8128e0068e3e5dc237b8c8834214f14415fc1f9caabc1e52e14",
+      "counts": {
+        "matched_cache": 195
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "f7ed8b140d2cc00a",
+      "filename": "07-Medical Gas System/Medical Gas Flow Rate.xlsm",
+      "sha256": "f7ed8b140d2cc00ab92410e780ddd5ce23125d88e234788569ce450dd4329b2a",
+      "counts": {
+        "matched_cache": 114
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "ed1b3be104c88852",
+      "filename": "07-Medical Gas System/Medical Gas Pipe Sizing.xlsm",
+      "sha256": "ed1b3be104c88852516c27f540ab32c0538e513b1f9005a72c4df0181b836313",
+      "counts": {
+        "matched_cache": 4459
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "1da0c293b4fdbeec",
+      "filename": "07-Medical Gas System/Medical Gas Source Sizing.xlsm",
+      "sha256": "1da0c293b4fdbeec769ed271da7afdfb28a63aa95b8e5cb9d801fb88cc79e7e3",
+      "counts": {
+        "matched_cache": 159
+      },
+      "issues": []
+    },
+    {
+      "workbook_id": "c900d1ddd795fe25",
+      "filename": "07-Medical Gas System/Medical Gas Terminal Units.xlsm",
+      "sha256": "c900d1ddd795fe2560595d1aef7a309c4383cf10a3cec4d5a4d56b5a8eb070d2",
+      "counts": {
+        "matched_cache": 430
+      },
+      "issues": []
+    }
+  ]
+}

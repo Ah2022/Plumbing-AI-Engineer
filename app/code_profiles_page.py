@@ -8,7 +8,7 @@ from compliance.governance import (
 )
 
 RESULT_SESSION_KEYS = ('fixture_list', 'hw_fixture_list', 'storm_intensity', 'storm_flow_lps',
-                       'compliance_results', 'qaqc_results','network_result')
+                       'compliance_results', 'qaqc_results','network_result','workbook_result')
 
 
 def clear_result_session():

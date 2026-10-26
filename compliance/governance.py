@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / 'database' / 'code_profiles.json'
-ENGINE_VERSION = '0.6.2-phases3-5'
+ENGINE_VERSION = '0.6.2-reference-workbooks'
 DOMAINS = ('water', 'drainage', 'vent', 'storm')
 REQUIRED_CRITERIA = ('jurisdiction', 'authority', 'amendments', 'occupancy',
                      'systems', 'units', 'method', 'exclusions', 'precedence')
@@ -43,6 +43,8 @@ def source_manifest():
              *sorted((ROOT / 'compliance').glob('*.py')),
              *sorted((ROOT / 'models').glob('*.py')), *sorted((ROOT / 'units').glob('*.py')),
              *sorted((ROOT / 'bim').glob('*.py')),
+             *sorted((ROOT / 'workbooks').glob('*.py')),
+             ROOT / 'database' / 'workbook_catalog.json',
              ROOT / 'database' / 'design_table_api.py', ROOT / 'database' / 'load_design_tables.py',
              ROOT / 'database' / 'load_confirmed_additions.py', ROOT / 'requirements-lock.txt']
     return {p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}

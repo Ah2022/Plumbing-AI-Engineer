@@ -1,0 +1,5871 @@
+{
+  "schema_version": "1.0",
+  "workbooks": [
+    {
+      "workbook_id": "b10d98a24e094509",
+      "filename": "01-Water Supply System/Boiler Hot Water Circulation Pump.xlsm",
+      "archive": "OneDrive_2026-10-26.zip",
+      "sha256": "b10d98a24e094509b72a9b13d03a6ea14a77861d5c8dd56fbf67415d99853400",
+      "primary_bases": [
+        "ASHRAE"
+      ],
+      "all_bases": [
+        "ASHRAE"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "00000000",
+          "state": "veryHidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Boier HWCP Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 65,
+          "formulas": 12,
+          "declared_bases": [
+            "ASHRAE"
+          ]
+        },
+        {
+          "name": "Data",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 175,
+          "formulas": 34,
+          "declared_bases": []
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Boier HWCP Sizing",
+          "cell": "A10",
+          "text": "Based On ASHRAE Handbook",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "ROUNDUP": 2,
+        "MAX": 4,
+        "IF": 3,
+        "INDEX": 5,
+        "MATCH": 5
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "df0c4f45cb3c7af8",
+      "filename": "01-Water Supply System/Central EWH Mixed Use.xlsm",
+      "archive": "OneDrive_2026-10-26.zip",
+      "sha256": "df0c4f45cb3c7af86ee59645dfc200f27ad92c104edcb123f5af5721ca78240a",
+      "primary_bases": [
+        "MANUFACTURER"
+      ],
+      "all_bases": [
+        "ASHRAE",
+        "MANUFACTURER"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "00000000",
+          "state": "veryHidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Central Electric WH",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 171,
+          "formulas": 94,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Data-7",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 488,
+          "formulas": 74,
+          "declared_bases": []
+        },
+        {
+          "name": "Data-1",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 231,
+          "formulas": 0,
+          "declared_bases": [
+            "ASHRAE"
+          ]
+        },
+        {
+          "name": "Data-2",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 930,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Data-6",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 381,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Data-3",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 350,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Data-4",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 309,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Data-5",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 26,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Reference-1",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 3,
+          "formulas": 0,
+          "declared_bases": [
+            "ASHRAE"
+          ]
+        },
+        {
+          "name": "Reference-2",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 1,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Reference-3",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 4,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Reference-4",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 1,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Central Electric WH",
+          "cell": "A60",
+          "text": "Calorifiers Selection (Hubbell Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central Electric WH",
+          "cell": "A72",
+          "text": "Electrical Heating Element Selection (Hubbell Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central Electric WH",
+          "cell": "A78",
+          "text": "Central EWH Details (Hubbell Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data-1",
+          "cell": "A3",
+          "text": "From 2011 ASHRAE Handbook Table 10 page 50.20",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data-2",
+          "cell": "A1",
+          "text": "Electric Water Heater - Calorifiers Data (Hubbel Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data-5",
+          "cell": "A1",
+          "text": "Burner Oilon Catalogue",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference-1",
+          "cell": "A1",
+          "text": "ASHRAE Handbook",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference-3",
+          "cell": "A1",
+          "text": "Viessmann Catalogue",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference-4",
+          "cell": "A1",
+          "text": "Dual Fuel Burner Catalogue",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "External workbook link present; linked data is unavailable to recalculation",
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "INDEX": 42,
+        "MATCH": 60,
+        "SUM": 1,
+        "LOOKUP": 2,
+        "ROUNDUP": 4,
+        "IF": 36,
+        "VLOOKUP": 8
+      },
+      "macros": true,
+      "external_links": 1,
+      "review_notes": [
+        "ASHRAE 2011 is cited at Data-1!A3; the primary calculation sheet does not state a standard. One external workbook link is present."
+      ]
+    },
+    {
+      "workbook_id": "723149d9de367628",
+      "filename": "01-Water Supply System/Central Water Heater Sizing - ASHRAE Method.xlsm",
+      "archive": "OneDrive_2026-10-26.zip",
+      "sha256": "723149d9de3676287b5f4e1f37ab8bf45240e24311c80106d0c858eaaa7f27cd",
+      "primary_bases": [
+        "ASHRAE",
+        "MANUFACTURER"
+      ],
+      "all_bases": [
+        "ASHRAE",
+        "MANUFACTURER"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "00000000",
+          "state": "veryHidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Central Electric WH",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 150,
+          "formulas": 85,
+          "declared_bases": [
+            "ASHRAE",
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Central Gas WH",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 139,
+          "formulas": 76,
+          "declared_bases": [
+            "ASHRAE",
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Data-1",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 231,
+          "formulas": 0,
+          "declared_bases": [
+            "ASHRAE"
+          ]
+        },
+        {
+          "name": "Data-2",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 930,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Central WH With Boiler",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 246,
+          "formulas": 127,
+          "declared_bases": [
+            "ASHRAE",
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Central Solar WH",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 199,
+          "formulas": 102,
+          "declared_bases": [
+            "ASHRAE",
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Data-6",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 381,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Data-3",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 350,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Data-4",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 309,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Data-5",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 26,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Reference-1",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 3,
+          "formulas": 0,
+          "declared_bases": [
+            "ASHRAE"
+          ]
+        },
+        {
+          "name": "Reference-2",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 1,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Reference-3",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 4,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Reference-4",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 1,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Central Electric WH",
+          "cell": "A10",
+          "text": "From 2011 ASHRAE Handbook Table 10 page 50.20",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central Electric WH",
+          "cell": "A45",
+          "text": "Calorifiers Selection (Hubbell Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central Electric WH",
+          "cell": "A57",
+          "text": "Electrical Heating Element Selection (Hubbell Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central Electric WH",
+          "cell": "A63",
+          "text": "Central EWH Details (Hubbell Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central Gas WH",
+          "cell": "A10",
+          "text": "From 2011 ASHRAE Handbook Table 10 page 50.20",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central Gas WH",
+          "cell": "A46",
+          "text": "Gas Heater Selection (AO-Smith Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central Gas WH",
+          "cell": "A56",
+          "text": "Heater Burner Selection (AO-Smith Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central Gas WH",
+          "cell": "A60",
+          "text": "Central GWH Details (AO-Smith Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data-1",
+          "cell": "A3",
+          "text": "From 2011 ASHRAE Handbook Table 10 page 50.20",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data-2",
+          "cell": "A1",
+          "text": "Electric Water Heater - Calorifiers Data (Hubbel Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central WH With Boiler",
+          "cell": "A10",
+          "text": "From 2011 ASHRAE Handbook Table 10 page 50.20",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central WH With Boiler",
+          "cell": "A45",
+          "text": "Calorifiers Selection (Hubbell Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central WH With Boiler",
+          "cell": "A57",
+          "text": "Hot Water Boiler Selection (Bosch - Viessmann Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central WH With Boiler",
+          "cell": "A58",
+          "text": "Boiler Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central WH With Boiler",
+          "cell": "A86",
+          "text": "Boiler Burner Selection (Oilon Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central Solar WH",
+          "cell": "A10",
+          "text": "From 2011 ASHRAE Handbook Table 10 page 50.20",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central Solar WH",
+          "cell": "A48",
+          "text": "Calorifiers Selection (Hubbell Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central Solar WH",
+          "cell": "A77",
+          "text": "Calorifier Details (Hubbell Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data-5",
+          "cell": "A1",
+          "text": "Burner Oilon Catalogue",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference-1",
+          "cell": "A1",
+          "text": "ASHRAE Handbook",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference-3",
+          "cell": "A1",
+          "text": "Viessmann Catalogue",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference-4",
+          "cell": "A1",
+          "text": "Dual Fuel Burner Catalogue",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "INDEX": 160,
+        "MATCH": 232,
+        "SUM": 4,
+        "LOOKUP": 8,
+        "ROUNDUP": 19,
+        "IF": 108,
+        "VLOOKUP": 30,
+        "ABS": 1,
+        "SIN": 3,
+        "RADIANS": 6,
+        "COS": 1
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "3b57f80a3f389a6f",
+      "filename": "01-Water Supply System/Central Water Heater Sizing - Dr. Steel Method.xlsm",
+      "archive": "OneDrive_2026-10-26.zip",
+      "sha256": "3b57f80a3f389a6fabb3da71e057b83deb64b7cc19a02fa4af7ff3c7e4d0917a",
+      "primary_bases": [
+        "ASHRAE",
+        "MANUFACTURER",
+        "STEEL_TEXTBOOK"
+      ],
+      "all_bases": [
+        "ASHRAE",
+        "MANUFACTURER",
+        "STEEL_TEXTBOOK"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "00000000",
+          "state": "veryHidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Central Electric WH",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 91,
+          "formulas": 31,
+          "declared_bases": [
+            "MANUFACTURER",
+            "STEEL_TEXTBOOK"
+          ]
+        },
+        {
+          "name": "Central Gas WH",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 80,
+          "formulas": 22,
+          "declared_bases": [
+            "MANUFACTURER",
+            "STEEL_TEXTBOOK"
+          ]
+        },
+        {
+          "name": "Central WH With Boiler",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 186,
+          "formulas": 72,
+          "declared_bases": [
+            "MANUFACTURER",
+            "STEEL_TEXTBOOK"
+          ]
+        },
+        {
+          "name": "Central Solar WH",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 139,
+          "formulas": 47,
+          "declared_bases": [
+            "ASHRAE",
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Data-1",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 42,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Data-2",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 930,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Data-3",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 350,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Data-4",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 309,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Data-5",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 26,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Data-6",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 381,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Reference-1",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 3,
+          "formulas": 0,
+          "declared_bases": [
+            "STEEL_TEXTBOOK"
+          ]
+        },
+        {
+          "name": "Reference-2",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 1,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Reference-3",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 4,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Reference-4",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 1,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Central Electric WH",
+          "cell": "A10",
+          "text": "From Engineered plumbing design (Dr. steel) cha.16\n",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central Electric WH",
+          "cell": "A26",
+          "text": "Calorifiers Selection (Hubbell Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central Electric WH",
+          "cell": "A38",
+          "text": "Electrical Heating Element Selection (Hubbell Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central Electric WH",
+          "cell": "A44",
+          "text": "Central EWH Details (Hubbell Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central Gas WH",
+          "cell": "A10",
+          "text": "From Engineered plumbing design (Dr. steel) cha.16\n",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central Gas WH",
+          "cell": "A27",
+          "text": "Gas Heater Selection (AO-Smith Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central Gas WH",
+          "cell": "A37",
+          "text": "Heater Burner Selection (AO-Smith Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central Gas WH",
+          "cell": "A41",
+          "text": "Central GWH Details (AO-Smith Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central WH With Boiler",
+          "cell": "A10",
+          "text": "From Engineered plumbing design (Dr. steel) cha.16\n",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central WH With Boiler",
+          "cell": "A26",
+          "text": "Calorifiers Selection (Hubbell Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central WH With Boiler",
+          "cell": "A38",
+          "text": "Hot Water Boiler Selection (Bosch - Viessmann Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central WH With Boiler",
+          "cell": "A39",
+          "text": "Boiler Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central WH With Boiler",
+          "cell": "A67",
+          "text": "Boiler Burner Selection (Oilon Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central Solar WH",
+          "cell": "A10",
+          "text": "From 2011 ASHRAE Handbook Table 10 page 50.20",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central Solar WH",
+          "cell": "A29",
+          "text": "Calorifiers Selection (Hubbell Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Central Solar WH",
+          "cell": "A58",
+          "text": "Calorifier Details (Hubbell Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data-2",
+          "cell": "A1",
+          "text": "Electric Water Heater - Calorifiers Data (Hubbel Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data-5",
+          "cell": "A1",
+          "text": "Burner Oilon Catalogue",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference-1",
+          "cell": "A1",
+          "text": "Dr. Steel",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference-3",
+          "cell": "A1",
+          "text": "Viessmann Catalogue",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference-4",
+          "cell": "A1",
+          "text": "Dual Fuel Burner Catalogue",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "INDEX": 98,
+        "MATCH": 98,
+        "ROUNDUP": 15,
+        "IF": 108,
+        "VLOOKUP": 30,
+        "ABS": 1,
+        "SIN": 3,
+        "RADIANS": 6,
+        "COS": 1
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": [
+        "Electric/gas/boiler sheets cite Steel chapter 16; the solar sheet cites ASHRAE 2011. Treat each worksheet as a separate method."
+      ]
+    },
+    {
+      "workbook_id": "4c9356d145211d27",
+      "filename": "01-Water Supply System/Drinking Chilled Water Sizing.xlsm",
+      "archive": "OneDrive_2026-10-26.zip",
+      "sha256": "4c9356d145211d27fc9a571cf66d11795441ef8634500e7f7947ddebfb65d9d3",
+      "primary_bases": [
+        "IPC",
+        "STEEL_TEXTBOOK"
+      ],
+      "all_bases": [
+        "IPC",
+        "STEEL_TEXTBOOK"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "00000000",
+          "state": "veryHidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Drinking CHW Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 115,
+          "formulas": 46,
+          "declared_bases": [
+            "STEEL_TEXTBOOK"
+          ]
+        },
+        {
+          "name": "Drinking CHW Pipe Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 37,
+          "formulas": 6,
+          "declared_bases": [
+            "IPC"
+          ]
+        },
+        {
+          "name": "Data-1",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 177,
+          "formulas": 13,
+          "declared_bases": []
+        },
+        {
+          "name": "Data-2",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 612,
+          "formulas": 35,
+          "declared_bases": []
+        },
+        {
+          "name": "Reference",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 2,
+          "formulas": 0,
+          "declared_bases": [
+            "IPC",
+            "STEEL_TEXTBOOK"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Drinking CHW Sizing",
+          "cell": "A10",
+          "text": "From Engineered plumbing design (Dr. steel) cha.20\n",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Drinking CHW Pipe Sizing",
+          "cell": "A14",
+          "text": "From IPC Table E E103.3(2)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference",
+          "cell": "A1",
+          "text": "Alfared Steel",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference",
+          "cell": "A32",
+          "text": "Intenational Plumbing Code",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "INDEX": 23,
+        "MATCH": 36,
+        "ROUNDUP": 8,
+        "SUM": 2,
+        "MAX": 4,
+        "IF": 17,
+        "LOOKUP": 16
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "d5c8a861e323b30e",
+      "filename": "01-Water Supply System/Hot Water Circulation Pump.xlsm",
+      "archive": "OneDrive_2026-10-26.zip",
+      "sha256": "d5c8a861e323b30eac197e421d9b6544de5acf5664050248902c63138aa2b162",
+      "primary_bases": [
+        "IPC",
+        "STEEL_TEXTBOOK"
+      ],
+      "all_bases": [
+        "ASHRAE",
+        "IPC",
+        "STEEL_TEXTBOOK"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "00000000",
+          "state": "veryHidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "HW Circulation Pump Sizing-2",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 105,
+          "formulas": 27,
+          "declared_bases": [
+            "IPC",
+            "STEEL_TEXTBOOK"
+          ]
+        },
+        {
+          "name": "Data",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 61,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Reference",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 2,
+          "formulas": 0,
+          "declared_bases": [
+            "ASHRAE",
+            "STEEL_TEXTBOOK"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "HW Circulation Pump Sizing-2",
+          "cell": "A10",
+          "text": "Based On Engineered Plumbing Design (Dr. Alfared Steel)/IPC Table E E103.3(2)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference",
+          "cell": "A1",
+          "text": "ASHRAE Applications",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference",
+          "cell": "A23",
+          "text": "Dr Steel",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "SUM": 1,
+        "ROUNDUP": 2,
+        "MAX": 1
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "b8b36305ffcca1d9",
+      "filename": "01-Water Supply System/Individual Storage Water Heater Sizing.xlsm",
+      "archive": "OneDrive_2026-10-26.zip",
+      "sha256": "b8b36305ffcca1d92a464e547150f5b2f012ebe8b864f5a0bfcc67f7a2622330",
+      "primary_bases": [
+        "ASHRAE"
+      ],
+      "all_bases": [
+        "ASHRAE"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "00000000",
+          "state": "veryHidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Individual Storage WH",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 117,
+          "formulas": 67,
+          "declared_bases": [
+            "ASHRAE"
+          ]
+        },
+        {
+          "name": "Data",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 247,
+          "formulas": 0,
+          "declared_bases": [
+            "ASHRAE"
+          ]
+        },
+        {
+          "name": "Reference",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 1,
+          "formulas": 0,
+          "declared_bases": [
+            "ASHRAE"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Individual Storage WH",
+          "cell": "A10",
+          "text": "From 2011 ASHRAE Handbook Table 10 page 50.20",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data",
+          "cell": "A3",
+          "text": "From 2011 ASHRAE Handbook Table 10 page 50.20",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference",
+          "cell": "A1",
+          "text": "ASHRAE Handbook",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "INDEX": 19,
+        "MATCH": 37,
+        "SUM": 1,
+        "LOOKUP": 2,
+        "ROUNDUP": 2
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "c752adaa024bbf07",
+      "filename": "01-Water Supply System/Instantaneous Water Heater Sizing.xlsm",
+      "archive": "OneDrive_2026-10-26.zip",
+      "sha256": "c752adaa024bbf077c2aaaf7efabb33a80844516d1a9dee122f0dbaeef0ff7e1",
+      "primary_bases": [
+        "IPC",
+        "STEEL_TEXTBOOK"
+      ],
+      "all_bases": [
+        "IPC",
+        "STEEL_TEXTBOOK"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "00000000",
+          "state": "veryHidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Instantaneous WH",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 100,
+          "formulas": 25,
+          "declared_bases": [
+            "IPC",
+            "STEEL_TEXTBOOK"
+          ]
+        },
+        {
+          "name": "Data",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 172,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Reference",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 2,
+          "formulas": 0,
+          "declared_bases": [
+            "IPC",
+            "STEEL_TEXTBOOK"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Instantaneous WH",
+          "cell": "A10",
+          "text": "Based On IPC Table E E103.3(2) - Engineered Plumbing Design (Dr.Steel)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference",
+          "cell": "A1",
+          "text": "International Plumbing Code",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference",
+          "cell": "A91",
+          "text": "Dr. Steel",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "SUM": 1,
+        "VLOOKUP": 1,
+        "INDEX": 1,
+        "MATCH": 1,
+        "ROUNDUP": 1
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "2d39809cccd5b0c6",
+      "filename": "01-Water Supply System/Thermal Expansion Tank Sizing.xlsm",
+      "archive": "OneDrive_2026-10-26.zip",
+      "sha256": "2d39809cccd5b0c630944584d71724c12958842657e41b2e48547dee343b972a",
+      "primary_bases": [
+        "MANUFACTURER"
+      ],
+      "all_bases": [
+        "MANUFACTURER"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "00000000",
+          "state": "veryHidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Expansion Tank Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 61,
+          "formulas": 20,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Data",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 187,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Expansion Tank Sizing",
+          "cell": "A27",
+          "text": "Expansion Tank Selection Data (Wessel Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data",
+          "cell": "D2",
+          "text": "Wessel Expansion Tank Catalogue",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "INDEX": 6,
+        "MATCH": 6,
+        "ROUNDUP": 4
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": [
+        "Wessel catalogue selection is identified; a governing code/standard edition is not identified."
+      ]
+    },
+    {
+      "workbook_id": "38f78293b9d26718",
+      "filename": "01-Water Supply System/Water Meter Sizing For Qatar.xlsm",
+      "archive": "OneDrive_2026-10-26.zip",
+      "sha256": "38f78293b9d26718968ee8cc65e067e97c75e71e682c9ee064744f8711a32318",
+      "primary_bases": [
+        "QATAR_KAHRAMAA"
+      ],
+      "all_bases": [
+        "ASPE",
+        "EGYPT_301",
+        "IPC",
+        "QATAR_KAHRAMAA"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "00000000",
+          "state": "veryHidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "WM Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 122,
+          "formulas": 91,
+          "declared_bases": [
+            "QATAR_KAHRAMAA"
+          ]
+        },
+        {
+          "name": "Data-1",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 579,
+          "formulas": 58,
+          "declared_bases": [
+            "ASPE",
+            "EGYPT_301",
+            "IPC",
+            "QATAR_KAHRAMAA"
+          ]
+        },
+        {
+          "name": "References",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "WM Sizing",
+          "cell": "A14",
+          "text": "Qatar - Kahramaa Regulations",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data-1",
+          "cell": "F1",
+          "text": "IPC 606.5.7 & 606.5.4",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data-1",
+          "cell": "A19",
+          "text": "ASPE - VOL.4 CHA.10 TABLE 10.3",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data-1",
+          "cell": "A40",
+          "text": "Egyptian Plumbing Code (301/1)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data-1",
+          "cell": "A79",
+          "text": "Qatar Kahramaa Regulations",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "VLOOKUP": 88,
+        "IF": 46,
+        "SUM": 1,
+        "ROUNDUP": 59,
+        "INDEX": 1,
+        "MATCH": 1
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "6d388c940bcaf561",
+      "filename": "01-Water Supply System/Water Supply Booster Pump.xlsm",
+      "archive": "OneDrive_2026-10-26.zip",
+      "sha256": "6d388c940bcaf561a5c98ac2ec3a0347cba4c7542bad1f557f3f3d30f1b1aee6",
+      "primary_bases": [
+        "IPC"
+      ],
+      "all_bases": [
+        "IPC"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "Calculations",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 291,
+          "formulas": 108,
+          "declared_bases": [
+            "IPC"
+          ]
+        },
+        {
+          "name": "00000000",
+          "state": "veryHidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Data",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 727,
+          "formulas": 61,
+          "declared_bases": []
+        },
+        {
+          "name": "References",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Calculations",
+          "cell": "A17",
+          "text": "From IPC Table E E103.3(2)",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "SUM": 3,
+        "IF": 18,
+        "LOOKUP": 30,
+        "INDEX": 14,
+        "MATCH": 14,
+        "MAX": 3,
+        "ROUNDUP": 4
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "cc7141ffa5a02caa",
+      "filename": "01-Water Supply System/Water Supply Filter.xlsm",
+      "archive": "OneDrive_2026-10-26.zip",
+      "sha256": "cc7141ffa5a02caaec6b543ad33ce6cabf41a2276af2801f8334bb673fffb1da",
+      "primary_bases": [],
+      "all_bases": [
+        "MANUFACTURER"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "00000000",
+          "state": "veryHidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Filter Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 51,
+          "formulas": 14,
+          "declared_bases": []
+        },
+        {
+          "name": "Data",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 81,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Data",
+          "cell": "A1",
+          "text": "Refer to Aqua catalogue",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "No primary code/standard identified in cell text; inspect source references before use",
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "ROUNDUP": 2,
+        "SQRT": 1,
+        "INDEX": 8,
+        "MATCH": 8
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": [
+        "Sizing equations and selection data are present, but no governing code/standard or manufacturer is named in the inspected text."
+      ]
+    },
+    {
+      "workbook_id": "374f35bee39c7a8b",
+      "filename": "01-Water Supply System/Water Supply Pipes Sizing.xlsm",
+      "archive": "OneDrive_2026-10-26.zip",
+      "sha256": "374f35bee39c7a8ba931927c28841c9396b76889ae69b147f693d4fa901ad2dc",
+      "primary_bases": [
+        "IPC"
+      ],
+      "all_bases": [
+        "IPC"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "Calculations",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 252,
+          "formulas": 102,
+          "declared_bases": [
+            "IPC"
+          ]
+        },
+        {
+          "name": "00000000",
+          "state": "veryHidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "References",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Data",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 780,
+          "formulas": 35,
+          "declared_bases": []
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Calculations",
+          "cell": "A14",
+          "text": "From IPC Table E E103.3(2)",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "12 saved formula errors; cached values are not fresh results",
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [
+        {
+          "sheet": "Calculations",
+          "cell": "AE47",
+          "error": "#N/A"
+        },
+        {
+          "sheet": "Calculations",
+          "cell": "AG47",
+          "error": "#N/A"
+        },
+        {
+          "sheet": "Calculations",
+          "cell": "AI47",
+          "error": "#N/A"
+        },
+        {
+          "sheet": "Calculations",
+          "cell": "AE49",
+          "error": "#N/A"
+        },
+        {
+          "sheet": "Calculations",
+          "cell": "AG49",
+          "error": "#N/A"
+        },
+        {
+          "sheet": "Calculations",
+          "cell": "AI49",
+          "error": "#N/A"
+        },
+        {
+          "sheet": "Calculations",
+          "cell": "AE51",
+          "error": "#N/A"
+        },
+        {
+          "sheet": "Calculations",
+          "cell": "AG51",
+          "error": "#N/A"
+        },
+        {
+          "sheet": "Calculations",
+          "cell": "AI51",
+          "error": "#N/A"
+        },
+        {
+          "sheet": "Calculations",
+          "cell": "AE52",
+          "error": "#N/A"
+        },
+        {
+          "sheet": "Calculations",
+          "cell": "AG52",
+          "error": "#N/A"
+        },
+        {
+          "sheet": "Calculations",
+          "cell": "AI52",
+          "error": "#N/A"
+        }
+      ],
+      "functions": {
+        "SUM": 3,
+        "IF": 24,
+        "LOOKUP": 48,
+        "INDEX": 15,
+        "MATCH": 15,
+        "MAX": 9,
+        "ROUNDUP": 9
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": [
+        "Twelve saved #N/A results exist at Calculations!AE47/AG47/AI47, AE49/AG49/AI49, AE51/AG51/AI51 and AE52/AG52/AI52."
+      ]
+    },
+    {
+      "workbook_id": "864f66d4e5bd77c6",
+      "filename": "01-Water Supply System/Water Supply Softener Sizing.xlsm",
+      "archive": "OneDrive_2026-10-26.zip",
+      "sha256": "864f66d4e5bd77c62a9b99ebf736a11101aa5b47c7629d3c72dcf196810a16a2",
+      "primary_bases": [
+        "MANUFACTURER"
+      ],
+      "all_bases": [
+        "MANUFACTURER"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "00000000",
+          "state": "veryHidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Softener Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 77,
+          "formulas": 26,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Data",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 236,
+          "formulas": 17,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Softener Sizing",
+          "cell": "A26",
+          "text": "Softener Selection Data (Watts Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data",
+          "cell": "A1",
+          "text": "Residential Applications Softener Selection (Watts Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data",
+          "cell": "A13",
+          "text": "Commercial Applications Softener Selection (Watts Catalogue)",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "ROUNDUP": 5,
+        "IF": 11,
+        "INDEX": 22,
+        "MATCH": 22
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "facae6074f8ee48e",
+      "filename": "02-Drainage System/Condensate Drain Pipe Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "facae6074f8ee48ebfb75f4c5e07581f1ed2b9aa822ac3c20c13ba18d0244845",
+      "primary_bases": [
+        "NSPC"
+      ],
+      "all_bases": [
+        "NSPC"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "CDP Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 24,
+          "formulas": 4,
+          "declared_bases": [
+            "NSPC"
+          ]
+        },
+        {
+          "name": "Data",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 26,
+          "formulas": 0,
+          "declared_bases": []
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "CDP Sizing",
+          "cell": "A10",
+          "text": "From NSPC 2009Ed Cha.9",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [],
+      "cached_errors": [],
+      "functions": {
+        "IF": 2,
+        "ISNUMBER": 1,
+        "MATCH": 4,
+        "INDEX": 3
+      },
+      "macros": false,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "9fec6e49ce6aa038",
+      "filename": "02-Drainage System/Gravity Grease Interceptor Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "9fec6e49ce6aa03894ee685cf213215cd2b9866e8c6e5d1c562c650be9cc6bc9",
+      "primary_bases": [
+        "UPC"
+      ],
+      "all_bases": [
+        "MANUFACTURER",
+        "UPC"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "Method-1",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 50,
+          "formulas": 16,
+          "declared_bases": [
+            "UPC"
+          ]
+        },
+        {
+          "name": "Method-2",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 62,
+          "formulas": 20,
+          "declared_bases": [
+            "UPC"
+          ]
+        },
+        {
+          "name": "Data",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 206,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER",
+            "UPC"
+          ]
+        },
+        {
+          "name": "Reference",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Method-1",
+          "cell": "A10",
+          "text": "From UPC Appendix H",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Method-2",
+          "cell": "A10",
+          "text": "From UPC Table 1014.3.6",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data",
+          "cell": "A1",
+          "text": "UPC App. H",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data",
+          "cell": "D1",
+          "text": "PARCUSA CATALOGUE",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data",
+          "cell": "A17",
+          "text": "UPC Table 1014.3.6",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [],
+      "cached_errors": [],
+      "functions": {
+        "ROUNDUP": 4,
+        "SUM": 2,
+        "INDEX": 18,
+        "MATCH": 21,
+        "IF": 3,
+        "ISNUMBER": 3
+      },
+      "macros": false,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "cf09b7192a4e83e3",
+      "filename": "02-Drainage System/Gray Water Tank Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "cf09b7192a4e83e3275db859bc4bf2dc1ff7ff9085730d55faf8a2972214fcd1",
+      "primary_bases": [
+        "ASPE",
+        "EGYPT_301",
+        "IPC",
+        "NFPA_101",
+        "QATAR_KAHRAMAA"
+      ],
+      "all_bases": [
+        "ASPE",
+        "EGYPT_301",
+        "IPC",
+        "NFPA_101",
+        "QATAR_KAHRAMAA"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "No. Of Person Guide",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 126,
+          "formulas": 71,
+          "declared_bases": [
+            "NFPA_101"
+          ]
+        },
+        {
+          "name": "00000000",
+          "state": "veryHidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "References",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Practical Plumbing Guide",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 131,
+          "formulas": 76,
+          "declared_bases": [
+            "IPC"
+          ]
+        },
+        {
+          "name": "ASPE",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 143,
+          "formulas": 88,
+          "declared_bases": [
+            "ASPE",
+            "IPC"
+          ]
+        },
+        {
+          "name": "EGY.CODE (301-1)",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 215,
+          "formulas": 160,
+          "declared_bases": [
+            "EGYPT_301",
+            "IPC"
+          ]
+        },
+        {
+          "name": "Qatar-Kahramaa",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 159,
+          "formulas": 104,
+          "declared_bases": [
+            "IPC",
+            "QATAR_KAHRAMAA"
+          ]
+        },
+        {
+          "name": "Data",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 178,
+          "formulas": 35,
+          "declared_bases": []
+        },
+        {
+          "name": "Data-1",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 162,
+          "formulas": 33,
+          "declared_bases": []
+        },
+        {
+          "name": "Data-2",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 559,
+          "formulas": 58,
+          "declared_bases": [
+            "ASPE",
+            "EGYPT_301",
+            "IPC",
+            "QATAR_KAHRAMAA"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "No. Of Person Guide",
+          "cell": "A10",
+          "text": "According to NFPA 101 - 2018ED Cha.7",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Practical Plumbing Guide",
+          "cell": "A46",
+          "text": "Gray Tank Piping (Based On IPC)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "ASPE",
+          "cell": "A15",
+          "text": "American Society Of Plumbing Engineers (ASPE)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "ASPE",
+          "cell": "A49",
+          "text": "Gray Tank Piping (Based On IPC)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "EGY.CODE (301-1)",
+          "cell": "A15",
+          "text": "Egyptian Plumbing Code (301/1)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "EGY.CODE (301-1)",
+          "cell": "A67",
+          "text": "Gray Tank Piping (Based On IPC)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Qatar-Kahramaa",
+          "cell": "A15",
+          "text": "Qatar - Kahramaa Regulations",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Qatar-Kahramaa",
+          "cell": "A53",
+          "text": "Gray Tank Piping (Based On IPC)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data-2",
+          "cell": "F1",
+          "text": "IPC 606.5.7 & 606.5.4",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data-2",
+          "cell": "A19",
+          "text": "ASPE - VOL.4 CHA.10 TABLE 10.3",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data-2",
+          "cell": "A40",
+          "text": "Egyptian Plumbing Code (301/1)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data-2",
+          "cell": "A79",
+          "text": "Qatar Kahramaa Regulations",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "INDEX": 34,
+        "MATCH": 34,
+        "IF": 180,
+        "ROUNDUP": 99,
+        "SUM": 11,
+        "VLOOKUP": 283
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "bc735ff4c1f693a9",
+      "filename": "02-Drainage System/Hydromechanical Grease Interceptor Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "bc735ff4c1f693a9920b826fa1352d05bf02aa8675749ca7cdc451ef35ad0766",
+      "primary_bases": [
+        "BRITISH_GUIDANCE",
+        "MANUFACTURER",
+        "STEEL_TEXTBOOK",
+        "UPC"
+      ],
+      "all_bases": [
+        "BRITISH_GUIDANCE",
+        "MANUFACTURER",
+        "STEEL_TEXTBOOK",
+        "UPC"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "Method-1",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 57,
+          "formulas": 18,
+          "declared_bases": [
+            "MANUFACTURER",
+            "STEEL_TEXTBOOK"
+          ]
+        },
+        {
+          "name": "Method-2",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 71,
+          "formulas": 24,
+          "declared_bases": [
+            "MANUFACTURER",
+            "UPC"
+          ]
+        },
+        {
+          "name": "Method-3",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 75,
+          "formulas": 25,
+          "declared_bases": [
+            "BRITISH_GUIDANCE",
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Data-1",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 211,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Data-2",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 44,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Reference",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 3,
+          "formulas": 0,
+          "declared_bases": [
+            "BRITISH_GUIDANCE",
+            "STEEL_TEXTBOOK",
+            "UPC"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Method-1",
+          "cell": "A10",
+          "text": "From engineered plumbing design (Dr. steel) Cha.2",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Method-1",
+          "cell": "A19",
+          "text": "Grease Interceptor Selection (Zurn Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Method-2",
+          "cell": "A10",
+          "text": "From UPC Table 1014.3.6",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Method-2",
+          "cell": "A28",
+          "text": "Grease Interceptor Selection (Zurn Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Method-3",
+          "cell": "A10",
+          "text": "From Instiute Of Plumbing - British Standard Method",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Method-3",
+          "cell": "A29",
+          "text": "Grease Interceptor Selection (Zurn Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data-1",
+          "cell": "A1",
+          "text": "Zurn Catalogue",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference",
+          "cell": "A1",
+          "text": "UPC Table 1014.3.6",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference",
+          "cell": "H1",
+          "text": "From Instiute Of Plumbing - British Standard Method",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference",
+          "cell": "U1",
+          "text": "From engineered plumbing design (Dr. steel) Cha.2",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [],
+      "cached_errors": [],
+      "functions": {
+        "IF": 3,
+        "ISNUMBER": 3,
+        "MATCH": 37,
+        "INDEX": 34,
+        "SUM": 2,
+        "SQRT": 1
+      },
+      "macros": false,
+      "external_links": 0,
+      "review_notes": [
+        "Method-2 cites UPC Table 1014.3.6, which IAPMO identifies as gravity grease interceptor sizing. Its applicability to the sheet title needs review."
+      ]
+    },
+    {
+      "workbook_id": "5bc2a670d12ed91f",
+      "filename": "02-Drainage System/Lint Interceptor Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "5bc2a670d12ed91f56953a4a68063e0855f4adebea7ee06acd9f9e46f61a1f67",
+      "primary_bases": [
+        "MANUFACTURER",
+        "UPC"
+      ],
+      "all_bases": [
+        "MANUFACTURER",
+        "UPC"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "Method-1",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 28,
+          "formulas": 2,
+          "declared_bases": [
+            "UPC"
+          ]
+        },
+        {
+          "name": "Method-2",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 50,
+          "formulas": 15,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Data",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 102,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Reference-1",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Reference-2",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Method-1",
+          "cell": "A10",
+          "text": "From UPC Appendix H",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Method-2",
+          "cell": "A10",
+          "text": "Based On Manufacturer (MIFAB)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data",
+          "cell": "E19",
+          "text": "MIFAB Catalogue ",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [],
+      "cached_errors": [],
+      "functions": {
+        "SUM": 1,
+        "IF": 1,
+        "ISNUMBER": 1,
+        "MATCH": 8,
+        "INDEX": 7
+      },
+      "macros": false,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "a531c3bfad01f4fe",
+      "filename": "02-Drainage System/Neutralization Tank Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "a531c3bfad01f4fe31c76a3decdd65ef6c60a0d5069f5e5674baf2076b99758f",
+      "primary_bases": [
+        "ASPE",
+        "MANUFACTURER"
+      ],
+      "all_bases": [
+        "ASPE",
+        "MANUFACTURER"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "NT Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 48,
+          "formulas": 15,
+          "declared_bases": [
+            "ASPE",
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Data",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 200,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Reference-1",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Reference-2",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 1,
+          "formulas": 0,
+          "declared_bases": [
+            "ASPE"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "NT Sizing",
+          "cell": "A10",
+          "text": "From ASPE - Volume 3 - 2013ED ",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "NT Sizing",
+          "cell": "A19",
+          "text": "Neutralization Tank Selection (MIFAB Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference-2",
+          "cell": "A1",
+          "text": "ASPE -2013Ed - Vol.3",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [],
+      "cached_errors": [],
+      "functions": {
+        "IF": 3,
+        "ISNUMBER": 2,
+        "MATCH": 12,
+        "INDEX": 10
+      },
+      "macros": false,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "b63a5c1260783651",
+      "filename": "02-Drainage System/Non Potable Water Tank Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "b63a5c12607836517a90afa7ec29eb1d8cbcef9d9ed026032731349f84aac3c4",
+      "primary_bases": [
+        "ASPE",
+        "EGYPT_301",
+        "IPC",
+        "NFPA_101",
+        "QATAR_KAHRAMAA"
+      ],
+      "all_bases": [
+        "ASPE",
+        "EGYPT_301",
+        "IPC",
+        "NFPA_101",
+        "QATAR_KAHRAMAA"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "No. Of Person Guide",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 126,
+          "formulas": 71,
+          "declared_bases": [
+            "NFPA_101"
+          ]
+        },
+        {
+          "name": "00000000",
+          "state": "veryHidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "References",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Practical Plumbing Guide",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 142,
+          "formulas": 80,
+          "declared_bases": [
+            "IPC"
+          ]
+        },
+        {
+          "name": "ASPE",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 154,
+          "formulas": 92,
+          "declared_bases": [
+            "ASPE",
+            "IPC"
+          ]
+        },
+        {
+          "name": "EGY.CODE (301-1)",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 226,
+          "formulas": 164,
+          "declared_bases": [
+            "EGYPT_301",
+            "IPC"
+          ]
+        },
+        {
+          "name": "Qatar-Kahramaa",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 170,
+          "formulas": 108,
+          "declared_bases": [
+            "IPC",
+            "QATAR_KAHRAMAA"
+          ]
+        },
+        {
+          "name": "Data",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 178,
+          "formulas": 35,
+          "declared_bases": []
+        },
+        {
+          "name": "Data-1",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 162,
+          "formulas": 33,
+          "declared_bases": []
+        },
+        {
+          "name": "Data-2",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 559,
+          "formulas": 58,
+          "declared_bases": [
+            "ASPE",
+            "EGYPT_301",
+            "IPC",
+            "QATAR_KAHRAMAA"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "No. Of Person Guide",
+          "cell": "A10",
+          "text": "According to NFPA 101 - 2018ED Cha.7",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Practical Plumbing Guide",
+          "cell": "A46",
+          "text": "Non Potable Tank Piping (Based On IPC)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "ASPE",
+          "cell": "A15",
+          "text": "American Society Of Plumbing Engineers (ASPE)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "ASPE",
+          "cell": "A49",
+          "text": "Tank Piping (Based On IPC)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "EGY.CODE (301-1)",
+          "cell": "A15",
+          "text": "Egyptian Plumbing Code (301/1)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "EGY.CODE (301-1)",
+          "cell": "A67",
+          "text": "Tank Piping (Based On IPC)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Qatar-Kahramaa",
+          "cell": "A15",
+          "text": "Qatar - Kahramaa Regulations",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Qatar-Kahramaa",
+          "cell": "A53",
+          "text": "Tank Piping (Based On IPC)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data-2",
+          "cell": "F1",
+          "text": "IPC 606.5.7 & 606.5.4",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data-2",
+          "cell": "A19",
+          "text": "ASPE - VOL.4 CHA.10 TABLE 10.3",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data-2",
+          "cell": "A40",
+          "text": "Egyptian Plumbing Code (301/1)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data-2",
+          "cell": "A79",
+          "text": "Qatar Kahramaa Regulations",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "INDEX": 54,
+        "MATCH": 54,
+        "IF": 192,
+        "ROUNDUP": 99,
+        "SUM": 11,
+        "VLOOKUP": 283,
+        "MAX": 12
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "ceaa69c302f7343f",
+      "filename": "02-Drainage System/Oil Interceptor Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "ceaa69c302f7343fb5c7bdd294dead86402ea3442e6180f94a69bd5dfb030038",
+      "primary_bases": [
+        "BRITISH_GUIDANCE",
+        "MANUFACTURER",
+        "NSPC",
+        "UPC"
+      ],
+      "all_bases": [
+        "BRITISH_GUIDANCE",
+        "MANUFACTURER",
+        "NSPC",
+        "UPC"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "Method-1",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 34,
+          "formulas": 3,
+          "declared_bases": [
+            "UPC"
+          ]
+        },
+        {
+          "name": "Method-2",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 34,
+          "formulas": 5,
+          "declared_bases": [
+            "NSPC"
+          ]
+        },
+        {
+          "name": "Method-3",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 60,
+          "formulas": 20,
+          "declared_bases": [
+            "MANUFACTURER",
+            "UPC"
+          ]
+        },
+        {
+          "name": "Method-4",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 67,
+          "formulas": 22,
+          "declared_bases": [
+            "BRITISH_GUIDANCE",
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Data-1",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 148,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Data-2",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 44,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Data-3",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 9,
+          "formulas": 0,
+          "declared_bases": [
+            "UPC"
+          ]
+        },
+        {
+          "name": "Reference-1",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 2,
+          "formulas": 0,
+          "declared_bases": [
+            "BRITISH_GUIDANCE",
+            "UPC"
+          ]
+        },
+        {
+          "name": "Reference-2",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 1,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Method-1",
+          "cell": "A2",
+          "text": "Oil Interceptor Sizing (UPC Method)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Method-1",
+          "cell": "A10",
+          "text": "From UPC Appendix H",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Method-2",
+          "cell": "A2",
+          "text": "Oil Interceptor Sizing (NSPC Method)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Method-2",
+          "cell": "A10",
+          "text": "From NSPC - Cha.6 - Sec 6.3.2",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Method-3",
+          "cell": "A10",
+          "text": "From UPC Table 1014.3.6",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Method-3",
+          "cell": "A25",
+          "text": "Oil Interceptor Selection (Zurn Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Method-4",
+          "cell": "A10",
+          "text": "From Instiute Of Plumbing - British Standard Method",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Method-4",
+          "cell": "A27",
+          "text": "Oil Interceptor Selection (Zurn Catalogue)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data-1",
+          "cell": "A1",
+          "text": "Zurn Catalogue",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data-3",
+          "cell": "A1",
+          "text": "UPC - 2015ED - Appendix H - Waste Flow",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference-1",
+          "cell": "A1",
+          "text": "From Instiute Of Plumbing - British Standard Method",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference-1",
+          "cell": "M1",
+          "text": "UPC - 2015ED - Appendix H",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference-2",
+          "cell": "A1",
+          "text": "Zurn Catalogue",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [],
+      "cached_errors": [],
+      "functions": {
+        "INDEX": 22,
+        "MATCH": 24,
+        "IF": 3,
+        "ROUNDUP": 1,
+        "SUM": 2,
+        "ISNUMBER": 2,
+        "SQRT": 1
+      },
+      "macros": false,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "54ce196dce3e61ea",
+      "filename": "02-Drainage System/Sand Interceptor Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "54ce196dce3e61eafc22f4e12e8f8b1cf8d1f976996ede79d2e8c0d650ccded5",
+      "primary_bases": [
+        "NSPC"
+      ],
+      "all_bases": [
+        "NSPC"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "Sand Interceptor",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 38,
+          "formulas": 10,
+          "declared_bases": [
+            "NSPC"
+          ]
+        },
+        {
+          "name": "Reference-1",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 1,
+          "formulas": 0,
+          "declared_bases": [
+            "NSPC"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Sand Interceptor",
+          "cell": "A2",
+          "text": "Sand Interceptor Sizing (NSPC Method)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Sand Interceptor",
+          "cell": "A10",
+          "text": "From NSPC - Cha.6 - Sec 6.4.2",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference-1",
+          "cell": "A1",
+          "text": "NSPC Cha.6",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [],
+      "cached_errors": [],
+      "functions": {
+        "IF": 1
+      },
+      "macros": false,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "7e57ede3208fae58",
+      "filename": "02-Drainage System/Sanitary Drainage - Tie In.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "7e57ede3208fae58be903b466b2857a4fe7f31ceecb28e6d4da0346d36488658",
+      "primary_bases": [
+        "BRITISH_GUIDANCE",
+        "IPC"
+      ],
+      "all_bases": [
+        "BRITISH_GUIDANCE",
+        "IPC"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "Method-01",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 120,
+          "formulas": 34,
+          "declared_bases": [
+            "IPC"
+          ]
+        },
+        {
+          "name": "00000000",
+          "state": "veryHidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Method-02",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 89,
+          "formulas": 53,
+          "declared_bases": [
+            "BRITISH_GUIDANCE"
+          ]
+        },
+        {
+          "name": "Method-03",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 123,
+          "formulas": 35,
+          "declared_bases": [
+            "IPC"
+          ]
+        },
+        {
+          "name": "Data-1",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 528,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Data-2",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 44,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "DATA-3",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 77,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "References-1",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Reference-2",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Method-01",
+          "cell": "A10",
+          "text": "From IPC Table E E103.3(2)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Method-02",
+          "cell": "A10",
+          "text": "From Instiute Of Plumbing - British Standard Method",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Method-03",
+          "cell": "A10",
+          "text": "From IPC TABLES 709.1/710",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "SUM": 10,
+        "IF": 14,
+        "LOOKUP": 16,
+        "INDEX": 34,
+        "MATCH": 34,
+        "MAX": 14,
+        "SQRT": 1
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "a29b545f6ca422f4",
+      "filename": "02-Drainage System/Sanitary Drainage Pipe Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "a29b545f6ca422f479f86ede4d7db93c26d84ddc7520c3926f71074c1104709c",
+      "primary_bases": [
+        "IPC"
+      ],
+      "all_bases": [
+        "IPC"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "DR Pipe Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 124,
+          "formulas": 33,
+          "declared_bases": [
+            "IPC"
+          ]
+        },
+        {
+          "name": "DATA",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 77,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Reference",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "DR Pipe Sizing",
+          "cell": "A10",
+          "text": "From IPC TABLES 709.1/710",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "SUM": 6,
+        "IF": 9,
+        "MAX": 10,
+        "INDEX": 11,
+        "MATCH": 11,
+        "LOOKUP": 10
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "d6914b155f39571e",
+      "filename": "02-Drainage System/Septic Tank Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "d6914b155f39571e205c5c6b9dc9cc3843d8f50215b2175b853369909e819bf2",
+      "primary_bases": [
+        "NSPC"
+      ],
+      "all_bases": [
+        "NSPC"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "Septic Tank Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 49,
+          "formulas": 12,
+          "declared_bases": [
+            "NSPC"
+          ]
+        },
+        {
+          "name": "Data",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 88,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Reference",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 1,
+          "formulas": 0,
+          "declared_bases": [
+            "NSPC"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Septic Tank Sizing",
+          "cell": "A10",
+          "text": "From NSPC-2009 Ch.16",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference",
+          "cell": "A1",
+          "text": "NSPC 2009ED Cha.16",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [],
+      "cached_errors": [],
+      "functions": {
+        "INDEX": 6,
+        "MATCH": 7,
+        "IF": 9,
+        "ISNUMBER": 1
+      },
+      "macros": false,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "fc29161059f4a91e",
+      "filename": "02-Drainage System/Soakaway Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "fc29161059f4a91ec0e7aa2f71e4b4123eaf1c990e871e6ebe5e28b634d2f26b",
+      "primary_bases": [
+        "QATAR_ASHGHAL"
+      ],
+      "all_bases": [
+        "QATAR_ASHGHAL"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "Soakaway Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 34,
+          "formulas": 7,
+          "declared_bases": [
+            "QATAR_ASHGHAL"
+          ]
+        },
+        {
+          "name": "Data",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 46,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Reference",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 1,
+          "formulas": 0,
+          "declared_bases": [
+            "QATAR_ASHGHAL"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Soakaway Sizing",
+          "cell": "A10",
+          "text": "Qatar Ashghal Regulation",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference",
+          "cell": "A1",
+          "text": "Qatar - Ashghal",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [],
+      "cached_errors": [],
+      "functions": {
+        "IF": 1,
+        "ISNUMBER": 1,
+        "MATCH": 5,
+        "INDEX": 2,
+        "ROUNDUP": 1
+      },
+      "macros": false,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "98acf9373a05531e",
+      "filename": "02-Drainage System/Storm Catch Basin Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "98acf9373a05531eda3e3045e0f3ebb257eec44fe1c14cecd7ae5b0e78174f3a",
+      "primary_bases": [],
+      "all_bases": [
+        "IPC"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "Catch Basin",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 42,
+          "formulas": 14,
+          "declared_bases": []
+        },
+        {
+          "name": "Data",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 153,
+          "formulas": 0,
+          "declared_bases": [
+            "IPC"
+          ]
+        },
+        {
+          "name": "Reference",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 1,
+          "formulas": 0,
+          "declared_bases": []
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Data",
+          "cell": "A1",
+          "text": "IPC. - TABLE 1106.3 - SIZE OF HORIZONTAL STORM DRAINGE PIPING",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data",
+          "cell": "A17",
+          "text": "IPC. - TABLE 1106.2(1) - SIZE OF CIRCULAR VERTICAL CONDUCTORS AND LEADERS",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "Unsupported functions: :INDIRECT",
+        "No primary code/standard identified in cell text; inspect source references before use"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "ROUNDUP": 3,
+        "LOOKUP": 1,
+        "INDEX": 4,
+        "MATCH": 4,
+        "INDIRECT": 1,
+        "CHAR": 2,
+        "COLUMN": 2,
+        ":INDIRECT": 1
+      },
+      "macros": false,
+      "external_links": 0,
+      "review_notes": [
+        "IPC Table 1106.2(1) is cited on auxiliary Data!A17; the calculation sheet does not identify an edition."
+      ]
+    },
+    {
+      "workbook_id": "a113b529d9567df2",
+      "filename": "02-Drainage System/Storm Drainage - Tie In.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "a113b529d9567df236d0c969788136ed4401a03317dc268df31e4f4dbfcd4c42",
+      "primary_bases": [
+        "IPC"
+      ],
+      "all_bases": [
+        "IPC"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "Storm Tie In",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 38,
+          "formulas": 10,
+          "declared_bases": [
+            "IPC"
+          ]
+        },
+        {
+          "name": "Data",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 153,
+          "formulas": 0,
+          "declared_bases": [
+            "IPC"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Storm Tie In",
+          "cell": "A10",
+          "text": "From IPC TABLES 1106.2/1106.3",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data",
+          "cell": "A1",
+          "text": "IPC. - TABLE 1106.3 - SIZE OF HORIZONTAL STORM DRAINGE PIPING",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data",
+          "cell": "A17",
+          "text": "IPC. - TABLE 1106.2(1) - SIZE OF CIRCULAR VERTICAL CONDUCTORS AND LEADERS",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "Unsupported functions: :INDIRECT"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "ROUNDUP": 3,
+        "LOOKUP": 2,
+        "INDEX": 7,
+        "MATCH": 7,
+        "INDIRECT": 2,
+        "CHAR": 4,
+        "COLUMN": 4,
+        ":INDIRECT": 2,
+        "MAX": 1
+      },
+      "macros": false,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "eb20d69abbcb8b2e",
+      "filename": "02-Drainage System/Storm Drainage Pipe Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "eb20d69abbcb8b2eab252d0d276cca55d8cca237c7b2f380f284173bd1e30c7f",
+      "primary_bases": [
+        "IPC"
+      ],
+      "all_bases": [
+        "IPC"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "Storm Pipe Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 34,
+          "formulas": 8,
+          "declared_bases": [
+            "IPC"
+          ]
+        },
+        {
+          "name": "Data",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 153,
+          "formulas": 0,
+          "declared_bases": [
+            "IPC"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Storm Pipe Sizing",
+          "cell": "A10",
+          "text": "From IPC TABLES 1106.2/1106.3",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data",
+          "cell": "A1",
+          "text": "IPC. - TABLE 1106.3 - SIZE OF HORIZONTAL STORM DRAINGE PIPING",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data",
+          "cell": "A17",
+          "text": "IPC. - TABLE 1106.2(1) - SIZE OF CIRCULAR VERTICAL CONDUCTORS AND LEADERS",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "Unsupported functions: :INDIRECT"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "ROUNDUP": 2,
+        "LOOKUP": 2,
+        "INDEX": 7,
+        "MATCH": 7,
+        "INDIRECT": 2,
+        "CHAR": 4,
+        "COLUMN": 4,
+        ":INDIRECT": 2,
+        "MAX": 1
+      },
+      "macros": false,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "9e6e0963e7d9c1cf",
+      "filename": "02-Drainage System/Storm Roof Gutter Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "9e6e0963e7d9c1cf08547fbd9dfba1e2449997dbe54b103188e3c739b30d8bac",
+      "primary_bases": [
+        "STEEL_TEXTBOOK"
+      ],
+      "all_bases": [
+        "STEEL_TEXTBOOK"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "Roof Gutter",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 34,
+          "formulas": 7,
+          "declared_bases": [
+            "STEEL_TEXTBOOK"
+          ]
+        },
+        {
+          "name": "Data",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 42,
+          "formulas": 0,
+          "declared_bases": []
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Roof Gutter",
+          "cell": "A10",
+          "text": "From Alfared Steel Cha.7",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [],
+      "cached_errors": [],
+      "functions": {
+        "ROUNDUP": 1,
+        "IF": 3,
+        "ISNUMBER": 2,
+        "MATCH": 7,
+        "INDEX": 5
+      },
+      "macros": false,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "cd3ce43396b5ebea",
+      "filename": "02-Drainage System/Storm Tank Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "cd3ce43396b5ebea28bf9b5201ce8d3e5fdbf7046b235f31bc634952a2a05129",
+      "primary_bases": [
+        "IPC",
+        "QATAR_ASHGHAL"
+      ],
+      "all_bases": [
+        "IPC",
+        "QATAR_ASHGHAL"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "00000000",
+          "state": "veryHidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Method-1",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 64,
+          "formulas": 15,
+          "declared_bases": [
+            "IPC"
+          ]
+        },
+        {
+          "name": "Method-2",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 61,
+          "formulas": 15,
+          "declared_bases": [
+            "IPC",
+            "QATAR_ASHGHAL"
+          ]
+        },
+        {
+          "name": "Data-1",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 178,
+          "formulas": 35,
+          "declared_bases": []
+        },
+        {
+          "name": "Data-2",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 89,
+          "formulas": 0,
+          "declared_bases": [
+            "IPC"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Method-1",
+          "cell": "A26",
+          "text": "Non Potable Tank Piping (Based On IPC)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Method-2",
+          "cell": "A15",
+          "text": "Storm Water Tank Data (Based On Qatar - ASHGHAL Regulations)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Method-2",
+          "cell": "A26",
+          "text": "Non Potable Tank Piping (Based On IPC)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data-2",
+          "cell": "A1",
+          "text": "IPC 606.5.7 & 606.5.4",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "INDEX": 5,
+        "MATCH": 5,
+        "IF": 22
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "1d6c1f8b18a86248",
+      "filename": "02-Drainage System/Sump Pit Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "1d6c1f8b18a86248b8abc2a0fa461ec53ffc75bcda4d2839bfea3bef9a494abc",
+      "primary_bases": [],
+      "all_bases": [],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "00000000",
+          "state": "veryHidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Sump Pit Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 138,
+          "formulas": 59,
+          "declared_bases": []
+        },
+        {
+          "name": "DATA",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 13,
+          "formulas": 0,
+          "declared_bases": []
+        }
+      ],
+      "reference_evidence": [],
+      "warnings": [
+        "No primary code/standard identified in cell text; inspect source references before use",
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "IF": 18,
+        "ROUNDUP": 2,
+        "SUM": 1,
+        "INDEX": 2,
+        "MATCH": 2
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": [
+        "No governing code/standard was identified in the inspected cell text."
+      ]
+    },
+    {
+      "workbook_id": "78b4240980da37fa",
+      "filename": "03-Pools & Water Features/Fountain Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "78b4240980da37fa8e72a237b6fafb5c78f5872ccc6a1e7773932ac594920f72",
+      "primary_bases": [
+        "ASPE",
+        "EGYPT_301",
+        "MANUFACTURER"
+      ],
+      "all_bases": [
+        "ASPE",
+        "EGYPT_301",
+        "MANUFACTURER"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "Fountain Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 405,
+          "formulas": 124,
+          "declared_bases": [
+            "ASPE",
+            "EGYPT_301",
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "data-1",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 159,
+          "formulas": 0,
+          "declared_bases": [
+            "ASPE",
+            "EGYPT_301",
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "data-2",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 81,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "data-3",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 146,
+          "formulas": 10,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Fountain Sizing",
+          "cell": "A10",
+          "text": "Refer to Manufacturer Recommendation",
+          "kind": "cached_reference_label"
+        },
+        {
+          "sheet": "Fountain Sizing",
+          "cell": "G13",
+          "text": "Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Fountain Sizing",
+          "cell": "A30",
+          "text": "Jet Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Fountain Sizing",
+          "cell": "A51",
+          "text": "Jet Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "B6",
+          "text": "Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "C6",
+          "text": "ASPE",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "D6",
+          "text": "Egyptian",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "B29",
+          "text": "Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "C29",
+          "text": "Egyptian",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "D29",
+          "text": "ASPE",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "B35",
+          "text": "Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "C35",
+          "text": "Egyptian",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "D35",
+          "text": "ASPE",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-2",
+          "cell": "A1",
+          "text": "Refer to Aqua catalogue",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-3",
+          "cell": "A1",
+          "text": "Astralpool Catalogue",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-3",
+          "cell": "A14",
+          "text": "From DEFO Catalogue",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "IF": 58,
+        "ROUNDUP": 13,
+        "INDEX": 36,
+        "MATCH": 37,
+        "SQRT": 1,
+        "MAX": 1
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "7d6d6cc7ae9b8796",
+      "filename": "03-Pools & Water Features/Jacuzzi Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "7d6d6cc7ae9b8796f79be0286c20c44ad341a759d64a49a306fd5defc7068340",
+      "primary_bases": [
+        "ASPE",
+        "EGYPT_301",
+        "MANUFACTURER"
+      ],
+      "all_bases": [
+        "ASPE",
+        "BRITISH_GUIDANCE",
+        "EGYPT_301",
+        "MANUFACTURER"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "Jacuzzi Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 391,
+          "formulas": 118,
+          "declared_bases": [
+            "ASPE",
+            "EGYPT_301",
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "data-1",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 157,
+          "formulas": 0,
+          "declared_bases": [
+            "ASPE",
+            "EGYPT_301",
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "data-2",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 81,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "data-3",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 169,
+          "formulas": 0,
+          "declared_bases": [
+            "BRITISH_GUIDANCE",
+            "MANUFACTURER"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Jacuzzi Sizing",
+          "cell": "A10",
+          "text": "Refer to ASPE - Volume 3 - Cha.6",
+          "kind": "cached_reference_label"
+        },
+        {
+          "sheet": "Jacuzzi Sizing",
+          "cell": "G13",
+          "text": "ASPE",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Jacuzzi Sizing",
+          "cell": "A30",
+          "text": "Jet Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "B6",
+          "text": "Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "C6",
+          "text": "ASPE",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "D6",
+          "text": "Egyptian",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "B29",
+          "text": "Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "C29",
+          "text": "Egyptian",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "D29",
+          "text": "ASPE",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "B35",
+          "text": "Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "C35",
+          "text": "Egyptian",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "D35",
+          "text": "ASPE",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-2",
+          "cell": "A1",
+          "text": "Refer to Aqua catalogue",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-3",
+          "cell": "A1",
+          "text": "Astralpool Catalogue",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-3",
+          "cell": "A15",
+          "text": "Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-3",
+          "cell": "A30",
+          "text": "Table 26 Volume of compressed air carried by medium grade steel pipes, of minimum bore, to BS 1387 at given velocities",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "IF": 61,
+        "INDEX": 51,
+        "MATCH": 56,
+        "ROUNDUP": 16,
+        "MAX": 4,
+        "SQRT": 1,
+        "ISNUMBER": 5
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "782e67e9999758ce",
+      "filename": "03-Pools & Water Features/Lake Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "782e67e9999758cee356505f067b54a2824e136eceeed29ba87e9f373d10ab6d",
+      "primary_bases": [
+        "ASPE",
+        "EGYPT_301",
+        "MANUFACTURER"
+      ],
+      "all_bases": [
+        "ASPE",
+        "EGYPT_301",
+        "MANUFACTURER"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "Overflow Lake Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 312,
+          "formulas": 91,
+          "declared_bases": [
+            "ASPE",
+            "EGYPT_301",
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Skimmer Lake Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 285,
+          "formulas": 84,
+          "declared_bases": [
+            "ASPE",
+            "EGYPT_301",
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "data-1",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 161,
+          "formulas": 0,
+          "declared_bases": [
+            "ASPE",
+            "EGYPT_301",
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "data-2",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 81,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "data-3",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 92,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Overflow Lake Sizing",
+          "cell": "A10",
+          "text": "Refer to Egyptian Code 301 - Part 3",
+          "kind": "cached_reference_label"
+        },
+        {
+          "sheet": "Overflow Lake Sizing",
+          "cell": "G13",
+          "text": "Egyptian",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Skimmer Lake Sizing",
+          "cell": "A10",
+          "text": "Refer to Egyptian Code 301 - Part 3",
+          "kind": "cached_reference_label"
+        },
+        {
+          "sheet": "Skimmer Lake Sizing",
+          "cell": "G13",
+          "text": "Egyptian",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "B6",
+          "text": "Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "C6",
+          "text": "ASPE",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "D6",
+          "text": "Egyptian",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "B29",
+          "text": "Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "C29",
+          "text": "Egyptian",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "D29",
+          "text": "ASPE",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "B35",
+          "text": "Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "C35",
+          "text": "Egyptian",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "D35",
+          "text": "ASPE",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-2",
+          "cell": "A1",
+          "text": "Refer to Aqua catalogue",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-3",
+          "cell": "A1",
+          "text": "Astralpool Catalogue",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "IF": 87,
+        "ROUNDUP": 33,
+        "SQRT": 2,
+        "INDEX": 64,
+        "MATCH": 74,
+        "MAX": 5,
+        "ISNUMBER": 10
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "41d5bd478d3d2a6b",
+      "filename": "03-Pools & Water Features/Lazy River Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "41d5bd478d3d2a6be8a7b15d4f50608e157c0ec09ad446dc5a7088df34ebe5f7",
+      "primary_bases": [
+        "ASPE",
+        "EGYPT_301",
+        "MANUFACTURER"
+      ],
+      "all_bases": [
+        "ASPE",
+        "EGYPT_301",
+        "MANUFACTURER"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "Lazy River Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 300,
+          "formulas": 82,
+          "declared_bases": [
+            "ASPE",
+            "EGYPT_301",
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "data-1",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 161,
+          "formulas": 0,
+          "declared_bases": [
+            "ASPE",
+            "EGYPT_301",
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "data-2",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 81,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "data-3",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 105,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Lazy River Sizing",
+          "cell": "A10",
+          "text": "Refer to Egyptian Code 301 - Part 3",
+          "kind": "cached_reference_label"
+        },
+        {
+          "sheet": "Lazy River Sizing",
+          "cell": "G13",
+          "text": "Egyptian",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "B6",
+          "text": "Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "C6",
+          "text": "ASPE",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "D6",
+          "text": "Egyptian",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "B29",
+          "text": "Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "C29",
+          "text": "Egyptian",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "D29",
+          "text": "ASPE",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "B35",
+          "text": "Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "C35",
+          "text": "Egyptian",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "D35",
+          "text": "ASPE",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-2",
+          "cell": "A1",
+          "text": "Refer to Aqua catalogue",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-3",
+          "cell": "A1",
+          "text": "Astralpool Catalogue",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-3",
+          "cell": "A14",
+          "text": "Polinewave Catalogue",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "IF": 17,
+        "INDEX": 34,
+        "MATCH": 39,
+        "ROUNDUP": 13,
+        "SQRT": 1,
+        "MAX": 3,
+        "ISNUMBER": 5
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "88b4024681ce4d03",
+      "filename": "03-Pools & Water Features/Swimming Pool Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "88b4024681ce4d03b65fff701df507cf21e0dc91d1224c2d1539f05bacf45413",
+      "primary_bases": [
+        "ASPE",
+        "EGYPT_301",
+        "MANUFACTURER"
+      ],
+      "all_bases": [
+        "ASPE",
+        "EGYPT_301",
+        "MANUFACTURER"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "Overflow Pool Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 319,
+          "formulas": 93,
+          "declared_bases": [
+            "ASPE",
+            "EGYPT_301",
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "Skimmer Pool Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 293,
+          "formulas": 86,
+          "declared_bases": [
+            "ASPE",
+            "EGYPT_301",
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "data-1",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 161,
+          "formulas": 0,
+          "declared_bases": [
+            "ASPE",
+            "EGYPT_301",
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "data-2",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 81,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "data-3",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 92,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Overflow Pool Sizing",
+          "cell": "A10",
+          "text": "Refer to ASPE - Volume 3 - Cha.6",
+          "kind": "cached_reference_label"
+        },
+        {
+          "sheet": "Overflow Pool Sizing",
+          "cell": "G13",
+          "text": "ASPE",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Skimmer Pool Sizing",
+          "cell": "A10",
+          "text": "Refer to Manufacturer Recommendation",
+          "kind": "cached_reference_label"
+        },
+        {
+          "sheet": "Skimmer Pool Sizing",
+          "cell": "G13",
+          "text": "Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "B6",
+          "text": "Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "C6",
+          "text": "ASPE",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "D6",
+          "text": "Egyptian",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "B29",
+          "text": "Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "C29",
+          "text": "Egyptian",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "D29",
+          "text": "ASPE",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "B35",
+          "text": "Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "C35",
+          "text": "Egyptian",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "D35",
+          "text": "ASPE",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-2",
+          "cell": "A1",
+          "text": "Refer to Aqua catalogue",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-3",
+          "cell": "A1",
+          "text": "Astralpool Catalogue",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "IF": 93,
+        "INDEX": 66,
+        "MATCH": 76,
+        "ROUNDUP": 33,
+        "SQRT": 2,
+        "MAX": 5,
+        "ISNUMBER": 10
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "f45d044659b0f1a0",
+      "filename": "03-Pools & Water Features/Waterslide Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "f45d044659b0f1a015058fe6002de37fe51a7705a63e9d3c6f1cdcd37917fe78",
+      "primary_bases": [
+        "ASPE",
+        "EGYPT_301",
+        "MANUFACTURER"
+      ],
+      "all_bases": [
+        "ASPE",
+        "EGYPT_301",
+        "MANUFACTURER"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "Waterslide Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 331,
+          "formulas": 94,
+          "declared_bases": [
+            "ASPE",
+            "EGYPT_301",
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "data-1",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 157,
+          "formulas": 0,
+          "declared_bases": [
+            "ASPE",
+            "EGYPT_301",
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "data-2",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 81,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        },
+        {
+          "name": "data-3",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 92,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Waterslide Sizing",
+          "cell": "A10",
+          "text": "Refer to ASPE - Volume 3 - Cha.6",
+          "kind": "cached_reference_label"
+        },
+        {
+          "sheet": "Waterslide Sizing",
+          "cell": "G13",
+          "text": "ASPE",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "B6",
+          "text": "Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "C6",
+          "text": "ASPE",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "D6",
+          "text": "Egyptian",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "B29",
+          "text": "Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "C29",
+          "text": "Egyptian",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "D29",
+          "text": "ASPE",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "B35",
+          "text": "Manufacturer",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "C35",
+          "text": "Egyptian",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-1",
+          "cell": "D35",
+          "text": "ASPE",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-2",
+          "cell": "A1",
+          "text": "Refer to Aqua catalogue",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-3",
+          "cell": "A1",
+          "text": "Astralpool Catalogue",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "IF": 44,
+        "INDEX": 34,
+        "MATCH": 39,
+        "ROUNDUP": 18,
+        "SQRT": 1,
+        "MAX": 3,
+        "ISNUMBER": 5
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "bd5b1f01c44a503e",
+      "filename": "05-Gas System/LPG Pipe Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "bd5b1f01c44a503eb731a37dcac5711a6a86b62a78d8f5de17f3210c23480096",
+      "primary_bases": [],
+      "all_bases": [],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "LPG",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 135,
+          "formulas": 105,
+          "declared_bases": []
+        },
+        {
+          "name": "Data",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 1404,
+          "formulas": 0,
+          "declared_bases": []
+        }
+      ],
+      "reference_evidence": [],
+      "warnings": [
+        "Unsupported functions: :INDIRECT",
+        "No primary code/standard identified in cell text; inspect source references before use"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "ROUNDUP": 21,
+        "IF": 84,
+        "INDEX": 105,
+        "MATCH": 273,
+        "INDIRECT": 84,
+        ":INDIRECT": 84
+      },
+      "macros": false,
+      "external_links": 0,
+      "review_notes": [
+        "Table 16.1(a) alone does not establish its publisher or edition. Source remains unidentified."
+      ]
+    },
+    {
+      "workbook_id": "419d752b2e92bf7b",
+      "filename": "05-Gas System/LPG Tank Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "419d752b2e92bf7b37e3d443b04c9d3ef64d4ca3f5758ccbada38c4fb2198c43",
+      "primary_bases": [
+        "ASPE",
+        "NFPA_58"
+      ],
+      "all_bases": [
+        "ASPE",
+        "MANUFACTURER",
+        "NFPA_58"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "LPG Tank Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 302,
+          "formulas": 223,
+          "declared_bases": [
+            "ASPE",
+            "NFPA_58"
+          ]
+        },
+        {
+          "name": "data-1",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 149,
+          "formulas": 31,
+          "declared_bases": []
+        },
+        {
+          "name": "data-2",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 299,
+          "formulas": 0,
+          "declared_bases": [
+            "NFPA_58"
+          ]
+        },
+        {
+          "name": "data-3",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 177,
+          "formulas": 0,
+          "declared_bases": [
+            "MANUFACTURER"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "LPG Tank Sizing",
+          "cell": "A10",
+          "text": "Refer to ASPE – 2013ED – Volume 2 – Cha.7 & NFPA 58 Cha.7 - Annex F",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-2",
+          "cell": "A1",
+          "text": "Correction Factor (NFPA 58)",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "data-3",
+          "cell": "A1",
+          "text": "Lapesa LPG Cylinders Catalogue (above/underground)",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "INDEX": 16,
+        "MATCH": 18,
+        "ROUNDUP": 33,
+        "SUM": 3,
+        "IF": 3,
+        "ISNUMBER": 1
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "3af40ee97760381b",
+      "filename": "05-Gas System/Natural Gas Pipe Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "3af40ee97760381b8e992c0a969749dcf88698dea8da5b2c4edb6c8000aad77b",
+      "primary_bases": [
+        "NFPA_54"
+      ],
+      "all_bases": [
+        "NFPA_54"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "NG Pipe Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 144,
+          "formulas": 106,
+          "declared_bases": [
+            "NFPA_54"
+          ]
+        },
+        {
+          "name": "Data",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 3791,
+          "formulas": 0,
+          "declared_bases": []
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "NG Pipe Sizing",
+          "cell": "A10",
+          "text": "Based On NFPA 54 - 2018Ed - Cha.6 / Annex B",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "Unsupported functions: :INDIRECT"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "IF": 211,
+        "ROUNDUP": 21,
+        "INDEX": 168,
+        "MATCH": 462,
+        "INDIRECT": 147,
+        ":INDIRECT": 147
+      },
+      "macros": false,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "5a4b5de2b9d118e5",
+      "filename": "06-Fuel System/Fuel Equipment Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "5a4b5de2b9d118e58f70d334c6335eef91a63604dbd0bada89cbb38bb99fe6e8",
+      "primary_bases": [
+        "ASPE"
+      ],
+      "all_bases": [
+        "ASHRAE",
+        "ASPE",
+        "STEEL_TEXTBOOK"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "00000000",
+          "state": "veryHidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Fuel Equipment Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 154,
+          "formulas": 49,
+          "declared_bases": [
+            "ASPE"
+          ]
+        },
+        {
+          "name": "Pipe Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 47,
+          "formulas": 24,
+          "declared_bases": []
+        },
+        {
+          "name": "Data",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 116,
+          "formulas": 12,
+          "declared_bases": []
+        },
+        {
+          "name": "Data-2",
+          "state": "visible",
+          "auxiliary": true,
+          "cells": 150,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Reference",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 2,
+          "formulas": 0,
+          "declared_bases": [
+            "ASHRAE",
+            "STEEL_TEXTBOOK"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Fuel Equipment Sizing",
+          "cell": "A10",
+          "text": "Refer to ASPE – 2001ED – Volume 3 – Cha.7",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference",
+          "cell": "A1",
+          "text": "ASHRAE Applications",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference",
+          "cell": "A23",
+          "text": "Dr Steel",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "IF": 66,
+        "ROUNDUP": 5,
+        "ISNUMBER": 2,
+        "MATCH": 69,
+        "INDEX": 67,
+        "SUM": 2,
+        "MAX": 30
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "8eaa637d6dc6c812",
+      "filename": "06-Fuel System/Petrol Station Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "8eaa637d6dc6c8128e0068e3e5dc237b8c8834214f14415fc1f9caabc1e52e14",
+      "primary_bases": [
+        "ASPE"
+      ],
+      "all_bases": [
+        "ASHRAE",
+        "ASPE",
+        "STEEL_TEXTBOOK"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "00000000",
+          "state": "veryHidden",
+          "auxiliary": true,
+          "cells": 0,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Main Data",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 75,
+          "formulas": 10,
+          "declared_bases": [
+            "ASPE"
+          ]
+        },
+        {
+          "name": "Fuel Type-1",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 79,
+          "formulas": 25,
+          "declared_bases": []
+        },
+        {
+          "name": "Fuel Type-2",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 79,
+          "formulas": 25,
+          "declared_bases": []
+        },
+        {
+          "name": "Fuel Type-3",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 79,
+          "formulas": 25,
+          "declared_bases": []
+        },
+        {
+          "name": "Fuel Type-4",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 79,
+          "formulas": 25,
+          "declared_bases": []
+        },
+        {
+          "name": "Fuel Type-5",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 79,
+          "formulas": 25,
+          "declared_bases": []
+        },
+        {
+          "name": "Pipe Sizing",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 84,
+          "formulas": 48,
+          "declared_bases": []
+        },
+        {
+          "name": "Data",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 116,
+          "formulas": 12,
+          "declared_bases": []
+        },
+        {
+          "name": "Data-2",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 150,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Data-3",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 42,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Reference",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 2,
+          "formulas": 0,
+          "declared_bases": [
+            "ASHRAE",
+            "STEEL_TEXTBOOK"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Main Data",
+          "cell": "A10",
+          "text": "Refer to ASPE – 2001ED – Volume 3 – Cha.7",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference",
+          "cell": "A1",
+          "text": "ASHRAE Applications",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Reference",
+          "cell": "A23",
+          "text": "Dr Steel",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "IF": 115,
+        "INDEX": 113,
+        "MATCH": 123,
+        "ISNUMBER": 5,
+        "ROUNDUP": 20,
+        "SUM": 5,
+        "MAX": 54
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "f7ed8b140d2cc00a",
+      "filename": "07-Medical Gas System/Medical Gas Flow Rate.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "f7ed8b140d2cc00ab92410e780ddd5ce23125d88e234788569ce450dd4329b2a",
+      "primary_bases": [
+        "HTM_02"
+      ],
+      "all_bases": [
+        "HTM_02"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "O2 Flow",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 171,
+          "formulas": 33,
+          "declared_bases": [
+            "HTM_02"
+          ]
+        },
+        {
+          "name": "N2O Flow",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 56,
+          "formulas": 9,
+          "declared_bases": [
+            "HTM_02"
+          ]
+        },
+        {
+          "name": "N2O-O2 Mix. Flow",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 41,
+          "formulas": 5,
+          "declared_bases": [
+            "HTM_02"
+          ]
+        },
+        {
+          "name": "MA4 Flow",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 112,
+          "formulas": 21,
+          "declared_bases": [
+            "HTM_02"
+          ]
+        },
+        {
+          "name": "SA7 Flow",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 40,
+          "formulas": 5,
+          "declared_bases": [
+            "HTM_02"
+          ]
+        },
+        {
+          "name": "MV Flow",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 166,
+          "formulas": 34,
+          "declared_bases": [
+            "HTM_02"
+          ]
+        },
+        {
+          "name": "AGSS Flow",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 48,
+          "formulas": 7,
+          "declared_bases": [
+            "HTM_02"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "O2 Flow",
+          "cell": "A10",
+          "text": "Refer to HTM-02 – Part A – Cha.4",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "N2O Flow",
+          "cell": "A10",
+          "text": "Refer to HTM-02 – Part A – Cha.4",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "N2O-O2 Mix. Flow",
+          "cell": "A10",
+          "text": "Refer to HTM-02 – Part A – Cha.4",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "MA4 Flow",
+          "cell": "A10",
+          "text": "Refer to HTM-02 – Part A – Cha.4",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "SA7 Flow",
+          "cell": "A10",
+          "text": "Refer to HTM-02 – Part A – Cha.4",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "MV Flow",
+          "cell": "A10",
+          "text": "Refer to HTM-02 – Part A – Cha.4",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "AGSS Flow",
+          "cell": "A10",
+          "text": "Refer to HTM-02 – Part A – Cha.4",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "IF": 107,
+        "SUM": 7
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "ed1b3be104c88852",
+      "filename": "07-Medical Gas System/Medical Gas Pipe Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "ed1b3be104c88852516c27f540ab32c0538e513b1f9005a72c4df0181b836313",
+      "primary_bases": [
+        "HTM_02"
+      ],
+      "all_bases": [
+        "HTM_02",
+        "HTM_22_LEGACY"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "O2",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 534,
+          "formulas": 429,
+          "declared_bases": [
+            "HTM_02"
+          ]
+        },
+        {
+          "name": "N2O",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 534,
+          "formulas": 429,
+          "declared_bases": [
+            "HTM_02"
+          ]
+        },
+        {
+          "name": "N2O-O2 Mix",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 534,
+          "formulas": 429,
+          "declared_bases": [
+            "HTM_02"
+          ]
+        },
+        {
+          "name": "MA",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 534,
+          "formulas": 429,
+          "declared_bases": [
+            "HTM_02"
+          ]
+        },
+        {
+          "name": "He-O2",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 534,
+          "formulas": 429,
+          "declared_bases": [
+            "HTM_02"
+          ]
+        },
+        {
+          "name": "SA7",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 532,
+          "formulas": 428,
+          "declared_bases": [
+            "HTM_02"
+          ]
+        },
+        {
+          "name": "SA11",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 522,
+          "formulas": 428,
+          "declared_bases": [
+            "HTM_02"
+          ]
+        },
+        {
+          "name": "MV",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 600,
+          "formulas": 503,
+          "declared_bases": [
+            "HTM_02"
+          ]
+        },
+        {
+          "name": "Data Tables",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 3266,
+          "formulas": 452,
+          "declared_bases": [
+            "HTM_22_LEGACY"
+          ]
+        },
+        {
+          "name": "AGSS",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 600,
+          "formulas": 503,
+          "declared_bases": [
+            "HTM_02"
+          ]
+        },
+        {
+          "name": "AGSS3",
+          "state": "hidden",
+          "auxiliary": false,
+          "cells": 87,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "AGSS2",
+          "state": "hidden",
+          "auxiliary": false,
+          "cells": 338,
+          "formulas": 0,
+          "declared_bases": []
+        },
+        {
+          "name": "Instructions",
+          "state": "hidden",
+          "auxiliary": true,
+          "cells": 9,
+          "formulas": 0,
+          "declared_bases": []
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "O2",
+          "cell": "A9",
+          "text": "Refer to HTM-02 – Part A – Appendix G",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "N2O",
+          "cell": "A9",
+          "text": "Refer to HTM-02 – Part A – Appendix G",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "N2O-O2 Mix",
+          "cell": "A9",
+          "text": "Refer to HTM-02 – Part A – Appendix G",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "MA",
+          "cell": "A9",
+          "text": "Refer to HTM-02 – Part A – Appendix G",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "He-O2",
+          "cell": "A9",
+          "text": "Refer to HTM-02 – Part A – Appendix G",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "SA7",
+          "cell": "A9",
+          "text": "Refer to HTM-02 – Part A – Appendix G",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "SA11",
+          "cell": "A9",
+          "text": "Refer to HTM-02 – Part A – Appendix G",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "MV",
+          "cell": "A9",
+          "text": "Refer to HTM-02 – Part A – Appendix G",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data Tables",
+          "cell": "A8",
+          "text": "4 Bar HTM 22 Design Data",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data Tables",
+          "cell": "A25",
+          "text": "7 Bar HTM 22 Design Data",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data Tables",
+          "cell": "A41",
+          "text": "Vacuum HTM 22 Design Data",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "Data Tables",
+          "cell": "A200",
+          "text": "11 Bar HTM 22 Design Data",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "AGSS",
+          "cell": "A9",
+          "text": "Refer to HTM-02 – Part A – Appendix G",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "Unsupported functions: WEIGHT2SUM",
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "HLOOKUP": 450,
+        "VLOOKUP": 725,
+        "IF": 2350,
+        "SUM": 476,
+        "WEIGHT2SUM": 2,
+        "ROUND": 101
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": [
+        "Primary sheets cite HTM-02 Part A Appendix G, while Data Tables includes HTM 22 labels. Confirm the guidance edition and source-table lineage. WEIGHT2SUM is unsupported.",
+        "SA7!A45 contains inconsistent pressure-unit text: one line pairs 21.7 psi with 150 kPa, another with 20 kPa. This source note requires correction/review."
+      ]
+    },
+    {
+      "workbook_id": "1da0c293b4fdbeec",
+      "filename": "07-Medical Gas System/Medical Gas Source Sizing.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "1da0c293b4fdbeec769ed271da7afdfb28a63aa95b8e5cb9d801fb88cc79e7e3",
+      "primary_bases": [
+        "HTM_02"
+      ],
+      "all_bases": [
+        "HTM_02"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "O2 Source",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 79,
+          "formulas": 26,
+          "declared_bases": [
+            "HTM_02"
+          ]
+        },
+        {
+          "name": "N2O Source",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 77,
+          "formulas": 10,
+          "declared_bases": [
+            "HTM_02"
+          ]
+        },
+        {
+          "name": "N2O-O2 Mix. Source",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 79,
+          "formulas": 10,
+          "declared_bases": [
+            "HTM_02"
+          ]
+        },
+        {
+          "name": "MA Source",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 93,
+          "formulas": 30,
+          "declared_bases": [
+            "HTM_02"
+          ]
+        },
+        {
+          "name": "SA Source",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 93,
+          "formulas": 30,
+          "declared_bases": [
+            "HTM_02"
+          ]
+        },
+        {
+          "name": "MA-SA Combined Source",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 111,
+          "formulas": 45,
+          "declared_bases": [
+            "HTM_02"
+          ]
+        },
+        {
+          "name": "MV Source",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 47,
+          "formulas": 6,
+          "declared_bases": [
+            "HTM_02"
+          ]
+        },
+        {
+          "name": "AGSS Source",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 31,
+          "formulas": 2,
+          "declared_bases": [
+            "HTM_02"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "O2 Source",
+          "cell": "A10",
+          "text": "Refer to HTM-02 – Part A – Cha.4",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "N2O Source",
+          "cell": "A10",
+          "text": "Refer to HTM-02 – Part A – Cha.4",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "N2O-O2 Mix. Source",
+          "cell": "A10",
+          "text": "Refer to HTM-02 – Part A – Cha.4",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "MA Source",
+          "cell": "A10",
+          "text": "Refer to HTM-02 – Part A – Cha.4",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "SA Source",
+          "cell": "A10",
+          "text": "Refer to HTM-02 – Part A – Cha.4",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "MA-SA Combined Source",
+          "cell": "A10",
+          "text": "Refer to HTM-02 – Part A – Cha.4",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "MV Source",
+          "cell": "A10",
+          "text": "Refer to HTM-02 – Part A – Cha.4",
+          "kind": "reference_label"
+        },
+        {
+          "sheet": "AGSS Source",
+          "cell": "A10",
+          "text": "Refer to HTM-02 – Part A – Cha.4",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "IF": 128,
+        "ROUNDUP": 16,
+        "EVEN": 16
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    },
+    {
+      "workbook_id": "c900d1ddd795fe25",
+      "filename": "07-Medical Gas System/Medical Gas Terminal Units.xlsm",
+      "archive": "OneDrive_3_10-26-2026.zip",
+      "sha256": "c900d1ddd795fe2560595d1aef7a309c4383cf10a3cec4d5a4d56b5a8eb070d2",
+      "primary_bases": [
+        "HTM_02"
+      ],
+      "all_bases": [
+        "HTM_02"
+      ],
+      "verification_status": "UNVERIFIED_REFERENCE",
+      "edition_status": "PER_REFERENCE_ONLY",
+      "sheets": [
+        {
+          "name": "Terminal Units",
+          "state": "visible",
+          "auxiliary": false,
+          "cells": 772,
+          "formulas": 430,
+          "declared_bases": [
+            "HTM_02"
+          ]
+        }
+      ],
+      "reference_evidence": [
+        {
+          "sheet": "Terminal Units",
+          "cell": "A10",
+          "text": "Refer to HTM-02 – Part A – Cha.3",
+          "kind": "reference_label"
+        }
+      ],
+      "warnings": [
+        "VBA is present and is never executed by this engine"
+      ],
+      "cached_errors": [],
+      "functions": {
+        "SUM": 7
+      },
+      "macros": true,
+      "external_links": 0,
+      "review_notes": []
+    }
+  ]
+}

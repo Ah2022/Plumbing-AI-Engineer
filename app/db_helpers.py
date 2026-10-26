@@ -12,6 +12,7 @@ from __future__ import annotations
 from models import CalculationResult
 
 CALC_TYPE_PREFIXES = {
+    "reference_workbook_scenario":"WB",
     "water_network_check":"NW",
     "drainage_network_check":"ND",
     "cold_water_velocity_check": "CW",
