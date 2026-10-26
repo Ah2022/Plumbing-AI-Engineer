@@ -22,6 +22,8 @@ Section 18: "must show its source"). Callers pass them explicitly.
 
 from __future__ import annotations
 
+from calculations.validation import finite
+
 from calculations.hydraulics import rational_method_peak_flow  # re-exported, usable since Phase 1
 from database.design_table_api import (
     get_rainfall_depth_24hr, get_duration_ratio, duration_label_to_hours,
@@ -40,6 +42,7 @@ def design_rainfall_intensity(conn, code_id: str, return_period_yr: int, duratio
       duration ratio -- SBC701 Table 8 depth-duration ratios, source_classification=CODE
       duration(hr) -- deterministic conversion of the SAME duration_label used for the ratio lookup
     """
+    finite('return_period_yr',return_period_yr,positive=True)
     depth = get_rainfall_depth_24hr(conn, code_id, return_period_yr, station=station)
     if depth is None:
         raise MissingCodeDataError(
@@ -98,6 +101,8 @@ def size_roof_drain(conn, code_id: str, roof_area_m2: float, rainfall_intensity_
     (or any other traceable source) and rounds UP to the nearest tabulated
     rate column, never down.
     """
+    finite('roof_area_m2',roof_area_m2,minimum=0)
+    finite('rainfall_intensity_mm_hr',rainfall_intensity_mm_hr,positive=True)
     dv = get_leader_size(conn, code_id, roof_area_m2, rainfall_intensity_mm_hr)
     if dv is None:
         raise MissingCodeDataError(
@@ -132,6 +137,7 @@ def size_storm_drain_pipe(conn, code_id: str, design_flow_lps: float, calc_id: s
     flow, once you already know the flow from the Rational Method / roof
     drain step).
     """
+    finite('design_flow_lps',design_flow_lps,minimum=0)
     flow_lpm = design_flow_lps * 60.0
     dv = get_storm_drain_pipe_size(conn, code_id, flow_lpm, orientation=orientation, slope_mm_per_m=slope_mm_per_m)
     if dv is None:

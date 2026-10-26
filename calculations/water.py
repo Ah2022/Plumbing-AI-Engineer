@@ -16,6 +16,8 @@ exactly what was used and from where — never a silent substitution.
 
 from __future__ import annotations
 
+from calculations.validation import finite
+
 import math
 
 from calculations.hydraulics import velocity_from_flow
@@ -60,6 +62,8 @@ def check_velocity_limit(conn, project_id: int, code_id: str, pipe_id: str,
                   f"set allow_fallback_code to permit an explicit cross-code fallback",
         )
 
+    finite('velocity limit',limit.value,positive=True)
+
     status = "PASS" if v_result.result_value <= limit.value else "FAIL"
     if limit.confidence == "FLAGGED":
         status = status if status == "FAIL" else "WARNING"  # a borrowed/flagged limit can PASS but must WARN
@@ -91,6 +95,9 @@ def total_fixture_units(conn, code_id: str, fixtures: list[dict]) -> dict:
              or [{"fixture_name": "...", "quantity": 40, "wsfu_value": 6.0,
                   "confidence": "CONFIRMED"}, ...]
     """
+    for f in fixtures:
+        finite('quantity',f.get('quantity'),minimum=0)
+        if f.get('wsfu_value') is not None: finite('wsfu_value',f['wsfu_value'],minimum=0)
     records = get_table_records(conn, code_id, "water", "1_Fixture_Units")
     total = 0.0
     missing = []
@@ -164,6 +171,8 @@ def size_pipe_from_demand(conn, code_id: str, total_wsfu: float, calc_id: str,
     draw a higher instantaneous demand than flush tank fixtures for the
     same WSFU total).
     """
+    finite('total_wsfu',total_wsfu,minimum=0)
+    if control_type not in ('flush_tank','flush_valve'): raise ValueError('Unsupported demand control type')
     demand_column = "flush_tank_lpm" if control_type == "flush_tank" else "flush_valve_lpm"
     demand = get_demand_from_wsfu(conn, code_id, total_wsfu, demand_column=demand_column)
     if demand is None:
@@ -183,19 +192,23 @@ def size_pipe_from_demand(conn, code_id: str, total_wsfu: float, calc_id: str,
         )
 
     q_m3s = demand_lps / 1000.0
+    finite('velocity limit',limit.value,positive=True)
     required_diameter_m = math.sqrt(4 * q_m3s / (math.pi * limit.value))
     required_diameter_mm = required_diameter_m * 1000.0
 
     floor_note = None
+    min_mm = None
+    min_confidence = 'CONFIRMED'
     if fixture_min_size_context:
         min_size = get_min_pipe_size(conn, code_id, fixture_min_size_context)
-        if min_size and min_size.unit == "mm" and min_size.value > required_diameter_mm:
-            floor_note = (f"Code minimum branch size for '{fixture_min_size_context}' "
-                          f"({min_size.value}mm) exceeds the hydraulically-required diameter "
-                          f"({round(required_diameter_mm, 1)}mm) — the code minimum governs.")
-            required_diameter_mm = min_size.value
+        if min_size is None:
+            raise MissingCodeDataError("Fixture minimum connection", f"code={code_id}, fixture={fixture_min_size_context}")
+        min_mm = min_size.value * 25.4 if min_size.unit == "in" else min_size.value
+        min_confidence = min_size.confidence
+        floor_note = (f'Code minimum nominal connection: {min_mm}mm. '
+                      'Check this separately against catalogue nominal size; it is not an internal diameter.')
 
-    confidence = "FLAGGED" if (demand.confidence == "FLAGGED" or limit.confidence == "FLAGGED") else "CONFIRMED"
+    confidence = "FLAGGED" if 'FLAGGED' in (demand.confidence,limit.confidence,min_confidence) else "CONFIRMED"
 
     return CalculationResult(
         calc_id=calc_id,
@@ -203,11 +216,11 @@ def size_pipe_from_demand(conn, code_id: str, total_wsfu: float, calc_id: str,
         formula="D = sqrt(4*Q / (pi*V_max)),  Q from WSFU via Hunter's Curve (code table)",
         inputs={"total_wsfu": (total_wsfu, "WSFU"), "control_type": (control_type, "-")},
         intermediate={"demand_lpm": demand.value, "demand_lps": round(demand_lps, 4),
-                      "velocity_limit_m_s": limit.value},
+                      "velocity_limit_m_s": limit.value,"fixture_min_nominal_mm":min_mm},
         result_value=round(required_diameter_mm, 2),
         result_unit="mm (required internal diameter -- not yet a catalog nominal size)",
-        required_value=None,
-        selected_value=round(required_diameter_mm, 2),
+        required_value=round(required_diameter_mm,2),
+        selected_value=None,
         status="WARNING" if confidence == "FLAGGED" else "CALCULATED_NOT_APPROVED",
         reference=f"{code_id}:2_Demand_Conversion + {limit.code_id}:{limit.table_reference}",
         notes=" | ".join(filter(None, [demand.notes, limit.notes, floor_note])),

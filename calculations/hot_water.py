@@ -18,6 +18,7 @@ from __future__ import annotations
 
 from database.design_table_api import get_table_records
 from calculations.hydraulics import q_heat
+from calculations.validation import finite
 from models import CalculationResult, MissingCodeDataError
 
 # ASPE Table 6-1 hourly demand factor / storage capacity factor -- confirmed
@@ -42,6 +43,9 @@ def hot_water_demand(conn, fixtures: list[dict], calc_id: str,
     with this table loaded; SAUDI_SBC_701/EGYPT_LOCAL have none of their own
     (confirmed gap, Section 0b item 4).
     """
+    finite('demand_factor',demand_factor,minimum=0,maximum=1)
+    finite('storage_capacity_factor',storage_capacity_factor,minimum=0)
+    for fixture in fixtures: finite('quantity',fixture.get('quantity'),minimum=0)
     records = get_table_records(conn, "IPC", "hot_water", "9_Hot_Water_Basis [fixture+gph")
     total_gph = 0.0
     missing = []
@@ -107,6 +111,7 @@ TEMPERATURE_CHECKS = {
 
 def check_hot_water_temperature(conn, check_type: str, selected_temp_c: float, calc_id: str) -> CalculationResult:
     """check_type: one of TEMPERATURE_CHECKS' keys."""
+    finite('selected_temp_c',selected_temp_c)
     if check_type not in TEMPERATURE_CHECKS:
         raise ValueError(f"Unknown check_type '{check_type}'. Valid: {list(TEMPERATURE_CHECKS)}")
     spec = TEMPERATURE_CHECKS[check_type]

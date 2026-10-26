@@ -2,11 +2,11 @@
 
 Python/SQLite plumbing calculation engine with a Streamlit interface, code-rule checks, reports, and Revit JSON exchange.
 
-**Phase 2 code governance: 26 October 2026.** This is a testing build with unresolved numerical, compliance-status, and project-isolation defects. Engineering outputs have been preserved for review. See the [baseline audit](docs/BASELINE_AUDIT.md).
+**Phases 3–5: 26 October 2026.** Calculation foundations, domestic-water tree networks, and drainage/vent checks are implemented for the [documented supported scope](docs/PHASES_3_4_5.md). IPC 2024 is the first verification target. Code adoption, numeric-table verification and engineering acceptance remain pending; outputs retain `REVIEW_REQUIRED`.
 
 ## Test the engine
 
-**[Open the updated Phase 2 Streamlit app](http://localhost:8502)** — works on the computer running Streamlit. This is a local URL, not an internet deployment.
+**[Open the updated Phases 3–5 Streamlit app](http://localhost:8503)** — works on the computer running Streamlit. This is a local URL, not an internet deployment.
 
 ```bash
 git clone https://github.com/Ah2022/Plumbing-AI-Engineer.git
@@ -15,7 +15,7 @@ python -m venv .venv
 # Windows: .venv\Scripts\activate
 # macOS/Linux: source .venv/bin/activate
 python -m pip install -r requirements.txt
-python -m streamlit run app/streamlit_app.py --server.port 8502
+python -m streamlit run app/streamlit_app.py --server.port 8503
 ```
 
 The app initializes a database on first use. After each implementation, pull the latest `main` and refresh the page; restart if dependencies changed. Streamlit reloads saved source changes. Use synthetic review projects while audit findings remain open.
@@ -43,7 +43,7 @@ Once deployed, add its actual URL here as the permanent test link. Community Clo
 - `Egyptian_Plumbing_Design_Data.xlsx`
 - `SBC701_Saudi_Plumbing_Design_Data.xlsx`
 
-## Phase 2 workflow
+## Review workflow
 
 1. Create a project; IPC 2024 is the default first verification target.
 2. Open **Code Profiles** and record jurisdiction, adopting authority, amendments, occupancy, systems, units, methods, exclusions, and requirement precedence.
@@ -51,18 +51,20 @@ Once deployed, add its actual URL here as the permanent test link. Community Clo
 4. Review the per-profile coverage matrix and independent benchmark records. New rules start pending; unsupported checks remain explicit.
 5. Recalculate after a profile/basis/source change. Reports and BIM export exclude or identify stale results and preserve review status.
 
-Numeric dataset editions and the Phase 1 engineering defects remain unverified. Every current result therefore remains `REVIEW_REQUIRED`; the software does not manufacture engineering approval. US customary/SI selection records the design basis and does not change the explicitly labeled units on calculation forms.
+6. Open **Network Review**, choose water or drainage/vents, and review the synthetic mapped-JSON example. Replace its criteria and catalogue with reviewed project data, then run, inspect and download the findings. Water supports explicit terminal flows or selected-code WSFU demand lookup; drainage capacity checks require the relevant workbook.
 
-For side-by-side local review, the retained [Phase 1 app](http://localhost:8501) runs separately from the updated [Phase 2 app](http://localhost:8502). These local services must be running on your computer.
+The ten defect reproductions left after Phase 2 now pass. Numeric dataset editions and project applicability still require review. US customary/SI selection records the design basis; calculation forms and mapped network JSON retain explicitly labeled units.
+
+For local comparison, retained [Phase 1](http://localhost:8501) and [Phase 2](http://localhost:8502) apps run separately from the [current build](http://localhost:8503). These services must be running on your computer.
 
 ## Verification
 
 ```bash
 # Full suite; requires the five local workbooks
-python -m pytest tests/ -q -rx
+python -m pytest tests/ -q
 
 # Public-checkout checks
-python -m pytest tests/test_audit_benchmarks.py tests/test_bim_exchange.py tests/test_reports.py tests/test_runtime_safety.py tests/test_governance.py tests/test_governance_ui.py -q -rx
+python -m pytest tests/test_audit_benchmarks.py tests/test_bim_exchange.py tests/test_reports.py tests/test_runtime_safety.py tests/test_governance.py tests/test_governance_ui.py tests/test_foundations.py tests/test_networks.py tests/test_network_ui.py -q
 
 # Inventory; uses an in-memory database and prints no workbook values
 python -m tools.baseline_inventory
@@ -71,7 +73,7 @@ python -m tools.baseline_inventory
 python -m tests.demo_project
 ```
 
-Verified on Windows/Python 3.12.14 with Streamlit 1.66.1: **139 passed, 10 expected failures**. The strict `xfail` cases reproduce open defects, not accepted engineering results. The [current inventory](docs/PHASE2_INVENTORY.json) records dependency versions, source-file fingerprints, and rule coverage. `requirements-lock.txt` records tested package versions.
+Verified on Windows/Python 3.12.14 with Streamlit 1.66.1: **238 passed, no expected failures**. Synthetic network tests cover independent pressure-path calculations, catalogue constraints, invalid topology, drainage/vent boundaries and model-import isolation. The [current inventory](docs/PHASE345_INVENTORY.json) records dependency versions, source-file fingerprints, and rule coverage. `requirements-lock.txt` records tested package versions.
 
 GitHub Actions runs public-checkout regression and interface-navigation checks after pushes and pull requests. It does not claim full workbook or live Revit validation.
 
@@ -93,15 +95,19 @@ python -m database.load_confirmed_additions
 
 | Area | Present implementation | Verification limit |
 | --- | --- | --- |
-| Calculations | Water, drainage, vents, hot water, tanks, pumps, stormwater | Open audit defects; no blanket compliance claim |
+| Foundations | Finite/domain validation, unit corrections, full-precision intermediates, globally unique IDs and transactional/current-result storage | Tested reproduction fixes; no blanket code-compliance claim |
+| Domestic water | Demand accumulation, actual-bore catalogue sizing, every terminal pressure path, governing margin | Directed trees only; WSFU mode is a design envelope; no loop/zone solver |
+| Drainage / vents | DFU accumulation, selected-code context capacities, slope/fall/minima, interval loading, supported dry vents and trap-arm distance | No gravity-flow solver; wet/circuit/AAV and offsets remain explicit unsupported checks |
 | Rules | 32 rules; 11 registered predicates across four code families | 21 unevaluated rules; editions and applicability need confirmation |
 | Interface | Project/design basis, calculation pages, QA/QC, reports | Headless interaction tests do not independently validate all engineering outputs |
-| Reports | Saved calculations, Markdown/CSV | Calculation notes are not persisted; AUD-006 |
-| BIM | JSON import/export, pyRevit scripts | Synthetic engine-side tests; live Revit unverified |
+| Reports | Notes, governance context, complete network input/findings, Markdown/CSV/JSON | Review state and incomplete coverage remain visible |
+| BIM | Atomic project/model-scoped JSON import/export and pyRevit scripts | Synthetic exchange tests; live Revit and raw CAD/IFC ingestion unverified |
 
 The current SQLite interface is a single trusted-user local review workflow. Public multi-user project access control has not been implemented.
 
-See the [Phase 2 implementation and review limits](docs/CODE_GOVERNANCE.md), the [old/new comparison](docs/ENGINE_COMPARISON.md), and the [audit](docs/BASELINE_AUDIT.md) and [historical architecture notes](docs/ARCHITECTURE.md). The improvement plan remains in chat for owner review.
+See the [implemented scope](docs/PHASES_3_4_5.md), [old/new comparison](docs/ENGINE_COMPARISON.md), and [CAD/IFC design-check study](docs/CAD_IFC_DESIGN_CHECK_STUDY.md). The study recommends IFC intake first, mapped DXF next, with explicit unit/connectivity/data-readiness gates before engineering checks. The current app accepts mapped JSON and does not scan raw CAD/IFC.
+
+The [Phase 2 governance record](docs/CODE_GOVERNANCE.md), [baseline audit](docs/BASELINE_AUDIT.md), and [architecture notes](docs/ARCHITECTURE.md) describe earlier states. The improvement plan remains in chat for owner review.
 
 ## License
 

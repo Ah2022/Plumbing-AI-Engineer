@@ -66,10 +66,10 @@ def probe(root):
 def compare(old_root,new_root):
     old,new = probe(old_root),probe(new_root)
     return {'baseline':'Original v0.6.2 / source commit 397e8d9f9b8031c6ce31a69aae64c4accaa75a23',
-            'updated':'Phase 2 code governance; preceding Phase 1 commit a5cb857837413a2dff6ae8cea2e6b91af64a9b81',
+            'updated':'Phases 3-5 verified calculation foundations and tree-network review',
             'method':'Identical synthetic inputs; separate processes; in-memory databases; no workbook values',
             'cases':[{'case':key,'old':old[key],'updated':new[key],'changed':old[key]!=new[key]} for key in old],
-            'engineering_limit':'The rain identity must be 1 L/s. Both versions return 10 L/s: AUD-001 remains unresolved.'}
+            'engineering_limit':'The rain identity is 1 L/s. The original returns 10 L/s; the updated engine returns 1 L/s. Code adoption and table verification still require engineer approval.'}
 
 
 if __name__=='__main__':

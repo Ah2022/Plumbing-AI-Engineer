@@ -338,7 +338,7 @@ def test_revit_export_excludes_stale_results(db):
     payload=empty_extract_payload('Synthetic.rvt','2026-10-26T00:00:00')
     payload['pipes']=[dict(revit_element_id='42',system='cold_water',length_m=1,nominal_diameter_mm=25)]
     import_revit_extract(db,1,payload)
-    save_calculation(db,1,velocity_from_flow(1,25,'R-1'),target_type='pipe',target_id='RVT-42')
+    save_calculation(db,1,velocity_from_flow(1,25,'R-1'),target_type='pipe',target_id=db.execute('SELECT pipe_id FROM pipes WHERE project_id=1').fetchone()[0])
     assert '42' in export_results_for_revit(db,1)['results']
     basis(db,'SBC701-2024')
     assert not export_results_for_revit(db,1)['results']

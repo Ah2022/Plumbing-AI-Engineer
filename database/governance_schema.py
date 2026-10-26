@@ -8,6 +8,10 @@ def ensure_governance_schema(conn):
     if 'projects' not in tables:
         raise ValueError('Initialize the engine schema before applying governance migration')
     changes = {
+        'pipes': {'revit_model_key':'TEXT'},
+        'tanks': {'revit_model_key':'TEXT'},
+        'pumps': {'revit_model_key':'TEXT'},
+        'revit_elements': {'revit_model_key':'TEXT'},
         'calculations': {'notes': 'TEXT', 'governance_json': 'TEXT',
                          'review_status': "TEXT NOT NULL DEFAULT 'LEGACY_UNVERIFIED'",
                          'is_current': 'INTEGER NOT NULL DEFAULT 0'},

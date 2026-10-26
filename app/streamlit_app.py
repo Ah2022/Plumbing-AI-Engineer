@@ -45,6 +45,7 @@ from reports.report_generator import generate_calculation_report_markdown
 from models import MissingCodeDataError
 from app.db_helpers import save_calculation, next_calc_id, status_badge
 from app.code_profiles_page import page_code_profiles, clear_result_session
+from app.network_page import page_network_review
 from compliance.governance import profile_for_code, set_basis, context, seed_review_inventory
 from database.governance_schema import ensure_governance_schema
 
@@ -287,7 +288,7 @@ def page_water():
                     result = total_fixture_units(conn, code_id, fixtures)
                     st.success(f"Total cold-water FU = **{result['total_cold_fu']}** "
                                f"(confidence: {result['confidence']})")
-                except MissingCodeDataError as e:
+                except (MissingCodeDataError, ValueError) as e:
                     st.error(str(e))
 
     with tab2:
@@ -310,7 +311,7 @@ def page_water():
                 save_calculation(conn, project_id, r)
                 st.markdown(f"### {status_badge(r.status)}")
                 show_result_table(r)
-            except MissingCodeDataError as e:
+            except (MissingCodeDataError, ValueError) as e:
                 st.error(str(e))
 
     with tab3:
@@ -336,7 +337,7 @@ def page_water():
                 save_calculation(conn, project_id, r3)
                 st.markdown(f"### {status_badge(r3.status)} — {r3.result_value} mm required")
                 show_result_table(r3)
-            except MissingCodeDataError as e:
+            except (MissingCodeDataError, ValueError) as e:
                 st.error(str(e))
 
 
@@ -368,7 +369,7 @@ def page_drainage_vent():
                 save_calculation(conn, project_id, r)
                 st.markdown(f"### {status_badge(r.status)} — {r.result_value} {r.result_unit}")
                 show_result_table(r)
-            except MissingCodeDataError as e:
+            except (MissingCodeDataError, ValueError) as e:
                 st.error(str(e))
 
     with tab2:
@@ -385,7 +386,7 @@ def page_drainage_vent():
                 save_calculation(conn, project_id, r)
                 st.markdown(f"### {status_badge(r.status)}")
                 show_result_table(r)
-            except MissingCodeDataError as e:
+            except (MissingCodeDataError, ValueError) as e:
                 st.error(str(e))
 
     with tab3:
@@ -399,7 +400,7 @@ def page_drainage_vent():
                 save_calculation(conn, project_id, r)
                 st.markdown(f"### {status_badge(r.status)} — {r.result_value} {r.result_unit}")
                 show_result_table(r)
-            except MissingCodeDataError as e:
+            except (MissingCodeDataError, ValueError) as e:
                 st.error(str(e))
                 st.caption("IPC has no simple DFU table — use the 'Vent sizing (IPC Table 906.1)' tab instead.")
 
@@ -419,7 +420,7 @@ def page_drainage_vent():
                 save_calculation(conn, project_id, r)
                 st.markdown(f"### {status_badge(r.status)} — {r.result_value} {r.result_unit}")
                 show_result_table(r)
-            except MissingCodeDataError as e:
+            except (MissingCodeDataError, ValueError) as e:
                 st.error(str(e))
 
 
@@ -462,7 +463,7 @@ def page_hot_water():
                     tk = size_hot_water_storage_tank_from_demand(r, tk_calc_id)
                     save_calculation(conn, project_id, tk)
                     st.markdown(f"### Storage tank: {tk.result_value} {tk.result_unit}")
-                except MissingCodeDataError as e:
+                except (MissingCodeDataError, ValueError) as e:
                     st.error(str(e))
 
     with tab2:
@@ -477,7 +478,7 @@ def page_hot_water():
                 save_calculation(conn, project_id, r)
                 st.markdown(f"### {status_badge(r.status)}")
                 show_result_table(r)
-            except MissingCodeDataError as e:
+            except (MissingCodeDataError, ValueError) as e:
                 st.error(str(e))
 
     with tab3:
@@ -586,7 +587,7 @@ def page_stormwater():
             st.session_state["storm_intensity"] = r.result_value
             st.markdown(f"### Design intensity: {r.result_value} {r.result_unit}")
             show_result_table(r)
-        except MissingCodeDataError as e:
+        except (MissingCodeDataError, ValueError) as e:
             st.error(str(e))
 
     st.subheader("2. Rational Method peak flow (Q = CIA)")
@@ -618,7 +619,7 @@ def page_stormwater():
             save_calculation(conn, project_id, r)
             st.markdown(f"### Leader size: {r.result_value} {r.result_unit}")
             show_result_table(r)
-        except MissingCodeDataError as e:
+        except (MissingCodeDataError, ValueError) as e:
             st.error(str(e))
 
     st.subheader("4. Storm drain pipe sizing")
@@ -637,7 +638,7 @@ def page_stormwater():
             save_calculation(conn, project_id, r)
             st.markdown(f"### Pipe size: {r.result_value} {r.result_unit}")
             show_result_table(r)
-        except MissingCodeDataError as e:
+        except (MissingCodeDataError, ValueError) as e:
             st.error(str(e))
 
 
@@ -783,12 +784,11 @@ def main():
         st.session_state.conn = get_conn()
 
     st.sidebar.title("🔧 Plumbing Design Engine")
-    st.sidebar.caption("v0.6.2 — Phase 2 code governance review build")
-    st.warning("Testing build: the Phase 1 audit identified unresolved stormwater-flow, "
-               "compliance-status, and project-isolation defects. Review the baseline audit "
-               "before relying on calculation results.")
+    st.sidebar.caption("v0.6.2 — Phases 3–5 network review build")
+    st.warning("Review build: calculation benchmarks pass, but code adoption, numeric-table applicability, "
+               "model completeness and engineering acceptance still require review.")
     page = st.sidebar.radio("Navigate", [
-        "Project", "Code Profiles", "Design Basis", "Fixtures & Water", "Drainage & Vent",
+        "Project", "Code Profiles", "Network Review", "Design Basis", "Fixtures & Water", "Drainage & Vent",
         "Hot Water", "Tanks", "Pumps", "Stormwater",
         "Code Compliance / QA-QC", "QA/QC Dashboard", "Report / Export",
     ])
@@ -812,6 +812,7 @@ def main():
     {
         "Project": page_project,
         "Code Profiles": page_code_profiles,
+        "Network Review": page_network_review,
         "Design Basis": page_design_basis,
         "Fixtures & Water": page_water,
         "Drainage & Vent": page_drainage_vent,

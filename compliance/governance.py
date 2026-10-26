@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / 'database' / 'code_profiles.json'
-ENGINE_VERSION = '0.6.2-phase2'
+ENGINE_VERSION = '0.6.2-phases3-5'
 DOMAINS = ('water', 'drainage', 'vent', 'storm')
 REQUIRED_CRITERIA = ('jurisdiction', 'authority', 'amendments', 'occupancy',
                      'systems', 'units', 'method', 'exclusions', 'precedence')
@@ -42,6 +42,7 @@ def source_manifest():
              *sorted((ROOT / 'calculations').glob('*.py')),
              *sorted((ROOT / 'compliance').glob('*.py')),
              *sorted((ROOT / 'models').glob('*.py')), *sorted((ROOT / 'units').glob('*.py')),
+             *sorted((ROOT / 'bim').glob('*.py')),
              ROOT / 'database' / 'design_table_api.py', ROOT / 'database' / 'load_design_tables.py',
              ROOT / 'database' / 'load_confirmed_additions.py', ROOT / 'requirements-lock.txt']
     return {p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}
@@ -264,7 +265,7 @@ def context(conn, project_id):
             issues.append('No supported systems selected')
         if p['numeric_dataset_edition'] != 'VERIFIED':
             issues.append('Numeric dataset edition/applicability remains unverified')
-        issues.append('Open Phase 1 engineering defects require independent acceptance')
+        issues.append('Independent engineering acceptance of supported methods and model completeness remains required')
     benchmarks = [dict(r) for r in conn.execute('SELECT * FROM verification_benchmarks WHERE profile_id=? ORDER BY benchmark_id',
                                                (p['profile_id'],))] if p else []
     payload = {'engine_version': ENGINE_VERSION, 'registry_version': json.loads(REGISTRY.read_text())['registry_version'],

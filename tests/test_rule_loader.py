@@ -279,10 +279,11 @@ def test_sbc701_pipe_sizing_beyond_table_range_raises(tmp_path):
 def test_sbc701_pipe_sizing_respects_fixture_minimum_floor(tmp_path):
     from calculations.water import size_pipe_from_demand
     conn = _conn_with_all_data(tmp_path)
-    r = size_pipe_from_demand(conn, "SAUDI_SBC_701", total_wsfu=1, calc_id="T-CW4",
+    r = size_pipe_from_demand(conn, "SAUDI_SBC_701", total_wsfu=12, calc_id="T-CW4",
                                control_type="flush_valve", material="PPR",
                                fixture_min_size_context="Water closet, flushometer valve")
-    assert r.result_value == 25.0  # code minimum overrides the smaller hydraulic result
+    assert r.intermediate["fixture_min_nominal_mm"] == 25.0
+    assert r.selected_value is None  # no catalogue: nominal minimum is not an invented internal diameter
 
 
 def test_hot_water_demand_known_value(tmp_path):

@@ -46,6 +46,6 @@ def select_pump_duty(design_flow_lps: float, static_head_m: float, friction_loss
         status="CALCULATED_NOT_APPROVED",
         reference="Standard pump-head-balance + hydraulic-power relationships (public-domain hydraulics)",
         notes=f"Duty point: {design_flow_lps} L/s @ {tdh_result.result_value} m TDH -> "
-              f"{power_result.result_value} kW hydraulic power. Motor sizing and actual pump "
+              f"{power_result.result_value} kW efficiency-adjusted power. Motor sizing and actual pump "
               f"selection need a manufacturer curve -- not loaded/invented here.",
     )

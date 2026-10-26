@@ -19,16 +19,20 @@ from __future__ import annotations
 import math
 
 from models import CalculationResult
+from calculations.validation import finite, checked_numeric
 
 G = 9.80665  # m/s^2
 
 
+@checked_numeric
 def velocity_from_flow(flow_lps: float, internal_diameter_mm: float, calc_id: str) -> CalculationResult:
     """V = Q / A.  Q in L/s, D in mm -> V in m/s."""
+    finite('flow_lps',flow_lps,minimum=0)
+    finite('internal_diameter_mm',internal_diameter_mm,positive=True)
     q_m3s = flow_lps / 1000.0
     d_m = internal_diameter_mm / 1000.0
     area_m2 = math.pi * (d_m ** 2) / 4.0
-    velocity = q_m3s / area_m2 if area_m2 > 0 else float("inf")
+    velocity = q_m3s / area_m2
 
     return CalculationResult(
         calc_id=calc_id,
@@ -43,6 +47,7 @@ def velocity_from_flow(flow_lps: float, internal_diameter_mm: float, calc_id: st
     )
 
 
+@checked_numeric
 def darcy_weisbach_head_loss(
     flow_lps: float,
     internal_diameter_mm: float,
@@ -51,9 +56,11 @@ def darcy_weisbach_head_loss(
     calc_id: str,
 ) -> CalculationResult:
     """hf = f * (L/D) * (V^2 / 2g)."""
+    finite('length_m',length_m,minimum=0)
+    finite('friction_factor',friction_factor,positive=True)
     d_m = internal_diameter_mm / 1000.0
     v_calc = velocity_from_flow(flow_lps, internal_diameter_mm, calc_id + "-V")
-    velocity = v_calc.result_value
+    velocity = (flow_lps/1000) / (math.pi*d_m*d_m/4)
 
     hf = friction_factor * (length_m / d_m) * (velocity ** 2) / (2 * G)
 
@@ -77,6 +84,7 @@ def darcy_weisbach_head_loss(
     )
 
 
+@checked_numeric
 def hazen_williams_head_loss(
     flow_lps: float,
     internal_diameter_mm: float,
@@ -89,9 +97,17 @@ def hazen_williams_head_loss(
         hf = 10.67 * L * Q^1.852 / (C^1.852 * D^4.8704)
     with Q in m^3/s, D in m, hf in m.
     """
+    finite('flow_lps',flow_lps,minimum=0)
+    finite('internal_diameter_mm',internal_diameter_mm,positive=True)
+    finite('length_m',length_m,minimum=0)
+    finite('c_factor',c_factor,positive=True)
     q_m3s = flow_lps / 1000.0
     d_m = internal_diameter_mm / 1000.0
 
+    finite('flow_lps',flow_lps,minimum=0)
+    finite('internal_diameter_mm',internal_diameter_mm,positive=True)
+    finite('length_m',length_m,minimum=0)
+    finite('c_factor',c_factor,positive=True)
     hf = 10.67 * length_m * (q_m3s ** 1.852) / (c_factor ** 1.852 * d_m ** 4.8704)
 
     return CalculationResult(
@@ -114,6 +130,7 @@ def hazen_williams_head_loss(
     )
 
 
+@checked_numeric
 def total_dynamic_head(
     static_head_m: float,
     friction_loss_m: float,
@@ -123,6 +140,10 @@ def total_dynamic_head(
     calc_id: str,
 ) -> CalculationResult:
     """TDH = Static Head + Friction Loss + Fitting/Equipment Loss + Required Residual Head."""
+    finite('static_head_m',static_head_m)
+    for name,value in [('friction_loss_m',friction_loss_m),('fitting_loss_m',fitting_loss_m),
+                       ('equipment_loss_m',equipment_loss_m),('required_residual_head_m',required_residual_head_m)]:
+        finite(name,value,minimum=0)
     tdh = static_head_m + friction_loss_m + fitting_loss_m + equipment_loss_m + required_residual_head_m
 
     return CalculationResult(
@@ -144,6 +165,7 @@ def total_dynamic_head(
     )
 
 
+@checked_numeric
 def pump_power(
     flow_lps: float,
     head_m: float,
@@ -152,6 +174,10 @@ def pump_power(
     fluid_density_kg_m3: float = 1000.0,
 ) -> CalculationResult:
     """P (kW) = rho * g * Q * H / (efficiency * 1000)."""
+    finite('flow_lps',flow_lps,minimum=0)
+    finite('head_m',head_m,minimum=0)
+    finite('efficiency',efficiency,positive=True,maximum=1)
+    finite('fluid_density_kg_m3',fluid_density_kg_m3,positive=True)
     q_m3s = flow_lps / 1000.0
     power_w = fluid_density_kg_m3 * G * q_m3s * head_m / efficiency
     power_kw = power_w / 1000.0
@@ -166,7 +192,8 @@ def pump_power(
             "efficiency": (efficiency, "-"),
             "fluid_density_kg_m3": (fluid_density_kg_m3, "kg/m3"),
         },
-        intermediate={"flow_m3_s": q_m3s},
+        intermediate={"flow_m3_s": q_m3s, "hydraulic_power_kw": power_kw*efficiency,
+                      "efficiency_adjusted_power_kw": power_kw},
         result_value=round(power_kw, 4),
         result_unit="kW",
         reference="Standard pump hydraulic-power relationship (public-domain hydraulics)",
@@ -174,6 +201,7 @@ def pump_power(
     )
 
 
+@checked_numeric
 def rational_method_peak_flow(
     runoff_coefficient: float,
     rainfall_intensity_mm_hr: float,
@@ -182,14 +210,17 @@ def rational_method_peak_flow(
 ) -> CalculationResult:
     """
     Rational Method: Q = C * I * A
-    SI convenience form used here: Q (L/s) = C * I(mm/hr) * A(m2) / 360
+    1 mm over 1 m2 = 1 litre; divide litres/hour by 3600 for L/s.
     """
-    q_lps = runoff_coefficient * rainfall_intensity_mm_hr * catchment_area_m2 / 360.0
+    finite('runoff_coefficient',runoff_coefficient,minimum=0,maximum=1)
+    finite('rainfall_intensity_mm_hr',rainfall_intensity_mm_hr,minimum=0)
+    finite('catchment_area_m2',catchment_area_m2,minimum=0)
+    q_lps = runoff_coefficient * rainfall_intensity_mm_hr * catchment_area_m2 / 3600.0
 
     return CalculationResult(
         calc_id=calc_id,
         calc_type="rational_method_peak_flow",
-        formula="Q (L/s) = C * I(mm/hr) * A(m2) / 360",
+        formula="Q (L/s) = C * I(mm/hr) * A(m2) / 3600",
         inputs={
             "runoff_coefficient": (runoff_coefficient, "-"),
             "rainfall_intensity_mm_hr": (rainfall_intensity_mm_hr, "mm/hr"),
@@ -204,8 +235,12 @@ def rational_method_peak_flow(
     )
 
 
+@checked_numeric
 def q_heat(mass_flow_kg_s: float, specific_heat_kj_kgc: float, delta_t_c: float, calc_id: str) -> CalculationResult:
     """Q = m_dot * Cp * Delta T  (hot-water heater/recovery duty)."""
+    finite('mass_flow_kg_s',mass_flow_kg_s,minimum=0)
+    finite('specific_heat_kj_kgc',specific_heat_kj_kgc,positive=True)
+    finite('delta_t_c',delta_t_c,minimum=0)
     q_kw = mass_flow_kg_s * specific_heat_kj_kgc * delta_t_c
 
     return CalculationResult(

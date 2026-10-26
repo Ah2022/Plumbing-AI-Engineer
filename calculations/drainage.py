@@ -15,6 +15,8 @@ change.
 
 from __future__ import annotations
 
+from calculations.validation import finite
+
 from database.design_table_api import get_table_records, get_min_slope
 from calculations.hydraulics import velocity_from_flow
 from models import CalculationResult, MissingCodeDataError
@@ -22,16 +24,18 @@ from models import CalculationResult, MissingCodeDataError
 # context -> substrings to look for in the drainage-sizing table's column names.
 # First matching column wins. Extend per-code as new column vocabularies show up.
 CONTEXT_COLUMN_HINTS = {
-    "horizontal_branch": ["max_dfu_horiz_branch", "horiz_branch", "drainage_max_units_horiz"],
+    "horizontal_branch": ["max_dfu_horiz_branch", "horiz_branch", "drainage_max_units_horiz","drainage_max_units_horizontal"],
     "stack_le3_branch_intervals": ["max_dfu_stack_le3_bi", "drainage_max_units_vertical"],
-    "stack_gt3_branch_intervals": ["max_dfu_stack_gt3_bi"],
-    "branch_interval": ["max_dfu_per_branch_interval"],
+    "stack_gt3_branch_intervals": ["max_dfu_stack_gt3_bi","max_dfu_stack_gt3_bi_total"],
+    "branch_interval": ["max_dfu_per_branch_interval","max_dfu_stack_gt3_bi_per_interval"],
+    "building_drain": [],"building_sewer": [],
 }
 
-PIPE_SIZE_COLUMN_HINTS = ["pipe_mm", "pipe_size_mm"]
+PIPE_SIZE_COLUMN_HINTS = ["pipe_mm", "pipe_size_mm","pipe_in"]
 
 
-def size_drainage_pipe(conn, code_id: str, total_dfu: float, context: str, calc_id: str) -> CalculationResult:
+def size_drainage_pipe(conn, code_id: str, total_dfu: float, context: str, calc_id: str,
+                       selected_slope_pct=None) -> CalculationResult:
     """
     Selects the smallest pipe size whose max-DFU capacity (for the given
     context) is >= total_dfu. Raises MissingCodeDataError if the code's
@@ -39,6 +43,7 @@ def size_drainage_pipe(conn, code_id: str, total_dfu: float, context: str, calc_
     total_dfu exceeds every size in the table (needs engineer judgement,
     not a silent largest-size guess).
     """
+    finite('total_dfu',total_dfu,minimum=0)
     if context not in CONTEXT_COLUMN_HINTS:
         raise ValueError(f"Unknown context '{context}'. Valid: {list(CONTEXT_COLUMN_HINTS)}")
 
@@ -48,6 +53,13 @@ def size_drainage_pipe(conn, code_id: str, total_dfu: float, context: str, calc_
 
     size_col = next((c for c in PIPE_SIZE_COLUMN_HINTS if any(c in rec for rec in records)), None)
     dfu_col = next((h for h in CONTEXT_COLUMN_HINTS[context] if any(h in rec for rec in records)), None)
+    if context in ('building_drain','building_sewer'):
+        finite('selected_slope_pct',selected_slope_pct,positive=True)
+        # Column labels encode the source slope; select a column no steeper than actual slope.
+        slopes={'slope_1_16':100/192,'slope_1_8':100/96,'slope_1_4':100/48,'slope_1_2':100/24,
+                'slope_5mm':0.5,'slope_10mm':1.,'slope_20mm':2.,'slope_40mm':4.}
+        usable=[(value,key) for key,value in slopes.items() if value<=selected_slope_pct+1e-9 and any(key in r for r in records)]
+        dfu_col=max(usable)[1] if usable else None
     if size_col is None or dfu_col is None:
         raise MissingCodeDataError(
             what=f"Drainage sizing column for context='{context}'",
@@ -57,21 +69,25 @@ def size_drainage_pipe(conn, code_id: str, total_dfu: float, context: str, calc_
 
     candidates = []
     for rec in records:
-        size_val = rec.get(size_col, (None, None, None))
+        row_size_col=next((c for c in PIPE_SIZE_COLUMN_HINTS if rec.get(c,(None,None,None))[0] is not None),None)
+        size_val = rec.get(row_size_col, (None, None, None))
         dfu_val = rec.get(dfu_col, (None, None, None))
         if size_val[0] is None or dfu_val[0] is None:
             continue  # non-numeric band ("per design") -> not a candidate, not a silent match
-        candidates.append((size_val[0], dfu_val[0], dfu_val[2]))
+        pipe_mm=size_val[0]*25.4 if row_size_col=='pipe_in' else size_val[0]
+        finite('table nominal size',pipe_mm,positive=True);finite('table DFU capacity',dfu_val[0],minimum=0)
+        conf='FLAGGED' if 'FLAGGED' in (size_val[2],dfu_val[2]) else 'CONFIRMED'
+        candidates.append((pipe_mm, dfu_val[0], conf, size_val[0], 'in' if row_size_col=='pipe_in' else 'mm'))
     candidates.sort(key=lambda c: c[0])
 
-    for pipe_mm, max_dfu, confidence in candidates:
+    for pipe_mm, max_dfu, confidence,source_size,source_unit in candidates:
         if total_dfu <= max_dfu:
             return CalculationResult(
                 calc_id=calc_id,
                 calc_type="drainage_pipe_sizing",
                 formula=f"Select smallest pipe where {dfu_col} >= total_dfu",
                 inputs={"total_dfu": (total_dfu, "DFU"), "context": (context, "-")},
-                intermediate={"candidates_checked": len(candidates)},
+                intermediate={"candidates_checked": len(candidates),'source_nominal_value':source_size,'source_nominal_unit':source_unit},
                 result_value=pipe_mm,
                 result_unit="mm",
                 required_value=total_dfu,
@@ -91,6 +107,8 @@ def size_drainage_pipe(conn, code_id: str, total_dfu: float, context: str, calc_
 def check_min_slope(conn, code_id: str, pipe_size_mm: float, selected_slope_pct: float, calc_id: str,
                      allow_fallback_code: str = None) -> CalculationResult:
     """Checks a selected slope against the code's minimum-slope table for this pipe size."""
+    finite('pipe_size_mm',pipe_size_mm,positive=True)
+    finite('selected_slope_pct',selected_slope_pct,minimum=0)
     limit = get_min_slope(conn, code_id, pipe_size_mm, allow_fallback_code=allow_fallback_code)
     if limit is None:
         raise MissingCodeDataError(
@@ -121,14 +139,19 @@ def check_min_slope(conn, code_id: str, pipe_size_mm: float, selected_slope_pct:
 
 
 def check_drainage_velocity(flow_lps: float, internal_diameter_mm: float, calc_id: str,
-                             min_self_cleansing_m_s: float = 0.61,
-                             max_velocity_m_s: float = 3.0) -> CalculationResult:
+                             min_self_cleansing_m_s=None,
+                             max_velocity_m_s=None, *, criteria_reference=None) -> CalculationResult:
     """
     Self-cleansing / erosion-limit check for gravity drainage. Defaults are
     IPC's own confirmed general-guidance values (0.61 m/s min self-cleansing;
     IPC's table 3_Velocity_Limits also gives a general 3.0 m/s max) — pass
     explicit values if a different code's confirmed figures should be used.
     """
+    if min_self_cleansing_m_s is None or max_velocity_m_s is None or not criteria_reference:
+        raise MissingCodeDataError('Drainage velocity criteria','Supply reviewed limits/reference; pipe bore alone does not establish gravity-flow area')
+    finite('minimum velocity',min_self_cleansing_m_s,minimum=0)
+    finite('maximum velocity',max_velocity_m_s,positive=True)
+    if min_self_cleansing_m_s>max_velocity_m_s: raise ValueError('Inverted velocity limits')
     v = velocity_from_flow(flow_lps, internal_diameter_mm, calc_id)
     v.calc_type = "drainage_velocity_check"
     if v.result_value < min_self_cleansing_m_s:
@@ -136,8 +159,9 @@ def check_drainage_velocity(flow_lps: float, internal_diameter_mm: float, calc_i
     elif v.result_value > max_velocity_m_s:
         v.status, v.notes = "FAIL", f"Above general erosion/noise limit ({max_velocity_m_s} m/s)."
     else:
-        v.status = "PASS"
+        v.status = "WARNING"
     v.required_value = max_velocity_m_s
     v.selected_value = v.result_value
-    v.reference = "IPC:3_Velocity_Limits general guidance (self-cleansing min / erosion max)"
+    v.reference = criteria_reference
+    v.notes=(v.notes or '')+' Full-bore velocity proxy only; partially full gravity hydraulics and self-cleansing require separate verification.'
     return v

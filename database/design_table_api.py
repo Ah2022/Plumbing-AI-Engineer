@@ -38,6 +38,10 @@ class DesignValue:
     fallback_from: Optional[str] = None   # set when borrowed from another code
     notes: Optional[str] = None
 
+    def __post_init__(self):
+        from calculations.validation import finite
+        finite('source design value',self.value)
+
 
 def get_table_records(conn, code_id: str, domain: str, table_name_substr: str) -> list[dict]:
     """Reconstruct every matching table's rows as records: [{col_key: (num,text,conf)}, ...]."""
@@ -198,23 +202,40 @@ def get_demand_from_wsfu(conn, code_id: str, total_wsfu: float,
     code data; only the interpolation is computed). Never extrapolates
     beyond the table's own range — that raises MissingCodeDataError instead.
     """
+    from calculations.validation import finite
+    finite('total_wsfu',total_wsfu,minimum=0)
+    if demand_column not in ('flush_tank_lpm','flush_valve_lpm','flush_tank_gpm','flush_valve_gpm'):
+        raise ValueError('Demand column must declare flush tank/valve and L/min or US gpm units')
     records = get_table_records(conn, code_id, "water", "2_Demand_Conversion")
     points = []
     for rec in records:
         wsfu = rec.get("wsfu", (None, None, None))
-        demand = rec.get(demand_column, (None, None, None))
+        base=demand_column.rsplit('_',1)[0]
+        lpm=rec.get(base+'_lpm',(None,None,None))
+        gpm=rec.get(base+'_gpm',(None,None,None))
+        if lpm[0] is not None and gpm[0] is not None and abs(lpm[0]-gpm[0]*3.785411784)>1e-6:
+            raise ValueError('Contradictory L/min and US gpm demand values')
+        demand=lpm if lpm[0] is not None else (gpm[0]*3.785411784,gpm[1],gpm[2]) if gpm[0] is not None else (None,None,None)
         if wsfu[0] is not None and demand[0] is not None:
             points.append((wsfu[0], demand[0], demand[2], rec.get("_table_reference")))
     if not points:
         return None
     points.sort(key=lambda p: p[0])
 
-    if total_wsfu <= points[0][0]:
-        wsfu, demand, conf, ref = points[0]
-        return DesignValue(value=demand, unit="L/min", code_id=code_id, table_reference=ref,
-                            confidence=conf, source_classification="CODE",
-                            notes=f"at or below table minimum ({wsfu} WSFU) -> using that row's demand")
-    if total_wsfu >= points[-1][0]:
+    unique = {}
+    for wsfu,demand,conf,ref in points:
+        finite('table WSFU',wsfu,minimum=0)
+        finite('table demand',demand,minimum=0)
+        if wsfu in unique and unique[wsfu][1] != demand:
+            raise ValueError('Conflicting demand rows for the same WSFU')
+        if wsfu in unique and unique[wsfu][2]=='FLAGGED': conf='FLAGGED'
+        unique[wsfu]=(wsfu,demand,conf,ref)
+    points=sorted(unique.values())
+    for wsfu,demand,conf,ref in points:
+        if total_wsfu == wsfu:
+            return DesignValue(value=demand,unit='L/min',code_id=code_id,table_reference=ref,
+                               confidence=conf,source_classification='CODE',notes='Exact demand-table row')
+    if total_wsfu < points[0][0] or total_wsfu > points[-1][0]:
         return None  # beyond table range -> caller must raise MissingCodeDataError, not extrapolate
 
     for (w1, d1, c1, ref), (w2, d2, c2, _) in zip(points, points[1:]):
@@ -224,7 +245,7 @@ def get_demand_from_wsfu(conn, code_id: str, total_wsfu: float,
             demand = d1 + frac * (d2 - d1)
             confidence = "FLAGGED" if (c1 == "FLAGGED" or c2 == "FLAGGED") else "CONFIRMED"
             return DesignValue(
-                value=round(demand, 2), unit="L/min", code_id=code_id, table_reference=ref,
+                value=demand, unit="L/min", code_id=code_id, table_reference=ref,
                 confidence=confidence, source_classification="CODE",
                 notes=f"interpolated between {w1} WSFU ({d1} L/min) and {w2} WSFU ({d2} L/min)",
             )

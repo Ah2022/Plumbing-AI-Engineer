@@ -32,6 +32,7 @@ that data source exists; do not add fake predicates for them.
 from __future__ import annotations
 
 import json
+import math
 from dataclasses import dataclass
 from typing import Callable, Optional
 
@@ -55,25 +56,34 @@ def check_static_pressure_threshold(conn, project_id: int, rule) -> CheckResult:
         return CheckResult("NOT_EVALUATED", reason="Rule has no numeric threshold.")
 
     row = conn.execute(
-        """SELECT item_value, status FROM design_basis_items
-           WHERE project_id = ? AND item_key = 'static_pressure_psi'""",
+        """SELECT item_value, status,unit FROM design_basis_items
+           WHERE project_id = ? AND item_key = 'static_pressure_psi' ORDER BY id DESC LIMIT 1""",
         (project_id,),
     ).fetchone()
     if row is None:
         return CheckResult("NOT_EVALUATED", required_value=f"<= {threshold_psi} psi",
                             reason="Project static pressure not entered yet.")
 
-    actual = float(row["item_value"])
+    if row['status'] != 'APPROVED':
+        return CheckResult('NOT_EVALUATED', reason='Latest static-pressure basis is not APPROVED.')
+    if (row['unit'] or 'psi').strip().lower()!='psi':
+        return CheckResult('NOT_EVALUATED', reason='static_pressure_psi requires psi units; convert explicitly.')
+    try:
+        actual = float(row['item_value'])
+        if not math.isfinite(actual) or actual < 0 or not isinstance(threshold_psi,(int,float)) or not math.isfinite(threshold_psi) or threshold_psi <= 0:
+            raise ValueError('Invalid pressure')
+    except (ValueError, TypeError):
+        return CheckResult('NOT_EVALUATED', reason='Invalid/non-finite static pressure or threshold.')
     if actual <= threshold_psi:
         return CheckResult("PASS", actual_value=f"{actual} psi", required_value=f"<= {threshold_psi} psi")
 
     # Above threshold — check whether a PRV arrangement is on record.
     prv_row = conn.execute(
-        """SELECT item_value FROM design_basis_items
-           WHERE project_id = ? AND item_key = 'pressure_reducing_valve_provided'""",
+        """SELECT item_value,status FROM design_basis_items
+           WHERE project_id = ? AND item_key = 'pressure_reducing_valve_provided' ORDER BY id DESC LIMIT 1""",
         (project_id,),
     ).fetchone()
-    if prv_row and prv_row["item_value"].strip().lower() in ("yes", "true", "1"):
+    if prv_row and prv_row['status']=='APPROVED' and prv_row["item_value"].strip().lower() in ("yes", "true", "1"):
         return CheckResult("PASS", actual_value=f"{actual} psi", required_value=f"<= {threshold_psi} psi",
                             reason="Above threshold but PRV arrangement is on record.")
     return CheckResult("FAIL", actual_value=f"{actual} psi", required_value=f"<= {threshold_psi} psi",
@@ -83,7 +93,7 @@ def check_static_pressure_threshold(conn, project_id: int, rule) -> CheckResult:
 def _check_design_basis_present(conn, project_id: int, item_key: str, label: str) -> CheckResult:
     row = conn.execute(
         """SELECT item_value, status FROM design_basis_items
-           WHERE project_id = ? AND item_key = ?""",
+           WHERE project_id = ? AND item_key = ? ORDER BY id DESC LIMIT 1""",
         (project_id, item_key),
     ).fetchone()
     if row is None:
@@ -101,15 +111,19 @@ def check_rainfall_design_data_present(conn, project_id: int, rule) -> CheckResu
 
 def _check_sizing_justified(conn, project_id: int, calc_type: str, label: str) -> CheckResult:
     rows = conn.execute(
-        """SELECT status FROM calculations WHERE project_id = ? AND calc_type = ?""",
+        """SELECT status,review_status FROM calculations WHERE project_id = ? AND calc_type = ? AND is_current=1""",
         (project_id, calc_type),
     ).fetchall()
     if not rows:
         return CheckResult("FAIL", reason=f"No {label} calculation exists for this project yet.")
+    if any(r['status']=='FAIL' for r in rows):
+        return CheckResult('FAIL', reason=f'{label} has a failed current calculation.')
     if any(r["status"] == "ASSUMED" for r in rows):
         return CheckResult("WARNING", reason=f"{label} sizing relies on an unapproved ASSUMED input.")
     if any(r["status"] == "MISSING_DATA" for r in rows):
         return CheckResult("FAIL", reason=f"{label} sizing is blocked on missing code/design-table data.")
+    if any(r['status']!='PASS' or r['review_status']!='VERIFIED' for r in rows):
+        return CheckResult('WARNING', reason=f'{label} requires calculation/governance approval.')
     return CheckResult("PASS", reason=f"{label} sizing is backed by recorded, non-assumed calculations.")
 
 

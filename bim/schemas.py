@@ -32,44 +32,44 @@ VALID_PIPE_SYSTEMS = {"cold_water", "hot_water", "drainage", "vent", "storm"}
 
 
 def validate_extract_payload(payload: dict) -> list[str]:
-    """
-    Validates a pyRevit extractor payload before it's trusted for import.
-    Returns a list of human-readable errors; empty list = valid. Never
-    raises -- the caller (bim/exchange.py) decides what to do with a
-    non-empty error list (reject the whole import, per spec Section 30's
-    "stop and report" philosophy -- a partially-valid Revit export is not
-    silently partially imported).
-    """
-    errors: list[str] = []
-
-    if "revit_model_name" not in payload:
-        errors.append("Missing 'revit_model_name' (which Revit file this export came from).")
-    if "extracted_at" not in payload:
-        errors.append("Missing 'extracted_at' timestamp.")
-
-    for i, pipe in enumerate(payload.get("pipes", [])):
-        missing = REQUIRED_PIPE_FIELDS - set(pipe.keys())
-        if missing:
-            errors.append(f"pipes[{i}]: missing required field(s) {sorted(missing)}")
-        elif pipe.get("system") not in VALID_PIPE_SYSTEMS:
-            errors.append(f"pipes[{i}] (element {pipe.get('revit_element_id')}): "
-                           f"system='{pipe.get('system')}' not one of {sorted(VALID_PIPE_SYSTEMS)}")
-
-    for i, fx in enumerate(payload.get("fixtures", [])):
-        missing = REQUIRED_FIXTURE_FIELDS - set(fx.keys())
-        if missing:
-            errors.append(f"fixtures[{i}]: missing required field(s) {sorted(missing)}")
-
-    for i, tk in enumerate(payload.get("tanks", [])):
-        missing = REQUIRED_TANK_FIELDS - set(tk.keys())
-        if missing:
-            errors.append(f"tanks[{i}]: missing required field(s) {sorted(missing)}")
-
-    for i, pm in enumerate(payload.get("pumps", [])):
-        missing = REQUIRED_PUMP_FIELDS - set(pm.keys())
-        if missing:
-            errors.append(f"pumps[{i}]: missing required field(s) {sorted(missing)}")
-
+    import json
+    from calculations.validation import finite
+    errors=[]
+    if not isinstance(payload,dict): return ['Payload must be an object']
+    for key in ('revit_model_name','extracted_at'):
+        if not isinstance(payload.get(key),str) or not payload[key].strip(): errors.append(f"Missing/invalid '{key}'")
+    if 'revit_model_id' in payload and (not isinstance(payload['revit_model_id'],str) or not payload['revit_model_id'].strip()):
+        errors.append('Invalid revit_model_id')
+    seen=set()
+    definitions=[('pipes',REQUIRED_PIPE_FIELDS),('fixtures',REQUIRED_FIXTURE_FIELDS),('tanks',REQUIRED_TANK_FIELDS),('pumps',REQUIRED_PUMP_FIELDS)]
+    for group,required in definitions:
+        items=payload.get(group,[])
+        if not isinstance(items,list): errors.append(f'{group} must be an array');continue
+        for i,item in enumerate(items):
+            label=f'{group}[{i}]'
+            if not isinstance(item,dict): errors.append(label+' must be an object');continue
+            missing=required-set(item)
+            if missing: errors.append(label+f': missing required field(s) {sorted(missing)}');continue
+            eid=item.get('revit_element_id')
+            if not isinstance(eid,str) or not eid.strip(): errors.append(label+': invalid element ID')
+            elif eid in seen: errors.append(label+': duplicate element ID')
+            else: seen.add(eid)
+            if 'parameters' in item and not isinstance(item['parameters'],dict): errors.append(label+': parameters must be an object')
+            for key in ('from_node','to_node','level'):
+                if item.get(key) is not None and (not isinstance(item[key],str) or not item[key].strip()): errors.append(label+': invalid '+key)
+            if group=='pipes':
+                if not isinstance(item.get('system'),str) or item['system'] not in VALID_PIPE_SYSTEMS: errors.append(label+': system not one of supported systems')
+                for key in ('length_m','nominal_diameter_mm'):
+                    try: finite(key,item[key],positive=True)
+                    except ValueError as e: errors.append(label+': '+str(e))
+                for key in ('flow_lps','elevation_diff_m','slope_percent'):
+                    if item.get(key) is not None:
+                        try: finite(key,item[key],minimum=0 if key=='flow_lps' else None)
+                        except ValueError as e: errors.append(label+': '+str(e))
+            for key in required-{'revit_element_id','length_m','nominal_diameter_mm'}:
+                if not isinstance(item[key],str) or not item[key].strip(): errors.append(label+': invalid '+key)
+    try: json.dumps(payload,allow_nan=False)
+    except (TypeError,ValueError): errors.append('Payload must contain finite JSON-compatible data')
     return errors
 
 

@@ -17,6 +17,8 @@ Tank sizing. Two paths:
 
 from __future__ import annotations
 
+from calculations.validation import finite
+
 from models import CalculationResult
 
 
@@ -26,6 +28,9 @@ def size_domestic_water_tank(avg_daily_demand_lps: float, storage_duration_hr: f
     required_volume_m3 = avg_daily_demand_lps * storage_duration_hr * 3600 / 1000
     selected_volume_m3 = required_volume_m3 * (1 + freeboard_pct/100)
     """
+    finite('avg_daily_demand_lps',avg_daily_demand_lps,minimum=0)
+    finite('storage_duration_hr',storage_duration_hr,positive=True)
+    finite('freeboard_pct',freeboard_pct,minimum=0)
     required_m3 = avg_daily_demand_lps * storage_duration_hr * 3600.0 / 1000.0
     selected_m3 = required_m3 * (1 + freeboard_pct / 100.0)
 

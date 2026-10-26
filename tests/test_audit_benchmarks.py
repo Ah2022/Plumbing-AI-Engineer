@@ -70,31 +70,26 @@ def test_storage_volume_unit_conversion():
     assert result.selected_value == pytest.approx(79.2)
 
 
-@pytest.mark.xfail(strict=True, reason="AUD-001: Rational Method conversion is tenfold too large")
 def test_rain_depth_volume_identity():
     # 3600 mm/hr on 1 m2 = 3600 litres/hour = exactly 1 litre/second.
     assert rational_method_peak_flow(1, 3600, 1, "A-8").result_value == 1
 
 
-@pytest.mark.xfail(strict=True, reason="AUD-002: zero internal diameter returns infinity")
 def test_zero_diameter_rejected():
     with pytest.raises(ValueError):
         velocity_from_flow(1, 0, "A-9")
 
 
-@pytest.mark.xfail(strict=True, reason="AUD-002: efficiency greater than one is accepted")
 def test_impossible_efficiency_rejected():
     with pytest.raises(ValueError):
         pump_power(5, 41, 1.1, "A-10")
 
 
-@pytest.mark.xfail(strict=True, reason="AUD-002: non-finite flow is accepted")
 def test_nonfinite_flow_rejected():
     with pytest.raises(ValueError):
         velocity_from_flow(float("nan"), 25, "A-11")
 
 
-@pytest.mark.xfail(strict=True, reason="AUD-003: pending pressure basis can receive PASS")
 def test_pending_pressure_not_passed(projects):
     projects.execute("INSERT INTO design_basis_items "
                      "(project_id,item_key,item_value,status) VALUES (1,'static_pressure_psi','60','PENDING')")
@@ -102,7 +97,6 @@ def test_pending_pressure_not_passed(projects):
     assert check_static_pressure_threshold(projects, 1, rule).status != "PASS"
 
 
-@pytest.mark.xfail(strict=True, reason="AUD-003: rejected PRV basis can receive PASS")
 def test_rejected_prv_not_passed(projects):
     projects.execute("INSERT INTO design_basis_items "
                      "(project_id,item_key,item_value,status) VALUES (1,'static_pressure_psi','100','APPROVED')")
@@ -112,14 +106,12 @@ def test_rejected_prv_not_passed(projects):
     assert check_static_pressure_threshold(projects, 1, rule).status != "PASS"
 
 
-@pytest.mark.xfail(strict=True, reason="AUD-004: failed sizing calculation can justify a compliance PASS")
 def test_failed_sizing_not_passed(projects):
     result = CalculationResult("CW-001", "cold_water_pipe_sizing", "synthetic", {}, {}, 1, "mm", status="FAIL")
     save_calculation(projects, 1, result)
     assert check_water_sizing_justified(projects, 1, None).status != "PASS"
 
 
-@pytest.mark.xfail(strict=True, reason="AUD-005: per-project calc IDs collide with the global primary key")
 def test_calculation_ids_work_across_projects(projects):
     for pid in (1, 2):
         cid = next_calc_id(projects, pid, "cold_water_pipe_sizing")
@@ -135,7 +127,6 @@ def test_calculation_notes_survive_save(projects):
     assert row.get("notes") == result.notes
 
 
-@pytest.mark.xfail(strict=True, reason="AUD-007: equal Revit IDs in different projects overwrite a pipe")
 def test_revit_ids_are_scoped_to_project(projects):
     payload = empty_extract_payload("Synthetic.rvt", "2026-10-26T00:00:00")
     payload["pipes"] = [{"revit_element_id": "123", "system": "cold_water",
@@ -145,7 +136,6 @@ def test_revit_ids_are_scoped_to_project(projects):
     assert projects.execute("SELECT COUNT(*) FROM pipes WHERE project_id=2").fetchone()[0] == 1
 
 
-@pytest.mark.xfail(strict=True, reason="AUD-007: re-import ignores changed flow and connectivity")
 def test_revit_reimport_updates_flow_and_connectivity(projects):
     payload = empty_extract_payload("Synthetic.rvt", "2026-10-26T00:00:00")
     pipe = {"revit_element_id": "123", "system": "cold_water", "length_m": 10,

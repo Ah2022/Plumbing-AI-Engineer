@@ -12,6 +12,8 @@ from __future__ import annotations
 from models import CalculationResult
 
 CALC_TYPE_PREFIXES = {
+    "water_network_check":"NW",
+    "drainage_network_check":"ND",
     "cold_water_velocity_check": "CW",
     "cold_water_pipe_sizing": "CW",
     "drainage_pipe_sizing": "DW",
@@ -31,14 +33,9 @@ CALC_TYPE_PREFIXES = {
 
 
 def next_calc_id(conn, project_id: int, calc_type: str) -> str:
+    from uuid import uuid4
     prefix = CALC_TYPE_PREFIXES.get(calc_type, "CALC")
-    row = conn.execute(
-        """SELECT COUNT(*) AS n FROM calculations
-           WHERE project_id = ? AND calc_id LIKE ?""",
-        (project_id, f"{prefix}-%"),
-    ).fetchone()
-    n = (row["n"] or 0) + 1
-    return f"{prefix}-{n:03d}"
+    return f"{prefix}-P{project_id}-{uuid4().hex}"
 
 
 def save_calculation(conn, project_id: int, result: CalculationResult,
@@ -50,18 +47,22 @@ def save_calculation(conn, project_id: int, result: CalculationResult,
     row.update(notes=result.notes, governance_json=json.dumps(governance, sort_keys=True),
                review_status=governance['review_status'])
     result.review_status = governance['review_status']
-    conn.execute(
-        """INSERT INTO calculations (calc_id, project_id, calc_type, target_type, target_id,
-             formula, inputs_json, intermediate_json, result_value, result_unit,
-             required_value, selected_value, status, code_rule_id, reference,
-             notes,governance_json,review_status,is_current)
-           VALUES (:calc_id,:project_id,:calc_type,:target_type,:target_id,:formula,
-             :inputs_json,:intermediate_json,:result_value,:result_unit,
-             :required_value,:selected_value,:status,:code_rule_id,:reference,
-             :notes,:governance_json,:review_status,1)""",
-        row,
-    )
-    conn.commit()
+    with conn:
+        if target_type is not None and target_id is not None:
+            conn.execute('UPDATE calculations SET is_current=0 WHERE project_id=? AND calc_type=? AND target_type=? AND target_id=?',
+                         (project_id,result.calc_type,target_type,str(target_id)))
+        conn.execute(
+            """INSERT INTO calculations (calc_id, project_id, calc_type, target_type, target_id,
+                 formula, inputs_json, intermediate_json, result_value, result_unit,
+                 required_value, selected_value, status, code_rule_id, reference,
+                 notes,governance_json,review_status,is_current)
+               VALUES (:calc_id,:project_id,:calc_type,:target_type,:target_id,:formula,
+                 :inputs_json,:intermediate_json,:result_value,:result_unit,
+                 :required_value,:selected_value,:status,:code_rule_id,:reference,
+                 :notes,:governance_json,:review_status,1)""",
+            row,
+        )
+
 
 
 STATUS_COLOR = {

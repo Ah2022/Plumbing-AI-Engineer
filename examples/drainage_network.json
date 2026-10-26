@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0",
+  "units": "SI",
+  "code_id": "IPC",
+  "basis_reference": "SYNTHETIC DEMONSTRATION ONLY; fixture ratings and criteria need engineer verification",
+  "root": "OUT",
+  "nodes": [
+    {
+      "id": "OUT",
+      "kind": "outlet",
+      "elevation_m": 0
+    },
+    {
+      "id": "J",
+      "kind": "junction",
+      "elevation_m": 1
+    },
+    {
+      "id": "A",
+      "kind": "fixture",
+      "elevation_m": 2,
+      "drainage_dfu": 1,
+      "demand_reference": "Synthetic fixture classification"
+    },
+    {
+      "id": "B",
+      "kind": "fixture",
+      "elevation_m": 2,
+      "drainage_dfu": 3,
+      "demand_reference": "Synthetic fixture classification"
+    }
+  ],
+  "pipes": [
+    {
+      "id": "D0",
+      "from_node": "J",
+      "to_node": "OUT",
+      "length_m": 21,
+      "horizontal_run_m": 20,
+      "nominal_mm": 100,
+      "context": "horizontal_branch",
+      "minimum_nominal_mm": 50,
+      "minimum_size_reference": "Synthetic criterion",
+      "minimum_slope_pct": 2,
+      "minimum_slope_reference": "Synthetic test criterion, not an IPC requirement"
+    },
+    {
+      "id": "D1",
+      "from_node": "A",
+      "to_node": "J",
+      "length_m": 21,
+      "horizontal_run_m": 20,
+      "nominal_mm": 100,
+      "context": "horizontal_branch",
+      "minimum_nominal_mm": 50,
+      "minimum_size_reference": "Synthetic criterion",
+      "minimum_slope_pct": 2,
+      "minimum_slope_reference": "Synthetic test criterion, not an IPC requirement"
+    },
+    {
+      "id": "D2",
+      "from_node": "B",
+      "to_node": "J",
+      "length_m": 21,
+      "horizontal_run_m": 20,
+      "nominal_mm": 100,
+      "context": "horizontal_branch",
+      "minimum_nominal_mm": 50,
+      "minimum_size_reference": "Synthetic criterion",
+      "minimum_slope_pct": 2,
+      "minimum_slope_reference": "Synthetic test criterion, not an IPC requirement"
+    }
+  ],
+  "vents": [],
+  "network_id": "D-DEMO"
+}

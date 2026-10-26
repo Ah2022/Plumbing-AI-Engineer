@@ -35,6 +35,17 @@ class CalculationResult:
     code_rule_id: Optional[str] = None
     notes: Optional[str] = None
 
+    def __post_init__(self):
+        import json
+        from calculations.validation import finite
+        for name in ('result_value','required_value','selected_value'):
+            value=getattr(self,name)
+            if value is not None: finite(name,value)
+        if not isinstance(self.inputs,dict) or not isinstance(self.intermediate,dict):
+            raise ValueError('Calculation inputs and intermediates must be structured records')
+        try: json.dumps([self.inputs,self.intermediate],allow_nan=False)
+        except (ValueError,TypeError) as e: raise ValueError('Calculation trace must be finite JSON data') from e
+
     def as_row(self, project_id: int, target_type: str = None, target_id: str = None) -> dict:
         """Flatten for insertion into the `calculations` table."""
         import json
