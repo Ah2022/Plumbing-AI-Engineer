@@ -222,6 +222,30 @@ def test_stack_without_interval_mapping_is_not_passed(tables,drainage):
     assert next(p for p in r['pipes'] if p['pipe_id']=='D0')['technical_status']=='MISSING_DATA'
 
 
+def test_inch_stack_interval_designation_can_govern(tables,drainage):
+    # Synthetic inch designations: total load fits 2, interval load requires 3.
+    tables.execute("UPDATE design_table_values SET col_key='pipe_in',value_num=CASE row_key WHEN '0' THEN 2 WHEN '1' THEN 3 ELSE 4 END WHERE col_key='pipe_mm'")
+    drainage['pipes'][0].update(context='stack_gt3_branch_intervals',branch_intervals=4,nominal_mm=100,selected_source_nominal_in=2)
+    drainage['nodes'][2]['branch_interval']=1
+    drainage['nodes'][3]['branch_interval']=1
+    for pipe in drainage['pipes'][1:]: pipe['selected_source_nominal_in']=4
+    main=next(p for p in analyze_drainage_network(tables,'TEST',drainage)['pipes'] if p['pipe_id']=='D0')
+    assert main['technical_status']=='FAIL'
+    assert 'max_dfu_per_branch_interval' in main['reference']
+    drainage['pipes'][0]['selected_source_nominal_in']=3
+    main=next(p for p in analyze_drainage_network(tables,'TEST',drainage)['pipes'] if p['pipe_id']=='D0')
+    assert main['technical_status']=='PASS'
+
+
+@pytest.mark.parametrize('table_name',['5_Drainage_Sizing','6_Min_Slope'])
+def test_flagged_drainage_source_cannot_become_pipe_pass(tables,drainage,table_name):
+    tables.execute("UPDATE design_table_values SET confidence='FLAGGED' WHERE table_id IN (SELECT table_id FROM design_tables WHERE table_name=?)",(table_name,))
+    if table_name=='6_Min_Slope':
+        for pipe in drainage['pipes']: pipe.pop('minimum_slope_pct')
+    report=analyze_drainage_network(tables,'TEST',drainage)
+    assert all(p['technical_status']=='WARNING' and p['confidence']=='FLAGGED' for p in report['pipes'])
+
+
 def test_stack_offset_is_explicitly_unevaluated(tables,drainage):
     drainage['pipes'][0]['has_offset']=True
     r=analyze_drainage_network(tables,'TEST',drainage)

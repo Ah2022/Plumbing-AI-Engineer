@@ -233,6 +233,7 @@ def analyze_drainage_network(conn,code_id,model):
                 continue
             required=size_drainage_pipe(conn,code_id,loads[key],kind,'NET-'+pid,selected_slope_pct=slope)
             required_size=max(required.result_value,pipe['minimum_nominal_mm'])
+            capacity_checks=[required]
             source_size_ok=True
             if required.intermediate.get('source_nominal_unit')=='in':
                 selected_in=pipe.get('selected_source_nominal_in')
@@ -251,8 +252,15 @@ def analyze_drainage_network(conn,code_id,model):
                     for interval,load in intervals[key].items():
                         per_interval=size_drainage_pipe(conn,code_id,load,'branch_interval','NET-I-'+pid)
                         required_size=max(required_size,per_interval.result_value)
+                        capacity_checks.append(per_interval)
+                        if per_interval.intermediate.get('source_nominal_unit')=='in':
+                            selected_in=pipe.get('selected_source_nominal_in')
+                            if selected_in is None: raise MissingCodeDataError('Nominal-size designation mapping','Supply selected_source_nominal_in for branch-interval sizing')
+                            finite('selected_source_nominal_in',selected_in,positive=True)
+                            source_size_ok=source_size_ok and selected_in>=per_interval.intermediate['source_nominal_value']
             size_ok=(nominal+1e-9>=pipe['minimum_nominal_mm'] and source_size_ok) if required.intermediate.get('source_nominal_unit')=='in' else nominal+1e-9>=required_size
-            min_slope=None;slope_ok=True;reference=required.reference
+            min_slope=None;slope_ok=True;reference='; '.join(dict.fromkeys(c.reference for c in capacity_checks))
+            flagged=any(c.status!='PASS' for c in capacity_checks)
             if horizontal>0:
                 if 'minimum_slope_pct' in pipe:
                     min_slope=finite('minimum_slope_pct',pipe['minimum_slope_pct'],positive=True)
@@ -261,11 +269,12 @@ def analyze_drainage_network(conn,code_id,model):
                 else:
                     s=check_min_slope(conn,code_id,nominal,slope,'NET-S-'+pid)
                     min_slope=s.required_value;reference+='; '+s.reference
+                    flagged=flagged or s.status=='WARNING'
                 slope_ok=slope+1e-9>=min_slope
-            status='PASS' if geometry_ok and size_ok and slope_ok else 'FAIL'
+            status=('WARNING' if flagged else 'PASS') if geometry_ok and size_ok and slope_ok else 'FAIL'
             checks.append(dict(pipe_id=pid,drainage_dfu=loads[key],context=kind,required_nominal_mm=required_size,
                 selected_nominal_mm=nominal,actual_slope_pct=slope,minimum_slope_pct=min_slope,technical_status=status,
-                reference=reference,confidence='CONFIRMED' if required.status=='PASS' else 'FLAGGED'))
+                reference=reference,confidence='FLAGGED' if flagged else 'CONFIRMED'))
         except MissingCodeDataError as e:
             checks.append(dict(pipe_id=pid,drainage_dfu=loads[key],technical_status='MISSING_DATA',reason=str(e)))
     vents=[]

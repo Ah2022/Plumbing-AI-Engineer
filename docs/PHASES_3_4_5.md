@@ -27,7 +27,7 @@ For WSFU mode, segment design flows are a diversified design envelope, not a sim
 
 `analyze_drainage_network` accumulates drainage DFU toward the declared outlet. It distinguishes branches, stack contexts, branch intervals and building drains/sewers using available selected-code table shapes. It checks selected nominal size, separate fixture/minimum-size criteria, actual fall, horizontal slope and source-table or explicitly referenced minimum slopes. Slope-dependent capacity columns are selected conservatively without rounding to a steeper column. Missing/ambiguous tables remain missing data.
 
-Stack interval counts and all contributing fixture assignments are required where relevant; per-interval and total loading can both govern. Offsets are explicitly unevaluated. This is DFU/table and geometric checking, not a partial-flow gravity solver; no discharge flow is invented from DFU.
+Stack interval counts and all contributing fixture assignments are required where relevant; per-interval and total loading can both govern, including inch-based source designations. Flagged capacity or slope sources remain warnings in per-pipe findings. Offsets are explicitly unevaluated. This is DFU/table and geometric checking, not a partial-flow gravity solver; no discharge flow is invented from DFU.
 
 Dry-vent checks use supported load/length/stack dimensions. Trap-arm checks evaluate source-table maximum distance only. Wet/circuit/AAV arrangements, missing trap/connection information, incomplete source tables and other unsupported conditions cannot default to a pass. Distance checks do not establish trap-weir, fall, connection or exception compliance.
 
@@ -45,7 +45,7 @@ Run all regressions with the five original local workbooks:
 python -m pytest tests/ -q
 ```
 
-The final local suite passed 238 tests with no expected failures on Python 3.12.14 / Streamlit 1.66.1. Data-independent CI also exercises synthetic source tables, pressure-path hand calculations, catalogue constraints, negative topology/units, drainage and vent boundaries, transactions, source/model identity and the new Streamlit page. Workbook contents remain excluded from the public repository.
+The final local suite passed 241 tests with no expected failures on Python 3.12.14 / Streamlit 1.66.1. Data-independent CI also exercises synthetic source tables, pressure-path hand calculations, catalogue constraints, negative topology/units, drainage and vent boundaries, transactions, source/model identity and the new Streamlit page. Workbook contents remain excluded from the public repository.
 
 ## Acceptance limits
 

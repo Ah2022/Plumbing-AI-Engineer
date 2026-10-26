@@ -39,7 +39,7 @@ python -m tools.compare_engines --old-root PATH_TO_ORIGINAL_ENGINE --output comp
 
 ## Test evidence and limits
 
-Phase 1 reported 93 passed and 11 strict expected failures; Phase 2 reported 139 passed and 10 strict expected failures. Current full local suite: **238 passed, no expected failures**, including all ten remaining defect reproductions, independent synthetic pressure-path checks, source-unit/boundary tests, drainage/vent cases and Streamlit interactions. Test-count growth also includes new scope; it does not establish authoritative code coverage.
+Phase 1 reported 93 passed and 11 strict expected failures; Phase 2 reported 139 passed and 10 strict expected failures. Current full local suite: **241 passed, no expected failures**, including all ten remaining defect reproductions, independent synthetic pressure-path checks, source-unit/boundary tests, drainage/vent cases and Streamlit interactions. Test-count growth also includes new scope; it does not establish authoritative code coverage.
 
 The original suite comprised 84 cases and had a Windows UI connection-cleanup failure when audited. [BASELINE_AUDIT.md](BASELINE_AUDIT.md) records that historical state. Full workbook tests run locally; public CI omits private workbooks and tests synthetic tables and formula/UI behavior on Windows and Linux. No live Revit/CAD/IFC validation or final engineering approval was performed.
 

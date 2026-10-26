@@ -73,7 +73,7 @@ python -m tools.baseline_inventory
 python -m tests.demo_project
 ```
 
-Verified on Windows/Python 3.12.14 with Streamlit 1.66.1: **238 passed, no expected failures**. Synthetic network tests cover independent pressure-path calculations, catalogue constraints, invalid topology, drainage/vent boundaries and model-import isolation. The [current inventory](docs/PHASE345_INVENTORY.json) records dependency versions, source-file fingerprints, and rule coverage. `requirements-lock.txt` records tested package versions.
+Verified on Windows/Python 3.12.14 with Streamlit 1.66.1: **241 passed, no expected failures**. Synthetic network tests cover independent pressure-path calculations, catalogue constraints, invalid topology, drainage/vent boundaries and model-import isolation. The [current inventory](docs/PHASE345_INVENTORY.json) records dependency versions, source-file fingerprints, and rule coverage. `requirements-lock.txt` records tested package versions.
 
 GitHub Actions runs public-checkout regression and interface-navigation checks after pushes and pull requests. It does not claim full workbook or live Revit validation.
 
