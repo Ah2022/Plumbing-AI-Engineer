@@ -1,6 +1,7 @@
 """Engineer-facing project adoption, coverage and verification records."""
 import json
 import streamlit as st
+from app.status_ui import project_status
 
 from compliance.governance import (
     profiles, profile, get_basis, set_basis, approve_basis, context,
@@ -34,9 +35,15 @@ def page_code_profiles():
     st.info('Changing a code profile or design basis retains historical results and marks them stale. '
             'Recalculate under the new basis. Unit selection records the design basis; it does not '
             'change the explicit units on existing calculation forms.')
+    g=context(conn,pid)
+    project_status(g)
     criteria = basis['criteria'] if basis else {}
-    with st.form('code_basis'):
-        profile_id = st.selectbox('Code profile', list(choices), index=list(choices).index(selected))
+    revision=basis['revision'] if basis else 0
+    profile_id=st.selectbox('Code profile',list(choices),index=list(choices).index(selected),key=f'profile_preview_{pid}_{revision}')
+    if profile_id!=selected:st.info('This profile is a draft selection. Save the code basis below to apply it to this project.')
+    preview=profile(profile_id)
+    st.link_button('Selected edition reference',preview['source_url'])
+    with st.form(f'code_basis_{pid}_{revision}_{profile_id}'):
         jurisdiction = st.text_input('Jurisdiction / project location', criteria.get('jurisdiction', ''))
         authority = st.text_input('Adopting authority', criteria.get('authority', ''))
         amendments = st.text_area('Local amendments (state none explicitly if confirmed)', criteria.get('amendments', ''))
@@ -57,17 +64,21 @@ def page_code_profiles():
             except ValueError as e:
                 st.error(str(e))
     g = context(conn, pid)
-    st.write({'review_status': g['review_status'], 'profile': g['basis']['profile_id'] if g['basis'] else None,
-              'basis_revision': g['basis']['revision'] if g['basis'] else None,
-              'adoption_status': g['basis']['basis_status'] if g['basis'] else 'NOT_DECLARED'})
-    for issue in g['issues']:
-        st.caption(issue)
+    with st.expander('What still needs review'):
+        for issue in g['issues']:st.caption(issue)
     if not g['basis']:
         return
     p = profile(g['basis']['profile_id'])
     st.link_button('Edition source / metadata', p['source_url'])
     st.caption(p['source_limit'])
-    with st.form('approve_code_basis'):
+    names={'jurisdiction':'project location','authority':'adopting authority','amendments':'local amendments',
+           'occupancy':'occupancy','systems':'systems in scope','units':'units','method':'methods and references',
+           'exclusions':'exclusions','precedence':'requirement precedence'}
+    missing=[label for key,label in names.items() if not g['basis']['criteria'].get(key)]
+    if missing:st.warning('Before recording adoption, complete and save: '+', '.join(missing)+'.')
+    elif g['basis']['basis_status']=='APPROVED':
+        st.caption('Adoption recorded by '+str(g['basis'].get('reviewer') or 'the named reviewer')+'. '+str(g['basis'].get('adoption_evidence') or ''))
+    with st.form(f'approve_code_basis_{pid}_{revision}'):
         reviewer = st.text_input('Adoption reviewer')
         evidence = st.text_area('Project adoption evidence / approved design-basis reference')
         confirmed = st.checkbox('I reviewed the project adoption and design-basis criteria')
@@ -82,14 +93,19 @@ def page_code_profiles():
                 st.error(str(e))
     rows = coverage(conn, p['profile_id'])
     st.subheader('Rule coverage and applicability')
-    st.dataframe(rows, width='stretch', alt='Rule coverage, references and verification status')
+    st.dataframe([{'Rule':r['rule_id'],'System':r['domain'],'Reference':r['reference'],
+                   'Implementation':r['implementation_status'].replace('_',' ').capitalize(),
+                   'Verification':r['verification_status'].replace('_',' ').capitalize()} for r in rows],
+                  hide_index=True,width='stretch',alt='Rule coverage, references and verification status')
     st.download_button('Download coverage matrix', json.dumps(rows, indent=2),
                        file_name=f"{p['profile_id']}-coverage.json", mime='application/json')
     benchmarks = [dict(r) for r in conn.execute('SELECT * FROM verification_benchmarks WHERE profile_id=? ORDER BY benchmark_id', (p['profile_id'],))]
     st.subheader('Independent benchmark acceptance records')
-    st.dataframe(benchmarks, width='stretch', alt='Pending and reviewed profile benchmark records')
+    st.dataframe([{'Benchmark':b['benchmark_id'],'System':b['domain'],'Purpose':b['purpose'],
+                   'Status':b['status'].replace('_',' ').capitalize(),'Reviewer':b['reviewer']} for b in benchmarks],
+                  hide_index=True,width='stretch',alt='Pending and reviewed profile benchmark records')
     with st.expander('Record an independent benchmark'):
-        with st.form('benchmark_review'):
+        with st.form(f'benchmark_review_{pid}_{revision}'):
             bid = st.selectbox('Benchmark', [r['benchmark_id'] for r in benchmarks])
             expected = st.number_input('Independently established expected value', value=0.0)
             actual = st.number_input('Observed engine value', value=0.0)
@@ -109,7 +125,7 @@ def page_code_profiles():
                 except (ValueError, TypeError) as e:
                     st.error(str(e))
     with st.expander('Review a supplied rule'):
-        with st.form('rule_review'):
+        with st.form(f'rule_review_{pid}_{revision}'):
             rid = st.selectbox('Rule', [r['rule_id'] for r in rows])
             status = st.selectbox('Verification decision', ['PENDING','VERIFIED','UNSUPPORTED'])
             applicability = st.text_area('Applicability and limitations')

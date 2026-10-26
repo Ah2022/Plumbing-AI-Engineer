@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / 'database' / 'code_profiles.json'
-ENGINE_VERSION = '0.6.2-reference-workbooks'
+ENGINE_VERSION = '0.6.2-interactive-calculations'
 DOMAINS = ('water', 'drainage', 'vent', 'storm')
 REQUIRED_CRITERIA = ('jurisdiction', 'authority', 'amendments', 'occupancy',
                      'systems', 'units', 'method', 'exclusions', 'precedence')

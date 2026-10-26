@@ -1,5 +1,7 @@
 # Supplied calculation sheets: code attribution and integration
 
+The source audit below records the initial integration. The current UI uses portable `.plmcalc` forms; see [Interactive calculations](INTERACTIVE_CALCULATIONS.md).
+
 Reviewed 26 October 2026. The two supplied ZIPs contain **48 distinct calculation workbooks** after excluding temporary `~$` lock files. The originals are retained byte-for-byte in the local source library. No workbook instructions or VBA were executed.
 
 These files are a mixed reference collection, not a single IPC 2024 package. Attribution below records claims in worksheet labels, formula-generated labels and supporting data sheets. It does not certify table values, identify an unstated edition or establish adoption for a project. Embedded images and drawings have not been exhaustively verified.

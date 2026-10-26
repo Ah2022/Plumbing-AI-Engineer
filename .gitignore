@@ -5,6 +5,8 @@ pytest-cache-files-*/
 .review/
 local_sources/
 *.xlsm
+*.plmcalc
+Interactive_Calculation_Library.zip
 .venv/
 venv/
 *.db

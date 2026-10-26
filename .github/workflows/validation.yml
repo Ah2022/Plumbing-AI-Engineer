@@ -22,7 +22,7 @@ jobs:
       - name: Install audited dependencies
         run: python -m pip install -r requirements.txt
       - name: Regressions and known-defect reproductions
-        run: python -m pytest tests/test_audit_benchmarks.py tests/test_bim_exchange.py tests/test_reports.py tests/test_runtime_safety.py tests/test_governance.py tests/test_governance_ui.py tests/test_foundations.py tests/test_networks.py tests/test_network_ui.py tests/test_workbooks.py tests/test_workbook_ui.py -q
+        run: python -m pytest tests/test_audit_benchmarks.py tests/test_bim_exchange.py tests/test_reports.py tests/test_runtime_safety.py tests/test_governance.py tests/test_governance_ui.py tests/test_foundations.py tests/test_networks.py tests/test_network_ui.py tests/test_workbooks.py tests/test_workbook_ui.py tests/test_interactive_packages.py -q
       - name: Public-checkout interface navigation
         run: python -m pytest tests/test_streamlit_app.py -k "project_page_loads or every_page_loads" -q
       - name: Verification limits

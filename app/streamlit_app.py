@@ -783,9 +783,13 @@ def main():
     from app.workbook_page import page_calculation_sheets
     if "conn" not in st.session_state:
         st.session_state.conn = get_conn()
+    schema_token=(id(st.session_state.conn),'interactive-packages-1')
+    if st.session_state.get('_schema_token')!=schema_token:
+        ensure_governance_schema(st.session_state.conn)
+        st.session_state['_schema_token']=schema_token
 
     st.sidebar.title("🔧 Plumbing Design Engine")
-    st.sidebar.caption("v0.6.2 — Network and reference workbook review")
+    st.sidebar.caption("v0.6.2 — Interactive plumbing calculations")
     st.warning("Review build: calculation benchmarks pass, but code adoption, numeric-table applicability, "
                "model completeness and engineering acceptance still require review.")
     page = st.sidebar.radio("Navigate", [
@@ -804,7 +808,7 @@ def main():
         if st.session_state.get('_governance_token') != token:
             clear_result_session()
             st.session_state['_governance_token'] = token
-        st.sidebar.caption('Code review: ' + governance['review_status'])
+        st.sidebar.caption('Engineering review pending' if governance['review_status']=='REVIEW_REQUIRED' else 'Verification complete')
         row = st.session_state.conn.execute(
             "SELECT project_name, code_id FROM projects WHERE project_id=?", (pid,)
         ).fetchone()

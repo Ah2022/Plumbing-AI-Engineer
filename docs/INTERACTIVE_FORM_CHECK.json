@@ -1,0 +1,1296 @@
+{
+  "method": "Every converted form evaluated with supplied sample inputs, using .plmcalc only; no Excel/VBA runtime or engineering certification",
+  "packages": 48,
+  "forms": 103,
+  "totals": {
+    "CALCULATED_NOT_APPROVED": 7670,
+    "MISSING_DATA": 72,
+    "NOT_EVALUATED": 4
+  },
+  "calculations": [
+    {
+      "title": "Swimming Pool Sizing",
+      "package_sha256": "0126809d31c372d950952c858baddc0f3ddaa8a79883397536dfccaa4ef30fbc",
+      "forms": [
+        {
+          "worksheet": "Overflow Pool Sizing",
+          "inputs": 60,
+          "outputs": 80,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 75,
+            "MISSING_DATA": 5
+          }
+        },
+        {
+          "worksheet": "Skimmer Pool Sizing",
+          "inputs": 52,
+          "outputs": 75,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 70,
+            "MISSING_DATA": 5
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 145,
+        "MISSING_DATA": 10
+      }
+    },
+    {
+      "title": "Gray Water Tank Sizing",
+      "package_sha256": "03064b7bdde5cb843e9b4d1e2fcff15bbe7e970f80ef9a3dfd19443797d6908f",
+      "forms": [
+        {
+          "worksheet": "No. Of Person Guide",
+          "inputs": 52,
+          "outputs": 60,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 60
+          }
+        },
+        {
+          "worksheet": "Practical Plumbing Guide",
+          "inputs": 25,
+          "outputs": 44,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 44
+          }
+        },
+        {
+          "worksheet": "ASPE",
+          "inputs": 28,
+          "outputs": 52,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 52
+          }
+        },
+        {
+          "worksheet": "EGY.CODE (301-1)",
+          "inputs": 46,
+          "outputs": 90,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 90
+          }
+        },
+        {
+          "worksheet": "Qatar-Kahramaa",
+          "inputs": 32,
+          "outputs": 58,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 58
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 304
+      }
+    },
+    {
+      "title": "Water Supply Pipes Sizing",
+      "package_sha256": "0d0f1df8b982c8ea5933ecd1255bd288dd27a206ab179432b06348fa97c6732d",
+      "forms": [
+        {
+          "worksheet": "Calculations",
+          "inputs": 124,
+          "outputs": 102,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 90,
+            "MISSING_DATA": 12
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 90,
+        "MISSING_DATA": 12
+      }
+    },
+    {
+      "title": "Soakaway Sizing",
+      "package_sha256": "19bb246bb71c046da357c4b65c668d641e4ceeefe74fc0ee000a955a84c7bd40",
+      "forms": [
+        {
+          "worksheet": "Soakaway Sizing",
+          "inputs": 3,
+          "outputs": 3,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 3
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 3
+      }
+    },
+    {
+      "title": "Water Supply Filter",
+      "package_sha256": "1a6b6a4d25ee1cdc1527fa98a4bff679cdaea062ee46c909b1def5d66b29bc0d",
+      "forms": [
+        {
+          "worksheet": "Filter Sizing",
+          "inputs": 3,
+          "outputs": 13,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 13
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 13
+      }
+    },
+    {
+      "title": "Sump Pit Sizing",
+      "package_sha256": "1d686ad0766db55828a1ba165d525902142225223a3994d0a31f2583e51e915c",
+      "forms": [
+        {
+          "worksheet": "Sump Pit Sizing",
+          "inputs": 18,
+          "outputs": 34,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 34
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 34
+      }
+    },
+    {
+      "title": "Waterslide Sizing",
+      "package_sha256": "1e9e9e5b4a8f44b0e3ffe1b05cd2d2b3c3a5a94477ab1efb7001c285e9352991",
+      "forms": [
+        {
+          "worksheet": "Waterslide Sizing",
+          "inputs": 62,
+          "outputs": 83,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 78,
+            "MISSING_DATA": 5
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 78,
+        "MISSING_DATA": 5
+      }
+    },
+    {
+      "title": "Lint Interceptor Sizing",
+      "package_sha256": "24b26d5de697f1dda17a90f167dc0d7c76719115fe9d0a34863789f29f513e7d",
+      "forms": [
+        {
+          "worksheet": "Method-1",
+          "inputs": 5,
+          "outputs": 2,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 2
+          }
+        },
+        {
+          "worksheet": "Method-2",
+          "inputs": 7,
+          "outputs": 10,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 10
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 12
+      }
+    },
+    {
+      "title": "Non Potable Water Tank Sizing",
+      "package_sha256": "2753c66581549b71a09cfd333bcac9cccddf610cea12a7f346f22accd9878be8",
+      "forms": [
+        {
+          "worksheet": "No. Of Person Guide",
+          "inputs": 52,
+          "outputs": 60,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 60
+          }
+        },
+        {
+          "worksheet": "Practical Plumbing Guide",
+          "inputs": 27,
+          "outputs": 48,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 48
+          }
+        },
+        {
+          "worksheet": "ASPE",
+          "inputs": 30,
+          "outputs": 56,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 56
+          }
+        },
+        {
+          "worksheet": "EGY.CODE (301-1)",
+          "inputs": 48,
+          "outputs": 94,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 94
+          }
+        },
+        {
+          "worksheet": "Qatar-Kahramaa",
+          "inputs": 34,
+          "outputs": 62,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 62
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 320
+      }
+    },
+    {
+      "title": "Jacuzzi Sizing",
+      "package_sha256": "2f19d56067a3065bcbefed9d4acffe847d3d54ec035323d91c273713debb754e",
+      "forms": [
+        {
+          "worksheet": "Jacuzzi Sizing",
+          "inputs": 65,
+          "outputs": 109,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 104,
+            "MISSING_DATA": 5
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 104,
+        "MISSING_DATA": 5
+      }
+    },
+    {
+      "title": "Storm Roof Gutter Sizing",
+      "package_sha256": "3e7e4fce545fe273ee138fc856938d62fa8edb73af82b34e36e29e5bddac865c",
+      "forms": [
+        {
+          "worksheet": "Roof Gutter",
+          "inputs": 2,
+          "outputs": 6,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 2,
+            "NOT_EVALUATED": 4
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 2,
+        "NOT_EVALUATED": 4
+      }
+    },
+    {
+      "title": "Septic Tank Sizing",
+      "package_sha256": "49d77b0b61e23be52ada28aa2096f0851c5b0f31d2b9f9e71e5b377ae5347557",
+      "forms": [
+        {
+          "worksheet": "Septic Tank Sizing",
+          "inputs": 8,
+          "outputs": 6,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 6
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 6
+      }
+    },
+    {
+      "title": "LPG Tank Sizing",
+      "package_sha256": "4c34e9ee656cf577a5f53cefb2b8c653eade62d0bf251bf3454ab9c0520a7b9a",
+      "forms": [
+        {
+          "worksheet": "LPG Tank Sizing",
+          "inputs": 38,
+          "outputs": 189,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 189
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 189
+      }
+    },
+    {
+      "title": "Water Meter Sizing For Qatar",
+      "package_sha256": "52cd7895969f48de0240d3b4e3c60262515e83685edd3ba48a7cc12048aee5ae",
+      "forms": [
+        {
+          "worksheet": "WM Sizing",
+          "inputs": 26,
+          "outputs": 47,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 47
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 47
+      }
+    },
+    {
+      "title": "Fuel Equipment Sizing",
+      "package_sha256": "56a496b21bd3bc2ec82d0200b92de198c8de5bb9a46f592fe3b799dc9fc801a1",
+      "forms": [
+        {
+          "worksheet": "Fuel Equipment Sizing",
+          "inputs": 23,
+          "outputs": 30,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 30
+          }
+        },
+        {
+          "worksheet": "Pipe Sizing",
+          "inputs": 8,
+          "outputs": 12,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 12
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 42
+      }
+    },
+    {
+      "title": "Fountain Sizing",
+      "package_sha256": "5cd761017ef0241271f17173d06ae238b660b5a0a4f686819c7e52b04d6be993",
+      "forms": [
+        {
+          "worksheet": "Fountain Sizing",
+          "inputs": 63,
+          "outputs": 113,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 113
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 113
+      }
+    },
+    {
+      "title": "Drinking Chilled Water Sizing",
+      "package_sha256": "5df41e07bf594fc2f3bfef40405aed7a1c9ca6bf3169b88c6c8e7454da28daf3",
+      "forms": [
+        {
+          "worksheet": "Drinking CHW Sizing",
+          "inputs": 13,
+          "outputs": 34,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 34
+          }
+        },
+        {
+          "worksheet": "Drinking CHW Pipe Sizing",
+          "inputs": 6,
+          "outputs": 6,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 2,
+            "MISSING_DATA": 4
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 36,
+        "MISSING_DATA": 4
+      }
+    },
+    {
+      "title": "Neutralization Tank Sizing",
+      "package_sha256": "615b9b2709c1f308e2bda5c35e138dc4f133a7cbdf821b965d5892219b800793",
+      "forms": [
+        {
+          "worksheet": "NT Sizing",
+          "inputs": 3,
+          "outputs": 11,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 11
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 11
+      }
+    },
+    {
+      "title": "LPG Pipe Sizing",
+      "package_sha256": "6185bd31ca1624c64ce7ef6d84d6a114f0d9f14dcf122ad0bf4090c577382379",
+      "forms": [
+        {
+          "worksheet": "LPG",
+          "inputs": 14,
+          "outputs": 34,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 32,
+            "MISSING_DATA": 2
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 32,
+        "MISSING_DATA": 2
+      }
+    },
+    {
+      "title": "Water Supply Booster Pump",
+      "package_sha256": "6b036dc6a373ae4111fddc6a2fa7a5758f348b3c6878750477c61e0f99014f4f",
+      "forms": [
+        {
+          "worksheet": "Calculations",
+          "inputs": 128,
+          "outputs": 108,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 93,
+            "MISSING_DATA": 15
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 93,
+        "MISSING_DATA": 15
+      }
+    },
+    {
+      "title": "Medical Gas Source Sizing",
+      "package_sha256": "735c3b834259022b00446971f84b9ebaf9a36299ba10d235531582df3067b86e",
+      "forms": [
+        {
+          "worksheet": "O2 Source",
+          "inputs": 9,
+          "outputs": 15,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 15
+          }
+        },
+        {
+          "worksheet": "N2O Source",
+          "inputs": 11,
+          "outputs": 10,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 10
+          }
+        },
+        {
+          "worksheet": "N2O-O2 Mix. Source",
+          "inputs": 12,
+          "outputs": 10,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 10
+          }
+        },
+        {
+          "worksheet": "MA Source",
+          "inputs": 8,
+          "outputs": 18,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 18
+          }
+        },
+        {
+          "worksheet": "SA Source",
+          "inputs": 8,
+          "outputs": 18,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 18
+          }
+        },
+        {
+          "worksheet": "MA-SA Combined Source",
+          "inputs": 10,
+          "outputs": 25,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 25
+          }
+        },
+        {
+          "worksheet": "MV Source",
+          "inputs": 3,
+          "outputs": 5,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 5
+          }
+        },
+        {
+          "worksheet": "AGSS Source",
+          "inputs": 4,
+          "outputs": 2,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 2
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 103
+      }
+    },
+    {
+      "title": "Medical Gas Terminal Units",
+      "package_sha256": "87584f67a6b98f64021144135807aba6eb7eaf9abb2f119cbcb8eaecec668cd1",
+      "forms": [
+        {
+          "worksheet": "Terminal Units",
+          "inputs": 488,
+          "outputs": 430,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 430
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 430
+      }
+    },
+    {
+      "title": "Petrol Station Sizing",
+      "package_sha256": "93b5abb23fa01dc2e5b0abac68b311d5494e5b1a771bf91f6dbd557dd1db6afd",
+      "forms": [
+        {
+          "worksheet": "Main Data",
+          "inputs": 15,
+          "outputs": 5,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 5
+          }
+        },
+        {
+          "worksheet": "Fuel Type-1",
+          "inputs": 5,
+          "outputs": 22,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 22
+          }
+        },
+        {
+          "worksheet": "Fuel Type-2",
+          "inputs": 5,
+          "outputs": 22,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 22
+          }
+        },
+        {
+          "worksheet": "Fuel Type-3",
+          "inputs": 5,
+          "outputs": 22,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 22
+          }
+        },
+        {
+          "worksheet": "Fuel Type-4",
+          "inputs": 5,
+          "outputs": 22,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 22
+          }
+        },
+        {
+          "worksheet": "Fuel Type-5",
+          "inputs": 5,
+          "outputs": 22,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 22
+          }
+        },
+        {
+          "worksheet": "Pipe Sizing",
+          "inputs": 26,
+          "outputs": 48,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 48
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 163
+      }
+    },
+    {
+      "title": "Sand Interceptor Sizing",
+      "package_sha256": "9560b05a686e4e6cce29662e57cf468c0a4f37754121e60390c0e82cb013c4d8",
+      "forms": [
+        {
+          "worksheet": "Sand Interceptor",
+          "inputs": 3,
+          "outputs": 5,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 5
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 5
+      }
+    },
+    {
+      "title": "Medical Gas Pipe Sizing",
+      "package_sha256": "a2417b28199b1a6895e24fce8373bc58a265848aefb6a1dcb9ef969d3cea8746",
+      "forms": [
+        {
+          "worksheet": "O2",
+          "inputs": 78,
+          "outputs": 429,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 429
+          }
+        },
+        {
+          "worksheet": "N2O",
+          "inputs": 78,
+          "outputs": 429,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 429
+          }
+        },
+        {
+          "worksheet": "N2O-O2 Mix",
+          "inputs": 78,
+          "outputs": 429,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 429
+          }
+        },
+        {
+          "worksheet": "MA",
+          "inputs": 78,
+          "outputs": 429,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 429
+          }
+        },
+        {
+          "worksheet": "He-O2",
+          "inputs": 78,
+          "outputs": 429,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 429
+          }
+        },
+        {
+          "worksheet": "SA7",
+          "inputs": 77,
+          "outputs": 428,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 428
+          }
+        },
+        {
+          "worksheet": "SA11",
+          "inputs": 75,
+          "outputs": 428,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 428
+          }
+        },
+        {
+          "worksheet": "MV",
+          "inputs": 75,
+          "outputs": 503,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 503
+          }
+        },
+        {
+          "worksheet": "AGSS",
+          "inputs": 75,
+          "outputs": 503,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 503
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 4007
+      }
+    },
+    {
+      "title": "Boiler Hot Water Circulation Pump",
+      "package_sha256": "a5ec65ca860c5c9e54aee326a6a964f74dacd2cb8e78be792330624b0804365b",
+      "forms": [
+        {
+          "worksheet": "Boier HWCP Sizing",
+          "inputs": 12,
+          "outputs": 12,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 12
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 12
+      }
+    },
+    {
+      "title": "Lake Sizing",
+      "package_sha256": "a7cfcf6690e413a6c4d885602daec190de7caf5509614b1b5f743e2a5b86c953",
+      "forms": [
+        {
+          "worksheet": "Overflow Lake Sizing",
+          "inputs": 57,
+          "outputs": 79,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 74,
+            "MISSING_DATA": 5
+          }
+        },
+        {
+          "worksheet": "Skimmer Lake Sizing",
+          "inputs": 49,
+          "outputs": 74,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 69,
+            "MISSING_DATA": 5
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 143,
+        "MISSING_DATA": 10
+      }
+    },
+    {
+      "title": "Hydromechanical Grease Interceptor Sizing",
+      "package_sha256": "aa02a4f624ffa4bc67fd99232cb83e330a45f0a0aff1e0890a68dd1b8a0220c0",
+      "forms": [
+        {
+          "worksheet": "Method-1",
+          "inputs": 6,
+          "outputs": 13,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 13
+          }
+        },
+        {
+          "worksheet": "Method-2",
+          "inputs": 14,
+          "outputs": 19,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 19
+          }
+        },
+        {
+          "worksheet": "Method-3",
+          "inputs": 13,
+          "outputs": 20,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 20
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 52
+      }
+    },
+    {
+      "title": "Instantaneous Water Heater Sizing",
+      "package_sha256": "ac4536d8d9d945545667f01cc0f7c9e7528173f7030edd862f0b62e9d15eb888",
+      "forms": [
+        {
+          "worksheet": "Instantaneous WH",
+          "inputs": 42,
+          "outputs": 25,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 25
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 25
+      }
+    },
+    {
+      "title": "Central Water Heater Sizing - ASHRAE Method",
+      "package_sha256": "adafd498bb0bdddff34ecc81f404e3f9264394d523d99181b013d5d3315479a2",
+      "forms": [
+        {
+          "worksheet": "Central Electric WH",
+          "inputs": 27,
+          "outputs": 56,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 56
+          }
+        },
+        {
+          "worksheet": "Central Gas WH",
+          "inputs": 26,
+          "outputs": 54,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 54
+          }
+        },
+        {
+          "worksheet": "Central WH With Boiler",
+          "inputs": 30,
+          "outputs": 88,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 88
+          }
+        },
+        {
+          "worksheet": "Central Solar WH",
+          "inputs": 35,
+          "outputs": 71,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 71
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 269
+      }
+    },
+    {
+      "title": "Lazy River Sizing",
+      "package_sha256": "b250a8e02440654f124292310a9e63983f555adcc0ba06a8e33883061eaa024d",
+      "forms": [
+        {
+          "worksheet": "Lazy River Sizing",
+          "inputs": 48,
+          "outputs": 77,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 72,
+            "MISSING_DATA": 5
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 72,
+        "MISSING_DATA": 5
+      }
+    },
+    {
+      "title": "Individual Storage Water Heater Sizing",
+      "package_sha256": "b45841e2ecd8bba1f3aee2e467b38ada828535800a432580fd8de0085d9ca2c5",
+      "forms": [
+        {
+          "worksheet": "Individual Storage WH",
+          "inputs": 26,
+          "outputs": 49,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 49
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 49
+      }
+    },
+    {
+      "title": "Medical Gas Flow Rate",
+      "package_sha256": "be5e3ead16c080a8549b0f5e21ff830ba05e00a007cdb2a6692c6174e6cbf74b",
+      "forms": [
+        {
+          "worksheet": "O2 Flow",
+          "inputs": 32,
+          "outputs": 33,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 33
+          }
+        },
+        {
+          "worksheet": "N2O Flow",
+          "inputs": 8,
+          "outputs": 9,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 9
+          }
+        },
+        {
+          "worksheet": "N2O-O2 Mix. Flow",
+          "inputs": 4,
+          "outputs": 5,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 5
+          }
+        },
+        {
+          "worksheet": "MA4 Flow",
+          "inputs": 20,
+          "outputs": 21,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 21
+          }
+        },
+        {
+          "worksheet": "SA7 Flow",
+          "inputs": 4,
+          "outputs": 5,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 5
+          }
+        },
+        {
+          "worksheet": "MV Flow",
+          "inputs": 33,
+          "outputs": 34,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 34
+          }
+        },
+        {
+          "worksheet": "AGSS Flow",
+          "inputs": 6,
+          "outputs": 7,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 7
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 114
+      }
+    },
+    {
+      "title": "Central Water Heater Sizing - Dr. Steel Method",
+      "package_sha256": "c3d281be61d1dab528b91ffbd013f99ee0c387eb8f97165906248713529e4983",
+      "forms": [
+        {
+          "worksheet": "Central Electric WH",
+          "inputs": 10,
+          "outputs": 24,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 24
+          }
+        },
+        {
+          "worksheet": "Central Gas WH",
+          "inputs": 9,
+          "outputs": 18,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 18
+          }
+        },
+        {
+          "worksheet": "Central WH With Boiler",
+          "inputs": 14,
+          "outputs": 51,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 51
+          }
+        },
+        {
+          "worksheet": "Central Solar WH",
+          "inputs": 19,
+          "outputs": 38,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 38
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 131
+      }
+    },
+    {
+      "title": "Sanitary Drainage - Tie In",
+      "package_sha256": "c99ab86a15cd1585accb4876666e62eb3833600e68bbe4d2f615a40e91cc1bfb",
+      "forms": [
+        {
+          "worksheet": "Method-01",
+          "inputs": 61,
+          "outputs": 34,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 34
+          }
+        },
+        {
+          "worksheet": "Method-02",
+          "inputs": 19,
+          "outputs": 37,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 37
+          }
+        },
+        {
+          "worksheet": "Method-03",
+          "inputs": 63,
+          "outputs": 35,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 35
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 106
+      }
+    },
+    {
+      "title": "Storm Drainage - Tie In",
+      "package_sha256": "cbb517432afd44c95779467474f06d4390b32bc526806e2a0a8ac1094afe6a86",
+      "forms": [
+        {
+          "worksheet": "Storm Tie In",
+          "inputs": 2,
+          "outputs": 10,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 9,
+            "MISSING_DATA": 1
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 9,
+        "MISSING_DATA": 1
+      }
+    },
+    {
+      "title": "Water Supply Softener Sizing",
+      "package_sha256": "cd7026a7d340bcdceb911feeb6e924e9f030de9a0727c46dc21e03dc1e4aedc4",
+      "forms": [
+        {
+          "worksheet": "Softener Sizing",
+          "inputs": 5,
+          "outputs": 26,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 26
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 26
+      }
+    },
+    {
+      "title": "Sanitary Drainage Pipe Sizing",
+      "package_sha256": "cef3b882cc3666044a5aac99c1983c27f9b1f45fdd0e2945dbe793f3ad0dadd8",
+      "forms": [
+        {
+          "worksheet": "DR Pipe Sizing",
+          "inputs": 62,
+          "outputs": 33,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 33
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 33
+      }
+    },
+    {
+      "title": "Hot Water Circulation Pump",
+      "package_sha256": "d22119ec863369d804aaed82a1f363fe2083ba7245f37cd010272587e06f2402",
+      "forms": [
+        {
+          "worksheet": "HW Circulation Pump Sizing-2",
+          "inputs": 40,
+          "outputs": 27,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 27
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 27
+      }
+    },
+    {
+      "title": "Central EWH Mixed Use",
+      "package_sha256": "dbd6fe6c5e94606b0566bd0fbd806b080da500473bcf9d9a7973255deb4302b7",
+      "forms": [
+        {
+          "worksheet": "Central Electric WH",
+          "inputs": 31,
+          "outputs": 61,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 61
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 61
+      }
+    },
+    {
+      "title": "Natural Gas Pipe Sizing",
+      "package_sha256": "dcdaf3285d0ca0b658f914fbafad20794fa231ce3b249b2734ede22a39cc53c0",
+      "forms": [
+        {
+          "worksheet": "NG Pipe Sizing",
+          "inputs": 17,
+          "outputs": 34,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 32,
+            "MISSING_DATA": 2
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 32,
+        "MISSING_DATA": 2
+      }
+    },
+    {
+      "title": "Oil Interceptor Sizing",
+      "package_sha256": "e050e3bd325f24ce3bcd08d761918e7b711cda1392f2c6a73e4e0412156c358f",
+      "forms": [
+        {
+          "worksheet": "Method-1",
+          "inputs": 4,
+          "outputs": 3,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 3
+          }
+        },
+        {
+          "worksheet": "Method-2",
+          "inputs": 2,
+          "outputs": 5,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 5
+          }
+        },
+        {
+          "worksheet": "Method-3",
+          "inputs": 8,
+          "outputs": 15,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 15
+          }
+        },
+        {
+          "worksheet": "Method-4",
+          "inputs": 9,
+          "outputs": 17,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 17
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 40
+      }
+    },
+    {
+      "title": "Thermal Expansion Tank Sizing",
+      "package_sha256": "eab7d84d3f7ef8ce64ae8a98d21cac38a9535489ece073aeb277616e24d1724e",
+      "forms": [
+        {
+          "worksheet": "Expansion Tank Sizing",
+          "inputs": 6,
+          "outputs": 17,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 17
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 17
+      }
+    },
+    {
+      "title": "Gravity Grease Interceptor Sizing",
+      "package_sha256": "f00b0e36a93a582b0cdd3eb61155956d4d809114928ac33191cf7fb0bba025bf",
+      "forms": [
+        {
+          "worksheet": "Method-1",
+          "inputs": 4,
+          "outputs": 11,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 11
+          }
+        },
+        {
+          "worksheet": "Method-2",
+          "inputs": 13,
+          "outputs": 15,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 15
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 26
+      }
+    },
+    {
+      "title": "Storm Drainage Pipe Sizing",
+      "package_sha256": "f3eeddb80d431d8d6b3ef5c9fe098bde62928c57a5dd9367ae571ceca6b3ab93",
+      "forms": [
+        {
+          "worksheet": "Storm Pipe Sizing",
+          "inputs": 2,
+          "outputs": 8,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 7,
+            "MISSING_DATA": 1
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 7,
+        "MISSING_DATA": 1
+      }
+    },
+    {
+      "title": "Condensate Drain Pipe Sizing",
+      "package_sha256": "fa32f6dbc52608f2963637f5cf235f9fcb20b7354bceef1c09ef0eb4d2851bdc",
+      "forms": [
+        {
+          "worksheet": "CDP Sizing",
+          "inputs": 1,
+          "outputs": 2,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 2
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 2
+      }
+    },
+    {
+      "title": "Storm Catch Basin Sizing",
+      "package_sha256": "faaa38ea33ed77dc92152373ed9ebc29ed4cc552a4c931187efb58df2183e01d",
+      "forms": [
+        {
+          "worksheet": "Catch Basin",
+          "inputs": 2,
+          "outputs": 9,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 9
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 9
+      }
+    },
+    {
+      "title": "Storm Tank Sizing",
+      "package_sha256": "fbd3d67294ea682363cef87b1891bb31238e1e01b1fc28770bb66dd25a2403c6",
+      "forms": [
+        {
+          "worksheet": "Method-1",
+          "inputs": 11,
+          "outputs": 13,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 13
+          }
+        },
+        {
+          "worksheet": "Method-2",
+          "inputs": 8,
+          "outputs": 13,
+          "statuses": {
+            "CALCULATED_NOT_APPROVED": 13
+          }
+        }
+      ],
+      "statuses": {
+        "CALCULATED_NOT_APPROVED": 26
+      }
+    }
+  ]
+}

@@ -43,11 +43,13 @@ Once deployed, add its actual URL here as the permanent test link. Community Clo
 - `Egyptian_Plumbing_Design_Data.xlsx`
 - `SBC701_Saudi_Plumbing_Design_Data.xlsx`
 
-## Calculation sheets
+## Interactive calculation sheets
 
-The supplied 48 workbooks are registered by system, worksheet, code/reference family and source hash. Open **Calculation Sheets** to inspect references and source formulas, choose output cells, change inputs as JSON and save fresh calculation traces. This includes IPC/UPC/NSPC, ASHRAE/ASPE, Egyptian/Qatar, NFPA, HTM and manufacturer methods; it is not a single IPC 2024 dataset. See the [source review and complete attribution](docs/CALCULATION_SHEETS_REVIEW.md).
+The supplied 48 workbooks are converted into **103 interactive forms**. Open **Calculation Sheets**, select the calculation/method, enter values in labelled fields or editable schedules, then **Calculate and save**. No cell-address JSON or Excel installation is needed to use a converted calculation.
 
-Original XLSM packages stay local in `local_sources/calculation_sheets/` and are excluded from Git. To install them in another checkout, run `python -m workbooks.library FIRST_ZIP SECOND_ZIP`. The public catalogue remains browsable without them. VBA, external links and unsupported formulas are never executed or replaced by cached values. Formula reproduction is distinct from engineering/code approval.
+For a deployed app or another computer, open **Add Excel sheets or an interactive library**, upload your converted library ZIP (or XLSX/XLSM files), and click **Import and convert**. Packages are stored with the active project in its database. A working synthetic demonstration is included in every checkout. Private calculation packages remain local or user-imported; they contain the supplied standards/catalogue data and are excluded from public Git.
+
+See the [interactive workflow and profile fixes](docs/INTERACTIVE_CALCULATIONS.md), [all-form execution evidence](docs/INTERACTIVE_FORM_CHECK.json), and [source/code attribution](docs/CALCULATION_SHEETS_REVIEW.md). Code Profiles now uses readable status summaries, project-scoped forms and an explicit draft/adoption/revision workflow. Pending engineering verification is not silently converted into approval.
 
 ## Review workflow
 
@@ -70,7 +72,7 @@ For local comparison, retained [Phase 1](http://localhost:8501) and [Phase 2](ht
 python -m pytest tests/ -q
 
 # Public-checkout checks
-python -m pytest tests/test_audit_benchmarks.py tests/test_bim_exchange.py tests/test_reports.py tests/test_runtime_safety.py tests/test_governance.py tests/test_governance_ui.py tests/test_foundations.py tests/test_networks.py tests/test_network_ui.py tests/test_workbooks.py tests/test_workbook_ui.py -q
+python -m pytest tests/test_audit_benchmarks.py tests/test_bim_exchange.py tests/test_reports.py tests/test_runtime_safety.py tests/test_governance.py tests/test_governance_ui.py tests/test_foundations.py tests/test_networks.py tests/test_network_ui.py tests/test_workbooks.py tests/test_workbook_ui.py tests/test_interactive_packages.py -q
 
 # Inventory; uses an in-memory database and prints no workbook values
 python -m tools.baseline_inventory
@@ -79,7 +81,7 @@ python -m tools.baseline_inventory
 python -m tests.demo_project
 ```
 
-The current full local suite passed **288 tests**, with no expected failures. The Phases 3–5 baseline passed **241 tests** on Windows/Python 3.12.14 with Streamlit 1.66.1. The added workbook suite validates formula semantics, macro-free reading, failure handling, provenance, and interface scenarios. Synthetic network tests cover independent pressure-path calculations, catalogue constraints, invalid topology, drainage/vent boundaries and model-import isolation. The [Phases 3–5 inventory](docs/PHASE345_INVENTORY.json) records dependency versions, source-file fingerprints, and rule coverage. `requirements-lock.txt` records tested package versions.
+The current full local suite passed **315 tests** with no expected failures. All 103 converted forms were also exercised from portable packages; unsupported or missing source calculations remain explicit. The Phases 3–5 baseline passed **241 tests** on Windows/Python 3.12.14 with Streamlit 1.66.1. The workbook and interactive-package suites validate formula semantics, macro-free import, portable packages, labelled inputs, project isolation and profile approval/revision transitions. Synthetic network tests cover independent pressure-path calculations, catalogue constraints, invalid topology, drainage/vent boundaries and model-import isolation. The [Phases 3–5 inventory](docs/PHASE345_INVENTORY.json) records dependency versions, source-file fingerprints, and rule coverage. `requirements-lock.txt` records tested package versions.
 
 GitHub Actions runs public-checkout regression and interface-navigation checks after pushes and pull requests. It does not claim full workbook or live Revit validation.
 

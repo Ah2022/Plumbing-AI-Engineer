@@ -24,6 +24,10 @@ def ensure_governance_schema(conn):
             if name not in existing:
                 conn.execute(f'ALTER TABLE {table} ADD COLUMN {name} {declaration}')
     statements = [
+        '''CREATE TABLE IF NOT EXISTS project_calculation_packages (
+            project_id INTEGER NOT NULL REFERENCES projects(project_id),
+            package_sha256 TEXT NOT NULL, title TEXT NOT NULL, package_json TEXT NOT NULL,
+            PRIMARY KEY(project_id,package_sha256))''',
         '''CREATE TABLE IF NOT EXISTS project_code_basis (
             project_id INTEGER PRIMARY KEY REFERENCES projects(project_id),
             profile_id TEXT NOT NULL, revision INTEGER NOT NULL,

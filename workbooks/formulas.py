@@ -85,9 +85,9 @@ SUPPORTED={'IF','SUM','MAX','MIN','ISNUMBER','MATCH','INDEX','VLOOKUP','HLOOKUP'
 
 
 class Evaluator:
-    def __init__(self,workbook,overrides=None):
+    def __init__(self,workbook,overrides=None,*,max_overrides=100):
         self.book=workbook;self.overrides={};self.cache={};self.failures={};self.active=set();self.parsed={};self.steps=0;self.trace={}
-        if len(overrides or {})>100:raise ValueError('At most 100 input overrides')
+        if not 1<=max_overrides<=500 or len(overrides or {})>max_overrides:raise ValueError(f'At most {max_overrides} input overrides')
         for key,value in (overrides or {}).items():
             sh,addr=self.address(key)
             cell=self.book['sheets'][sh]['cells'].get(addr)
