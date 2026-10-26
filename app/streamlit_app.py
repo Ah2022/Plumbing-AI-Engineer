@@ -25,7 +25,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 import pandas as pd
 import streamlit as st
 
-from database.db import init_db, get_connection
+from database.db import init_db, get_connection, get_db_path
 from compliance.rule_loader import load_all_rules
 from compliance.rule_registry import sync_predicate_flags
 from compliance.engine import run_compliance_for_project
@@ -47,7 +47,7 @@ from app.db_helpers import save_calculation, next_calc_id, status_badge
 
 st.set_page_config(page_title="Plumbing Design Engine", layout="wide")
 
-DB_PATH = Path(__file__).parent.parent / "database" / "plumbing_engine.db"
+DB_PATH = get_db_path()
 
 
 def bootstrap_db():
@@ -57,7 +57,7 @@ def bootstrap_db():
     ever removed while the process is still alive. The existence check below
     already makes repeat calls cheap."""
     if not DB_PATH.exists():
-        conn = init_db(reset=True)
+        conn = init_db(DB_PATH)
         load_all_rules(conn)
         sync_predicate_flags(conn)
         load_all_workbooks(conn)
@@ -769,7 +769,10 @@ def main():
         st.session_state.conn = get_conn()
 
     st.sidebar.title("🔧 Plumbing Design Engine")
-    st.sidebar.caption("v0.6 — Phase 1-6 complete, Phase 7 (Revit/pyRevit) scaffolded")
+    st.sidebar.caption("v0.6.2 — Phase 1 audit review build")
+    st.warning("Testing build: the Phase 1 audit identified unresolved stormwater-flow, "
+               "compliance-status, and project-isolation defects. Review the baseline audit "
+               "before relying on calculation results.")
     page = st.sidebar.radio("Navigate", [
         "Project", "Design Basis", "Fixtures & Water", "Drainage & Vent",
         "Hot Water", "Tanks", "Pumps", "Stormwater",

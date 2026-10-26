@@ -1,0 +1,30 @@
+name: Review build validation
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  public-checkout:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install audited dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Regressions and known-defect reproductions
+        run: python -m pytest tests/test_audit_benchmarks.py tests/test_bim_exchange.py tests/test_reports.py tests/test_runtime_safety.py -q -rx
+      - name: Public-checkout interface navigation
+        run: python -m pytest tests/test_streamlit_app.py -k "project_page_loads or every_page_loads" -q
+      - name: Verification limits
+        shell: bash
+        run: echo "Full-suite checks require local workbooks. Strict xfails are open defects. Live Revit is unverified." >> "$GITHUB_STEP_SUMMARY"

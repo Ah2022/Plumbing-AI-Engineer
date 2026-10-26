@@ -17,6 +17,9 @@ Exercises the real pipeline against the supplied code-rule data:
 
 from __future__ import annotations
 
+import tempfile
+from pathlib import Path
+
 from database.db import init_db
 from compliance.rule_loader import load_all_rules
 from compliance.rule_registry import sync_predicate_flags
@@ -37,8 +40,11 @@ from bim.exchange import import_revit_extract, export_results_for_revit
 from models import MissingCodeDataError
 
 
-def main():
-    conn = init_db(reset=True)
+def main(db_path=None):
+    if db_path is None:
+        with tempfile.TemporaryDirectory(prefix="plumbing-demo-") as directory:
+            return main(Path(directory) / "demo.db")
+    conn = init_db(db_path=db_path)
 
     print("=" * 70)
     print("STEP 1 — Load code rules from database/codes/")

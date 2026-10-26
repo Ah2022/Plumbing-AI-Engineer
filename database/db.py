@@ -9,6 +9,7 @@ portable to PostgreSQL later), this module just wires it up.
 
 from __future__ import annotations
 
+import os
 import sqlite3
 from pathlib import Path
 
@@ -16,21 +17,27 @@ SCHEMA_PATH = Path(__file__).parent / "schema.sql"
 DEFAULT_DB_PATH = Path(__file__).parent / "plumbing_engine.db"
 
 
-def get_connection(db_path: Path | str = DEFAULT_DB_PATH) -> sqlite3.Connection:
+def get_db_path(db_path: Path | str | None = None) -> Path:
+    """Resolve an explicit path or a per-process test/deployment override."""
+    return Path(db_path if db_path is not None else os.environ.get(
+        "PLUMBING_ENGINE_DB_PATH", str(DEFAULT_DB_PATH))).expanduser()
+
+
+def get_connection(db_path: Path | str | None = None) -> sqlite3.Connection:
     """Open a SQLite connection with foreign keys enforced and Row access."""
-    conn = sqlite3.connect(str(db_path))
+    conn = sqlite3.connect(str(get_db_path(db_path)))
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON;")
     return conn
 
 
-def init_db(db_path: Path | str = DEFAULT_DB_PATH, reset: bool = False) -> sqlite3.Connection:
+def init_db(db_path: Path | str | None = None, reset: bool = False) -> sqlite3.Connection:
     """
     Create the database from schema.sql.
 
     reset=True drops and recreates the file — use only for dev/test.
     """
-    db_path = Path(db_path)
+    db_path = get_db_path(db_path)
     if reset and db_path.exists():
         db_path.unlink()
 
@@ -42,8 +49,18 @@ def init_db(db_path: Path | str = DEFAULT_DB_PATH, reset: bool = False) -> sqlit
 
 
 if __name__ == "__main__":
-    conn = init_db(reset=True)
-    print(f"Initialized database at {DEFAULT_DB_PATH}")
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Initialize the engine database without replacing existing data.")
+    parser.add_argument("--db-path", type=Path, help="Database file (or PLUMBING_ENGINE_DB_PATH).")
+    parser.add_argument("--reset", action="store_true", help="Explicitly delete and recreate this database.")
+    args = parser.parse_args()
+    db_path = get_db_path(args.db_path)
+    if db_path.exists() and not args.reset:
+        print(f"Existing database retained at {db_path}. Use --reset only for disposable data.")
+        raise SystemExit(0)
+    conn = init_db(db_path, reset=args.reset)
+    print(f"Initialized database at {db_path}")
     tables = conn.execute(
         "SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;"
     ).fetchall()

@@ -1,3 +1,5 @@
+> Historical development notes. Current verified status and open defects are in [BASELINE_AUDIT.md](BASELINE_AUDIT.md). Earlier completion claims and test counts below are not release acceptance.
+
 # Plumbing Design, Calculation & Code-Compliance Engine
 ## Architecture, Data Analysis & MVP Plan — v0.6 (Phases 1-6 complete; Phase 7 engine-side complete & tested, Revit-side written but unverified)
 

@@ -25,14 +25,15 @@ APP_PATH = Path(__file__).parent.parent / "app" / "streamlit_app.py"
 def fresh_app(tmp_path, monkeypatch):
     # Point the app at a throwaway DB file for this test only.
     monkeypatch.chdir(Path(__file__).parent.parent)
-    db_path = Path(__file__).parent.parent / "database" / "plumbing_engine.db"
-    if db_path.exists():
-        db_path.unlink()
+    db_path = tmp_path / "app.db"
+    monkeypatch.setenv("PLUMBING_ENGINE_DB_PATH", str(db_path))
     at = AppTest.from_file(str(APP_PATH))
     at.run(timeout=30)
-    yield at
-    if db_path.exists():
-        db_path.unlink()
+    try:
+        yield at
+    finally:
+        if "conn" in at.session_state:
+            at.session_state["conn"].close()
 
 
 def _create_project(at):

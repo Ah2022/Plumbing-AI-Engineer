@@ -1,6 +1,8 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
+pytest-cache-files-*/
+.review/
 .venv/
 venv/
 *.db
@@ -10,3 +12,4 @@ venv/
 .env
 .env.*
 !.env.example
+.streamlit/secrets.toml
