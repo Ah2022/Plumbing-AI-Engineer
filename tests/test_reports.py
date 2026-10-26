@@ -109,7 +109,7 @@ def test_report_generator_structure(tmp_path):
     assert data["calculations"][0]["calc_id"] == "CW-001"
     assert len(data["compliance"]) == 8  # SAUDI_SBC_701 has 8 rules
     assert len(data["assumptions"]) == 1
-    assert len(data["qaqc"]) == 6
+    assert len(data["qaqc"]) == 7
 
 
 def test_report_generator_markdown_contains_key_sections(tmp_path):

@@ -44,6 +44,9 @@ from reports.qaqc_dashboard import run_qaqc
 from reports.report_generator import generate_calculation_report_markdown
 from models import MissingCodeDataError
 from app.db_helpers import save_calculation, next_calc_id, status_badge
+from app.code_profiles_page import page_code_profiles, clear_result_session
+from compliance.governance import profile_for_code, set_basis, context, seed_review_inventory
+from database.governance_schema import ensure_governance_schema
 
 st.set_page_config(page_title="Plumbing Design Engine", layout="wide")
 
@@ -76,6 +79,8 @@ def get_conn():
     conn = sqlite3.connect(str(DB_PATH), check_same_thread=False)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON;")
+    ensure_governance_schema(conn)
+    seed_review_inventory(conn)
     return conn
 
 
@@ -88,6 +93,7 @@ def result_to_row(r) -> dict:
     return {
         "calc_id": r.calc_id,
         "status": status_badge(r.status),
+        "review_status": getattr(r, 'review_status', 'REVIEW_REQUIRED'),
         "result": f"{r.result_value} {r.result_unit or ''}".strip(),
         "required": r.required_value,
         "selected": r.selected_value,
@@ -117,6 +123,8 @@ def page_project():
         options = {f"#{r['project_id']} — {r['project_name']} ({r['code_id']})": r["project_id"] for r in existing}
         choice = st.selectbox("Project", ["(new project)"] + list(options.keys()))
         if choice != "(new project)":
+            if st.session_state.get('project_id') != options[choice]:
+                clear_result_session()
             st.session_state.project_id = options[choice]
             st.success(f"Active project: {choice}")
 
@@ -134,7 +142,7 @@ def page_project():
             ], index=3)
             code_id = st.selectbox("Applicable code", list(codes.keys()),
                                     format_func=lambda c: f"{c} — {codes[c]}",
-                                    index=list(codes.keys()).index("SAUDI_SBC_701") if "SAUDI_SBC_701" in codes else 0)
+                                    index=list(codes.keys()).index("IPC") if "IPC" in codes else 0)
         with col2:
             gross_area = st.number_input("Gross area (m²)", min_value=0.0, value=25000.0)
             floors = st.number_input("Number of floors", min_value=0, value=6, step=1)
@@ -153,6 +161,12 @@ def page_project():
             )
             conn.commit()
             st.session_state.project_id = cur.lastrowid
+            clear_result_session()
+            selected_profile = profile_for_code(code_id)
+            if selected_profile:
+                set_basis(conn, cur.lastrowid, selected_profile['profile_id'],
+                          dict(occupancy=building_type, systems=['water'], units='SI'),
+                          engineer or 'Project creator')
             st.success(f"Created project #{cur.lastrowid}")
             st.rerun()
 
@@ -769,12 +783,12 @@ def main():
         st.session_state.conn = get_conn()
 
     st.sidebar.title("🔧 Plumbing Design Engine")
-    st.sidebar.caption("v0.6.2 — Phase 1 audit review build")
+    st.sidebar.caption("v0.6.2 — Phase 2 code governance review build")
     st.warning("Testing build: the Phase 1 audit identified unresolved stormwater-flow, "
                "compliance-status, and project-isolation defects. Review the baseline audit "
                "before relying on calculation results.")
     page = st.sidebar.radio("Navigate", [
-        "Project", "Design Basis", "Fixtures & Water", "Drainage & Vent",
+        "Project", "Code Profiles", "Design Basis", "Fixtures & Water", "Drainage & Vent",
         "Hot Water", "Tanks", "Pumps", "Stormwater",
         "Code Compliance / QA-QC", "QA/QC Dashboard", "Report / Export",
     ])
@@ -784,6 +798,12 @@ def main():
 
     pid = st.session_state.get("project_id")
     if pid:
+        governance = context(st.session_state.conn, pid)
+        token = (pid, governance['fingerprint'])
+        if st.session_state.get('_governance_token') != token:
+            clear_result_session()
+            st.session_state['_governance_token'] = token
+        st.sidebar.caption('Code review: ' + governance['review_status'])
         row = st.session_state.conn.execute(
             "SELECT project_name, code_id FROM projects WHERE project_id=?", (pid,)
         ).fetchone()
@@ -791,6 +811,7 @@ def main():
 
     {
         "Project": page_project,
+        "Code Profiles": page_code_profiles,
         "Design Basis": page_design_basis,
         "Fixtures & Water": page_water,
         "Drainage & Vent": page_drainage_vent,

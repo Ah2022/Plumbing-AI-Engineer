@@ -37,6 +37,8 @@ def fresh_app(tmp_path, monkeypatch):
 
 
 def _create_project(at):
+    # Existing numeric/UI regressions retain their original Saudi test basis.
+    [s for s in at.selectbox if s.label == 'Applicable code'][0].set_value('SAUDI_SBC_701')
     btn = [b for b in at.button if b.label == "Create project"]
     btn[0].click().run(timeout=30)
     return at
@@ -53,6 +55,7 @@ def test_create_project_succeeds(fresh_app):
 
 
 @pytest.mark.parametrize("page", [
+    "Code Profiles",
     "Design Basis", "Fixtures & Water", "Drainage & Vent",
     "Hot Water", "Tanks", "Pumps", "Stormwater",
     "Code Compliance / QA-QC", "QA/QC Dashboard", "Report / Export",

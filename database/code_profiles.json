@@ -1,0 +1,33 @@
+{
+  "registry_version": "1.0.0",
+  "first_verification_target": "IPC-2024",
+  "profiles": [
+    {
+      "profile_id": "IPC-2024", "code_id": "IPC", "edition": "2024",
+      "document": "2024 International Plumbing Code", "publisher": "International Code Council",
+      "source_url": "https://shop.iccsafe.org/international-codes/model-codes/2024-international-plumbing-coder.html",
+      "metadata_status": "OFFICIAL_EDITION_IDENTIFIED", "source_checked": "2026-10-26",
+      "source_limit": "Edition identity only. Rule provisions, numeric workbooks, local adoption, and amendments require independent verification.",
+      "units": ["SI", "US_CUSTOMARY"], "domains": ["water", "drainage", "vent", "storm"],
+      "implementation_status": "PARTIAL_UNVERIFIED", "numeric_dataset_edition": "UNVERIFIED"
+    },
+    {
+      "profile_id": "SBC701-2024", "code_id": "SAUDI_SBC_701", "edition": "2024",
+      "document": "Saudi Plumbing Code SBC 701-CR-2024", "publisher": "Saudi Building Code",
+      "source_url": "https://sbc.gov.sa/ar/BC/Documents/tableofcontent2024/SBC%20701/SBC701-CR_241224-FA.pdf",
+      "metadata_status": "OFFICIAL_EDITION_IDENTIFIED", "source_checked": "2026-10-26",
+      "source_limit": "Public table of contents only; it does not verify individual provisions, datasets, or project adoption.",
+      "units": ["SI", "US_CUSTOMARY"], "domains": ["water", "drainage", "vent", "storm"],
+      "implementation_status": "PARTIAL_UNVERIFIED", "numeric_dataset_edition": "UNVERIFIED"
+    },
+    {
+      "profile_id": "EGYPT-301-1-2003", "code_id": "EGYPT_LOCAL", "edition": "301/1 (2003)",
+      "document": "Egyptian building sanitary installations code, Part 1", "publisher": "HBRC",
+      "source_url": "https://www.hbrc.edu.eg/ar/egyptian-code-2",
+      "metadata_status": "SUPPLIED_LABEL_UNVERIFIED", "source_checked": "2026-10-26",
+      "source_limit": "Edition label comes from supplied JSON. HBRC catalogue could not be fetched; currency, exact scope, and project adoption remain unverified.",
+      "units": ["SI"], "domains": ["water", "drainage", "vent", "storm"],
+      "implementation_status": "PARTIAL_UNVERIFIED", "numeric_dataset_edition": "UNVERIFIED"
+    }
+  ]
+}

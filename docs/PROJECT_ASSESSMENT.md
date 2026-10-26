@@ -1,5 +1,5 @@
 # Project assessment
 
-The initial source-availability assessment is superseded by the [Phase 1 baseline audit](BASELINE_AUDIT.md), dated 26 October 2026.
+Current implementation: [Phase 2 code governance](CODE_GOVERNANCE.md).
 
-The source is now present. The audit records actual test results, capabilities, data inventory, reproducible defects, validation-workflow fixes, and verification limits. The improvement plan is reviewed in the owner's chat.
+The [Phase 1 audit](BASELINE_AUDIT.md) remains the engineering issue baseline. The [old/new comparison](ENGINE_COMPARISON.md) records executed behavioral changes and unchanged numerical defects. Code adoption and authoritative engineering acceptance remain pending; the improvement plan stays in chat.

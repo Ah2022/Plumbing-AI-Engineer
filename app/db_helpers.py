@@ -44,13 +44,21 @@ def next_calc_id(conn, project_id: int, calc_type: str) -> str:
 def save_calculation(conn, project_id: int, result: CalculationResult,
                       target_type: str = None, target_id: str = None) -> None:
     row = result.as_row(project_id, target_type=target_type, target_id=target_id)
+    import json
+    from compliance.governance import context
+    governance = context(conn, project_id)
+    row.update(notes=result.notes, governance_json=json.dumps(governance, sort_keys=True),
+               review_status=governance['review_status'])
+    result.review_status = governance['review_status']
     conn.execute(
         """INSERT INTO calculations (calc_id, project_id, calc_type, target_type, target_id,
              formula, inputs_json, intermediate_json, result_value, result_unit,
-             required_value, selected_value, status, code_rule_id, reference)
+             required_value, selected_value, status, code_rule_id, reference,
+             notes,governance_json,review_status,is_current)
            VALUES (:calc_id,:project_id,:calc_type,:target_type,:target_id,:formula,
              :inputs_json,:intermediate_json,:result_value,:result_unit,
-             :required_value,:selected_value,:status,:code_rule_id,:reference)""",
+             :required_value,:selected_value,:status,:code_rule_id,:reference,
+             :notes,:governance_json,:review_status,1)""",
         row,
     )
     conn.commit()

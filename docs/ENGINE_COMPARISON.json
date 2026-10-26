@@ -1,0 +1,80 @@
+{
+  "baseline": "Original v0.6.2 / source commit 397e8d9f9b8031c6ce31a69aae64c4accaa75a23",
+  "updated": "Phase 2 code governance; preceding Phase 1 commit a5cb857837413a2dff6ae8cea2e6b91af64a9b81",
+  "method": "Identical synthetic inputs; separate processes; in-memory databases; no workbook values",
+  "cases": [
+    {
+      "case": "velocity_1lps_25mm",
+      "old": 2.0372,
+      "updated": 2.0372,
+      "changed": false
+    },
+    {
+      "case": "hazen_2_5lps_50mm_40m_C150",
+      "old": 1.3111,
+      "updated": 1.3111,
+      "changed": false
+    },
+    {
+      "case": "pump_5lps_41m_eta0_7",
+      "old": 2.8719,
+      "updated": 2.8719,
+      "changed": false
+    },
+    {
+      "case": "rain_3600mmhr_1m2_C1",
+      "old": 10.0,
+      "updated": 10.0,
+      "changed": false
+    },
+    {
+      "case": "pending_pressure_compliance_status",
+      "old": "PASS",
+      "updated": "NOT_EVALUATED",
+      "changed": true
+    },
+    {
+      "case": "pending_pressure_technical_status",
+      "old": "PASS",
+      "updated": "PASS",
+      "changed": false
+    },
+    {
+      "case": "saved_notes",
+      "old": null,
+      "updated": "Synthetic comparison rationale",
+      "changed": true
+    },
+    {
+      "case": "saved_review_status",
+      "old": "ABSENT",
+      "updated": "REVIEW_REQUIRED",
+      "changed": true
+    },
+    {
+      "case": "has_versioned_governance",
+      "old": false,
+      "updated": true,
+      "changed": true
+    },
+    {
+      "case": "profile_switch_invalidates",
+      "old": "UNAVAILABLE",
+      "updated": true,
+      "changed": true
+    },
+    {
+      "case": "declared_edition",
+      "old": null,
+      "updated": "2024",
+      "changed": true
+    },
+    {
+      "case": "adoption_status",
+      "old": "ABSENT",
+      "updated": "DRAFT",
+      "changed": true
+    }
+  ],
+  "engineering_limit": "The rain identity must be 1 L/s. Both versions return 10 L/s: AUD-001 remains unresolved."
+}

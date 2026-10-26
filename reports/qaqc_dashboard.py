@@ -173,6 +173,11 @@ def run_qaqc(conn, project_id: int) -> list[dict]:
         _check_flagged_data_in_use(conn, project_id),
         _check_coverage_gaps(conn, project_id),
     ]
+    from compliance.governance import context
+    governance = context(conn, project_id)
+    results.append(_insert(conn, project_id, 'Code profile and adoption review', 'governance',
+                           'WARNING' if governance['issues'] else 'PASS',
+                           '; '.join(governance['issues']) or 'Verified code context'))
     conn.commit()
     return results
 

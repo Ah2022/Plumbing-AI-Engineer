@@ -2,11 +2,11 @@
 
 Python/SQLite plumbing calculation engine with a Streamlit interface, code-rule checks, reports, and Revit JSON exchange.
 
-**Phase 1 audit: 26 October 2026.** This is a testing build with unresolved numerical, compliance-status, and project-isolation defects. Engineering outputs have been preserved for review. See the [baseline audit](docs/BASELINE_AUDIT.md).
+**Phase 2 code governance: 26 October 2026.** This is a testing build with unresolved numerical, compliance-status, and project-isolation defects. Engineering outputs have been preserved for review. See the [baseline audit](docs/BASELINE_AUDIT.md).
 
 ## Test the engine
 
-**[Open the local Streamlit test app](http://localhost:8501)** — works on the computer running Streamlit. This is a local URL, not an internet deployment.
+**[Open the updated Phase 2 Streamlit app](http://localhost:8502)** — works on the computer running Streamlit. This is a local URL, not an internet deployment.
 
 ```bash
 git clone https://github.com/Ah2022/Plumbing-AI-Engineer.git
@@ -15,7 +15,7 @@ python -m venv .venv
 # Windows: .venv\Scripts\activate
 # macOS/Linux: source .venv/bin/activate
 python -m pip install -r requirements.txt
-python -m streamlit run app/streamlit_app.py
+python -m streamlit run app/streamlit_app.py --server.port 8502
 ```
 
 The app initializes a database on first use. After each implementation, pull the latest `main` and refresh the page; restart if dependencies changed. Streamlit reloads saved source changes. Use synthetic review projects while audit findings remain open.
@@ -43,6 +43,18 @@ Once deployed, add its actual URL here as the permanent test link. Community Clo
 - `Egyptian_Plumbing_Design_Data.xlsx`
 - `SBC701_Saudi_Plumbing_Design_Data.xlsx`
 
+## Phase 2 workflow
+
+1. Create a project; IPC 2024 is the default first verification target.
+2. Open **Code Profiles** and record jurisdiction, adopting authority, amendments, occupancy, systems, units, methods, exclusions, and requirement precedence.
+3. Save a draft. A named engineer can record adoption approval with project evidence; this does not verify the code package.
+4. Review the per-profile coverage matrix and independent benchmark records. New rules start pending; unsupported checks remain explicit.
+5. Recalculate after a profile/basis/source change. Reports and BIM export exclude or identify stale results and preserve review status.
+
+Numeric dataset editions and the Phase 1 engineering defects remain unverified. Every current result therefore remains `REVIEW_REQUIRED`; the software does not manufacture engineering approval. US customary/SI selection records the design basis and does not change the explicitly labeled units on calculation forms.
+
+For side-by-side local review, the retained [Phase 1 app](http://localhost:8501) runs separately from the updated [Phase 2 app](http://localhost:8502). These local services must be running on your computer.
+
 ## Verification
 
 ```bash
@@ -50,7 +62,7 @@ Once deployed, add its actual URL here as the permanent test link. Community Clo
 python -m pytest tests/ -q -rx
 
 # Public-checkout checks
-python -m pytest tests/test_audit_benchmarks.py tests/test_bim_exchange.py tests/test_reports.py tests/test_runtime_safety.py -q -rx
+python -m pytest tests/test_audit_benchmarks.py tests/test_bim_exchange.py tests/test_reports.py tests/test_runtime_safety.py tests/test_governance.py tests/test_governance_ui.py -q -rx
 
 # Inventory; uses an in-memory database and prints no workbook values
 python -m tools.baseline_inventory
@@ -59,7 +71,7 @@ python -m tools.baseline_inventory
 python -m tests.demo_project
 ```
 
-Verified on Windows/Python 3.12.14 with Streamlit 1.66.1: **93 passed, 11 expected failures**. The strict `xfail` cases reproduce open defects, not accepted engineering results. The [inventory](docs/BASELINE_INVENTORY.json) records dependency versions, source-file fingerprints, and rule coverage. `requirements-lock.txt` records tested package versions.
+Verified on Windows/Python 3.12.14 with Streamlit 1.66.1: **139 passed, 10 expected failures**. The strict `xfail` cases reproduce open defects, not accepted engineering results. The [current inventory](docs/PHASE2_INVENTORY.json) records dependency versions, source-file fingerprints, and rule coverage. `requirements-lock.txt` records tested package versions.
 
 GitHub Actions runs public-checkout regression and interface-navigation checks after pushes and pull requests. It does not claim full workbook or live Revit validation.
 
@@ -75,7 +87,7 @@ python -m database.load_design_tables
 python -m database.load_confirmed_additions
 ```
 
-`python -m database.db --reset` explicitly deletes the selected database and is intended only for disposable data. Existing databases are not automatically migrated by this audit.
+`python -m database.db --reset` explicitly deletes the selected database and is intended only for disposable data. The Streamlit app applies the additive governance migration on open; existing projects and raw results are retained. Legacy results are marked unverified/stale. Back up an existing database before deliberate migration. The explicit migration command is `python -m database.governance_schema --db-path PATH`.
 
 ## Implementation and limits
 
@@ -89,7 +101,7 @@ python -m database.load_confirmed_additions
 
 The current SQLite interface is a single trusted-user local review workflow. Public multi-user project access control has not been implemented.
 
-See the [audit](docs/BASELINE_AUDIT.md) and [historical architecture notes](docs/ARCHITECTURE.md). The improvement plan remains in chat for owner review.
+See the [Phase 2 implementation and review limits](docs/CODE_GOVERNANCE.md), the [old/new comparison](docs/ENGINE_COMPARISON.md), and the [audit](docs/BASELINE_AUDIT.md) and [historical architecture notes](docs/ARCHITECTURE.md). The improvement plan remains in chat for owner review.
 
 ## License
 

@@ -228,17 +228,8 @@ def main(db_path=None):
     ).fetchone()
     linked_hw = hazen_williams_head_loss(flow_lps=2.5, internal_diameter_mm=50.0, length_m=40.0,
                                           c_factor=150, calc_id="CW-006")
-    row = linked_hw.as_row(project_id, target_type="pipe", target_id=linked_pipe["pipe_id"])
-    conn.execute(
-        """INSERT INTO calculations (calc_id, project_id, calc_type, target_type, target_id,
-             formula, inputs_json, intermediate_json, result_value, result_unit,
-             required_value, selected_value, status, code_rule_id, reference)
-           VALUES (:calc_id,:project_id,:calc_type,:target_type,:target_id,:formula,
-             :inputs_json,:intermediate_json,:result_value,:result_unit,
-             :required_value,:selected_value,:status,:code_rule_id,:reference)""",
-        row,
-    )
-    conn.commit()
+    from app.db_helpers import save_calculation
+    save_calculation(conn, project_id, linked_hw, target_type="pipe", target_id=linked_pipe["pipe_id"])
     results_payload = export_results_for_revit(conn, project_id)
     print(f"  Results payload for the pyRevit writer script: "
           f"{results_payload['results']['987654']}")

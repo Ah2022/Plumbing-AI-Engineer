@@ -128,7 +128,6 @@ def test_calculation_ids_work_across_projects(projects):
     assert projects.execute("SELECT COUNT(*) FROM calculations").fetchone()[0] == 2
 
 
-@pytest.mark.xfail(strict=True, reason="AUD-006: explanatory calculation notes are not persisted")
 def test_calculation_notes_survive_save(projects):
     result = CalculationResult("A-12", "synthetic", "synthetic", {}, {}, 1, "mm", notes="Synthetic review note")
     save_calculation(projects, 1, result)

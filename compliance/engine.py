@@ -16,6 +16,12 @@ from compliance.rule_registry import RULE_PREDICATES, CheckResult
 
 
 def run_compliance_for_project(conn, project_id: int, code_id: str) -> list[dict]:
+    import json
+    from compliance.governance import context
+    governance = context(conn, project_id)
+    project = conn.execute('SELECT code_id FROM projects WHERE project_id=?', (project_id,)).fetchone()
+    if project['code_id'] != code_id:
+        raise ValueError('Requested compliance code differs from the project code')
     rules = conn.execute(
         "SELECT * FROM code_rules WHERE code_id = ? ORDER BY rule_id", (code_id,)
     ).fetchall()
@@ -32,20 +38,29 @@ def run_compliance_for_project(conn, project_id: int, code_id: str) -> list[dict
         else:
             result = predicate(conn, project_id, rule)
 
+        technical_status = result.status
+        if result.status == 'PASS' and governance['review_status'] != 'VERIFIED':
+            result = CheckResult('NOT_EVALUATED', actual_value=result.actual_value,
+                                 required_value=result.required_value,
+                                 reason='Technical predicate returned PASS; code verification/adoption remains pending. ' +
+                                 '; '.join(governance['issues']))
         conn.execute(
             """INSERT INTO compliance_checks
                (project_id, rule_id, target_type, target_id, actual_value,
-                required_value, status, reason)
-               VALUES (?, ?, 'project', ?, ?, ?, ?, ?)""",
+                required_value, status, reason,technical_status,governance_json,is_current)
+               VALUES (?, ?, 'project', ?, ?, ?, ?, ?,?,?,1)""",
             (
                 project_id, rule["rule_id"], str(project_id),
                 result.actual_value, result.required_value, result.status, result.reason,
+                technical_status,json.dumps(governance,sort_keys=True),
             ),
         )
         results.append({
             "rule_id": rule["rule_id"],
             "severity": rule["severity"],
             "status": result.status,
+            "technical_status": technical_status,
+            "review_status": governance['review_status'],
             "reason": result.reason,
             "reference": rule["reference"],
         })

@@ -44,6 +44,8 @@ def init_db(db_path: Path | str | None = None, reset: bool = False) -> sqlite3.C
     conn = get_connection(db_path)
     schema_sql = SCHEMA_PATH.read_text(encoding="utf-8")
     conn.executescript(schema_sql)
+    from database.governance_schema import ensure_governance_schema
+    ensure_governance_schema(conn)
     conn.commit()
     return conn
 

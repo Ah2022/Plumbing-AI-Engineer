@@ -144,7 +144,7 @@ def export_results_for_revit(conn, project_id: int) -> dict:
         for el in elements:
             calc = conn.execute(
                 """SELECT calc_id, calc_type, status, required_value, selected_value,
-                          result_value, result_unit, reference
+                          result_value, result_unit, reference,is_current,governance_json,review_status
                    FROM calculations
                    WHERE project_id=? AND target_type=? AND target_id=?
                    ORDER BY calc_id DESC LIMIT 1""",
@@ -152,10 +152,15 @@ def export_results_for_revit(conn, project_id: int) -> dict:
             ).fetchone()
             if calc is None:
                 continue
+            from compliance.governance import calculation_is_current
+            if not calculation_is_current(conn, project_id, calc):
+                continue
             results[el["revit_element_id"]] = {
                 "calc_id": calc["calc_id"],
                 "calc_type": calc["calc_type"],
-                "status": calc["status"],
+                "status": 'WARNING' if calc['status'] == 'PASS' and calc['review_status'] != 'VERIFIED' else calc['status'],
+                "technical_status": calc['status'],
+                "review_status": calc['review_status'],
                 "required_value": calc["required_value"],
                 "selected_value": calc["selected_value"],
                 "result_value": calc["result_value"],

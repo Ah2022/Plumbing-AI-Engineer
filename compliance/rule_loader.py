@@ -54,8 +54,10 @@ def load_all_rules(conn) -> dict:
         schema_version = readme.get("schema_version")
 
         conn.execute(
-            """INSERT OR REPLACE INTO codes (code_id, code_name, jurisdiction, schema_version, notes)
-               VALUES (?, ?, ?, ?, ?)""",
+            """INSERT INTO codes (code_id, code_name, jurisdiction, schema_version, notes)
+               VALUES (?, ?, ?, ?, ?) ON CONFLICT(code_id) DO UPDATE SET
+               code_name=excluded.code_name,jurisdiction=excluded.jurisdiction,
+               schema_version=excluded.schema_version,notes=excluded.notes""",
             (
                 code_id,
                 code_name,
@@ -74,10 +76,14 @@ def load_all_rules(conn) -> dict:
             for rule in data.get("rules", []):
                 params = rule.get("parameters")
                 conn.execute(
-                    """INSERT OR REPLACE INTO code_rules
+                    """INSERT INTO code_rules
                        (rule_id, code_id, domain, severity, condition_text, action_text,
                         reference, source_note, parameters_json, has_predicate)
-                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                       ON CONFLICT(rule_id) DO UPDATE SET code_id=excluded.code_id,
+                       domain=excluded.domain,severity=excluded.severity,condition_text=excluded.condition_text,
+                       action_text=excluded.action_text,reference=excluded.reference,
+                       source_note=excluded.source_note,parameters_json=excluded.parameters_json""",
                     (
                         rule["rule_id"],
                         code_id,
@@ -95,11 +101,16 @@ def load_all_rules(conn) -> dict:
         summary[code_id] = rule_count
 
     conn.commit()
+    from compliance.governance import seed_review_inventory
+    seed_review_inventory(conn)
     return summary
 
 
 if __name__ == "__main__":
-    conn = init_db(reset=True)
+    from database.db import get_db_path
+    from database.governance_schema import ensure_governance_schema
+    conn = get_connection() if get_db_path().exists() else init_db()
+    ensure_governance_schema(conn)
     result = load_all_rules(conn)
     total = sum(result.values())
     print("Loaded code rules:")

@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import datetime
 import json
+from compliance.governance import context
 
 
 def _project_row(conn, project_id: int) -> dict:
@@ -44,6 +45,11 @@ def _calculation_rows(conn, project_id: int) -> list[dict]:
         d = dict(r)
         d["inputs"] = json.loads(d.get("inputs_json") or "{}")
         d["intermediate"] = json.loads(d.get("intermediate_json") or "{}")
+        from compliance.governance import calculation_is_current
+        d['current'] = calculation_is_current(conn, project_id, r)
+        d['governance'] = json.loads(d.get('governance_json') or '{}')
+        if not d['current']:
+            d['review_status'] = 'STALE_RECALCULATION_REQUIRED'
         out.append(d)
     return out
 
@@ -55,7 +61,17 @@ def _compliance_rows(conn, project_id: int) -> list[dict]:
         "WHERE cc.project_id=? ORDER BY cc.rule_id, cc.check_id",
         (project_id,),
     ).fetchall()
-    return [dict(r) for r in rows]
+    from compliance.governance import calculation_is_current
+    result = []
+    for row in rows:
+        d = dict(row)
+        d['current'] = calculation_is_current(conn, project_id, row)
+        if not d['current']:
+            d['historical_status'] = d['status']
+            d['status'] = 'NOT_EVALUATED'
+            d['reason'] = 'STALE: recalculation and compliance rerun required. ' + (d.get('reason') or '')
+        result.append(d)
+    return result
 
 
 def _assumption_rows(conn, project_id: int) -> list[dict]:
@@ -87,6 +103,7 @@ def generate_calculation_report(conn, project_id: int) -> dict:
         compliance_status_counts[c["status"]] = compliance_status_counts.get(c["status"], 0) + 1
 
     return {
+        "governance": context(conn, project_id),
         "generated_at": datetime.datetime.now().isoformat(timespec="seconds"),
         "project": _project_row(conn, project_id),
         "design_basis": _design_basis_rows(conn, project_id),
@@ -130,6 +147,17 @@ def generate_calculation_report_markdown(conn, project_id: int) -> str:
     )
     lines.append("")
 
+    g = data['governance']
+    lines.append('## Code profile and verification')
+    lines.append(f"**Review status:** {g['review_status']}")
+    for issue in g['issues']:
+        lines.append(f'- {issue}')
+    if g['basis']:
+        lines.append(f"**Profile:** {g['basis']['profile_id']} | **Basis revision:** {g['basis']['revision']}")
+        lines.append(f"**Project adoption:** {g['basis']['basis_status']}")
+    lines.append('Technical results and code/engineer approval are separate. Stale records require recalculation.')
+    lines.append('')
+
     lines.append("## 1. Design Basis")
     if data["design_basis"]:
         lines.append("| Item | Value | Source | Status |")
@@ -145,13 +173,13 @@ def generate_calculation_report_markdown(conn, project_id: int) -> str:
     lines.append(f"Summary: " + ", ".join(f"{k}={v}" for k, v in sorted(data["calculation_status_counts"].items())) or "_None._")
     lines.append("")
     if data["calculations"]:
-        lines.append("| Calc ID | Type | Formula | Result | Required | Selected | Status | Reference |")
-        lines.append("|---|---|---|---|---|---|---|---|")
+        lines.append("| Calc ID | Type | Formula | Result | Required | Selected | Technical status | Review status | Reference | Notes |")
+        lines.append("|---|---|---|---|---|---|---|---|---|---|")
         for c in data["calculations"]:
             lines.append(
                 f"| {c['calc_id']} | {c['calc_type']} | {c['formula']} | "
                 f"{_fmt(c['result_value'], c.get('result_unit'))} | {_fmt(c['required_value'])} | "
-                f"{_fmt(c['selected_value'])} | {c['status']} | {c.get('reference') or '—'} |"
+                f"{_fmt(c['selected_value'])} | {c['status']} | {c['review_status']} | {c.get('reference') or '—'} | {c.get('notes') or '—'} |"
             )
     else:
         lines.append("_No calculations recorded yet._")

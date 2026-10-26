@@ -1,0 +1,114 @@
+{
+  "python": "3.12.14",
+  "platform": "Windows",
+  "packages": {
+    "pytest": "9.1.1",
+    "openpyxl": "3.1.5",
+    "streamlit": "1.66.1",
+    "pandas": "3.1.0"
+  },
+  "workbooks": [
+    {
+      "file": "database/code_design_data/IPC_Plumbing_Design_Data.xlsx",
+      "code": "IPC",
+      "available": true,
+      "sha256": "d4adf45daa02b7259f64aef7b555d7c575c4f39663629f40121be4d3ecc03a15"
+    },
+    {
+      "file": "database/code_design_data/UPC_Plumbing_Design_Data.xlsx",
+      "code": "UPC",
+      "available": true,
+      "sha256": "529f9ce7b050fdaa856e527971dd12bdd22766f103adfcfcc24c4d1910bc7773"
+    },
+    {
+      "file": "database/code_design_data/BS_EN_Plumbing_Design_Data.xlsx",
+      "code": "BS_EN",
+      "available": true,
+      "sha256": "1f5dab7891ae99803ca13330a2185d550973de7583e86e0f27d25e4dc4adfe9c"
+    },
+    {
+      "file": "database/code_design_data/Egyptian_Plumbing_Design_Data.xlsx",
+      "code": "EGYPT_LOCAL",
+      "available": true,
+      "sha256": "ba43918fe369f561fe31eeeed1084684c6eac1170629674bb57cb3a4dffad887"
+    },
+    {
+      "file": "database/code_design_data/SBC701_Saudi_Plumbing_Design_Data.xlsx",
+      "code": "SAUDI_SBC_701",
+      "available": true,
+      "sha256": "e37c1ba89c9398845ad6fdc62175b6b8e4ba73368aa5fdf2304cc9a12a785bab"
+    }
+  ],
+  "codes": [
+    {
+      "code_id": "EGYPT_LOCAL",
+      "rules": 6,
+      "executable": 2
+    },
+    {
+      "code_id": "IPC",
+      "rules": 9,
+      "executable": 3
+    },
+    {
+      "code_id": "SAUDI_SBC_701",
+      "rules": 8,
+      "executable": 3
+    },
+    {
+      "code_id": "UPC",
+      "rules": 9,
+      "executable": 3
+    }
+  ],
+  "workbook_load": {
+    "IPC": {
+      "tables_loaded": 17,
+      "rows_loaded": 1131,
+      "flagged_rows": 16
+    },
+    "UPC": {
+      "tables_loaded": 8,
+      "rows_loaded": 423,
+      "flagged_rows": 16
+    },
+    "BS_EN": {
+      "tables_loaded": 8,
+      "rows_loaded": 241,
+      "flagged_rows": 21
+    },
+    "EGYPT_LOCAL": {
+      "tables_loaded": 8,
+      "rows_loaded": 154,
+      "flagged_rows": 16
+    },
+    "SAUDI_SBC_701": {
+      "tables_loaded": 18,
+      "rows_loaded": 779,
+      "flagged_rows": 182
+    }
+  },
+  "tables": [
+    "assumptions",
+    "calculations",
+    "code_rules",
+    "codes",
+    "compliance_checks",
+    "design_basis_items",
+    "design_table_values",
+    "design_tables",
+    "fixtures",
+    "governance_events",
+    "materials",
+    "pipe_sizes",
+    "pipes",
+    "project_code_basis",
+    "projects",
+    "pumps",
+    "qaqc_results",
+    "revit_elements",
+    "rule_reviews",
+    "tanks",
+    "verification_benchmarks"
+  ]
+}
