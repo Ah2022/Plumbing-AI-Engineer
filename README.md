@@ -1,93 +1,110 @@
-# Plumbing AI Engineer
+# Plumbing Design, Calculation & Code-Compliance Engine
 
-A plumbing engineering project intended to help plumbing designers develop, check, and document building plumbing systems against a selected code edition and local requirements.
+**Technical documentation:** [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+The proposed improvement plan is reviewed in chat.
 
-**Review status:** source inspection pending. As of 26 October 2026, the supplied GitHub baseline contains a README and MIT license. The owner identified a separate local engine folder, but its files are not available in the cloud workspace. The capabilities below are proposed review/improvement targets; existing implementation status is unverified.
+**Upload status (26 October 2026):** Source code and rules are present. Publication of the five design-data workbooks is pending owner approval; numeric-table setup and workbook-dependent tests require those files under `database/code_design_data/`. The generated local database is excluded.
 
-## Purpose
-
-Plumbing design requires more than choosing pipe diameters. Engineers must establish the governing requirements, select an applicable sizing method, validate inputs, check system constraints, and explain each result.
-
-The proposed engine will bring these steps into a reproducible workflow. Calculation outputs should show the inputs, units, assumptions, equations or lookup rules, governing references, and checks needed for engineering review.
-
-## Proposed scope
-
-| Area | Intended capability | Current status |
-| --- | --- | --- |
-| Design basis | Record jurisdiction, adopted code and edition, amendments, occupancy, units, and design criteria | Proposed |
-| Domestic water | Fixture demand, demand conversion, pipe selection, pressure losses, residual pressure, and velocity checks | Proposed |
-| Sanitary drainage | Drainage fixture loading and applicable branch, stack, and building-drain sizing checks | Proposed |
-| Venting | Applicable vent sizing, developed-length, trap-arm, and arrangement checks | Proposed |
-| Hot water and stormwater | Separate modules with their own approved design basis and verification | Later scope |
-| Engineering reports | Reproducible calculation records and schedules with rule references and review status | Proposed |
-| AI assistance | Explain verified results and help prepare structured inputs for engineer confirmation | Proposed |
-
-**Required code families:** IPC, Egyptian plumbing code, and Saudi plumbing code, selected according to the project. Exact editions, adoption, local amendments, and system coverage must be confirmed for each project. Each family needs a separately verified rule package; a shared interface must not silently mix their fixture values, sizing methods, or exceptions. Implementation and compliance coverage remain unverified.
-
-## Intended design workflow
-
-1. Select and approve the project design basis.
-2. Define fixtures, pipe segments, elevations, equipment, operating conditions, and network connections.
-3. Validate the model and identify missing or unsupported information.
-4. Run a deterministic calculation using the approved rule set.
-5. Review sizing constraints, pressure checks, exceptions, and references.
-6. Export a calculation report and record the engineer's review.
-
-Results should distinguish **pass**, **fail**, **not evaluated**, and **not applicable** for each check. An incomplete or unsupported model must not receive an overall compliance pass.
-
-## Proposed architecture
-
-The architecture remains subject to review of the actual source code and owner approval.
-
-| Component | Responsibility |
-| --- | --- |
-| Project model and unit layer | Store explicit units, fixture classifications, network topology, elevations, and design conditions |
-| Versioned rule packages | Store code applicability, references, approved table data, exceptions, amendments, and validation status |
-| Calculation kernel | Apply deterministic demand, hydraulic, sizing, and constraint calculations |
-| Validation layer | Check inputs, topology, applicability, calculation bounds, and unresolved requirements |
-| Report generator | Preserve inputs, assumptions, rule versions, results, limitations, and reviewer decisions |
-| Interface and optional AI layer | Collect inputs and explain results through the validated engine |
-
-AI-generated text should not define authoritative rules, invent table values, or bypass calculation validation. Rule data and numerical calculations need explicit versions and independent verification.
-
-## Getting started
-
-The supplied GitHub baseline has no runnable application. Setup for the owner's local engine cannot be documented until its files are available. To review the documentation:
+## Quickstart
 
 ```bash
-git clone https://github.com/Ah2022/Plumbing-AI-Engineer.git
 cd Plumbing-AI-Engineer
+pip install -r requirements.txt
+
+# Initialize the DB, load the 32 code rules AND the 2,728 numeric design values
+python -m database.db
+python -m database.load_design_tables
+
+# Run the full end-to-end demo (resets database/plumbing_engine.db) (rules -> tables -> project -> calc -> compliance
+# -> stormwater -> QA/QC dashboard -> report -> simulated Revit exchange)
+python -m tests.demo_project
+
+# Run the regression tests
+python -m pytest tests/ -v
+
+# Launch the UI (Project / Design Basis / Fixtures & Water / Drainage & Vent /
+# Hot Water / Tanks / Pumps / Stormwater / Code Compliance / QA-QC Dashboard /
+# Report / Export — first launch auto-initializes the DB)
+streamlit run app/streamlit_app.py
 ```
 
-- Read the [project assessment](docs/PROJECT_ASSESSMENT.md) for the verified repository baseline and audit limits.
-- Review the [phased improvement plan](docs/IMPROVEMENT_PLAN.md) for deliverables, dependencies, approval gates, and acceptance criteria.
-- Provide the engine source repository, branch, or files so the provisional plan can be revised against the real implementation.
+## Layout
 
-Build commands, dependencies, configuration, and examples will be documented once the implementation is available and verified.
+```
+plumbing_engine/
+├── docs/ARCHITECTURE.md      ← full write-up, read this first
+├── app/
+│   ├── streamlit_app.py       ← UI: Project / Design Basis / Fixtures & Water /
+│   │                              Drainage & Vent / Code Compliance / Report
+│   └── db_helpers.py           ← calc-ID generation, saving CalculationResults, status badges
+├── database/
+│   ├── schema.sql             ← SQLite schema (portable SQL)
+│   ├── db.py                  ← connection + init helper
+│   ├── design_table_api.py     ← query layer: velocity limits, fixture units, min slope, etc.
+│   ├── load_design_tables.py    ← ETL: Code_Data.zip workbooks -> design_table_values
+│   ├── load_confirmed_additions.py ← ETL: Ahmed's independently-verified data (rainfall, PPR)
+│   └── codes/                 ← the code-rule JSON you supplied, as-is
+├── compliance/
+│   ├── rule_loader.py         ← loads codes/*.json into SQLite (real, tested)
+│   ├── rule_registry.py       ← rule_id -> Python predicate mapping
+│   └── engine.py                ← runs predicates, records compliance_checks
+├── calculations/
+│   ├── hydraulics.py           ← public-domain formulas (Q=VA, Darcy-Weisbach,
+│   │                              Hazen-Williams, TDH, pump power, Q=CIA, Q=mCpΔT)
+│   ├── water.py                 ← cold water: velocity checks, fixture-unit totals,
+│   │                                pipe-sizing-from-demand (real data, Phase 2 complete)
+│   ├── drainage.py               ← DFU-to-pipe sizing, min-slope check (real data)
+│   ├── vent.py                    ← DFU-to-vent sizing, incl. IPC's multi-dimensional Table 906.1
+│   ├── hot_water.py                 ← ASPE demand/storage method, hospital temp checks (real data)
+│   ├── tanks.py                      ← domestic + hot-water storage tank sizing
+│   ├── pumps.py                       ← TDH + hydraulic power duty-point calc
+│   └── stormwater.py                    ← full chain: rainfall intensity -> Rational Method
+│                                           -> roof-drain (leader) sizing -> storm pipe sizing (real data)
+├── reports/
+│   ├── report_generator.py               ← Markdown calculation report (spec Section 23)
+│   └── qaqc_dashboard.py                  ← 6 project-health checks -> qaqc_results table
+├── models/__init__.py           ← CalculationResult, MissingCodeDataError
+├── units/convert.py              ← explicit unit conversions
+├── tests/                         ← demo_project.py, pytest regression tests (76 passing,
+│                                     incl. a headless Streamlit UI test suite)
+└── bim/                             ← Revit/pyRevit exchange (Phase 7)
+    ├── schemas.py                          ← JSON exchange contract (engine <-> Revit)
+    ├── exchange.py                          ← engine-side import/export -- tested, no Revit needed
+    ├── pyrevit/PlumbingEngine.extension/     ← Extract Data + Run Analysis pushbuttons
+    │                                            (written to pyRevit conventions, unverified — no Revit here)
+    └── revit/PLM_shared_parameters.txt        ← shared-parameter definitions for PLM_* results
+```
 
-## Development and validation
+## Current status (v0.6 — Phase 1-6 complete; Phase 7 engine-side complete & tested, Revit-side written but unverified)
 
-The first implementation milestone should establish a reproducible development environment and independent engineering benchmarks. Proposed validation includes:
+- Code-rule database, numeric design tables (2,728+ values), compliance
+  engine, hydraulics formulas: **built and tested**.
+- Cold water, drainage/vent, hot water/tanks/pumps (Phases 1-4) — **run on
+  real data**, as before.
+- **Stormwater (Phase 5) — now complete.** The previously-noted "roof-drain
+  table blocked" gap turned out to be stale: the SBC701 workbook already had
+  Table 1106's leader/pipe-sizing sub-tables loaded; only the Riyadh 24hr
+  rainfall depth was missing, and that's now supplied (Al-Saleh 1997). Full
+  chain — design rainfall intensity → Rational Method peak flow → roof-drain
+  (leader) sizing → storm drain pipe sizing — runs on real data.
+- **Report Generator + QA/QC Dashboard (Phase 6) — complete.** A Markdown
+  calculation report (spec Section 23) and a 6-check project-health
+  dashboard, both reading back only what's already been calculated/checked.
+- **Revit/pyRevit exchange (Phase 7) — engine side complete & tested; Revit
+  side written but unverified.** `bim/schemas.py`/`bim/exchange.py` (the
+  JSON contract + import/export logic) are pure Python/SQLite and fully
+  tested with a simulated extract. The pyRevit pushbutton scripts and shared-
+  parameter file are written to real conventions but **have not been run
+  against an actual Revit session** — there's no Revit install available to
+  test them here. See `docs/ARCHITECTURE.md` Section E/F for exactly what
+  that means and what to check first.
+- **UI**: Streamlit app now covers all 10 pages including Stormwater and
+  QA/QC Dashboard. Tested headlessly via `AppTest` — every page and button
+  runs without exceptions. **76/76 tests pass.**
 
-- Hand-checked reference calculations tied to the selected code edition.
-- Tests for table boundaries, unit conversion, invalid inputs, and unsupported arrangements.
-- Network examples covering critical pressure paths, drainage loading, and vent constraints.
-- Reproducible report checks and automated regression checks for each supported rule package.
-
-No calculation or application tests were run: the supplied GitHub baseline has no implementation or test suite, and the local engine files are unavailable to this review.
-
-## Change approval
-
-The assessment, roadmap, and this README are documentation deliverables. Implementation phases require owner approval before work begins. Approval of one phase does not authorize subsequent phases or changes to the governing code, engineering methods, or application architecture.
-
-## Contributing
-
-Propose a scoped change with its engineering basis, affected code edition, expected behavior, and validation evidence. Cite code clauses or table identifiers where applicable, and distinguish mandatory provisions from engineering recommendations. Keep licensed code content and project data out of public contributions unless redistribution is permitted.
-
-## Engineering use
-
-The planned tool supports engineering analysis. Project applicability, local amendments, installation conditions, and final design acceptance require review by the responsible engineer and relevant authority.
-
-## License
-
-This repository is licensed under the [MIT License](LICENSE). Third-party standards and reference data may have separate usage and redistribution terms.
+Nothing in this repo invents a code value. Where a numeric limit or table
+isn't in the supplied data, the relevant function raises
+`MissingCodeDataError` instead of guessing — or, where the source data
+itself names an explicit interim substitute, that substitution is available
+only via an explicit opt-in parameter and is always tagged FLAGGED with a
+note naming exactly what was borrowed from where.

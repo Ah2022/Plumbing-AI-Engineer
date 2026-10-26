@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Machine-readable plumbing design/checking rules derived from code structure and publicly accessible code information.",
+  "rule_fields": {
+    "rule_id": "Unique identifier",
+    "domain": "water|drainage|vent|storm",
+    "severity": "error|warning|info",
+    "condition": "Human-readable condition to evaluate",
+    "action": "Expected checker response",
+    "parameters": "Optional numeric/configurable values",
+    "reference": "Code chapter/section",
+    "source_note": "Traceability note"
+  },
+  "code_family": {
+    "code": "2024 Uniform Plumbing Code (UPC)",
+    "official_sources": [
+      "https://codes.iapmo.org/home.aspx?code=UPC",
+      "https://iapmo.org/codes-standards-development/uniform-plumbing-code"
+    ]
+  },
+  "implementation_note": "These files are a derived rules-engine dataset, not a reproduction of the copyrighted code text."
+}

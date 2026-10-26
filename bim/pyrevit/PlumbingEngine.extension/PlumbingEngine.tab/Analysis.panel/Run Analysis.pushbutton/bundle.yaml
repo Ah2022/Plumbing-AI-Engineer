@@ -1,0 +1,12 @@
+title: |
+  Run
+  Analysis
+tooltip: >
+  Reads the latest saved calculation results from the plumbing-design-
+  engine's SQLite DB for this model's Revit-linked pipes/tanks/pumps,
+  writes them onto PLM_* shared parameters, and color-codes each element
+  by status (green=PASS, red=FAIL, orange=WARNING). Requires PLM_*
+  shared parameters to already be bound to the relevant categories --
+  see bim/revit/PLM_shared_parameters.txt.
+engine:
+  clean: true

@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Machine-readable plumbing design/checking rules derived from code structure and publicly accessible code information.",
+  "rule_fields": {
+    "rule_id": "Unique identifier",
+    "domain": "water|drainage|vent|storm",
+    "severity": "error|warning|info",
+    "condition": "Human-readable condition to evaluate",
+    "action": "Expected checker response",
+    "parameters": "Optional numeric/configurable values",
+    "reference": "Code chapter/section",
+    "source_note": "Traceability note"
+  },
+  "code_family": {
+    "code": "2024 Uniform Plumbing Code (UPC)",
+    "official_sources": [
+      "https://codes.iapmo.org/home.aspx?code=UPC",
+      "https://iapmo.org/codes-standards-development/uniform-plumbing-code"
+    ]
+  },
+  "rules": [
+    {
+      "rule_id": "UPC-V-001",
+      "domain": "vent",
+      "severity": "error",
+      "condition": "Trap-seal protection or required venting is missing.",
+      "action": "Verify vent type, connection, termination and sizing.",
+      "reference": "UPC 2024 Chapter 9"
+    },
+    {
+      "rule_id": "UPC-V-002",
+      "domain": "vent",
+      "severity": "warning",
+      "condition": "Air admittance valve is used where the governing UPC provision does not permit it or required supplemental venting is missing.",
+      "action": "Verify AAV eligibility, location and supplemental vent requirements.",
+      "reference": "UPC 2024 Chapter 9"
+    }
+  ]
+}

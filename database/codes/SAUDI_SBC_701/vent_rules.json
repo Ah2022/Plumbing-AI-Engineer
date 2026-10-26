@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Machine-readable plumbing design/checking rules derived from code structure and publicly accessible code information.",
+  "rule_fields": {
+    "rule_id": "Unique identifier",
+    "domain": "water|drainage|vent|storm",
+    "severity": "error|warning|info",
+    "condition": "Human-readable condition to evaluate",
+    "action": "Expected checker response",
+    "parameters": "Optional numeric/configurable values",
+    "reference": "Code chapter/section",
+    "source_note": "Traceability note"
+  },
+  "code_family": {
+    "code": "Saudi Plumbing Code SBC 701-2024",
+    "official_sources": [
+      "https://sbc.gov.sa/ar/BC/Documents/tableofcontent2024/SBC%20701/SBC701-CR_241224-FA.pdf",
+      "https://sbc.gov.sa/ar/BC/Documents/tableofcontent2024/SBC%20701/SBC701-CC_241224-FA.pdf"
+    ]
+  },
+  "rules": [
+    {
+      "rule_id": "SBC701-V-001",
+      "domain": "vent",
+      "severity": "error",
+      "condition": "Required vent termination, connection, grade or vent sizing is not satisfied.",
+      "action": "Verify Sections 903-906 and applicable engineered/special vent provisions.",
+      "reference": "SBC 701-2024 Chapter 9"
+    },
+    {
+      "rule_id": "SBC701-V-002",
+      "domain": "vent",
+      "severity": "warning",
+      "condition": "AAV, single-stack, combination waste-and-vent or engineered venting is used without verifying the applicable dedicated section.",
+      "action": "Verify the applicable special venting section before approval.",
+      "reference": "SBC 701-2024 Sections 915-920"
+    }
+  ]
+}

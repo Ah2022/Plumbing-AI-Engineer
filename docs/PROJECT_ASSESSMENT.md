@@ -5,6 +5,8 @@
 **Baseline commit:** `de5f67c1f1524cd237df1c9d2de61809420e9157`  
 **Review type:** repository readiness and proposed engineering requirements; source-level audit pending.
 
+**Source upload update — 26 October 2026:** The v0.6.2 engine source, tests, and code-rule JSON have now been added to this repository. The earlier source-availability findings below describe the pre-upload baseline. The proposed improvement plan has been moved to the owner's chat for review. Publication of the five design-data workbooks is pending owner approval. A source-level engineering audit remains pending.
+
 ## Finding
 
 The supplied repository does not contain the plumbing engine described in the project brief. The local tracked tree contains only `README.md` and `LICENSE`. The baseline README consists of the project title. The license is MIT, attributed to Ahmed Hisham. GitHub branch discovery returned only `main`; the local `work` branch points to the initial commit.
@@ -86,7 +88,7 @@ The following are audit questions for the implementation when it becomes availab
 5. **P2 — Improve reporting, workflow, and supported system coverage.** Expand after engineering acceptance of the initial module.
 6. **P3 — Add optional AI and integrations.** Keep them dependent on the verified calculation core.
 
-The detailed [improvement plan](IMPROVEMENT_PLAN.md) defines the proposed phase gates. Engineering defects and implementation estimates must be added after the source becomes available.
+The detailed improvement plan is reviewed in the owner's chat. Engineering defects and implementation estimates must be added after the source becomes available.
 
 ## Decisions needed from the owner
 

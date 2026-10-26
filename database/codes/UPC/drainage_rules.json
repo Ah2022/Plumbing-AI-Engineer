@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Machine-readable plumbing design/checking rules derived from code structure and publicly accessible code information.",
+  "rule_fields": {
+    "rule_id": "Unique identifier",
+    "domain": "water|drainage|vent|storm",
+    "severity": "error|warning|info",
+    "condition": "Human-readable condition to evaluate",
+    "action": "Expected checker response",
+    "parameters": "Optional numeric/configurable values",
+    "reference": "Code chapter/section",
+    "source_note": "Traceability note"
+  },
+  "code_family": {
+    "code": "2024 Uniform Plumbing Code (UPC)",
+    "official_sources": [
+      "https://codes.iapmo.org/home.aspx?code=UPC",
+      "https://iapmo.org/codes-standards-development/uniform-plumbing-code"
+    ]
+  },
+  "rules": [
+    {
+      "rule_id": "UPC-D-001",
+      "domain": "drainage",
+      "severity": "error",
+      "condition": "Sanitary drainage sizing is not supported by drainage fixture-unit/load calculations.",
+      "action": "Verify DFU assignment and drainage pipe sizing.",
+      "reference": "UPC 2024 Chapter 7"
+    },
+    {
+      "rule_id": "UPC-D-002",
+      "domain": "drainage",
+      "severity": "error",
+      "condition": "A prohibited S-trap or other noncompliant trap arrangement is detected.",
+      "action": "Flag and replace with an approved trap/vent arrangement.",
+      "reference": "UPC Chapter 10 / trap provisions"
+    }
+  ]
+}

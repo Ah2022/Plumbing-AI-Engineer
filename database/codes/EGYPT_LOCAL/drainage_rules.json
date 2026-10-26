@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Machine-readable plumbing design/checking rules derived from code structure and publicly accessible code information.",
+  "rule_fields": {
+    "rule_id": "Unique identifier",
+    "domain": "water|drainage|vent|storm",
+    "severity": "error|warning|info",
+    "condition": "Human-readable condition to evaluate",
+    "action": "Expected checker response",
+    "parameters": "Optional numeric/configurable values",
+    "reference": "Code chapter/section",
+    "source_note": "Traceability note"
+  },
+  "code_family": {
+    "code": "Egyptian Code for Design and Execution Requirements for Building Sanitary Installations, Part 1, 301/1 (2003); related Egyptian water/sanitary network codes.",
+    "official_sources": [
+      "https://www.hbrc.edu.eg/ar/egyptian-code-2"
+    ],
+    "important_scope_note": "The HBRC public catalogue confirms 301/1 (2003) and related sanitary-installation volumes. Exact current project requirements must be checked against the licensed/current edition and project authority requirements."
+  },
+  "rules": [
+    {
+      "rule_id": "EGY-D-001",
+      "domain": "drainage",
+      "severity": "error",
+      "condition": "Internal sanitary drainage arrangement does not provide a code-compliant gravity drainage path or appropriate pumping arrangement where gravity discharge is impossible.",
+      "action": "Check drainage layout, invert levels, traps, stacks and lifting/pumping provisions.",
+      "reference": "Egyptian Building Sanitary Installations Code 301/1 (2003)"
+    },
+    {
+      "rule_id": "EGY-D-002",
+      "domain": "drainage",
+      "severity": "warning",
+      "condition": "Drainage pipe sizing is not supported by fixture/load calculations and applicable Egyptian tables.",
+      "action": "Verify sanitary drainage loads, pipe sizes and gradients against the licensed code.",
+      "reference": "Egyptian Building Sanitary Installations Code 301/1 (2003)"
+    }
+  ]
+}

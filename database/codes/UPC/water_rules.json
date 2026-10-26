@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Machine-readable plumbing design/checking rules derived from code structure and publicly accessible code information.",
+  "rule_fields": {
+    "rule_id": "Unique identifier",
+    "domain": "water|drainage|vent|storm",
+    "severity": "error|warning|info",
+    "condition": "Human-readable condition to evaluate",
+    "action": "Expected checker response",
+    "parameters": "Optional numeric/configurable values",
+    "reference": "Code chapter/section",
+    "source_note": "Traceability note"
+  },
+  "code_family": {
+    "code": "2024 Uniform Plumbing Code (UPC)",
+    "official_sources": [
+      "https://codes.iapmo.org/home.aspx?code=UPC",
+      "https://iapmo.org/codes-standards-development/uniform-plumbing-code"
+    ]
+  },
+  "rules": [
+    {
+      "rule_id": "UPC-W-001",
+      "domain": "water",
+      "severity": "error",
+      "condition": "Potable water system has an unprotected cross-connection to a nonpotable source.",
+      "action": "Require code-compliant backflow/cross-connection protection.",
+      "reference": "UPC 2024 Chapter 6 / water supply provisions"
+    },
+    {
+      "rule_id": "UPC-W-002",
+      "domain": "water",
+      "severity": "warning",
+      "condition": "Water distribution sizing does not use the UPC's applicable sizing method/tables or approved engineering method.",
+      "action": "Recalculate demand and pipe sizes using the applicable UPC method.",
+      "reference": "UPC 2024 Chapter 6"
+    },
+    {
+      "rule_id": "UPC-W-003",
+      "domain": "water",
+      "severity": "warning",
+      "condition": "Hot-water recirculation/system arrangement is inconsistent with the applicable UPC provisions.",
+      "action": "Verify recirculation, temperature control and equipment arrangement.",
+      "reference": "UPC 2024 water-supply provisions",
+      "source_note": "IAPMO identifies updated hot-water recirculating provisions in 2024."
+    }
+  ]
+}

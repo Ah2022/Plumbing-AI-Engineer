@@ -1,0 +1,14 @@
+# This is a Revit shared parameter file.
+# Do not edit manually.
+*META	VERSION	MINVERSION
+META	2	1
+*GROUP	ID	NAME
+GROUP	1	Plumbing Engine (PLM)
+*PARAM	GUID	NAME	DATATYPE	DATACATEGORY	GROUP	VISIBLE	DESCRIPTION	USERMODIFIABLE
+PARAM	5f1946d2-c765-4d1e-8755-be63c42c7809	PLM_Calc_ID	TEXT		1	1	Traceable calculation ID from the plumbing-design-engine (e.g. CW-014)	1
+PARAM	dc1aacdd-1bf5-41ee-8402-22e0094bcfc7	PLM_Code_Status	TEXT		1	1	PASS / FAIL / WARNING / ASSUMED / MISSING_DATA / CALCULATED_NOT_APPROVED	1
+PARAM	f0711c04-2a28-4788-9c33-97df44c4b06e	PLM_Required_Value	NUMBER		1	1	Code-required value from the governing calculation	1
+PARAM	d22f2415-98d9-4d2b-b3bc-0a8db6c9b5b7	PLM_Selected_Value	NUMBER		1	1	As-designed/selected value being checked against the requirement	1
+PARAM	db9f0d66-f2dc-4333-8177-5aaa9b1285cf	PLM_Result_Value	NUMBER		1	1	Raw calculation result value	1
+PARAM	5ea3eaff-f954-491b-bdf1-a29cd4bfa04e	PLM_Result_Unit	TEXT		1	1	Unit of PLM_Result_Value	1
+PARAM	da7b80a6-7c5f-41e9-8ca9-4d43a01a1f20	PLM_Reference	TEXT		1	1	Code/table reference the calculation cited	1

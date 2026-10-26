@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Machine-readable plumbing design/checking rules derived from code structure and publicly accessible code information.",
+  "rule_fields": {
+    "rule_id": "Unique identifier",
+    "domain": "water|drainage|vent|storm",
+    "severity": "error|warning|info",
+    "condition": "Human-readable condition to evaluate",
+    "action": "Expected checker response",
+    "parameters": "Optional numeric/configurable values",
+    "reference": "Code chapter/section",
+    "source_note": "Traceability note"
+  },
+  "code_family": {
+    "code": "2024 Uniform Plumbing Code (UPC)",
+    "official_sources": [
+      "https://codes.iapmo.org/home.aspx?code=UPC",
+      "https://iapmo.org/codes-standards-development/uniform-plumbing-code"
+    ]
+  },
+  "rules": [
+    {
+      "rule_id": "UPC-S-001",
+      "domain": "storm",
+      "severity": "error",
+      "condition": "Storm drainage is discharged to sanitary drainage where prohibited by the governing UPC provision.",
+      "action": "Separate storm and sanitary systems unless an explicit approved exception applies.",
+      "reference": "UPC Chapter 11, Section 1101 provisions"
+    },
+    {
+      "rule_id": "UPC-S-002",
+      "domain": "storm",
+      "severity": "warning",
+      "condition": "Storm-drainage sizing lacks rainfall/design-intensity input.",
+      "action": "Verify rainfall intensity, drainage area and applicable sizing tables/method.",
+      "reference": "UPC Chapter 11"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Machine-readable plumbing design/checking rules derived from code structure and publicly accessible code information.",
+  "rule_fields": {
+    "rule_id": "Unique identifier",
+    "domain": "water|drainage|vent|storm",
+    "severity": "error|warning|info",
+    "condition": "Human-readable condition to evaluate",
+    "action": "Expected checker response",
+    "parameters": "Optional numeric/configurable values",
+    "reference": "Code chapter/section",
+    "source_note": "Traceability note"
+  },
+  "code_family": {
+    "code": "2024 International Plumbing Code (IPC)",
+    "official_sources": [
+      "https://codes.iccsafe.org/content/IPC2024P1",
+      "https://shop.iccsafe.org/international-codes/model-codes/2024-international-plumbing-coder.html"
+    ]
+  },
+  "rules": [
+    {
+      "rule_id": "IPC-S-001",
+      "domain": "storm",
+      "severity": "error",
+      "condition": "Roof/storm drainage sizing is performed without the applicable rainfall intensity/design data.",
+      "action": "Require project rainfall/design criteria and code storm-sizing method.",
+      "reference": "IPC 2024 Chapter 11",
+      "source_note": "Chapter 11 includes roof drains and sizing of conductors, leaders and storm drains."
+    },
+    {
+      "rule_id": "IPC-S-002",
+      "domain": "storm",
+      "severity": "warning",
+      "condition": "Secondary/emergency roof drainage is required by the design but is absent or not independently checked.",
+      "action": "Check secondary drainage provisions where applicable.",
+      "reference": "IPC 2024 Section 1108",
+      "source_note": "Chapter 11 includes secondary/emergency roof drains."
+    }
+  ]
+}

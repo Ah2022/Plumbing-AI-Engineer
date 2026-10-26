@@ -1,0 +1,8 @@
+title: Extract
+tooltip: >
+  Walks plumbing pipes and fixtures in the active model and writes a
+  JSON extract for the plumbing-design-engine (bim/schemas.py contract).
+  Run this after any model change you want reflected in the engine, before
+  re-running calculations in the Streamlit app.
+engine:
+  clean: true

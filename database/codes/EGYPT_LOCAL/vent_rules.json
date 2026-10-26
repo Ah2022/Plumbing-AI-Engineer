@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Machine-readable plumbing design/checking rules derived from code structure and publicly accessible code information.",
+  "rule_fields": {
+    "rule_id": "Unique identifier",
+    "domain": "water|drainage|vent|storm",
+    "severity": "error|warning|info",
+    "condition": "Human-readable condition to evaluate",
+    "action": "Expected checker response",
+    "parameters": "Optional numeric/configurable values",
+    "reference": "Code chapter/section",
+    "source_note": "Traceability note"
+  },
+  "code_family": {
+    "code": "Egyptian Code for Design and Execution Requirements for Building Sanitary Installations, Part 1, 301/1 (2003); related Egyptian water/sanitary network codes.",
+    "official_sources": [
+      "https://www.hbrc.edu.eg/ar/egyptian-code-2"
+    ],
+    "important_scope_note": "The HBRC public catalogue confirms 301/1 (2003) and related sanitary-installation volumes. Exact current project requirements must be checked against the licensed/current edition and project authority requirements."
+  },
+  "rules": [
+    {
+      "rule_id": "EGY-V-001",
+      "domain": "vent",
+      "severity": "error",
+      "condition": "Sanitary drainage traps/stacks lack the ventilation arrangement required to prevent trap-seal loss and pressure problems.",
+      "action": "Verify vent stacks, branch vents and connections against the Egyptian code.",
+      "reference": "Egyptian Building Sanitary Installations Code 301/1 (2003)"
+    }
+  ]
+}

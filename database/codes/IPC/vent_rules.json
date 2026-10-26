@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Machine-readable plumbing design/checking rules derived from code structure and publicly accessible code information.",
+  "rule_fields": {
+    "rule_id": "Unique identifier",
+    "domain": "water|drainage|vent|storm",
+    "severity": "error|warning|info",
+    "condition": "Human-readable condition to evaluate",
+    "action": "Expected checker response",
+    "parameters": "Optional numeric/configurable values",
+    "reference": "Code chapter/section",
+    "source_note": "Traceability note"
+  },
+  "code_family": {
+    "code": "2024 International Plumbing Code (IPC)",
+    "official_sources": [
+      "https://codes.iccsafe.org/content/IPC2024P1",
+      "https://shop.iccsafe.org/international-codes/model-codes/2024-international-plumbing-coder.html"
+    ]
+  },
+  "rules": [
+    {
+      "rule_id": "IPC-V-001",
+      "domain": "vent",
+      "severity": "error",
+      "condition": "A trap is installed without adequate venting/trap-seal protection.",
+      "action": "Flag the trap and verify vent arrangement and sizing.",
+      "reference": "IPC 2024 Chapter 9, Section 901",
+      "source_note": "IPC Chapter 9 states venting protects fixture trap seals and maintains an air path."
+    },
+    {
+      "rule_id": "IPC-V-002",
+      "domain": "vent",
+      "severity": "warning",
+      "condition": "Vent termination/location does not satisfy the applicable vent-terminal requirements.",
+      "action": "Check roof/wall termination, clearances and termination height against the applicable section.",
+      "reference": "IPC 2024 Chapter 9",
+      "source_note": "Exact dimensional requirements should be read from the licensed/current code."
+    }
+  ]
+}

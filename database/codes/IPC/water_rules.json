@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Machine-readable plumbing design/checking rules derived from code structure and publicly accessible code information.",
+  "rule_fields": {
+    "rule_id": "Unique identifier",
+    "domain": "water|drainage|vent|storm",
+    "severity": "error|warning|info",
+    "condition": "Human-readable condition to evaluate",
+    "action": "Expected checker response",
+    "parameters": "Optional numeric/configurable values",
+    "reference": "Code chapter/section",
+    "source_note": "Traceability note"
+  },
+  "code_family": {
+    "code": "2024 International Plumbing Code (IPC)",
+    "official_sources": [
+      "https://codes.iccsafe.org/content/IPC2024P1",
+      "https://shop.iccsafe.org/international-codes/model-codes/2024-international-plumbing-coder.html"
+    ]
+  },
+  "rules": [
+    {
+      "rule_id": "IPC-W-001",
+      "domain": "water",
+      "severity": "error",
+      "condition": "Potable water piping is connected to a nonpotable system without an approved backflow/cross-connection protection method.",
+      "action": "Flag cross-connection and require protection appropriate to the hazard.",
+      "reference": "IPC 2024 Chapter 6, Section 608",
+      "source_note": "Potable water protection/backflow is governed by Chapter 6."
+    },
+    {
+      "rule_id": "IPC-W-002",
+      "domain": "water",
+      "severity": "warning",
+      "condition": "Static pressure in building water distribution is above the code pressure threshold.",
+      "action": "Require an approved pressure-reducing/regulating arrangement and verify downstream pressure.",
+      "parameters": {
+        "static_pressure_threshold_psi": 80
+      },
+      "reference": "IPC 2024 Section 604.8",
+      "source_note": "Publicly accessible IPC-derived text identifies 80 psi static as the threshold."
+    },
+    {
+      "rule_id": "IPC-W-003",
+      "domain": "water",
+      "severity": "warning",
+      "condition": "Quick-closing valves are present but water-hammer control is not provided where required.",
+      "action": "Check for compliant water-hammer arrestor installation.",
+      "reference": "IPC 2024 Section 604.9",
+      "source_note": "Water-hammer control is addressed in the water-distribution chapter."
+    }
+  ]
+}

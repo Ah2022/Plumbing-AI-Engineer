@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "supported_codes": [
+    "IPC",
+    "UPC",
+    "EGYPT_LOCAL",
+    "SAUDI_SBC_701"
+  ],
+  "domains": [
+    "water",
+    "drainage",
+    "vent",
+    "storm"
+  ],
+  "rule_engine_policy": {
+    "hard_error": "Do not approve the model/item.",
+    "warning": "Require human review.",
+    "info": "Informational only.",
+    "authority_priority": "Project-specific authority/adopted code > governing local code > referenced international code."
+  },
+  "copyright_note": "The dataset contains derived checks and references, not the full text, tables or copyrighted reproduction of the codes.",
+  "files": {
+    "IPC": [
+      "water_rules.json",
+      "drainage_rules.json",
+      "vent_rules.json",
+      "storm_rules.json"
+    ],
+    "UPC": [
+      "water_rules.json",
+      "drainage_rules.json",
+      "vent_rules.json",
+      "storm_rules.json"
+    ],
+    "EGYPT_LOCAL": [
+      "water_rules.json",
+      "drainage_rules.json",
+      "vent_rules.json",
+      "storm_rules.json"
+    ],
+    "SAUDI_SBC_701": [
+      "water_rules.json",
+      "drainage_rules.json",
+      "vent_rules.json",
+      "storm_rules.json"
+    ]
+  }
+}

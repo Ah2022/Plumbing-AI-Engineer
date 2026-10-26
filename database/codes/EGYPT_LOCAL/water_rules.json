@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Machine-readable plumbing design/checking rules derived from code structure and publicly accessible code information.",
+  "rule_fields": {
+    "rule_id": "Unique identifier",
+    "domain": "water|drainage|vent|storm",
+    "severity": "error|warning|info",
+    "condition": "Human-readable condition to evaluate",
+    "action": "Expected checker response",
+    "parameters": "Optional numeric/configurable values",
+    "reference": "Code chapter/section",
+    "source_note": "Traceability note"
+  },
+  "code_family": {
+    "code": "Egyptian Code for Design and Execution Requirements for Building Sanitary Installations, Part 1, 301/1 (2003); related Egyptian water/sanitary network codes.",
+    "official_sources": [
+      "https://www.hbrc.edu.eg/ar/egyptian-code-2"
+    ],
+    "important_scope_note": "The HBRC public catalogue confirms 301/1 (2003) and related sanitary-installation volumes. Exact current project requirements must be checked against the licensed/current edition and project authority requirements."
+  },
+  "rules": [
+    {
+      "rule_id": "EGY-W-001",
+      "domain": "water",
+      "severity": "error",
+      "condition": "Potable water piping is interconnected with contaminated/nonpotable water without approved protection.",
+      "action": "Separate systems and provide the protection required by the governing Egyptian sanitary-installation requirements.",
+      "reference": "Egyptian Building Sanitary Installations Code 301/1 (2003), water-supply provisions"
+    },
+    {
+      "rule_id": "EGY-W-002",
+      "domain": "water",
+      "severity": "warning",
+      "condition": "Building water demand/pressure is not demonstrated for the building's sanitary fixtures.",
+      "action": "Provide demand, pressure and sizing calculations using the applicable Egyptian code method/project authority requirements.",
+      "reference": "Egyptian Building Sanitary Installations Code 301/1 (2003)"
+    }
+  ]
+}

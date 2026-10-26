@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Machine-readable plumbing design/checking rules derived from code structure and publicly accessible code information.",
+  "rule_fields": {
+    "rule_id": "Unique identifier",
+    "domain": "water|drainage|vent|storm",
+    "severity": "error|warning|info",
+    "condition": "Human-readable condition to evaluate",
+    "action": "Expected checker response",
+    "parameters": "Optional numeric/configurable values",
+    "reference": "Code chapter/section",
+    "source_note": "Traceability note"
+  },
+  "code_family": {
+    "code": "2024 International Plumbing Code (IPC)",
+    "official_sources": [
+      "https://codes.iccsafe.org/content/IPC2024P1",
+      "https://shop.iccsafe.org/international-codes/model-codes/2024-international-plumbing-coder.html"
+    ]
+  },
+  "rules": [
+    {
+      "rule_id": "IPC-D-001",
+      "domain": "drainage",
+      "severity": "error",
+      "condition": "Sanitary drainage pipe sizing is not justified by the applicable drainage sizing method/table.",
+      "action": "Require fixture-unit/load based sizing and code table verification.",
+      "reference": "IPC 2024 Chapter 7",
+      "source_note": "Chapter 7 governs sanitary drainage design, installation and sizing."
+    },
+    {
+      "rule_id": "IPC-D-002",
+      "domain": "drainage",
+      "severity": "warning",
+      "condition": "A drainage system is arranged so that sewage can backflow into fixtures or occupied areas.",
+      "action": "Check elevation, backwater protection and drainage layout.",
+      "reference": "IPC 2024 Chapter 7",
+      "source_note": "Derived engineering check; exact exceptions require code review."
+    }
+  ]
+}

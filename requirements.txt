@@ -1,0 +1,18 @@
+# Core — Phase 1 (nothing exotic on purpose; SQLite is stdlib)
+pytest>=8.0
+openpyxl>=3.1        # reading the Code_Data.zip workbooks
+
+# UI (Phase "start UI" — Streamlit)
+streamlit>=1.60
+
+# Phase 6 — report generation (add when reports/ is built)
+# reportlab>=4.0        # PDF calculation reports
+# jinja2>=3.1            # HTML report templating
+
+# Phase 7 — Revit / pyRevit integration
+# pyRevit runs inside Revit's own CPython3/IronPython — no pip install;
+# see bim/pyrevit/ once that phase starts.
+
+# Later — REST API (Phase 7+)
+# fastapi>=0.110
+# uvicorn>=0.29

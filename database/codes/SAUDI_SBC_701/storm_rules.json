@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Machine-readable plumbing design/checking rules derived from code structure and publicly accessible code information.",
+  "rule_fields": {
+    "rule_id": "Unique identifier",
+    "domain": "water|drainage|vent|storm",
+    "severity": "error|warning|info",
+    "condition": "Human-readable condition to evaluate",
+    "action": "Expected checker response",
+    "parameters": "Optional numeric/configurable values",
+    "reference": "Code chapter/section",
+    "source_note": "Traceability note"
+  },
+  "code_family": {
+    "code": "Saudi Plumbing Code SBC 701-2024",
+    "official_sources": [
+      "https://sbc.gov.sa/ar/BC/Documents/tableofcontent2024/SBC%20701/SBC701-CR_241224-FA.pdf",
+      "https://sbc.gov.sa/ar/BC/Documents/tableofcontent2024/SBC%20701/SBC701-CC_241224-FA.pdf"
+    ]
+  },
+  "rules": [
+    {
+      "rule_id": "SBC701-S-001",
+      "domain": "storm",
+      "severity": "error",
+      "condition": "Storm drainage sizing is missing rainfall/design data or uses the wrong drainage method.",
+      "action": "Verify storm area, rainfall/design intensity and pipe sizing.",
+      "reference": "SBC 701-2024 Sections 1101-1113"
+    },
+    {
+      "rule_id": "SBC701-S-002",
+      "domain": "storm",
+      "severity": "warning",
+      "condition": "Secondary/emergency roof drainage is omitted where required by the roof/design condition.",
+      "action": "Check secondary roof-drain provisions.",
+      "reference": "SBC 701-2024 Section 1108"
+    }
+  ]
+}

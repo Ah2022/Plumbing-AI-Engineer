@@ -1,0 +1,6 @@
+{
+    "name": "PlumbingEngine",
+    "description": "Extract plumbing elements to / write PLM_* calculation results back from Ahmed's plumbing-design-engine (Python/SQLite core, engine runs standalone -- see /bim/exchange.py).",
+    "author": "Ahmed",
+    "version": "0.1.0"
+}
