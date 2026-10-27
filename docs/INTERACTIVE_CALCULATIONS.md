@@ -36,6 +36,14 @@ The adoption sequence is:
 
 ## Package integrity and limits
 
+### Older converted libraries
+
+Layout compiler version 2 automatically upgrades older checksum-valid packages. Earlier builds compared saved generated forms with the current inferred layout byte-for-byte and could reject intact calculations. The loader now verifies the original checksum and source/control structure, then regenerates an older layout using the current deterministic compiler. Source values, formulas, named references and original workbook identity are retained. The upgraded package records its prior package identity and receives a new checksum; exports can be reopened without another upgrade.
+
+Blank-input discovery is ordered and its row index is rebuilt before labels are inferred, keeping compilation idempotent and stable across Python processes. Cache keys include the layout compiler version. Existing project packages can open in place without re-upload, and supported draft inputs carry forward. Calculations with identical titles receive distinct display labels so a project copy cannot silently switch to an example or installed copy.
+
+Current-version altered form controls, modified source data with a stale checksum, and unsupported future layout versions still fail validation. A layout upgrade does not grant engineering approval.
+
 Packages are versioned, size-bounded and checked against their content checksum. Input controls are regenerated/validated against the calculation cells. Only declared input fields can be changed; formulas/reference tables cannot be overwritten through the form. Package identity and input identity are saved with the result, alongside the project's governance snapshot. These checks detect corruption and bind results to their actual calculation package; they are not a publisher signature or engineering certification.
 
 The existing bounded formula interpreter remains responsible for calculations. VBA, external workbook links, unknown functions, unsupported arrays and inconsistent source lookups are not replaced with saved cache values. Source units/rounding and known source issues are retained. Generated labels/controls are an interpretation of the supplied layout and still require engineering review before production use.
@@ -44,4 +52,6 @@ Every converted form was exercised with its supplied sample state, without readi
 
 ## Verification
 
-The final local engine/UI suite passed **315 tests**. All 103 converted forms were also evaluated from their portable packages: 7,670 result cells calculated, 72 retained explicit missing/inconsistent-source findings and four retained unsupported-method findings. These counts are execution evidence, not engineering approval. The real filter and medical-gas terminal forms and Code Profiles were additionally loaded against a disposable copy of the three existing review projects, without a raw JSON renderer. The live additive migration retained all three projects and their saved code bases.
+The final local engine/UI suite passed **322 tests**. All 103 converted forms were also evaluated from their portable packages: 7,670 result cells calculated, 72 retained explicit missing/inconsistent-source findings and four retained unsupported-method findings. These counts are execution evidence, not engineering approval. The real filter and medical-gas terminal forms and Code Profiles were additionally loaded against a disposable copy of the three existing review projects, without a raw JSON renderer. The live additive migration retained all three projects and their saved code bases.
+
+Compatibility fix verified on 27 October 2026: all 48 current packages and 125 archived package copies opened and round-tripped successfully. Seven added regression cases cover older layout upgrades, source integrity, draft/result identity, idempotent compilation and independent Python hash seeds. The live gray-water calculation was reopened in the browser after restarting the stale application process.

@@ -14,6 +14,7 @@ from workbooks.formulas import Evaluator,FormulaError
 
 FORMAT='plumbing-interactive-calculation'
 VERSION=1
+FORM_COMPILER_VERSION=2
 LOCAL=Path(__file__).resolve().parents[1]/'local_sources'/'interactive_packages'
 MAX_PACKAGE=15_000_000
 
@@ -94,7 +95,7 @@ def compile_forms(book):
                     if (c2-c1+1)*(r2-r1+1)<=200:
                         referenced.update(f'{get_column_letter(c)}{r}' for r in range(r1,r2+1) for c in range(c1,c2+1))
         # Missing scalar inputs are retained as blank fields if they have a real label.
-        for addr in referenced-set(cells):
+        for addr in sorted(referenced-set(cells),key=coordinate_to_tuple):
             row,col=coordinate_to_tuple(addr)
             is_merge_child=False
             for area in sheet.get('merges',[]):
@@ -102,6 +103,9 @@ def compile_forms(book):
                 if c1<=col<=c2 and r1<=row<=r2 and (col,row)!=(c1,r1):is_merge_child=True;break
             if 9<=row<=1000 and col<=100 and not is_merge_child and label_for(cells,addr,rows,referenced):
                 cells[addr]=dict(value=None,formula=None,error=False,editable_hint=True)
+        # Rebuild the row index after blank inputs are materialized. Otherwise the
+        # first and second compilation can infer different table headings.
+        rows=row_index(cells)
         sections=_sections(cells);fields=[];outputs=[];seen={}
         for addr,c in sorted(cells.items(),key=lambda item:coordinate_to_tuple(item[0])):
             row,col=coordinate_to_tuple(addr)
@@ -130,7 +134,7 @@ def compile_forms(book):
 
 def build_package(book,filename,metadata=None):
     book=deepcopy(book);book.pop('package_sha256',None)
-    payload=dict(format=FORMAT,version=VERSION,title=Path(filename).stem,
+    payload=dict(format=FORMAT,version=VERSION,form_compiler_version=FORM_COMPILER_VERSION,title=Path(filename).stem,
                  metadata=metadata or describe(book,filename),workbook=book)
     payload['forms']=compile_forms(book)
     payload['package_sha256']=digest(payload)
@@ -138,6 +142,22 @@ def build_package(book,filename,metadata=None):
 
 
 def encode_package(package):return json.dumps(package,ensure_ascii=False,separators=(',',':'),allow_nan=False).encode('utf-8')
+
+
+def validate_saved_controls(forms,book):
+    """A legacy layout can change labels, never grant write access to formulas."""
+    if not isinstance(forms,dict) or len(forms)>100:raise ValueError('Invalid saved form definitions')
+    for sheet,form in forms.items():
+        if sheet not in book['sheets'] or not isinstance(form,dict):raise ValueError('Invalid saved form worksheet')
+        cells=book['sheets'][sheet]['cells']
+        for group,limit in [('inputs',500),('outputs',1000)]:
+            fields=form.get(group)
+            if not isinstance(fields,list) or len(fields)>limit:raise ValueError('Invalid saved form definitions')
+            for field in fields:
+                if not isinstance(field,dict) or not isinstance(field.get('cell'),str):raise ValueError('Invalid saved form field')
+                cell=cells.get(field['cell'])
+                if cell is None or (group=='inputs' and cell.get('formula') is not None) or (group=='outputs' and cell.get('formula') is None):
+                    raise ValueError('Saved form definitions do not match their source cells')
 
 
 def decode_package(data):
@@ -148,6 +168,9 @@ def decode_package(data):
     if not isinstance(p,dict) or p.get('format')!=FORMAT or p.get('version')!=VERSION:raise ValueError('Unsupported interactive calculation format/version')
     checksum=p.get('package_sha256');body={k:v for k,v in p.items() if k!='package_sha256'}
     if not isinstance(checksum,str) or checksum!=digest(body):raise ValueError('Interactive package checksum does not match its contents')
+    compiler=p.get('form_compiler_version',1)
+    if isinstance(compiler,bool) or not isinstance(compiler,int) or compiler<1 or compiler>FORM_COMPILER_VERSION:
+        raise ValueError('Unsupported calculation layout version; update the engine to open this package')
     b=p.get('workbook',{})
     if not isinstance(b,dict):raise ValueError('Invalid calculation workbook')
     sheets=b.get('sheets')
@@ -188,8 +211,15 @@ def decode_package(data):
     if not isinstance(b.get('names'),dict) or len(b['names'])>10000:raise ValueError('Invalid named references')
     if any(not isinstance(k,str) or not isinstance(v,str) or len(v)>16000 for k,v in b['names'].items()):raise ValueError('Invalid named reference')
     if not isinstance(b.get('sha256'),str) or not re.fullmatch('[0-9a-f]{64}',b['sha256']):raise ValueError('Missing original source identity')
-    # Form definitions are rebuilt from validated calculation facts, not trusted UI commands.
-    forms=compile_forms(b)
+    validate_saved_controls(p.get('forms'),b)
+    # Validate without mutating the checksum-protected source record.
+    forms=compile_forms(deepcopy(b))
+    if compiler<FORM_COMPILER_VERSION:
+        upgraded=build_package(b,p['title'],metadata)
+        upgraded['title']=p['title']
+        upgraded['upgraded_from_package']=checksum
+        upgraded['package_sha256']=digest({k:v for k,v in upgraded.items() if k!='package_sha256'})
+        return upgraded
     if p.get('forms')!=forms:raise ValueError('Interactive form definitions do not match their source cells')
     return p
 
@@ -246,10 +276,8 @@ def install_project_packages(conn,pid,packages):
     validated=[decode_package(encode_package(p)) for p in packages]
     with conn:
         for p in validated:
-            # Decode augments the runtime book; encode the canonical original package.
-            original=next(item for item in packages if item['package_sha256']==p['package_sha256'])
             conn.execute('INSERT OR REPLACE INTO project_calculation_packages(project_id,package_sha256,title,package_json) VALUES (?,?,?,?)',
-                         (pid,p['package_sha256'],p['title'],encode_package(original).decode('utf-8')))
+                         (pid,p['package_sha256'],p['title'],encode_package(p).decode('utf-8')))
     return len(validated)
 
 

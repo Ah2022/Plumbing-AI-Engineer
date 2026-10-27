@@ -79,3 +79,25 @@ def test_existing_session_receives_additive_library_migration(fresh_app,referenc
     assert not at.exception
     assert conn.execute("SELECT 1 FROM sqlite_master WHERE name='project_calculation_packages'").fetchone()
     assert conn.execute('SELECT COUNT(*) FROM projects').fetchone()[0]==1
+
+
+def test_saved_legacy_package_opens_and_saves_with_upgraded_identity(fresh_app,reference_ui):
+    from tests.test_interactive_packages import legacy_package
+    from workbooks.interactive import encode_package,decode_package
+    at=fresh_app
+    next(b for b in at.button if b.label=='Create project').click().run(timeout=30)
+    p=legacy_package();old_hash=p['package_sha256'];canonical=decode_package(encode_package(p))
+    conn=at.session_state['conn']
+    conn.execute('INSERT INTO project_calculation_packages(project_id,package_sha256,title,package_json) VALUES (?,?,?,?)',
+                 (1,old_hash,p['title'],encode_package(p).decode('utf-8')));conn.commit()
+    at.session_state['calculation_picker_1']=old_hash
+    at.session_state['calculation_draft_1:1:'+old_hash+':Flow and duration']={'G10':3.,'G11':20.}
+    at.sidebar.radio[0].set_value('Calculation Sheets').run(timeout=30)
+    assert not at.exception and not at.error
+    assert next(n for n in at.number_input if n.label=='Flow rate (L/s)').value==3
+    next(b for b in at.button if b.label=='Calculate and save').click().run(timeout=30)
+    assert not at.exception
+    row=conn.execute("SELECT inputs_json,intermediate_json,target_id FROM calculations WHERE calc_type='reference_workbook_scenario'").fetchone()
+    assert json.loads(row['inputs_json'])['package_sha256']==canonical['package_sha256']
+    assert json.loads(row['intermediate_json'])['results'][0]['value']==3600
+    assert row['target_id'].startswith(canonical['package_sha256'])

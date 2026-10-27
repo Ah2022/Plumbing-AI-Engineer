@@ -6,7 +6,7 @@ import pytest
 
 from workbooks.demo import demo_package
 from workbooks.interactive import (decode_package,encode_package,build_package,bundle,import_bytes,run_package,
-                                  install_project_packages,project_packages,digest,choices_for)
+                                  install_project_packages,project_packages,digest,choices_for,compile_forms,FORM_COMPILER_VERSION)
 from database.db import init_db,get_connection
 from tests.test_workbooks import package as excel_package
 
@@ -125,3 +125,67 @@ def test_repeated_schedule_labels_include_the_column_heading():
     q=build_package(b,'Schedule example.xlsx');fields=q['forms']['Flow and duration']['inputs']
     assert 'Oxygen quantity' in next(f for f in fields if f['cell']=='G10')['label']
     assert 'Medical air quantity' in next(f for f in fields if f['cell']=='H10')['label']
+
+
+def legacy_package():
+    p=demo_package();p.pop('form_compiler_version')
+    p['forms']['Flow and duration']['inputs'][0]['label']='Older layout label'
+    p['package_sha256']=digest({k:v for k,v in p.items() if k!='package_sha256'})
+    return p
+
+
+def test_older_layout_upgrades_without_changing_source_data():
+    old=legacy_package();source=deepcopy(old['workbook'])
+    upgraded=decode_package(encode_package(old))
+    assert upgraded['form_compiler_version']==FORM_COMPILER_VERSION
+    assert upgraded['upgraded_from_package']==old['package_sha256']
+    assert upgraded['workbook']==source
+    assert upgraded['forms']['Flow and duration']['inputs'][0]['label']=='Flow rate (L/s)'
+    assert decode_package(encode_package(upgraded))==upgraded
+    assert run_package(upgraded,'Flow and duration',{'G10':3,'G11':20})['results'][0]['value']==3600
+
+
+def test_older_layout_checksum_still_prevents_modified_calculations():
+    p=legacy_package();p['workbook']['sheets']['Flow and duration']['cells']['G10']['value']=500
+    with pytest.raises(ValueError,match='checksum'):decode_package(encode_package(p))
+
+
+def test_older_layout_cannot_make_formula_outputs_editable():
+    p=legacy_package();p['forms']['Flow and duration']['inputs'][0]['cell']='G13'
+    p['package_sha256']=digest({k:v for k,v in p.items() if k!='package_sha256'})
+    with pytest.raises(ValueError,match='form definitions'):decode_package(encode_package(p))
+
+
+def test_compilation_is_idempotent_with_blank_referenced_inputs():
+    b=demo_package()['workbook'];c=b['sheets']['Flow and duration']['cells']
+    c['G13']['formula']='G10*G11*60+G15+H15'
+    c['A15']=dict(value='Additional allowance (litres)',formula=None,error=False)
+    first=compile_forms(b);second=compile_forms(b)
+    assert first==second and c['G15']['value'] is None and c['H15']['value'] is None
+
+
+def test_legacy_install_uses_upgraded_identity(tmp_path):
+    c=init_db(tmp_path/'legacy.db')
+    try:
+        c.execute("INSERT INTO codes(code_id,code_name) VALUES ('TEST','Synthetic')")
+        c.execute("INSERT INTO projects(project_id,project_name,building_type,code_id) VALUES (1,'Synthetic','Office','TEST')");c.commit()
+        old=legacy_package();install_project_packages(c,1,[old])
+        saved=project_packages(c,1)[0]
+        assert saved['package_sha256']!=old['package_sha256']
+        assert c.execute('SELECT package_sha256 FROM project_calculation_packages').fetchone()[0]==saved['package_sha256']
+    finally:c.close()
+
+
+def test_package_identity_is_stable_across_process_hash_seeds():
+    import subprocess,sys,os
+    from pathlib import Path
+    book=demo_package()['workbook'];cells=book['sheets']['Flow and duration']['cells']
+    cells['G13']['formula']='G10*G11*60+G15+H15'
+    cells['A15']=dict(value='Allowance (litres)',formula=None,error=False)
+    code="import json,sys; from workbooks.interactive import build_package; print(build_package(json.load(sys.stdin),'Synthetic.xlsx')['package_sha256'])"
+    hashes=[]
+    for seed in ('1','42'):
+        r=subprocess.run([sys.executable,'-c',code],input=json.dumps(book),text=True,capture_output=True,
+                         env=dict(os.environ,PYTHONHASHSEED=seed),cwd=Path(__file__).resolve().parents[1],timeout=30,check=True)
+        hashes.append(r.stdout.strip())
+    assert hashes[0]==hashes[1]

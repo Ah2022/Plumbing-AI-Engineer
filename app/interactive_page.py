@@ -1,5 +1,6 @@
 """Interactive calculation forms from portable packages, with in-app conversion."""
 from pathlib import Path
+from collections import Counter
 import json,zipfile
 import streamlit as st
 
@@ -8,17 +9,17 @@ from app.status_ui import project_status
 from compliance.governance import context,get_basis
 from models import CalculationResult
 from workbooks.interactive import (LOCAL,decode_package,encode_package,import_bytes,install_project_packages,
-                                   choices_for,run_package,bundle)
+                                   choices_for,run_package,bundle,FORM_COMPILER_VERSION)
 from workbooks.demo import demo_package
 from workbooks.formulas import Evaluator,FormulaError
 
 
 @st.cache_data(show_spinner=False,max_entries=64)
-def read_package_file(path,mtime_ns,size):return decode_package(Path(path).read_bytes())
+def read_package_file(path,mtime_ns,size,compiler_version):return decode_package(Path(path).read_bytes())
 
 
 @st.cache_data(show_spinner=False,max_entries=64)
-def read_package_json(text):return decode_package(text.encode('utf-8'))
+def read_package_json(text,compiler_version):return decode_package(text.encode('utf-8'))
 
 
 @st.cache_data(show_spinner=False,max_entries=2)
@@ -26,7 +27,8 @@ def local_index(signature):
     records=[]
     for filename,mtime,size in signature:
         p=json.loads(Path(filename).read_text(encoding='utf-8'))
-        records.append(dict(id=p['package_sha256'],title=p['title'],path=filename,mtime=mtime,size=size))
+        records.append(dict(id=p['package_sha256'],title=p['title'],path=filename,mtime=mtime,size=size,
+                            upgraded_from_package=p.get('upgraded_from_package')))
     return records
 
 
@@ -63,15 +65,22 @@ def page_calculation_sheets():
     records=sorted(available.values(),key=lambda r:(r.get('demo',False),r['title'],r['id']))
     st.caption(f'{len(records)-1} imported or installed calculations, plus a synthetic demonstration.')
     ids=[r['id'] for r in records];pick_key=f'calculation_picker_{pid}'
-    if st.session_state.get(pick_key) not in ids:st.session_state[pick_key]=ids[0]
-    selected=st.selectbox('Calculation',ids,format_func=lambda k:available[k]['title'],key=pick_key)
+    if st.session_state.get(pick_key) not in ids:
+        previous=st.session_state.get(pick_key)
+        st.session_state[pick_key]=next((r['id'] for r in records if previous and r.get('upgraded_from_package')==previous),ids[0])
+    counts=Counter(r['title'] for r in records);calculation_labels={};used=Counter()
+    for r in records:
+        label=r['title']
+        if counts[label]>1:label+=' — '+('Example' if r.get('demo') else 'Project copy' if r.get('project') else 'Installed copy')
+        used[label]+=1;calculation_labels[r['id']]=label+(f' ({used[label]})' if used[label]>1 else '')
+    selected=st.selectbox('Calculation',ids,format_func=lambda k,names=calculation_labels:names[k],key=pick_key)
     record=available[selected]
     try:
         if record.get('demo'):package=demo
         elif record.get('project'):
             text=conn.execute('SELECT package_json FROM project_calculation_packages WHERE project_id=? AND package_sha256=?',(pid,selected)).fetchone()[0]
-            package=read_package_json(text)
-        else:package=read_package_file(record['path'],record['mtime'],record['size'])
+            package=read_package_json(text,FORM_COMPILER_VERSION)
+        else:package=read_package_file(record['path'],record['mtime'],record['size'],FORM_COMPILER_VERSION)
     except (ValueError,OSError,KeyError,TypeError) as error:st.error('Unable to open this calculation: '+str(error));return
     forms=package['forms']
     if not forms:st.warning('No labelled calculation form could be generated for this source.');return
@@ -81,8 +90,15 @@ def page_calculation_sheets():
     st.caption('Calculation references: '+(', '.join(references) or 'Not identified in the source'))
     if record.get('demo'):st.info('Synthetic demonstration: flow × duration. This example is not a code requirement.')
     revision=(get_basis(conn,pid) or {}).get('revision',0) if pid else 0
-    token=f'{pid}:{revision}:{selected}:{name}'
-    draft_key='calculation_draft_'+token;draft=st.session_state.setdefault(draft_key,{})
+    active_id=package['package_sha256']
+    token=f'{pid}:{revision}:{active_id}:{name}'
+    if package.get('upgraded_from_package'):st.caption('This calculation layout was upgraded for the current engine. Original values and formulas were retained.')
+    draft_key='calculation_draft_'+token
+    legacy_draft=st.session_state.get(f'calculation_draft_{pid}:{revision}:{selected}:{name}')
+    if draft_key not in st.session_state and isinstance(legacy_draft,dict):
+        allowed={f['cell'] for f in forms[name]['inputs']}
+        st.session_state[draft_key]={k:v for k,v in legacy_draft.items() if k in allowed}
+    draft=st.session_state.setdefault(draft_key,{})
     values=dict(draft);fields=forms[name]['inputs'];book=package['workbook']
     st.subheader('Design inputs')
     sections=list(dict.fromkeys(f['section'] for f in fields))
@@ -131,10 +147,10 @@ def page_calculation_sheets():
             report.update(project_id=pid,basis_revision=revision,title=package['title'])
             result=CalculationResult(next_calc_id(conn,pid,'reference_workbook_scenario'),'reference_workbook_scenario',
                 'Interactive source formulas with declared inputs and original source units',
-                {'package_sha256':selected,'worksheet':name,'values':values},report,None,'Source form units',
+                {'package_sha256':active_id,'worksheet':name,'values':values},report,None,'Source form units',
                 status=report['technical_status'],reference=package['title']+' / '+name,
                 notes='Interactive reference method; engineering applicability remains subject to project review.')
-            save_calculation(conn,pid,result,target_type='reference_workbook',target_id=selected+'/'+name)
+            save_calculation(conn,pid,result,target_type='reference_workbook',target_id=active_id+'/'+name)
             report['calc_id']=result.calc_id;st.session_state['workbook_result']=dict(token=token,report=report)
         except (ValueError,TypeError,KeyError) as error:st.session_state.pop('workbook_result',None);st.error(str(error))
     saved=st.session_state.get('workbook_result')
@@ -161,8 +177,8 @@ def page_calculation_sheets():
                 if r.get('demo'):continue
                 if r.get('project'):
                     text=conn.execute('SELECT package_json FROM project_calculation_packages WHERE project_id=? AND package_sha256=?',(pid,r['id'])).fetchone()[0]
-                    packages.append(read_package_json(text))
-                else:packages.append(read_package_file(r['path'],r['mtime'],r['size']))
+                    packages.append(read_package_json(text,FORM_COMPILER_VERSION))
+                else:packages.append(read_package_file(r['path'],r['mtime'],r['size'],FORM_COMPILER_VERSION))
             st.session_state['_interactive_bundle']=(pid,tuple(ids),bundle(packages))
         ready=st.session_state.get('_interactive_bundle')
         if ready and ready[:2]==(pid,tuple(ids)):st.download_button('Download interactive library ZIP',ready[2],file_name='Interactive_Calculation_Library.zip',mime='application/zip')
