@@ -1,0 +1,227 @@
+{
+  "schema_version": "phase2a-observed-software-evidence-1",
+  "recorded_date": "2026-10-27",
+  "evidence_class": "OBSERVED_SYNTHETIC_SOFTWARE_RUN_NOT_INDEPENDENT_ENGINEERING_APPROVAL",
+  "backend": "Official EPANET2.2 Windows64",
+  "library_sha256": "6e092abf28bb50efe1b17def7e4358496e6c9de5b61ac1060ee82ed041a9cdf1",
+  "tree_source_git_blob_sha1": "0b61d89effb81678a63d41c68cb60742d44146cc",
+  "baseline": [
+    {
+      "case": "loop",
+      "input_sha256": "53015fdc6d430682674beec5d218c8eb5ec3b42176387c1652359c913a302f27",
+      "toolkit_version": 20200,
+      "solver_status": "CONVERGED",
+      "technical_status": "PASS",
+      "complete": true,
+      "events": 1,
+      "end_time_s": 0,
+      "minimum_pressure_margin_m": 19.86422330244861,
+      "maximum_demand_deficit_lps": 0,
+      "code_compliance_status": "NOT_EVALUATED"
+    },
+    {
+      "case": "pda",
+      "input_sha256": "6307a1f6fac6a3cb1654c546db77c0dcd5fffd95e84489d9c36611b797e9b4cd",
+      "toolkit_version": 20200,
+      "solver_status": "CONVERGED",
+      "technical_status": "FAIL",
+      "complete": true,
+      "events": 1,
+      "end_time_s": 0,
+      "minimum_pressure_margin_m": -15.616627519338028,
+      "maximum_demand_deficit_lps": 1.063691025284702,
+      "code_compliance_status": "NOT_EVALUATED"
+    },
+    {
+      "case": "eps",
+      "input_sha256": "90478570389e0ec471e1063c1cceabe9e327590e3567dde14b2d8b9f17f69cbf",
+      "toolkit_version": 20200,
+      "solver_status": "CONVERGED",
+      "technical_status": "PASS",
+      "complete": true,
+      "events": 25,
+      "end_time_s": 86400,
+      "minimum_pressure_margin_m": 8.264949561719156,
+      "maximum_demand_deficit_lps": 0,
+      "code_compliance_status": "NOT_EVALUATED"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "PEAK",
+      "solver_status": "CONVERGED",
+      "technical_status": "FAIL",
+      "complete": true,
+      "minimum_pressure_margin_m": 0.9890197502978406,
+      "maximum_demand_deficit_lps": 0.5426071761109061,
+      "disabled_controls": 0
+    },
+    {
+      "id": "MIN_SOURCE",
+      "solver_status": "CONVERGED",
+      "technical_status": "FAIL",
+      "complete": true,
+      "minimum_pressure_margin_m": 2.9213314947023505,
+      "maximum_demand_deficit_lps": 0.18047076371414983,
+      "disabled_controls": 0
+    },
+    {
+      "id": "FIRE",
+      "solver_status": "CONVERGED",
+      "technical_status": "FAIL",
+      "complete": true,
+      "minimum_pressure_margin_m": 0.05933244974858631,
+      "maximum_demand_deficit_lps": 0.9983394049680907,
+      "disabled_controls": 0
+    },
+    {
+      "id": "TANK_LOW",
+      "solver_status": "CONVERGED",
+      "technical_status": "PASS",
+      "complete": true,
+      "minimum_pressure_margin_m": 5.658581133659638,
+      "maximum_demand_deficit_lps": 0,
+      "disabled_controls": 0
+    },
+    {
+      "id": "TANK_HIGH",
+      "solver_status": "CONVERGED",
+      "technical_status": "PASS",
+      "complete": true,
+      "minimum_pressure_margin_m": 5.850078477698041,
+      "maximum_demand_deficit_lps": 0,
+      "disabled_controls": 0
+    },
+    {
+      "id": "PUMP_FAILURE",
+      "solver_status": "CONVERGED",
+      "technical_status": "FAIL",
+      "complete": true,
+      "minimum_pressure_margin_m": -14.999999994804915,
+      "maximum_demand_deficit_lps": 2.5200046451771607,
+      "disabled_controls": 2
+    },
+    {
+      "id": "VALVE_CLOSURE",
+      "solver_status": "CONVERGED",
+      "technical_status": "FAIL",
+      "complete": true,
+      "minimum_pressure_margin_m": -9.999999987421303,
+      "maximum_demand_deficit_lps": 0.5599835795276883,
+      "disabled_controls": 0
+    }
+  ],
+  "tree_comparisons": [
+    {
+      "project": "hospital",
+      "comparison": [
+        {
+          "terminal_id": "B",
+          "tree_pressure_m": -0.6772848692448699,
+          "epanet_pressure_m": -0.686009069894424,
+          "difference_m": -0.008724200649554148,
+          "convention_residual_m": 1.6653345369377348e-15,
+          "comparison_status": "MATCH_WITH_DOCUMENTED_CONVENTIONS"
+        },
+        {
+          "terminal_id": "A",
+          "tree_pressure_m": 18.992836233323793,
+          "epanet_pressure_m": 18.988769566986402,
+          "difference_m": -0.004066666337390501,
+          "convention_residual_m": -3.552713678800501e-15,
+          "comparison_status": "MATCH_WITH_DOCUMENTED_CONVENTIONS"
+        }
+      ]
+    },
+    {
+      "project": "hotel",
+      "comparison": [
+        {
+          "terminal_id": "B",
+          "tree_pressure_m": 31.78113098972456,
+          "epanet_pressure_m": 31.77314144535034,
+          "difference_m": -0.007989544374218838,
+          "convention_residual_m": 1.0658141036401503e-14,
+          "comparison_status": "MATCH_WITH_DOCUMENTED_CONVENTIONS"
+        },
+        {
+          "terminal_id": "A",
+          "tree_pressure_m": 53.81266130454857,
+          "epanet_pressure_m": 53.8048295694584,
+          "difference_m": -0.007831735090171321,
+          "convention_residual_m": -1.4210854715202004e-14,
+          "comparison_status": "MATCH_WITH_DOCUMENTED_CONVENTIONS"
+        }
+      ]
+    },
+    {
+      "project": "mixed_use",
+      "comparison": [
+        {
+          "terminal_id": "B",
+          "tree_pressure_m": 32.22182328637444,
+          "epanet_pressure_m": 32.21650589051128,
+          "difference_m": -0.005317395863158936,
+          "convention_residual_m": -7.105427357601002e-15,
+          "comparison_status": "MATCH_WITH_DOCUMENTED_CONVENTIONS"
+        },
+        {
+          "terminal_id": "A",
+          "tree_pressure_m": 44.147178806964305,
+          "epanet_pressure_m": 44.13207690974326,
+          "difference_m": -0.015101897221043714,
+          "convention_residual_m": -7.105427357601002e-15,
+          "comparison_status": "MATCH_WITH_DOCUMENTED_CONVENTIONS"
+        }
+      ]
+    },
+    {
+      "project": "office",
+      "comparison": [
+        {
+          "terminal_id": "B",
+          "tree_pressure_m": 20.801177553812977,
+          "epanet_pressure_m": 20.7776640451535,
+          "difference_m": -0.023513508659476656,
+          "convention_residual_m": 2.1316282072803006e-14,
+          "comparison_status": "MATCH_WITH_DOCUMENTED_CONVENTIONS"
+        },
+        {
+          "terminal_id": "A",
+          "tree_pressure_m": 39.93943186712533,
+          "epanet_pressure_m": 39.93080239995014,
+          "difference_m": -0.008629467175190086,
+          "convention_residual_m": 1.4210854715202004e-14,
+          "comparison_status": "MATCH_WITH_DOCUMENTED_CONVENTIONS"
+        }
+      ]
+    },
+    {
+      "project": "residential",
+      "comparison": [
+        {
+          "terminal_id": "B",
+          "tree_pressure_m": 23.960769520149036,
+          "epanet_pressure_m": 23.951220949068475,
+          "difference_m": -0.009548571080561175,
+          "convention_residual_m": -2.1316282072803006e-14,
+          "comparison_status": "MATCH_WITH_DOCUMENTED_CONVENTIONS"
+        },
+        {
+          "terminal_id": "A",
+          "tree_pressure_m": 30.29762094028293,
+          "epanet_pressure_m": 30.290710061864587,
+          "difference_m": -0.006910878418342037,
+          "convention_residual_m": -1.7763568394002505e-14,
+          "comparison_status": "MATCH_WITH_DOCUMENTED_CONVENTIONS"
+        }
+      ]
+    }
+  ],
+  "engineering_status": "REVIEW_REQUIRED",
+  "code_compliance_status": "NOT_EVALUATED",
+  "limitations": [
+    "Observed results are software evidence, not golden expected values or approved real-project design references.",
+    "Published EPANET conventions are reconciled explicitly; original tree outputs are unchanged."
+  ]
+}

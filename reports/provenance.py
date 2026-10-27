@@ -27,7 +27,7 @@ def _manifest(signature):
 
 
 def engine_manifest():
-    paths = sorted(p for folder in ('app', 'calculations', 'database', 'compliance', 'models', 'reports', 'bim', 'units', 'workbooks')
+    paths = sorted(p for folder in ('app', 'calculations', 'database', 'compliance', 'models', 'reports', 'bim', 'units', 'workbooks', 'solvers')
                    for p in (ROOT/folder).rglob('*.py') if '__pycache__' not in p.parts)
     signature = tuple((p.relative_to(ROOT).as_posix(), p.stat().st_mtime_ns, p.stat().st_size) for p in paths)
     # Return a copy so callers cannot mutate the cached manifest.

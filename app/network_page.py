@@ -23,10 +23,14 @@ def page_network_review():
     st.info('Examples use synthetic criteria and catalogues. Replace them with reviewed project/manufacturer '
             'data. Edit mapped nodes and pipes below, or import JSON. Drawing intake is available on CAD / IFC Checks; '
             'it does not automatically supply a complete mapped network.')
-    kind=st.selectbox('Network type',['Domestic water','Drainage and vents'])
+    kind=st.selectbox('Network type',['Domestic water','Drainage and vents','General pressure network'])
     from compliance.governance import get_basis
     basis=get_basis(conn,pid)
     revision=basis['revision'] if basis else 0
+    if kind=='General pressure network':
+        from app.general_network_page import page_general_network
+        page_general_network(conn,pid,code,revision)
+        return
     example='water_network.json' if kind=='Domestic water' else 'drainage_network.json'
     template=json.loads((ROOT/'examples'/example).read_text(encoding='utf-8'))
     template['code_id']=code

@@ -1,0 +1,92 @@
+{
+  "schema_version": "pressure-network-1",
+  "units": "SI",
+  "code_id": "IPC",
+  "basis_reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+  "nodes": [
+    {
+      "id": "S",
+      "kind": "source",
+      "elevation_m": 0,
+      "head_m": 40,
+      "reference": "Synthetic Phase2A software example; project/code/manufacturer review required"
+    },
+    {
+      "id": "A",
+      "kind": "junction",
+      "elevation_m": 5,
+      "demand_lps": 1,
+      "required_pressure_m": 10,
+      "demand_reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+      "reference": "Synthetic Phase2A software example; project/code/manufacturer review required"
+    },
+    {
+      "id": "B",
+      "kind": "junction",
+      "elevation_m": 10,
+      "demand_lps": 1,
+      "required_pressure_m": 10,
+      "demand_reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+      "reference": "Synthetic Phase2A software example; project/code/manufacturer review required"
+    },
+    {
+      "id": "C",
+      "kind": "junction",
+      "elevation_m": 0,
+      "demand_lps": 0,
+      "required_pressure_m": 10,
+      "demand_reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+      "reference": "Synthetic Phase2A software example; project/code/manufacturer review required"
+    }
+  ],
+  "links": [
+    {
+      "id": "P1",
+      "kind": "pipe",
+      "from_node": "S",
+      "to_node": "A",
+      "length_m": 100,
+      "internal_mm": 75,
+      "roughness": 140,
+      "roughness_unit": "C",
+      "minor_loss_k": 1,
+      "reference": "Synthetic Phase2A software example; project/code/manufacturer review required"
+    },
+    {
+      "id": "P2",
+      "kind": "pipe",
+      "from_node": "A",
+      "to_node": "B",
+      "length_m": 100,
+      "internal_mm": 75,
+      "roughness": 140,
+      "roughness_unit": "C",
+      "minor_loss_k": 1,
+      "reference": "Synthetic Phase2A software example; project/code/manufacturer review required"
+    },
+    {
+      "id": "P3",
+      "kind": "pipe",
+      "from_node": "B",
+      "to_node": "C",
+      "length_m": 100,
+      "internal_mm": 75,
+      "roughness": 140,
+      "roughness_unit": "C",
+      "minor_loss_k": 1,
+      "reference": "Synthetic Phase2A software example; project/code/manufacturer review required"
+    },
+    {
+      "id": "P4",
+      "kind": "pipe",
+      "from_node": "C",
+      "to_node": "S",
+      "length_m": 100,
+      "internal_mm": 75,
+      "roughness": 140,
+      "roughness_unit": "C",
+      "minor_loss_k": 1,
+      "reference": "Synthetic Phase2A software example; project/code/manufacturer review required"
+    }
+  ]
+}
