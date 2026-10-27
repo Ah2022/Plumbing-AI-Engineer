@@ -4,6 +4,7 @@ from pathlib import Path
 import streamlit as st
 
 from app.network_editor import parse_network, network_tables
+from app.network_preview import render_network_preview
 from app.db_helpers import next_calc_id,save_calculation
 from calculations.network import analyze_water_network,analyze_drainage_network
 from database.design_table_api import get_demand_from_wsfu
@@ -20,7 +21,8 @@ def page_network_review():
     conn=st.session_state.conn
     code=conn.execute('SELECT code_id FROM projects WHERE project_id=?',(pid,)).fetchone()[0]
     st.info('Examples use synthetic criteria and catalogues. Replace them with reviewed project/manufacturer '
-            'data. Edit mapped nodes and pipes below, or import JSON. Raw CAD/IFC scanning is not yet supported.')
+            'data. Edit mapped nodes and pipes below, or import JSON. Drawing intake is available on CAD / IFC Checks; '
+            'it does not automatically supply a complete mapped network.')
     kind=st.selectbox('Network type',['Domestic water','Drainage and vents'])
     from compliance.governance import get_basis
     basis=get_basis(conn,pid)
@@ -35,10 +37,13 @@ def page_network_review():
     draft_key = 'network_draft_' + scope
     model = st.session_state.setdefault(draft_key, template)
     mode = st.radio('Network input method', ['Editable tables', 'Mapped network JSON'], horizontal=True)
+    preview = st.container()
     model_error = None
     if mode == 'Mapped network JSON':
-        upload = st.file_uploader('Import mapped network JSON', type=['json'], key='network_upload_' + scope)
-        text=st.text_area('Mapped network JSON', json.dumps(model, indent=2), height=300,
+        upload = st.file_uploader('Import mapped network JSON', type=['json'], max_upload_size=20, key='network_upload_' + scope)
+        with st.expander('Advanced JSON editor', expanded=False):
+            st.caption('JSON is the source data. Apply edits with Ctrl+Enter or leave the field to refresh the diagram above. An uploaded file takes precedence over this text.')
+            text=st.text_area('Mapped network JSON', json.dumps(model, indent=2), height=300,
                           key='network_json_' + scope)
         try:
             model = parse_network(upload.getvalue().decode('utf-8-sig') if upload else text, code)
@@ -56,8 +61,10 @@ def page_network_review():
         except (ValueError, TypeError, KeyError) as error:
             model_error = str(error)
             st.error(model_error)
+    with preview:
+        render_network_preview(model, model_error)
     st.download_button('Download mapped network JSON', json.dumps(model, indent=2),
-                       file_name='mapped-network.json', mime='application/json')
+                       file_name='mapped-network.json', mime='application/json', disabled=bool(model_error))
     select=st.checkbox('Select available catalogue sizes against velocity and pressure',value=False,
                        disabled=kind!='Domestic water')
     if st.button('Run network review'):
