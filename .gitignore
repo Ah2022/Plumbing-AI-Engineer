@@ -17,3 +17,10 @@ venv/
 .env.*
 !.env.example
 .streamlit/secrets.toml
+# Project models stay local. Only generated synthetic parser fixtures are public.
+*.ifc
+*.ifczip
+*.dxf
+*.dwg
+!examples/model_pilot.ifc
+!examples/model_pilot.dxf

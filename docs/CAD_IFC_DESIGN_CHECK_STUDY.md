@@ -2,7 +2,7 @@
 
 **Research date:** 26 October 2026. **Recommendation:** add an IFC intake adapter first, then a mapped DXF adapter. Keep native DWG conversion as an explicit integration choice. Reuse the deterministic engine and code-governance workflow; do not make an image/LLM judgment the compliance decision.
 
-This document is a feasibility/design study. No actual CAD or IFC file was parsed or certified in this implementation. The new Network Review page accepts explicit normalized JSON, not raw CAD/IFC. It provides a tested calculation boundary for a future adapter.
+This document records the 26 October feasibility study. **Update, 27 October:** the first [IFC/DXF intake and per-pipe design-check pilot](CAD_IFC_PILOT.md) is implemented and tested on real synthetic files. Full network mapping, interoperability with independently authored project models and blanket code certification remain pending. The Network Review page remains the calculation boundary for a future reviewed port-to-network adapter.
 
 ## What a model checker can establish
 

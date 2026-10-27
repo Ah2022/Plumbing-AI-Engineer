@@ -20,11 +20,13 @@ jobs:
           python-version: '3.12'
           cache: pip
       - name: Install audited dependencies
-        run: python -m pip install -r requirements.txt
+        run: python -m pip install -r requirements.txt -r requirements-models.txt
       - name: Regressions and known-defect reproductions
         run: python -m pytest tests/test_audit_benchmarks.py tests/test_bim_exchange.py tests/test_reports.py tests/test_runtime_safety.py tests/test_governance.py tests/test_governance_ui.py tests/test_foundations.py tests/test_networks.py tests/test_network_ui.py tests/test_fixture_schedules.py tests/test_workbooks.py tests/test_workbook_ui.py tests/test_interactive_packages.py -q
       - name: Public-checkout interface navigation
         run: python -m pytest tests/test_streamlit_app.py -k "project_page_loads or every_page_loads" -q
+      - name: Real IFC and DXF intake and mapped design checks
+        run: python -m pytest tests/test_model_intake.py tests/test_model_ui.py -q
       - name: Verification limits
         shell: bash
         run: echo "Full-suite checks require local workbooks. Supported tree-network checks are covered by synthetic benchmarks. Live CAD/IFC/Revit ingestion is not certified." >> "$GITHUB_STEP_SUMMARY"

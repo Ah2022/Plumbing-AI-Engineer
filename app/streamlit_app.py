@@ -48,6 +48,7 @@ from models import MissingCodeDataError
 from app.db_helpers import save_calculation, next_calc_id, status_badge
 from app.code_profiles_page import page_code_profiles, clear_result_session
 from app.network_page import page_network_review
+from app.model_page import page_model_review
 from compliance.governance import profile_for_code, set_basis, context, seed_review_inventory
 from database.governance_schema import ensure_governance_schema
 
@@ -798,7 +799,7 @@ def main():
     st.warning("Review build: calculation benchmarks pass, but code adoption, numeric-table applicability, "
                "model completeness and engineering acceptance still require review.")
     page = st.sidebar.radio("Navigate", [
-        "Project", "Code Profiles", "Network Review", "Calculation Sheets", "Design Basis", "Fixtures & Water", "Drainage & Vent",
+        "Project", "Code Profiles", "Network Review", "CAD / IFC Checks", "Calculation Sheets", "Design Basis", "Fixtures & Water", "Drainage & Vent",
         "Hot Water", "Tanks", "Pumps", "Stormwater",
         "Code Compliance / QA-QC", "QA/QC Dashboard", "Report / Export",
     ])
@@ -823,6 +824,7 @@ def main():
         "Project": page_project,
         "Code Profiles": page_code_profiles,
         "Network Review": page_network_review,
+        "CAD / IFC Checks": page_model_review,
         "Calculation Sheets": page_calculation_sheets,
         "Design Basis": page_design_basis,
         "Fixtures & Water": page_water,
