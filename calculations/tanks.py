@@ -63,7 +63,13 @@ def size_hot_water_storage_tank_from_demand(hot_water_demand_result, calc_id: st
     reframes it as a tank_sizing record so it shows up consistently
     alongside other tank results.
     """
+    if (hot_water_demand_result.calc_type != 'hot_water_demand' or hot_water_demand_result.result_unit != 'GPH'
+            or hot_water_demand_result.status in ('FAIL', 'MISSING_DATA')):
+        raise ValueError('Hot-water storage requires a valid hot_water_demand result in GPH')
     storage_gal = hot_water_demand_result.selected_value
+    if storage_gal is None:
+        raise ValueError('Hot-water demand result has no storage capacity')
+    finite('hot-water storage_gal', storage_gal, minimum=0)
     storage_l = storage_gal * 3.78541 if storage_gal is not None else None
 
     return CalculationResult(

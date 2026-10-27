@@ -27,7 +27,8 @@ def select_pump_duty(design_flow_lps: float, static_head_m: float, friction_loss
         static_head_m, friction_loss_m, fitting_loss_m, equipment_loss_m,
         required_residual_head_m, calc_id=f"{calc_id}-TDH",
     )
-    power_result = pump_power(design_flow_lps, tdh_result.result_value, efficiency, calc_id=f"{calc_id}-PWR")
+    full_tdh = sum(value[0] for value in tdh_result.inputs.values())
+    power_result = pump_power(design_flow_lps, full_tdh, efficiency, calc_id=f"{calc_id}-PWR")
 
     return CalculationResult(
         calc_id=calc_id,
@@ -37,7 +38,9 @@ def select_pump_duty(design_flow_lps: float, static_head_m: float, friction_loss
         inputs={"design_flow_lps": (design_flow_lps, "L/s"), "efficiency": (efficiency, "-")},
         intermediate={
             "tdh_m": tdh_result.result_value,
+            "unrounded_tdh_m": full_tdh,
             "tdh_breakdown": tdh_result.inputs,
+            "hydraulic_power_kw": power_result.intermediate['hydraulic_power_kw'],
             "power_kw": power_result.result_value,
         },
         result_value=power_result.result_value,

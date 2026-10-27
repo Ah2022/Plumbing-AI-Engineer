@@ -727,6 +727,9 @@ def page_report():
     if project_id is None:
         return
 
+    from app.review_page import review_tools
+    review_tools(conn, project_id)
+
     st.caption("The formatted calculation report (spec Section 23) below reads back everything "
                "already calculated, compliance-checked, and QA/QC-summarized for this project — "
                "it never re-computes or re-derives a number.")
@@ -787,6 +790,8 @@ def _project_code(conn, project_id) -> str:
 
 def main():
     from app.workbook_page import page_calculation_sheets
+    from app.revit_page import page_revit_exchange
+    from app.release_page import page_release_readiness
     if "conn" not in st.session_state:
         st.session_state.conn = get_conn()
     schema_token=(id(st.session_state.conn),'interactive-packages-1')
@@ -801,11 +806,11 @@ def main():
     page = st.sidebar.radio("Navigate", [
         "Project", "Code Profiles", "Network Review", "CAD / IFC Checks", "Calculation Sheets", "Design Basis", "Fixtures & Water", "Drainage & Vent",
         "Hot Water", "Tanks", "Pumps", "Stormwater",
-        "Code Compliance / QA-QC", "QA/QC Dashboard", "Report / Export",
+        "Code Compliance / QA-QC", "QA/QC Dashboard", "Report / Export", "Revit Exchange", "Release Readiness",
     ])
     st.sidebar.divider()
-    st.sidebar.caption("Phase 7 (Revit/pyRevit integration): scripts are written (bim/pyrevit/) but "
-                      "cannot run outside Revit — see docs/ARCHITECTURE.md Section E.")
+    st.sidebar.caption("Revit Exchange supports file import, linked calculations and a guarded result handoff. "
+                      "Live writeback requires validated PLM bindings and explicit review in Revit.")
 
     pid = st.session_state.get("project_id")
     if pid:
@@ -836,6 +841,8 @@ def main():
         "Code Compliance / QA-QC": page_compliance,
         "QA/QC Dashboard": page_qaqc_dashboard,
         "Report / Export": page_report,
+        "Revit Exchange": page_revit_exchange,
+        "Release Readiness": page_release_readiness,
     }[page]()
 
 

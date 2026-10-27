@@ -12,3 +12,11 @@ PARAM	d22f2415-98d9-4d2b-b3bc-0a8db6c9b5b7	PLM_Selected_Value	NUMBER		1	1	As-des
 PARAM	db9f0d66-f2dc-4333-8177-5aaa9b1285cf	PLM_Result_Value	NUMBER		1	1	Raw calculation result value	1
 PARAM	5ea3eaff-f954-491b-bdf1-a29cd4bfa04e	PLM_Result_Unit	TEXT		1	1	Unit of PLM_Result_Value	1
 PARAM	da7b80a6-7c5f-41e9-8ca9-4d43a01a1f20	PLM_Reference	TEXT		1	1	Code/table reference the calculation cited	1
+PARAM	655f4e4c-59f4-545b-a3fd-324c180c9169	PLM_Technical_Status	TEXT		1	1	Review/provenance or explicit numeric-availability flag	1
+PARAM	359e11fb-a18d-59f5-8d3a-c3c5da8b2ca9	PLM_Review_Status	TEXT		1	1	Review/provenance or explicit numeric-availability flag	1
+PARAM	d3baaab5-dc07-5a66-b55c-6746e92c40ea	PLM_Source_SHA256	TEXT		1	1	Review/provenance or explicit numeric-availability flag	1
+PARAM	eff0bb90-a53e-57cb-836f-3094536e0b70	PLM_Required_Available	YESNO		1	1	Review/provenance or explicit numeric-availability flag	1
+PARAM	fdde05b3-1b32-5a04-afb6-eb521427ba6a	PLM_Selected_Available	YESNO		1	1	Review/provenance or explicit numeric-availability flag	1
+PARAM	fd645093-46a1-57c3-a8ec-66021f51920f	PLM_Result_Available	YESNO		1	1	Review/provenance or explicit numeric-availability flag	1
+PARAM	f2e2eab1-9c55-5aff-b597-8f68097096a6	PLM_Equipment_Class	TEXT		1	1	Explicit user-reviewed equipment extraction classification	1
+PARAM	47b1e057-0ff2-5d2f-9027-7bb8fc24df18	PLM_Tank_Type	TEXT		1	1	Explicit user-reviewed equipment extraction classification	1

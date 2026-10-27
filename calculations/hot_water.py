@@ -160,6 +160,8 @@ def check_hot_water_temperature(conn, check_type: str, selected_temp_c: float, c
 
 def heater_capacity(mass_flow_kg_s: float, cold_water_temp_c: float, hot_water_temp_c: float, calc_id: str) -> CalculationResult:
     """Wraps hydraulics.q_heat for the specific case of a heater's required duty."""
+    finite('cold_water_temp_c', cold_water_temp_c, minimum=-273.15)
+    finite('hot_water_temp_c', hot_water_temp_c, minimum=-273.15)
     cp_water = 4.186  # kJ/kg.C, public-domain physical property of water
     delta_t = hot_water_temp_c - cold_water_temp_c
     result = q_heat(mass_flow_kg_s, cp_water, delta_t, calc_id)

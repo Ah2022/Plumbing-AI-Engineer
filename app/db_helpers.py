@@ -46,6 +46,10 @@ def save_calculation(conn, project_id: int, result: CalculationResult,
     row = result.as_row(project_id, target_type=target_type, target_id=target_id)
     import json
     from compliance.governance import context
+    from database.review_schema import ensure_review_schema
+    from reports.provenance import engine_manifest, digest
+    ensure_review_schema(conn)
+    manifest = engine_manifest()
     governance = context(conn, project_id)
     # Pilot adapter/coverage acceptance is independent of the project's code adoption.
     review_status = 'REVIEW_REQUIRED' if result.calc_type in ('model_design_check', 'model_document_review') else governance['review_status']
@@ -67,6 +71,9 @@ def save_calculation(conn, project_id: int, result: CalculationResult,
                  :notes,:governance_json,:review_status,1)""",
             row,
         )
+        conn.execute('''INSERT INTO calculation_provenance(calc_id,input_sha256,engine_sha256,manifest_json)
+                        VALUES (?,?,?,?)''',
+                     (result.calc_id, digest(result.inputs), manifest['source_sha256'], json.dumps(manifest)))
 
 
 

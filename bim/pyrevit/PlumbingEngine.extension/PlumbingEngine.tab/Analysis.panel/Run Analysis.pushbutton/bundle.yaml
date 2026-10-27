@@ -1,12 +1,9 @@
 title: |
-  Run
-  Analysis
+  Review
+  Results
 tooltip: >
-  Reads the latest saved calculation results from the plumbing-design-
-  engine's SQLite DB for this model's Revit-linked pipes/tanks/pumps,
-  writes them onto PLM_* shared parameters, and color-codes each element
-  by status (green=PASS, red=FAIL, orange=WARNING). Requires PLM_*
-  shared parameters to already be bound to the relevant categories --
-  see bim/revit/PLM_shared_parameters.txt.
+  Opens a model-matched engine handoff JSON, previews all PLM changes,
+  and offers rollback-only testing before an explicitly confirmed commit.
+  Never changes geometry or native pipe dimensions.
 engine:
   clean: true

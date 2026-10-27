@@ -54,6 +54,8 @@ def ensure_governance_schema(conn):
     ]
     for sql in statements:
         conn.execute(sql)
+    from database.review_schema import ensure_review_schema
+    ensure_review_schema(conn)
     conn.commit()
 
 

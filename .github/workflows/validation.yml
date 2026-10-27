@@ -25,6 +25,8 @@ jobs:
         run: python -m pytest tests/test_audit_benchmarks.py tests/test_bim_exchange.py tests/test_reports.py tests/test_runtime_safety.py tests/test_governance.py tests/test_governance_ui.py tests/test_foundations.py tests/test_networks.py tests/test_network_ui.py tests/test_fixture_schedules.py tests/test_workbooks.py tests/test_workbook_ui.py tests/test_interactive_packages.py -q
       - name: Public-checkout interface navigation
         run: python -m pytest tests/test_streamlit_app.py -k "project_page_loads or every_page_loads" -q
+      - name: Review evidence, release benchmarks and guarded Revit handoff
+        run: python -m pytest tests/test_review_workflow.py tests/test_revit_handoff.py tests/test_phase67_ui.py -q
       - name: Model, drawing and network-preview checks
         run: python -m pytest tests/test_model_intake.py tests/test_model_ui.py tests/test_drawing_uploads.py tests/test_network_preview.py -q
       - name: Verification limits

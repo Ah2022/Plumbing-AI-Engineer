@@ -36,15 +36,18 @@ def validate_extract_payload(payload: dict) -> list[str]:
     from calculations.validation import finite
     errors=[]
     if not isinstance(payload,dict): return ['Payload must be an object']
+    if payload.get('units', 'SI') != 'SI': errors.append('Extract units must be explicit SI')
+    if payload.get('schema_version', '1.0') != '1.0': errors.append('Unsupported extract schema version')
     for key in ('revit_model_name','extracted_at'):
         if not isinstance(payload.get(key),str) or not payload[key].strip(): errors.append(f"Missing/invalid '{key}'")
     if 'revit_model_id' in payload and (not isinstance(payload['revit_model_id'],str) or not payload['revit_model_id'].strip()):
         errors.append('Invalid revit_model_id')
-    seen=set()
+    seen=set(); unique_ids=set(); count=0
     definitions=[('pipes',REQUIRED_PIPE_FIELDS),('fixtures',REQUIRED_FIXTURE_FIELDS),('tanks',REQUIRED_TANK_FIELDS),('pumps',REQUIRED_PUMP_FIELDS)]
     for group,required in definitions:
         items=payload.get(group,[])
         if not isinstance(items,list): errors.append(f'{group} must be an array');continue
+        count += len(items)
         for i,item in enumerate(items):
             label=f'{group}[{i}]'
             if not isinstance(item,dict): errors.append(label+' must be an object');continue
@@ -54,6 +57,11 @@ def validate_extract_payload(payload: dict) -> list[str]:
             if not isinstance(eid,str) or not eid.strip(): errors.append(label+': invalid element ID')
             elif eid in seen: errors.append(label+': duplicate element ID')
             else: seen.add(eid)
+            unique_id=item.get('revit_unique_id')
+            if unique_id is not None:
+                if not isinstance(unique_id,str) or not unique_id.strip(): errors.append(label+': invalid Revit UniqueId')
+                elif unique_id in unique_ids: errors.append(label+': duplicate Revit UniqueId')
+                else: unique_ids.add(unique_id)
             if 'parameters' in item and not isinstance(item['parameters'],dict): errors.append(label+': parameters must be an object')
             for key in ('from_node','to_node','level'):
                 if item.get(key) is not None and (not isinstance(item[key],str) or not item[key].strip()): errors.append(label+': invalid '+key)
@@ -68,6 +76,7 @@ def validate_extract_payload(payload: dict) -> list[str]:
                         except ValueError as e: errors.append(label+': '+str(e))
             for key in required-{'revit_element_id','length_m','nominal_diameter_mm'}:
                 if not isinstance(item[key],str) or not item[key].strip(): errors.append(label+': invalid '+key)
+    if count > 10000: errors.append('Partition extracts larger than 10000 objects; no silent truncation is supported')
     try: json.dumps(payload,allow_nan=False)
     except (TypeError,ValueError): errors.append('Payload must contain finite JSON-compatible data')
     return errors
@@ -91,6 +100,8 @@ def empty_extract_payload(revit_model_name: str, extracted_at: str) -> dict:
 PLM_PARAMETER_NAMES = [
     "PLM_Calc_ID", "PLM_Code_Status", "PLM_Required_Value", "PLM_Selected_Value",
     "PLM_Result_Value", "PLM_Result_Unit", "PLM_Reference",
+    "PLM_Technical_Status", "PLM_Review_Status", "PLM_Source_SHA256",
+    "PLM_Required_Available", "PLM_Selected_Available", "PLM_Result_Available",
 ]
 
 # Status -> Revit OverrideGraphicSettings color (RGB), matching the

@@ -29,6 +29,9 @@ class InvalidExtractPayload(Exception):
 def import_revit_extract(conn, project_id: int, payload: dict) -> dict:
     """Atomic, project/model-scoped import. Legacy unassigned rows are retained."""
     import hashlib
+    from database.review_schema import ensure_review_schema
+    from reports.provenance import digest
+    ensure_review_schema(conn)
     errors=validate_extract_payload(payload)
     if errors: raise InvalidExtractPayload(errors)
     if not conn.execute('SELECT 1 FROM projects WHERE project_id=?',(project_id,)).fetchone():
@@ -38,6 +41,16 @@ def import_revit_extract(conn, project_id: int, payload: dict) -> dict:
     counts={key:len(payload.get(key,[])) for key in ('pipes','fixtures','tanks','pumps')}
     conn.execute('SAVEPOINT model_import')
     try:
+        conn.execute('''INSERT INTO revit_model_imports(project_id,model_key,model_identity,model_name,source_sha256,payload_json)
+            VALUES (?,?,?,?,?,?) ON CONFLICT(project_id,model_key) DO UPDATE SET
+            model_identity=excluded.model_identity,model_name=excluded.model_name,source_sha256=excluded.source_sha256,
+            payload_json=excluded.payload_json,imported_at=CURRENT_TIMESTAMP''',
+            (project_id,model_key,identity,payload['revit_model_name'],digest(payload),_to_json(payload)))
+        conn.execute('DELETE FROM revit_element_identities WHERE project_id=? AND model_key=?',(project_id,model_key))
+        for group in ('pipes','fixtures','tanks','pumps'):
+            for item in payload.get(group,[]):
+                conn.execute('INSERT INTO revit_element_identities(project_id,model_key,element_id,unique_id) VALUES (?,?,?,?)',
+                    (project_id,model_key,item['revit_element_id'],item.get('revit_unique_id')))
         for pipe in payload.get('pipes',[]):
             eid=pipe['revit_element_id']
             existing=conn.execute('SELECT pipe_id FROM pipes WHERE project_id=? AND revit_model_key=? AND revit_element_id=?',(project_id,model_key,eid)).fetchone()
@@ -90,12 +103,16 @@ def export_results_for_revit(conn, project_id: int, model_key=None) -> dict:
     leave those elements' PLM_* parameters untouched rather than clear
     or guess them.
     """
+    from database.review_schema import ensure_review_schema
+    ensure_review_schema(conn)
     keys={r[0] for r in conn.execute('SELECT DISTINCT revit_model_key FROM pipes WHERE project_id=? UNION SELECT DISTINCT revit_model_key FROM tanks WHERE project_id=? UNION SELECT DISTINCT revit_model_key FROM pumps WHERE project_id=?',(project_id,project_id,project_id))}
     if model_key is None:
         if len(keys)>1: raise ValueError('Multiple model identities: select model_key explicitly')
         model_key=next(iter(keys),None)
     elif model_key not in keys: raise ValueError('Unknown model_key for this project')
     results = {}
+    model = conn.execute('SELECT * FROM revit_model_imports WHERE project_id=? AND model_key=?',(project_id,model_key)).fetchone()
+    identities = {r['element_id']:r['unique_id'] for r in conn.execute('SELECT * FROM revit_element_identities WHERE project_id=? AND model_key=?',(project_id,model_key))}
 
     for kind, table, id_col in (
         ("pipe", "pipes", "pipe_id"),
@@ -108,6 +125,7 @@ def export_results_for_revit(conn, project_id: int, model_key=None) -> dict:
             (project_id,model_key),
         ).fetchall()
         for el in elements:
+            if model and el['revit_element_id'] not in identities: continue
             candidates = conn.execute(
                 """SELECT calc_id, calc_type, status, required_value, selected_value,
                           result_value, result_unit, reference,is_current,governance_json,review_status
@@ -119,8 +137,8 @@ def export_results_for_revit(conn, project_id: int, model_key=None) -> dict:
             from compliance.governance import calculation_is_current
             current=[c for c in candidates if calculation_is_current(conn,project_id,c)]
             if not current: continue
-            calc=current[0]
             rank={'FAIL':5,'MISSING_DATA':4,'ASSUMED':3,'WARNING':3,'CALCULATED_NOT_APPROVED':2,'PASS':1}
+            calc=max(current,key=lambda c:rank[c['status']])
             technical=max((c['status'] for c in current),key=lambda status:rank[status])
             review='VERIFIED' if all(c['review_status']=='VERIFIED' for c in current) else 'REVIEW_REQUIRED'
             results[el["revit_element_id"]] = {
@@ -135,11 +153,15 @@ def export_results_for_revit(conn, project_id: int, model_key=None) -> dict:
                 "result_value": calc["result_value"],
                 "result_unit": calc["result_unit"],
                 "reference": calc["reference"],
+                "revit_unique_id": identities.get(el['revit_element_id']),
             }
 
     return {
+        "schema_version": "1.0",
         "project_id": project_id,
         "model_key": model_key,
+        "model_identity": model['model_identity'] if model else None,
+        "source_sha256": model['source_sha256'] if model else None,
         "plm_parameter_names": PLM_PARAMETER_NAMES,
         "results": results,
     }

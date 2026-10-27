@@ -96,11 +96,13 @@ def generate_calculation_report(conn, project_id: int) -> dict:
 
     calc_status_counts: dict[str, int] = {}
     for c in calcs:
-        calc_status_counts[c["status"]] = calc_status_counts.get(c["status"], 0) + 1
+        if c['current']:
+            calc_status_counts[c["status"]] = calc_status_counts.get(c["status"], 0) + 1
 
     compliance_status_counts: dict[str, int] = {}
     for c in compliance:
-        compliance_status_counts[c["status"]] = compliance_status_counts.get(c["status"], 0) + 1
+        if c['current']:
+            compliance_status_counts[c["status"]] = compliance_status_counts.get(c["status"], 0) + 1
 
     return {
         "governance": context(conn, project_id),
@@ -216,6 +218,28 @@ def generate_calculation_report_markdown(conn, project_id: int) -> str:
     else:
         lines.append("_QA/QC dashboard has not been run for this project yet — see QA/QC Dashboard page._")
     lines.append("")
+
+    lines.append('## 6. Calculation evidence and reproduction')
+    lines.append('Current-result summaries exclude retained historical records. Proposed overrides never replace computed values automatically.')
+    from database.review_schema import ensure_review_schema
+    ensure_review_schema(conn)
+    for c in data['calculations']:
+        lines.append(f"### {c['calc_id']} — {'current' if c['current'] else 'historical / stale'}")
+        provenance = conn.execute('SELECT engine_sha256,input_sha256 FROM calculation_provenance WHERE calc_id=?', (c['calc_id'],)).fetchone()
+        if provenance:
+            lines.append(f"Engine SHA-256: `{provenance['engine_sha256']}`; input SHA-256: `{provenance['input_sha256']}`")
+        else:
+            lines.append('Legacy result: engine fingerprint was not captured at execution; retain original source/runtime evidence.')
+        for label, value in [('Recorded inputs', c['inputs']), ('Intermediate results and unresolved checks', c['intermediate']),
+                             ('Recorded governance and source references', c['governance'])]:
+            lines.extend([f'**{label}**', '```json', json.dumps(value, indent=2, ensure_ascii=False, allow_nan=False), '```'])
+    proposals = conn.execute('SELECT * FROM calculation_overrides WHERE project_id=? ORDER BY created_at,override_id', (project_id,)).fetchall()
+    lines.append('## 7. Recorded override proposals')
+    for proposal in proposals:
+        lines.append(f"- {proposal['calc_id']} / {proposal['field']}: computed {proposal['computed_json']}; proposed {proposal['proposed_value']} {proposal['unit']}. "
+                     f"Reviewer: {proposal['actor']}. Reason: {proposal['reason']}. Status: {proposal['review_status']}.")
+    if not proposals:
+        lines.append('_No override proposals recorded._')
 
     return "\n".join(lines)
 

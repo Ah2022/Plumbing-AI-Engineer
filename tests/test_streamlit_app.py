@@ -58,7 +58,7 @@ def test_create_project_succeeds(fresh_app):
     "Code Profiles", "Network Review", "CAD / IFC Checks", "Calculation Sheets",
     "Design Basis", "Fixtures & Water", "Drainage & Vent",
     "Hot Water", "Tanks", "Pumps", "Stormwater",
-    "Code Compliance / QA-QC", "QA/QC Dashboard", "Report / Export",
+    "Code Compliance / QA-QC", "QA/QC Dashboard", "Report / Export", "Revit Exchange", "Release Readiness",
 ])
 def test_every_page_loads_without_exceptions(fresh_app, page):
     at = _create_project(fresh_app)

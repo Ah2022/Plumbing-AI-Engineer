@@ -323,7 +323,7 @@ def get_rainfall_depth_24hr(conn, code_id: str, return_period_yr: int,
     records = get_table_records(conn, code_id, "storm", "Riyadh 24hr Design Rainfall Depth")
     for rec in records:
         rp = rec.get("return_period_yr", (None, None, None))[0]
-        if rp is not None and int(rp) == int(return_period_yr):
+        if rp is not None and float(rp) == float(return_period_yr):
             num, txt, conf = rec.get(station, (None, None, None))
             if num is not None:
                 return DesignValue(
@@ -441,6 +441,10 @@ def get_storm_drain_pipe_size(conn, code_id: str, design_flow_lpm: float,
         cap_col = "vertical_drain_lpm"
     elif orientation == "horizontal":
         if slope_mm_per_m is None:
+            return None
+        from calculations.validation import finite
+        finite('slope_mm_per_m', slope_mm_per_m, positive=True)
+        if not float(slope_mm_per_m).is_integer():
             return None
         cap_col = f"horiz_{int(slope_mm_per_m)}mm_m"
     else:

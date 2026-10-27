@@ -63,6 +63,9 @@ def design_rainfall_intensity(conn, code_id: str, return_period_yr: int, duratio
             where="calculations/stormwater.py:_DURATION_TO_HOURS has no entry for this label",
         )
 
+    finite('source rainfall depth', depth.value, minimum=0)
+    finite('source duration ratio', ratio.value, minimum=0, maximum=1)
+    finite('duration_hr', duration_hr, positive=True)
     design_depth_mm = depth.value * ratio.value
     intensity_mm_hr = design_depth_mm / duration_hr
 

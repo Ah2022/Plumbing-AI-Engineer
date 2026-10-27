@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / 'database' / 'code_profiles.json'
-ENGINE_VERSION = '0.6.2-interactive-calculations'
+ENGINE_VERSION = '0.6.2-review-release-1'
 DOMAINS = ('water', 'drainage', 'vent', 'storm')
 REQUIRED_CRITERIA = ('jurisdiction', 'authority', 'amendments', 'occupancy',
                      'systems', 'units', 'method', 'exclusions', 'precedence')
@@ -270,7 +270,10 @@ def context(conn, project_id):
         issues.append('Independent engineering acceptance of supported methods and model completeness remains required')
     benchmarks = [dict(r) for r in conn.execute('SELECT * FROM verification_benchmarks WHERE profile_id=? ORDER BY benchmark_id',
                                                (p['profile_id'],))] if p else []
-    payload = {'engine_version': ENGINE_VERSION, 'registry_version': json.loads(REGISTRY.read_text())['registry_version'],
+    from reports.provenance import engine_manifest
+    manifest = engine_manifest()
+    payload = {'engine_version': ENGINE_VERSION, 'engine_source_sha256': manifest['source_sha256'],
+               'runtime_sha256': manifest['runtime_sha256'], 'registry_version': json.loads(REGISTRY.read_text())['registry_version'],
                'profile': p, 'basis': basis, 'rule_coverage': rows, 'sources': source_manifest(),
                'verification_benchmarks': benchmarks,
                'source_fingerprint': source_fingerprint(conn),
@@ -284,6 +287,16 @@ def calculation_is_current(conn, project_id, row):
         return False
     try:
         saved = json.loads(row['governance_json'])
-        return isinstance(saved, dict) and saved.get('fingerprint') == context(conn, project_id)['fingerprint']
+        current = context(conn, project_id)
+        if not isinstance(saved, dict) or saved.get('fingerprint') != current['fingerprint']:
+            return False
+        if 'calc_id' in row.keys() and conn.execute("SELECT 1 FROM sqlite_master WHERE name='calculation_provenance'").fetchone():
+            proof = conn.execute('SELECT * FROM calculation_provenance WHERE calc_id=?',(row['calc_id'],)).fetchone()
+            if proof:
+                full = row if 'inputs_json' in row.keys() else conn.execute(
+                    'SELECT inputs_json FROM calculations WHERE project_id=? AND calc_id=?',(project_id,row['calc_id'])).fetchone()
+                if full is None or proof['input_sha256'] != digest(json.loads(full['inputs_json'])) or proof['engine_sha256'] != current['engine_source_sha256']:
+                    return False
+        return True
     except (ValueError, TypeError):
         return False

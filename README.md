@@ -2,6 +2,8 @@
 
 Python/SQLite plumbing calculation engine with a Streamlit interface, code-rule checks, reports, and Revit JSON exchange.
 
+**Phases 6–7 implementation: 27 October 2026.** **Report / Export** now includes complete evidence packets, immutable review revisions, comparison, supported calculation replay and attributed override proposals. **Release Readiness** runs nine isolated software benchmarks. **Revit Exchange** imports reviewed extracts, links supported checks and prepares guarded PLM-only result handoffs. [Usage, implemented scope and outstanding engineering/live-model acceptance](docs/REVIEW_AND_RELEASE.md). Live Revit writeback has not been validated; preview and rollback are the defaults.
+
 **Phases 3–5: 26 October 2026.** Calculation foundations, domestic-water tree networks, and drainage/vent checks are implemented for the [documented supported scope](docs/PHASES_3_4_5.md). IPC 2024 is the first verification target. Code adoption, numeric-table verification and engineering acceptance remain pending; outputs retain `REVIEW_REQUIRED`.
 
 ## Test the engine
