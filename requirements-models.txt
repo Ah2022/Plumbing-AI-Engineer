@@ -2,3 +2,4 @@
 # Install after requirements.txt. No external conversion service is used.
 ifcopenshell==0.8.5
 ezdxf==1.4.3
+pypdfium2==5.14.0

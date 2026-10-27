@@ -1,6 +1,8 @@
 # IFC / DXF design-check pilot
 
 Implemented 27 October 2026. Open **CAD / IFC Checks** in the [local engine](http://localhost:8504/).
+**Update:** DWG and PDF uploads are now available through their distinct [conversion/drawing-review paths](DWG_PDF_UPLOADS.md).
+
 This is an initial, local model-intake and per-pipe checking milestone. It does not certify whole-model code compliance.
 
 ## Install and use
@@ -11,7 +13,7 @@ python -m streamlit run app/streamlit_app.py --server.port 8504
 ```
 
 1. Open a project and its governing code profile. Select **CAD / IFC Checks**.
-2. Upload an IFC STEP or DXF file, or load one of the bundled synthetic examples. Native DWG must first be exported to DXF or IFC. There is no external translation service.
+2. Upload IFC, DXF, DWG or PDF, or load a bundled IFC/DXF example. DWG geometry requires a confirmed companion DXF or a configured local converter; PDF opens a drawing-review path. There is no external translation service.
 3. Inspect the source evidence: file hash, model identity, schema, original unit declaration and conversion, stable source IDs, system/layer, centreline dimensions, available property sets and explicit IFC port connections.
 4. Keep a stable model identifier across revisions. Include the intended pipe objects; DXF linework is initially excluded because an architectural line is not inherently a pipe. Record reasons for exclusions.
 5. Map cold water, hot water or drainage. Enter actual internal bore and design flow for water. For drainage, enter nominal size and independently reviewed start/end invert elevations, then confirm upstream-to-downstream direction. Reference each element's engineering inputs.
@@ -36,7 +38,7 @@ The pilot accepts up to **20 MB** and **500 supported objects** per import. Larg
 
 ## Verification and next milestones
 
-**Validation:** 346 full local regression tests passed; the final public build passed 271 tests (one source-dependent skip) and all 15 page-navigation checks without private workbooks. The model-specific suite contains 16 passing checks.
+**Initial IFC/DXF pilot validation:** 346 full local regression tests passed; the final public build passed 271 tests (one source-dependent skip) and all 15 page-navigation checks without private workbooks. The model-specific suite contains 16 passing checks.
 
 Real-parser synthetic tests cover millimetres, inches with explicit unit override, nested rotation, IFC systems/properties/ports, disconnected DXF crossings, measured plan run, missing units/axes, malformed files, missing bore, independent velocity and slope calculations, adverse fall, flagged/missing code data, multi-segment slope exclusions, mapping confirmation and project/model history isolation.
 

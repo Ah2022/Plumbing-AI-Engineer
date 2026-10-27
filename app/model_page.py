@@ -6,6 +6,7 @@ import json
 import pandas as pd
 import streamlit as st
 from app.db_helpers import next_calc_id, save_calculation
+from app.model_documents import drawing_review
 from bim.model_intake import inspect_model
 from bim.model_review import initial_mapping, review_model
 from compliance.governance import context
@@ -24,12 +25,17 @@ def page_model_review():
     code = conn.execute('SELECT code_id FROM projects WHERE project_id=?', (pid,)).fetchone()[0]
     scope = f'{pid}_{context(conn, pid)["fingerprint"]}'
     key = 'model_intake_' + scope
-    st.info('Local pilot: IFC and DXF intake, mapped water velocity and straight-segment drainage slope. '
+    st.info('Local pilot: IFC/DXF geometry, DWG conversion intake and PDF drawing review, with mapped water velocity and straight-segment drainage slope checks. '
             'Findings retain engineering review requirements and partial coverage.')
-    st.caption('Native DWG: export to DXF or IFC. No model is sent to an external conversion service. '
+    st.caption('DWG geometry needs local conversion or a companion DXF export. PDF pages support visual/text review. No file is sent to an external conversion service. '
                'Optional parsers: python -m pip install -r requirements-models.txt')
-    upload = st.file_uploader('Upload plumbing model (IFC or DXF, up to 20 MB)', type=['ifc', 'dxf'],
+    upload = st.file_uploader('Upload plumbing model or drawing (IFC, DXF, DWG or PDF, up to 20 MB)', type=['ifc', 'dxf', 'dwg', 'pdf'],
                               max_upload_size=20, key=key + '_upload')
+    companion = None
+    pair_confirmed = False
+    if upload is not None and Path(upload.name).suffix.lower() == '.dwg':
+        companion = st.file_uploader('Companion DXF export (optional)', type=['dxf'], max_upload_size=20, key=key + '_dwg_dxf')
+        pair_confirmed = st.checkbox('I confirm this DXF was exported from the uploaded DWG revision', key=key + '_pair')
     unit = st.selectbox('DXF drawing units', ['Use declared file units', 'mm', 'm', 'ft', 'in'], key=key + '_unit')
     demo = st.selectbox('Synthetic test model', ['IFC', 'DXF'], key=key + '_demo_type')
     import_clicked = st.button('Inspect uploaded model', disabled=upload is None)
@@ -38,11 +44,14 @@ def page_model_review():
         try:
             filename = upload.name if import_clicked else 'model_pilot.' + demo.lower()
             data = upload.getvalue() if import_clicked else (ROOT / 'examples' / filename).read_bytes()
-            inventory = inspect_model(data, filename, dxf_unit=None if unit == 'Use declared file units' else unit)
+            inventory = inspect_model(data, filename, dxf_unit=None if unit == 'Use declared file units' else unit,
+                dwg_dxf_data=companion.getvalue() if companion else None, dwg_pair_confirmed=pair_confirmed)
             st.session_state[key] = inventory
+            st.session_state[key + '_pdf_bytes'] = data if inventory['format'] == 'PDF' else None
             st.session_state.pop(key + '_report', None)
         except (ValueError, OSError, RuntimeError) as error:
             st.session_state.pop(key, None)
+            st.session_state.pop(key + '_pdf_bytes', None)
             st.session_state.pop(key + '_report', None)
             st.error(str(error))
     inventory = st.session_state.get(key)
@@ -50,13 +59,19 @@ def page_model_review():
         st.caption('Inspect a model to see source geometry, units, connections and editable engineering mappings.')
         return
     digest = inventory['source_sha256']
-    model_key = key + '_' + digest
+    input_identity = dict(source=digest, conversion=inventory.get('conversion'), adapter=inventory['adapter_revision'])
+    model_key = key + '_' + hashlib.sha256(json.dumps(input_identity, sort_keys=True).encode()).hexdigest()
     st.subheader('Extracted model evidence')
     st.caption(f"{inventory['filename']} · {inventory['format']} {inventory['schema']} · {len(inventory['objects'])} objects")
     with st.expander('Source identity, units, properties and explicit port connections'):
         st.json(inventory)
     for limitation in inventory['limitations']:
         st.caption(limitation)
+    if inventory.get('geometry_ready', True) is not True:
+        drawing_review(conn, pid, inventory, st.session_state.get(key + '_pdf_bytes'), model_key)
+        return
+    if inventory.get('conversion'):
+        st.caption('DWG geometry source: ' + inventory['conversion']['method'] + '. Review the exported entities and units before checking.')
     st.dataframe([{k: obj.get(k) for k in ('source_id', 'source_class', 'kind', 'name', 'system',
         'length_m', 'horizontal_run_m', 'axis_segment_count', 'geometry_status', 'start_xyz_m', 'end_xyz_m')}
         for obj in inventory['objects']], width='stretch', alt='Read-only source objects and extracted geometry in metres')
@@ -65,7 +80,7 @@ def page_model_review():
     identity = st.text_input('Model identifier (keep stable across revisions)',
         inventory.get('model_id') or Path(inventory['filename']).stem, key=model_key + '_identity')
     st.subheader('Review the engineering mapping')
-    st.caption('IFC pipe objects are initially included; DXF linework requires an explicit Include selection. '
+    st.caption('IFC pipe objects are initially included; DXF/DWG linework requires an explicit Include selection. '
                'Enter actual internal bore for water. For drainage, enter upstream/downstream invert levels '
                'against the axis start/end order, then confirm direction. Source centreline Z is never used as invert.')
     mapping = initial_mapping(inventory)
@@ -102,6 +117,7 @@ def page_model_review():
             result = CalculationResult(next_calc_id(conn, pid, 'model_design_check'), 'model_design_check',
                 'Velocity = Q / internal area; straight drainage slope = 100 * invert fall / plan run',
                 dict(source_sha256=digest, adapter_revision=inventory['adapter_revision'], mappings=rows,
+                     source_format=inventory['format'], conversion=inventory.get('conversion'),
                      criteria=criteria, source_objects=inventory['objects'], source_units=inventory['unit_evidence']),
                 report, report['failure_count'], 'failed checks', status='FAIL' if report['failure_count'] else 'WARNING',
                 reference=f'{code}; per-object criterion/table references', notes='Partial model-design pilot; review required.')

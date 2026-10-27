@@ -26,7 +26,7 @@ jobs:
       - name: Public-checkout interface navigation
         run: python -m pytest tests/test_streamlit_app.py -k "project_page_loads or every_page_loads" -q
       - name: Real IFC and DXF intake and mapped design checks
-        run: python -m pytest tests/test_model_intake.py tests/test_model_ui.py -q
+        run: python -m pytest tests/test_model_intake.py tests/test_model_ui.py tests/test_drawing_uploads.py -q
       - name: Verification limits
         shell: bash
         run: echo "Full-suite checks require local workbooks. Supported tree-network checks are covered by synthetic benchmarks. Live CAD/IFC/Revit ingestion is not certified." >> "$GITHUB_STEP_SUMMARY"

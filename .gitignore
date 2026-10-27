@@ -22,5 +22,6 @@ venv/
 *.ifczip
 *.dxf
 *.dwg
+*.pdf
 !examples/model_pilot.ifc
 !examples/model_pilot.dxf

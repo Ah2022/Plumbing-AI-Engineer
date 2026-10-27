@@ -13,6 +13,7 @@ from models import CalculationResult
 
 CALC_TYPE_PREFIXES = {
     "model_design_check":"MD",
+    "model_document_review":"MR",
     "reference_workbook_scenario":"WB",
     "water_network_check":"NW",
     "drainage_network_check":"ND",
@@ -47,7 +48,7 @@ def save_calculation(conn, project_id: int, result: CalculationResult,
     from compliance.governance import context
     governance = context(conn, project_id)
     # Pilot adapter/coverage acceptance is independent of the project's code adoption.
-    review_status = 'REVIEW_REQUIRED' if result.calc_type == 'model_design_check' else governance['review_status']
+    review_status = 'REVIEW_REQUIRED' if result.calc_type in ('model_design_check', 'model_document_review') else governance['review_status']
     row.update(notes=result.notes, governance_json=json.dumps(governance, sort_keys=True),
                review_status=review_status)
     result.review_status = review_status

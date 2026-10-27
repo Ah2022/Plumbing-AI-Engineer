@@ -17,6 +17,8 @@ def initial_mapping(inventory):
 @checked_numeric
 def review_model(conn, code, inventory, mapping, *, mapping_reference, reviewed,
                  velocity_limit_m_s=None, velocity_reference=''):
+    if inventory.get('geometry_ready', True) is not True:
+        raise ValueError('This drawing has no mapped plumbing geometry. Complete DWG conversion or use IFC/DXF for numerical model checks.')
     if reviewed is not True or not isinstance(mapping_reference, str) or not mapping_reference.strip():
         raise ValueError('Confirm the mapping and provide its reviewer/evidence reference before checking.')
     source = {row['source_id']: row for row in inventory['objects']}
@@ -100,6 +102,7 @@ def review_model(conn, code, inventory, mapping, *, mapping_reference, reviewed,
                 'Connected DFU, pipe context, branch intervals and vent/trap arrangements require complete network mapping.')
     failures = sum(f['status'] == 'FAIL' for f in findings)
     return dict(source_sha256=inventory['source_sha256'], source_model_id=inventory.get('model_id'),
+        source_format=inventory['format'], conversion=inventory.get('conversion'),
         filename=inventory['filename'], code_id=code, adapter_revision=inventory['adapter_revision'],
         mapping_sha256=sha256(json.dumps(mapping, sort_keys=True, allow_nan=False).encode()).hexdigest(),
         mapping_reference=mapping_reference, technical_status='FAIL' if failures else 'PARTIAL',

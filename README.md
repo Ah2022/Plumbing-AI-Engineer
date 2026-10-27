@@ -45,11 +45,11 @@ Once deployed, add its actual URL here as the permanent test link. Community Clo
 
 ## CAD / IFC design-check pilot
 
-Open **CAD / IFC Checks** in the [local app](http://localhost:8504/). Upload an IFC STEP or DXF file, inspect source IDs/units/geometry, review the per-object engineering mapping, and save/download findings. Bundled synthetic IFC and DXF examples are available on the page.
+Open **CAD / IFC Checks** in the [local app](http://localhost:8504/). Upload an IFC, DXF, DWG or PDF. IFC/DXF provide source geometry for reviewed engineering mappings. DWG accepts a confirmed companion DXF or a configured local converter; PDF offers page previews, extracted text and saved drawing-review notes. Bundled synthetic IFC and DXF examples are available on the page.
 
 Install the optional parsers with `python -m pip install -r requirements-models.txt`, then restart Streamlit. The first pilot checks **water velocity** from actual internal bore and design flow, and **straight-segment drainage slope** from reviewed invert levels against the active code's available minimum-slope table. Source facts and reviewed engineering inputs remain separate. It does not infer connections from crossings, replace missing bore with DN, or replace invert levels with centreline Z.
 
-Whole-network pressure, connected fixture loads, capacity, vents and unsupported geometry remain explicitly unevaluated. Findings retain **partial coverage** and **engineering review required**. Native DWG needs an export to DXF or IFC. See the [implemented scope, workflow, synthetic benchmarks and next milestones](docs/CAD_IFC_PILOT.md).
+Whole-network pressure, connected fixture loads, capacity, vents and unsupported geometry remain explicitly unevaluated. Findings retain **partial coverage** and **engineering review required**. DWG conversion readiness and PDF drawing review are described in the [DWG/PDF upload guide](docs/DWG_PDF_UPLOADS.md). See the [implemented scope, workflow, synthetic benchmarks and next milestones](docs/CAD_IFC_PILOT.md).
 
 ## Interactive calculation sheets
 
@@ -81,7 +81,7 @@ For local comparison, retained [Phase 1](http://localhost:8501) and [Phase 2](ht
 python -m pytest tests/ -q
 
 # Public-checkout checks
-python -m pytest tests/test_audit_benchmarks.py tests/test_bim_exchange.py tests/test_reports.py tests/test_runtime_safety.py tests/test_governance.py tests/test_governance_ui.py tests/test_foundations.py tests/test_networks.py tests/test_network_ui.py tests/test_fixture_schedules.py tests/test_workbooks.py tests/test_workbook_ui.py tests/test_interactive_packages.py -q
+python -m pytest tests/test_audit_benchmarks.py tests/test_bim_exchange.py tests/test_reports.py tests/test_runtime_safety.py tests/test_governance.py tests/test_governance_ui.py tests/test_foundations.py tests/test_networks.py tests/test_network_ui.py tests/test_fixture_schedules.py tests/test_workbooks.py tests/test_workbook_ui.py tests/test_interactive_packages.py tests/test_model_intake.py tests/test_model_ui.py tests/test_drawing_uploads.py -q
 
 # Inventory; uses an in-memory database and prints no workbook values
 python -m tools.baseline_inventory
@@ -90,7 +90,7 @@ python -m tools.baseline_inventory
 python -m tests.demo_project
 ```
 
-The current full local suite passed **346 tests** with no expected failures. The public-checkout regressions passed **271 tests** (one source-dependent check skipped), and all **15** page-navigation checks passed without private workbooks. All 103 converted forms were also exercised from portable packages; unsupported or missing source calculations remain explicit. The Phases 3–5 baseline passed **241 tests** on Windows/Python 3.12.14 with Streamlit 1.66.1. The workbook and interactive-package suites validate formula semantics, macro-free import, portable packages, labelled inputs, project isolation and profile approval/revision transitions. Synthetic network tests cover independent pressure-path calculations, catalogue constraints, invalid topology, drainage/vent boundaries and model-import isolation. The [Phases 3–5 inventory](docs/PHASE345_INVENTORY.json) records dependency versions, source-file fingerprints, and rule coverage. `requirements-lock.txt` records tested package versions.
+The current full local suite passed **353 tests** with no expected failures. The public model/drawing-upload suites passed **23 tests**, and all **15** page-navigation checks passed without private workbooks. All 103 converted forms were also exercised from portable packages; unsupported or missing source calculations remain explicit. The Phases 3–5 baseline passed **241 tests** on Windows/Python 3.12.14 with Streamlit 1.66.1. The workbook and interactive-package suites validate formula semantics, macro-free import, portable packages, labelled inputs, project isolation and profile approval/revision transitions. Synthetic network tests cover independent pressure-path calculations, catalogue constraints, invalid topology, drainage/vent boundaries and model-import isolation. The [Phases 3–5 inventory](docs/PHASE345_INVENTORY.json) records dependency versions, source-file fingerprints, and rule coverage. `requirements-lock.txt` records tested package versions.
 
 GitHub Actions runs public-checkout regression and interface-navigation checks after pushes and pull requests. It does not claim full workbook or live Revit validation.
 
