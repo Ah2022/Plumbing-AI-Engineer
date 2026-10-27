@@ -46,9 +46,11 @@ def save_calculation(conn, project_id: int, result: CalculationResult,
     import json
     from compliance.governance import context
     governance = context(conn, project_id)
+    # Pilot adapter/coverage acceptance is independent of the project's code adoption.
+    review_status = 'REVIEW_REQUIRED' if result.calc_type == 'model_design_check' else governance['review_status']
     row.update(notes=result.notes, governance_json=json.dumps(governance, sort_keys=True),
-               review_status=governance['review_status'])
-    result.review_status = governance['review_status']
+               review_status=review_status)
+    result.review_status = review_status
     with conn:
         if target_type is not None and target_id is not None:
             conn.execute('UPDATE calculations SET is_current=0 WHERE project_id=? AND calc_type=? AND target_type=? AND target_id=?',

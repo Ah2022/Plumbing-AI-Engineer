@@ -30,8 +30,11 @@ def test_model_review_requires_mapping_confirmation(fresh_app):
     assert at.session_state['conn'].execute("SELECT COUNT(*) FROM calculations WHERE calc_type='model_design_check'").fetchone()[0] == 0
 
 
-def test_model_review_saves_trace_partial_coverage_and_scope(fresh_app):
+def test_model_review_saves_trace_partial_coverage_and_scope(fresh_app, monkeypatch):
     at = load_example(open_model_page(fresh_app))
+    import compliance.governance as governance
+    original_context = governance.context
+    monkeypatch.setattr(governance, 'context', lambda *args: dict(original_context(*args), review_status='VERIFIED'))
     editor = next(key for key in at.session_state if key.endswith('_mapping'))
     at.session_state[editor] = {'edited_rows': {0: dict(service='cold_water', internal_mm=25.,
         design_flow_lps=1., input_reference='SYNTHETIC measured bore and flow')}, 'added_rows': [], 'deleted_rows': []}
