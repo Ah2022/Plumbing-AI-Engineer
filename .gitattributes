@@ -1,0 +1,2 @@
+# Frozen reference checksums must remain identical on Windows and Linux.
+validation/phase1a/** text eol=lf

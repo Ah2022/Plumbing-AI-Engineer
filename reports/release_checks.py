@@ -8,6 +8,7 @@ from calculations.stormwater import design_rainfall_intensity, size_roof_drain, 
 from calculations.hydraulics import rational_method_peak_flow
 from database.db import init_db
 from reports.provenance import engine_manifest
+from validation.gate import validation_gate
 
 
 def run_release_benchmarks():
@@ -62,5 +63,6 @@ def run_release_benchmarks():
     return dict(schema_version='release-software-checks-1',generated_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),
         software_status='PASS' if cases and all(c['status']=='PASS' for c in cases) else 'FAIL', cases=cases,
         runtime=engine_manifest(), engineering_status='REVIEW_REQUIRED', live_writeback_status='NOT_VALIDATED',
+        engineering_validation=validation_gate(),release_label='ENGINEERING_VALIDATION_PENDING',
         limitations=['Synthetic source rows verify method arithmetic and lookup boundaries only; they do not verify any licensed code table.',
             'Pump curves, project adoption, code applicability, model completeness and real-model writeback need separate acceptance evidence.'])

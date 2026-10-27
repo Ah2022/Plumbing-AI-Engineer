@@ -1,0 +1,11 @@
+{
+  "tool": "Official OWA EPANET2.2 Windows64 toolkit",
+  "version": 20200,
+  "release_url": "https://github.com/OpenWaterAnalytics/EPANET/releases/tag/v2.2",
+  "download_url": "https://github.com/OpenWaterAnalytics/EPANET/releases/download/v2.2/EPANET_2_2_WIN_32_64.zip",
+  "archive_sha256": "e3c761cbd08b9f518c25639261304e9088834dd262092cff421d37c3ab6eb8e2",
+  "library_sha256": "6e092abf28bb50efe1b17def7e4358496e6c9de5b61ac1060ee82ed041a9cdf1",
+  "run_date": "2026-10-27",
+  "models": "Five authored project epanet.inp files; steady-state DDA/H-W. No EPANET sizing optimizer, drainage or water-quality validation.",
+  "engineering_review": "PENDING"
+}

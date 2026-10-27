@@ -1,0 +1,188 @@
+[
+  {
+    "id": "hospital-A",
+    "project_id": "hospital",
+    "terminal": "A",
+    "hand_pressure_m": 18.99283623332379,
+    "epanet_pressure_m": 18.988769566986402,
+    "delta_m": -0.004066666337386948,
+    "epanet_convention_prediction_m": 18.988769566986406,
+    "unexplained_residual_m": -3.552713678800501e-15,
+    "absolute_residual_tolerance_m": 1e-06,
+    "explanation": "Different published Hazen-Williams diameter exponent and unit/minor-loss constants. Engine/hand SI:10.67,D^4.8704,g9.80665. EPANET2.2:4.727,d^4.871(ft/cfs),28.317L/cuft,0.3048m/ft,minor0.02517K/d^4. The independent convention calculation explains the delta without a widened matching tolerance.",
+    "source_urls": [
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/hydcoeffs.c",
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/types.h",
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/input1.c"
+    ],
+    "engineering_review": "PENDING"
+  },
+  {
+    "id": "hospital-B",
+    "project_id": "hospital",
+    "terminal": "B",
+    "hand_pressure_m": -0.6772848692448745,
+    "epanet_pressure_m": -0.686009069894424,
+    "delta_m": -0.008724200649549485,
+    "epanet_convention_prediction_m": -0.6860090698944257,
+    "unexplained_residual_m": 1.6653345369377348e-15,
+    "absolute_residual_tolerance_m": 1e-06,
+    "explanation": "Different published Hazen-Williams diameter exponent and unit/minor-loss constants. Engine/hand SI:10.67,D^4.8704,g9.80665. EPANET2.2:4.727,d^4.871(ft/cfs),28.317L/cuft,0.3048m/ft,minor0.02517K/d^4. The independent convention calculation explains the delta without a widened matching tolerance.",
+    "source_urls": [
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/hydcoeffs.c",
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/types.h",
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/input1.c"
+    ],
+    "engineering_review": "PENDING"
+  },
+  {
+    "id": "hospital-negative-pressure-warning",
+    "project_id": "hospital",
+    "explanation": "EPANET warning6: negative pressure under prescribed DDA demand. The deliberately inadequate30m source produces a negative terminal pressure. Demand is forced for comparison, not a claim that real fixtures deliver design flow at negative pressure. Engine technical envelope FAIL is expected. Pressure-dependent demand and booster/zone design remain unevaluated.",
+    "engineering_review": "PENDING"
+  },
+  {
+    "id": "hotel-A",
+    "project_id": "hotel",
+    "terminal": "A",
+    "hand_pressure_m": 53.81266130454856,
+    "epanet_pressure_m": 53.8048295694584,
+    "delta_m": -0.007831735090164216,
+    "epanet_convention_prediction_m": 53.80482956945841,
+    "unexplained_residual_m": -1.4210854715202004e-14,
+    "absolute_residual_tolerance_m": 1e-06,
+    "explanation": "Different published Hazen-Williams diameter exponent and unit/minor-loss constants. Engine/hand SI:10.67,D^4.8704,g9.80665. EPANET2.2:4.727,d^4.871(ft/cfs),28.317L/cuft,0.3048m/ft,minor0.02517K/d^4. The independent convention calculation explains the delta without a widened matching tolerance.",
+    "source_urls": [
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/hydcoeffs.c",
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/types.h",
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/input1.c"
+    ],
+    "engineering_review": "PENDING"
+  },
+  {
+    "id": "hotel-B",
+    "project_id": "hotel",
+    "terminal": "B",
+    "hand_pressure_m": 31.781130989724552,
+    "epanet_pressure_m": 31.77314144535034,
+    "delta_m": -0.007989544374211732,
+    "epanet_convention_prediction_m": 31.77314144535033,
+    "unexplained_residual_m": 1.0658141036401503e-14,
+    "absolute_residual_tolerance_m": 1e-06,
+    "explanation": "Different published Hazen-Williams diameter exponent and unit/minor-loss constants. Engine/hand SI:10.67,D^4.8704,g9.80665. EPANET2.2:4.727,d^4.871(ft/cfs),28.317L/cuft,0.3048m/ft,minor0.02517K/d^4. The independent convention calculation explains the delta without a widened matching tolerance.",
+    "source_urls": [
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/hydcoeffs.c",
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/types.h",
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/input1.c"
+    ],
+    "engineering_review": "PENDING"
+  },
+  {
+    "id": "mixed_use-A",
+    "project_id": "mixed_use",
+    "terminal": "A",
+    "hand_pressure_m": 44.147178806964305,
+    "epanet_pressure_m": 44.13207690974326,
+    "delta_m": -0.015101897221043714,
+    "epanet_convention_prediction_m": 44.13207690974327,
+    "unexplained_residual_m": -7.105427357601002e-15,
+    "absolute_residual_tolerance_m": 1e-06,
+    "explanation": "Different published Hazen-Williams diameter exponent and unit/minor-loss constants. Engine/hand SI:10.67,D^4.8704,g9.80665. EPANET2.2:4.727,d^4.871(ft/cfs),28.317L/cuft,0.3048m/ft,minor0.02517K/d^4. The independent convention calculation explains the delta without a widened matching tolerance.",
+    "source_urls": [
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/hydcoeffs.c",
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/types.h",
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/input1.c"
+    ],
+    "engineering_review": "PENDING"
+  },
+  {
+    "id": "mixed_use-B",
+    "project_id": "mixed_use",
+    "terminal": "B",
+    "hand_pressure_m": 32.22182328637444,
+    "epanet_pressure_m": 32.21650589051128,
+    "delta_m": -0.005317395863158936,
+    "epanet_convention_prediction_m": 32.216505890511286,
+    "unexplained_residual_m": -7.105427357601002e-15,
+    "absolute_residual_tolerance_m": 1e-06,
+    "explanation": "Different published Hazen-Williams diameter exponent and unit/minor-loss constants. Engine/hand SI:10.67,D^4.8704,g9.80665. EPANET2.2:4.727,d^4.871(ft/cfs),28.317L/cuft,0.3048m/ft,minor0.02517K/d^4. The independent convention calculation explains the delta without a widened matching tolerance.",
+    "source_urls": [
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/hydcoeffs.c",
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/types.h",
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/input1.c"
+    ],
+    "engineering_review": "PENDING"
+  },
+  {
+    "id": "office-A",
+    "project_id": "office",
+    "terminal": "A",
+    "hand_pressure_m": 39.93943186712533,
+    "epanet_pressure_m": 39.93080239995014,
+    "delta_m": -0.008629467175190086,
+    "epanet_convention_prediction_m": 39.930802399950124,
+    "unexplained_residual_m": 1.4210854715202004e-14,
+    "absolute_residual_tolerance_m": 1e-06,
+    "explanation": "Different published Hazen-Williams diameter exponent and unit/minor-loss constants. Engine/hand SI:10.67,D^4.8704,g9.80665. EPANET2.2:4.727,d^4.871(ft/cfs),28.317L/cuft,0.3048m/ft,minor0.02517K/d^4. The independent convention calculation explains the delta without a widened matching tolerance.",
+    "source_urls": [
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/hydcoeffs.c",
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/types.h",
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/input1.c"
+    ],
+    "engineering_review": "PENDING"
+  },
+  {
+    "id": "office-B",
+    "project_id": "office",
+    "terminal": "B",
+    "hand_pressure_m": 20.801177553812956,
+    "epanet_pressure_m": 20.7776640451535,
+    "delta_m": -0.02351350865945534,
+    "epanet_convention_prediction_m": 20.77766404515348,
+    "unexplained_residual_m": 2.1316282072803006e-14,
+    "absolute_residual_tolerance_m": 1e-06,
+    "explanation": "Different published Hazen-Williams diameter exponent and unit/minor-loss constants. Engine/hand SI:10.67,D^4.8704,g9.80665. EPANET2.2:4.727,d^4.871(ft/cfs),28.317L/cuft,0.3048m/ft,minor0.02517K/d^4. The independent convention calculation explains the delta without a widened matching tolerance.",
+    "source_urls": [
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/hydcoeffs.c",
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/types.h",
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/input1.c"
+    ],
+    "engineering_review": "PENDING"
+  },
+  {
+    "id": "residential-A",
+    "project_id": "residential",
+    "terminal": "A",
+    "hand_pressure_m": 30.297620940282926,
+    "epanet_pressure_m": 30.290710061864587,
+    "delta_m": -0.006910878418338484,
+    "epanet_convention_prediction_m": 30.290710061864605,
+    "unexplained_residual_m": -1.7763568394002505e-14,
+    "absolute_residual_tolerance_m": 1e-06,
+    "explanation": "Different published Hazen-Williams diameter exponent and unit/minor-loss constants. Engine/hand SI:10.67,D^4.8704,g9.80665. EPANET2.2:4.727,d^4.871(ft/cfs),28.317L/cuft,0.3048m/ft,minor0.02517K/d^4. The independent convention calculation explains the delta without a widened matching tolerance.",
+    "source_urls": [
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/hydcoeffs.c",
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/types.h",
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/input1.c"
+    ],
+    "engineering_review": "PENDING"
+  },
+  {
+    "id": "residential-B",
+    "project_id": "residential",
+    "terminal": "B",
+    "hand_pressure_m": 23.96076952014903,
+    "epanet_pressure_m": 23.951220949068475,
+    "delta_m": -0.009548571080554069,
+    "epanet_convention_prediction_m": 23.951220949068496,
+    "unexplained_residual_m": -2.1316282072803006e-14,
+    "absolute_residual_tolerance_m": 1e-06,
+    "explanation": "Different published Hazen-Williams diameter exponent and unit/minor-loss constants. Engine/hand SI:10.67,D^4.8704,g9.80665. EPANET2.2:4.727,d^4.871(ft/cfs),28.317L/cuft,0.3048m/ft,minor0.02517K/d^4. The independent convention calculation explains the delta without a widened matching tolerance.",
+    "source_urls": [
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/hydcoeffs.c",
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/types.h",
+      "https://github.com/OpenWaterAnalytics/EPANET/blob/v2.2/src/input1.c"
+    ],
+    "engineering_review": "PENDING"
+  }
+]

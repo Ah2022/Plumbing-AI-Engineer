@@ -1,0 +1,38 @@
+{
+  "nodes": {
+    "J": {
+      "pressure_m": 45.32522097896335,
+      "demand_lps": 0.0
+    },
+    "A": {
+      "pressure_m": 39.93080239995014,
+      "demand_lps": 0.8
+    },
+    "B": {
+      "pressure_m": 20.7776640451535,
+      "demand_lps": 0.6
+    },
+    "S": {
+      "pressure_m": 0.0,
+      "demand_lps": -1.3999999999999952
+    }
+  },
+  "pipes": {
+    "P0": {
+      "flow_lps": 1.3999999999999952,
+      "velocity_m_s": 1.3754056369367833
+    },
+    "P1": {
+      "flow_lps": 0.7999999999999998,
+      "velocity_m_s": 1.506784197354249
+    },
+    "P2": {
+      "flow_lps": 0.5999999999999999,
+      "velocity_m_s": 1.9098489701465104
+    }
+  },
+  "version": 20200,
+  "library_sha256": "6e092abf28bb50efe1b17def7e4358496e6c9de5b61ac1060ee82ed041a9cdf1",
+  "input_sha256": "584b564813b130837488415573095c8b4490c2919882bfce4bdfc93fed924ea5",
+  "warnings": []
+}

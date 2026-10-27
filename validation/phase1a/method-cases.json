@@ -1,0 +1,520 @@
+[
+  {
+    "id": "velocity_from_flow",
+    "entrypoint": "calculations.hydraulics.velocity_from_flow",
+    "inputs": {
+      "flow_lps": 1,
+      "internal_diameter_mm": 50
+    },
+    "expected": 0.5092958178940651,
+    "unit": "m/s",
+    "absolute_tolerance": 5.1e-05,
+    "derivation": "4*0.001/(pi*0.05^2)",
+    "evidence_class": "INDEPENDENT_ARITHMETIC_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING"
+  },
+  {
+    "id": "darcy_weisbach_head_loss",
+    "entrypoint": "calculations.hydraulics.darcy_weisbach_head_loss",
+    "inputs": {
+      "flow_lps": 1,
+      "internal_diameter_mm": 50,
+      "length_m": 10,
+      "friction_factor": 0.02
+    },
+    "expected": 0.05289925308324142,
+    "unit": "m",
+    "absolute_tolerance": 5.1e-05,
+    "derivation": "0.02*10/0.05*V^2/(2*9.80665)",
+    "evidence_class": "INDEPENDENT_ARITHMETIC_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING"
+  },
+  {
+    "id": "hazen_williams_head_loss",
+    "entrypoint": "calculations.hydraulics.hazen_williams_head_loss",
+    "inputs": {
+      "flow_lps": 1,
+      "internal_diameter_mm": 50,
+      "length_m": 10,
+      "c_factor": 140
+    },
+    "expected": 0.06824514930327762,
+    "unit": "m",
+    "absolute_tolerance": 5.1e-05,
+    "derivation": "10.67*10*0.001^1.852/(140^1.852*0.05^4.8704)",
+    "evidence_class": "INDEPENDENT_ARITHMETIC_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING"
+  },
+  {
+    "id": "total_dynamic_head",
+    "entrypoint": "calculations.hydraulics.total_dynamic_head",
+    "inputs": {
+      "static_head_m": 10,
+      "friction_loss_m": 2,
+      "fitting_loss_m": 1,
+      "equipment_loss_m": 3,
+      "required_residual_head_m": 4
+    },
+    "expected": 20,
+    "unit": "m",
+    "absolute_tolerance": 5.1e-05,
+    "derivation": "10+2+1+3+4",
+    "evidence_class": "INDEPENDENT_ARITHMETIC_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING"
+  },
+  {
+    "id": "pump_power",
+    "entrypoint": "calculations.hydraulics.pump_power",
+    "inputs": {
+      "flow_lps": 5,
+      "head_m": 20,
+      "efficiency": 0.8
+    },
+    "expected": 1.22583125,
+    "unit": "kW",
+    "absolute_tolerance": 5.1e-05,
+    "derivation": "1000*9.80665*0.005*20/0.8/1000",
+    "evidence_class": "INDEPENDENT_ARITHMETIC_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING"
+  },
+  {
+    "id": "rational_method_peak_flow",
+    "entrypoint": "calculations.hydraulics.rational_method_peak_flow",
+    "inputs": {
+      "runoff_coefficient": 0.9,
+      "rainfall_intensity_mm_hr": 60,
+      "catchment_area_m2": 1000
+    },
+    "expected": 15,
+    "unit": "L/s",
+    "absolute_tolerance": 5.1e-05,
+    "derivation": "0.9*60*1000/3600",
+    "evidence_class": "INDEPENDENT_ARITHMETIC_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING"
+  },
+  {
+    "id": "q_heat",
+    "entrypoint": "calculations.hydraulics.q_heat",
+    "inputs": {
+      "mass_flow_kg_s": 0.5,
+      "specific_heat_kj_kgc": 4.186,
+      "delta_t_c": 45
+    },
+    "expected": 94.185,
+    "unit": "kW",
+    "absolute_tolerance": 5.1e-05,
+    "derivation": "0.5*4.186*45",
+    "evidence_class": "INDEPENDENT_ARITHMETIC_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING"
+  },
+  {
+    "id": "heater_capacity",
+    "entrypoint": "calculations.hot_water.heater_capacity",
+    "inputs": {
+      "mass_flow_kg_s": 0.5,
+      "cold_water_temp_c": 15,
+      "hot_water_temp_c": 60
+    },
+    "expected": 94.185,
+    "unit": "kW",
+    "absolute_tolerance": 5.1e-05,
+    "derivation": "0.5*4.186*(60-15)",
+    "evidence_class": "AUTHOR_PREPARED_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING"
+  },
+  {
+    "id": "size_domestic_water_tank",
+    "entrypoint": "calculations.tanks.size_domestic_water_tank",
+    "inputs": {
+      "avg_daily_demand_lps": 2,
+      "storage_duration_hr": 4,
+      "freeboard_pct": 10
+    },
+    "expected": 31.68,
+    "unit": "m3",
+    "absolute_tolerance": 5.1e-05,
+    "derivation": "2*4*3.6*1.10",
+    "evidence_class": "AUTHOR_PREPARED_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING"
+  },
+  {
+    "id": "select_pump_duty",
+    "entrypoint": "calculations.pumps.select_pump_duty",
+    "inputs": {
+      "design_flow_lps": 5,
+      "static_head_m": 10,
+      "friction_loss_m": 2,
+      "fitting_loss_m": 1,
+      "equipment_loss_m": 3,
+      "required_residual_head_m": 4,
+      "efficiency": 0.8
+    },
+    "expected": 1.22583125,
+    "unit": "kW",
+    "absolute_tolerance": 5.1e-05,
+    "derivation": "5 L/s at total head20 m, eta0.8",
+    "evidence_class": "AUTHOR_PREPARED_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING"
+  },
+  {
+    "id": "hot_water_demand",
+    "entrypoint": "calculations.hot_water.hot_water_demand",
+    "inputs": {
+      "fixtures": [
+        {
+          "fixture_name": "Candidate fixture",
+          "quantity": 40
+        }
+      ],
+      "demand_factor": 0.25,
+      "storage_capacity_factor": 0.6
+    },
+    "expected": 100,
+    "unit": "GPH",
+    "absolute_tolerance": 5.1e-05,
+    "derivation": "40*10*0.25; fixture GPH is fictional",
+    "evidence_class": "AUTHOR_PREPARED_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING",
+    "connection": true
+  },
+  {
+    "id": "size_hot_water_storage_tank_from_demand",
+    "entrypoint": "calculations.tanks.size_hot_water_storage_tank_from_demand",
+    "inputs": {},
+    "expected": 227.1,
+    "unit": "L",
+    "absolute_tolerance": 0.0051,
+    "derivation": "100 GPH * 0.6 * 3.78541 L/USgal; output rounded0.1L",
+    "evidence_class": "AUTHOR_PREPARED_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING",
+    "special": "hot_storage"
+  },
+  {
+    "id": "check_hot_water_temperature",
+    "entrypoint": "calculations.hot_water.check_hot_water_temperature",
+    "inputs": {
+      "check_type": "scald_protection_patient_areas",
+      "selected_temp_c": 44
+    },
+    "expected": 44,
+    "unit": "C",
+    "absolute_tolerance": 5.1e-05,
+    "derivation": "44>stipulated43 yields FAIL, not a verified IPC limit",
+    "evidence_class": "AUTHOR_PREPARED_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING",
+    "connection": true,
+    "status": "FAIL",
+    "required": 43
+  },
+  {
+    "id": "check_velocity_limit",
+    "entrypoint": "calculations.water.check_velocity_limit",
+    "inputs": {
+      "project_id": 1,
+      "code_id": "REFERENCE",
+      "pipe_id": "P",
+      "flow_lps": 1,
+      "internal_diameter_mm": 50
+    },
+    "expected": 0.5092958178940651,
+    "unit": "m/s",
+    "absolute_tolerance": 5.1e-05,
+    "derivation": "V<stipulated2; no authenticated code limit",
+    "evidence_class": "AUTHOR_PREPARED_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING",
+    "connection": true,
+    "status": "PASS",
+    "required": 2
+  },
+  {
+    "id": "total_fixture_units",
+    "entrypoint": "calculations.water.total_fixture_units",
+    "inputs": {
+      "code_id": "REFERENCE",
+      "fixtures": [
+        {
+          "fixture_name": "Candidate fixture",
+          "quantity": 3
+        }
+      ]
+    },
+    "expected": 6,
+    "unit": "WSFU",
+    "absolute_tolerance": 5.1e-05,
+    "derivation": "3*stipulated2; no fixture FU authentication",
+    "evidence_class": "AUTHOR_PREPARED_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING",
+    "connection": true,
+    "field": "total_cold_fu",
+    "no_calc_id": true
+  },
+  {
+    "id": "size_pipe_from_demand",
+    "entrypoint": "calculations.water.size_pipe_from_demand",
+    "inputs": {
+      "code_id": "REFERENCE",
+      "total_wsfu": 5
+    },
+    "expected": 17.841241161527712,
+    "unit": "mm",
+    "absolute_tolerance": 0.0051,
+    "derivation": "Interpolate0..10 WSFU=>0..60 L/min:5=>30L/min; sqrt(4*0.0005/(pi*2))*1000",
+    "evidence_class": "AUTHOR_PREPARED_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING",
+    "connection": true
+  },
+  {
+    "id": "size_drainage_pipe",
+    "entrypoint": "calculations.drainage.size_drainage_pipe",
+    "inputs": {
+      "code_id": "REFERENCE",
+      "total_dfu": 10,
+      "context": "horizontal_branch"
+    },
+    "expected": 75,
+    "unit": "mm",
+    "absolute_tolerance": 0.0051,
+    "derivation": "50 capacity6 insufficient;75 capacity24 first adequate",
+    "evidence_class": "AUTHOR_PREPARED_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING",
+    "connection": true,
+    "status": "PASS"
+  },
+  {
+    "id": "check_min_slope",
+    "entrypoint": "calculations.drainage.check_min_slope",
+    "inputs": {
+      "code_id": "REFERENCE",
+      "pipe_size_mm": 75,
+      "selected_slope_pct": 0.5
+    },
+    "expected": 0.5,
+    "unit": "%",
+    "absolute_tolerance": 5.1e-05,
+    "derivation": "0.5<stipulated1 soFAIL",
+    "evidence_class": "AUTHOR_PREPARED_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING",
+    "connection": true,
+    "status": "FAIL",
+    "required": 1
+  },
+  {
+    "id": "check_drainage_velocity",
+    "entrypoint": "calculations.drainage.check_drainage_velocity",
+    "inputs": {
+      "flow_lps": 1,
+      "internal_diameter_mm": 50,
+      "min_self_cleansing_m_s": 0.6,
+      "max_velocity_m_s": 3,
+      "criteria_reference": "AUTHOR-BASIS-1"
+    },
+    "expected": 0.5092958178940651,
+    "unit": "m/s",
+    "absolute_tolerance": 5.1e-05,
+    "derivation": "Full-bore velocity only; below stipulated0.6 remainsWARNING",
+    "evidence_class": "AUTHOR_PREPARED_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING",
+    "status": "WARNING"
+  },
+  {
+    "id": "size_vent_pipe",
+    "entrypoint": "calculations.vent.size_vent_pipe",
+    "inputs": {
+      "code_id": "REFERENCE",
+      "total_dfu": 10
+    },
+    "expected": 50,
+    "unit": "mm",
+    "absolute_tolerance": 0.0051,
+    "derivation": "40 covers4;50 covers20, first adequate",
+    "evidence_class": "AUTHOR_PREPARED_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING",
+    "connection": true,
+    "status": "PASS"
+  },
+  {
+    "id": "size_vent_pipe_multidim",
+    "entrypoint": "calculations.vent.size_vent_pipe_multidim",
+    "inputs": {
+      "code_id": "REFERENCE",
+      "stack_size_in": 4,
+      "total_fu": 10,
+      "developed_length_ft": 80
+    },
+    "expected": 2,
+    "unit": "in",
+    "absolute_tolerance": 5.1e-05,
+    "derivation": "4in stack/20FU/100ft row with2in vent covers10FU,80ft",
+    "evidence_class": "AUTHOR_PREPARED_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING",
+    "connection": true,
+    "status": "PASS"
+  },
+  {
+    "id": "check_trap_arm",
+    "entrypoint": "calculations.vent.check_trap_arm",
+    "inputs": {
+      "code_id": "REFERENCE",
+      "nominal_mm": 38.1,
+      "developed_length_m": 1
+    },
+    "expected": 1,
+    "unit": "m",
+    "absolute_tolerance": 5.1e-05,
+    "derivation": "3ft*0.3048=0.9144m<1=>FAIL",
+    "evidence_class": "AUTHOR_PREPARED_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING",
+    "connection": true,
+    "status": "FAIL",
+    "required": 0.9144
+  },
+  {
+    "id": "check_vent_arrangement",
+    "entrypoint": "calculations.vent.check_vent_arrangement",
+    "inputs": {
+      "code_id": "REFERENCE",
+      "vent": {
+        "id": "V",
+        "arrangement": "wet"
+      },
+      "dfu_load": 10
+    },
+    "expected": null,
+    "unit": "-",
+    "absolute_tolerance": 5.1e-05,
+    "derivation": "Wet arrangement explicitly NOT_EVALUATED",
+    "evidence_class": "AUTHOR_PREPARED_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING",
+    "connection": true,
+    "field": "technical_status",
+    "expected_text": "NOT_EVALUATED",
+    "no_calc_id": true
+  },
+  {
+    "id": "design_rainfall_intensity",
+    "entrypoint": "calculations.stormwater.design_rainfall_intensity",
+    "inputs": {
+      "code_id": "REFERENCE",
+      "return_period_yr": 10,
+      "duration_label": "15 min"
+    },
+    "expected": 60,
+    "unit": "mm/hr",
+    "absolute_tolerance": 5.1e-05,
+    "derivation": "100mm*.15/.25h =60; fictional climate data",
+    "evidence_class": "AUTHOR_PREPARED_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING",
+    "connection": true
+  },
+  {
+    "id": "size_roof_drain",
+    "entrypoint": "calculations.stormwater.size_roof_drain",
+    "inputs": {
+      "code_id": "REFERENCE",
+      "roof_area_m2": 300,
+      "rainfall_intensity_mm_hr": 60
+    },
+    "expected": 100,
+    "unit": "mm",
+    "absolute_tolerance": 0.0051,
+    "derivation": "Use75mm/hr column;50mm covers100m2 insufficient,100mm covers600m2",
+    "evidence_class": "AUTHOR_PREPARED_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING",
+    "connection": true,
+    "status": "PASS"
+  },
+  {
+    "id": "size_storm_drain_pipe",
+    "entrypoint": "calculations.stormwater.size_storm_drain_pipe",
+    "inputs": {
+      "code_id": "REFERENCE",
+      "design_flow_lps": 5
+    },
+    "expected": 100,
+    "unit": "mm",
+    "absolute_tolerance": 0.0051,
+    "derivation": "5*60=300L/min;50mm capacity100 insufficient,100mm1000 adequate",
+    "evidence_class": "AUTHOR_PREPARED_CANDIDATE",
+    "source_ids": [
+      "AUTHOR-BASIS-1"
+    ],
+    "engineering_review": "PENDING",
+    "connection": true,
+    "status": "PASS"
+  }
+]

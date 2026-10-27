@@ -1,0 +1,27 @@
+[TITLE]
+hotel - authored validation candidate, not approved
+[JUNCTIONS]
+;ID Elevation_m Demand_LPS
+J 1 0
+A 6 1.5
+B 28 1.2
+[RESERVOIRS]
+S 65
+[PIPES]
+;ID From To Length_m Internal_mm C MinorK
+P0 S J 30 46 140 1 OPEN
+P1 J A 42 36 140 1 OPEN
+P2 J B 65 36 140 1 OPEN
+[OPTIONS]
+UNITS LPS
+HEADLOSS H-W
+DEMAND MODEL DDA
+ACCURACY 0.000001
+TRIALS 100
+[TIMES]
+DURATION 0
+[REPORT]
+STATUS YES
+NODES ALL
+LINKS ALL
+[END]

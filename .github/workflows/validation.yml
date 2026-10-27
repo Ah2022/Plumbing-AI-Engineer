@@ -27,6 +27,19 @@ jobs:
         run: python -m pytest tests/test_streamlit_app.py -k "project_page_loads or every_page_loads" -q
       - name: Review evidence, release benchmarks and guarded Revit handoff
         run: python -m pytest tests/test_review_workflow.py tests/test_revit_handoff.py tests/test_phase67_ui.py -q
+      - name: Frozen engineering reference candidates and acceptance gates
+        run: python -m pytest tests/test_engineering_validation.py -q
+      - name: Independent EPANET 2.2 rerun on Windows
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $archive = Join-Path $env:RUNNER_TEMP 'epanet22.zip'
+          $solver = Join-Path $env:RUNNER_TEMP 'epanet22'
+          Invoke-WebRequest 'https://github.com/OpenWaterAnalytics/EPANET/releases/download/v2.2/EPANET_2_2_WIN_32_64.zip' -OutFile $archive
+          if ((Get-FileHash -LiteralPath $archive -Algorithm SHA256).Hash -ne 'E3C761CBD08B9F518C25639261304E9088834DD262092CFF421D37C3AB6EB8E2') { throw 'EPANET release checksum mismatch' }
+          Expand-Archive -LiteralPath $archive -DestinationPath $solver
+          $env:EPANET_LIBRARY = Join-Path $solver '64bit/epanet2.dll'
+          python -m pytest tests/test_engineering_validation.py -q
       - name: Model, drawing and network-preview checks
         run: python -m pytest tests/test_model_intake.py tests/test_model_ui.py tests/test_drawing_uploads.py tests/test_network_preview.py -q
       - name: Verification limits

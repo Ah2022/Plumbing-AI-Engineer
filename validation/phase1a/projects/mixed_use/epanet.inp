@@ -1,0 +1,27 @@
+[TITLE]
+mixed_use - authored validation candidate, not approved
+[JUNCTIONS]
+;ID Elevation_m Demand_LPS
+J 1 0
+A 5 1
+B 22 1.8
+[RESERVOIRS]
+S 58
+[PIPES]
+;ID From To Length_m Internal_mm C MinorK
+P0 S J 28 46 140 1 OPEN
+P1 J A 40 26 140 1 OPEN
+P2 J B 54 46 140 1 OPEN
+[OPTIONS]
+UNITS LPS
+HEADLOSS H-W
+DEMAND MODEL DDA
+ACCURACY 0.000001
+TRIALS 100
+[TIMES]
+DURATION 0
+[REPORT]
+STATUS YES
+NODES ALL
+LINKS ALL
+[END]

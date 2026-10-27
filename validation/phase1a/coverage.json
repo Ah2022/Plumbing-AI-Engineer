@@ -1,0 +1,997 @@
+{
+  "schema_version": "reference-coverage-1",
+  "core_calculations": [
+    {
+      "entrypoint": "calculations.drainage.check_drainage_velocity",
+      "candidate_reference_ids": [
+        "check_drainage_velocity"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.drainage.check_min_slope",
+      "candidate_reference_ids": [
+        "check_min_slope"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.drainage.size_drainage_pipe",
+      "candidate_reference_ids": [
+        "size_drainage_pipe"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.hot_water.check_hot_water_temperature",
+      "candidate_reference_ids": [
+        "check_hot_water_temperature"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.hot_water.heater_capacity",
+      "candidate_reference_ids": [
+        "heater_capacity"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.hot_water.hot_water_demand",
+      "candidate_reference_ids": [
+        "hot_water_demand"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.hydraulics.darcy_weisbach_head_loss",
+      "candidate_reference_ids": [
+        "darcy_weisbach_head_loss"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.hydraulics.hazen_williams_head_loss",
+      "candidate_reference_ids": [
+        "hazen_williams_head_loss"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.hydraulics.pump_power",
+      "candidate_reference_ids": [
+        "pump_power"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.hydraulics.q_heat",
+      "candidate_reference_ids": [
+        "q_heat"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.hydraulics.rational_method_peak_flow",
+      "candidate_reference_ids": [
+        "rational_method_peak_flow"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.hydraulics.total_dynamic_head",
+      "candidate_reference_ids": [
+        "total_dynamic_head"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.hydraulics.velocity_from_flow",
+      "candidate_reference_ids": [
+        "velocity_from_flow"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.network.analyze_drainage_network",
+      "candidate_reference_ids": [
+        "projects/*/input.json",
+        "projects/*/expected.json"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.network.analyze_water_network",
+      "candidate_reference_ids": [
+        "projects/*/input.json",
+        "projects/*/expected.json"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.network.validate_tree",
+      "candidate_reference_ids": [
+        "projects/*/input.json",
+        "projects/*/expected.json"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.pumps.select_pump_duty",
+      "candidate_reference_ids": [
+        "select_pump_duty"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.stormwater.design_rainfall_intensity",
+      "candidate_reference_ids": [
+        "design_rainfall_intensity"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.stormwater.size_roof_drain",
+      "candidate_reference_ids": [
+        "size_roof_drain"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.stormwater.size_storm_drain_pipe",
+      "candidate_reference_ids": [
+        "size_storm_drain_pipe"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.tanks.size_domestic_water_tank",
+      "candidate_reference_ids": [
+        "size_domestic_water_tank"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.tanks.size_hot_water_storage_tank_from_demand",
+      "candidate_reference_ids": [
+        "size_hot_water_storage_tank_from_demand"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.vent.check_trap_arm",
+      "candidate_reference_ids": [
+        "check_trap_arm"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.vent.check_vent_arrangement",
+      "candidate_reference_ids": [
+        "check_vent_arrangement"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.vent.size_vent_pipe",
+      "candidate_reference_ids": [
+        "size_vent_pipe"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.vent.size_vent_pipe_multidim",
+      "candidate_reference_ids": [
+        "size_vent_pipe_multidim"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.water.check_velocity_limit",
+      "candidate_reference_ids": [
+        "check_velocity_limit"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.water.size_pipe_from_demand",
+      "candidate_reference_ids": [
+        "size_pipe_from_demand"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    },
+    {
+      "entrypoint": "calculations.water.total_fixture_units",
+      "candidate_reference_ids": [
+        "total_fixture_units"
+      ],
+      "software_reference": "GOLDEN_CANDIDATE",
+      "engineering_status": "PENDING",
+      "gap": "Independent qualified plumbing-engineer approval and authoritative source authentication missing"
+    }
+  ],
+  "interactive_forms": [
+    {
+      "package_sha256": "05dd31a003610430ffa2b61309e46b0b89b7ebbb35776ca97b25fff30eff7f5b",
+      "worksheet": "Lazy River Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "083bb75f5bdc86be333b579ff492b0d0ff6394ca22a23c7bb4bc698e853ed3ff",
+      "worksheet": "No. Of Person Guide",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "083bb75f5bdc86be333b579ff492b0d0ff6394ca22a23c7bb4bc698e853ed3ff",
+      "worksheet": "Practical Plumbing Guide",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "083bb75f5bdc86be333b579ff492b0d0ff6394ca22a23c7bb4bc698e853ed3ff",
+      "worksheet": "ASPE",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "083bb75f5bdc86be333b579ff492b0d0ff6394ca22a23c7bb4bc698e853ed3ff",
+      "worksheet": "EGY.CODE (301-1)",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "083bb75f5bdc86be333b579ff492b0d0ff6394ca22a23c7bb4bc698e853ed3ff",
+      "worksheet": "Qatar-Kahramaa",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "08c63e29f514c69f96c6df60c97282b5b2297fe3047112a49f5fc6c21b3ad4fc",
+      "worksheet": "WM Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "14f2f51ef7a527519389977978094eba8d6492e01e0d2200b736400cba32abfb",
+      "worksheet": "Instantaneous WH",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "1cf9428302076b9218de076114711ba7c068d9ffb8a5aa057bfef70cec834682",
+      "worksheet": "Method-1",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "1cf9428302076b9218de076114711ba7c068d9ffb8a5aa057bfef70cec834682",
+      "worksheet": "Method-2",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "1e4d91f3d9c640686efd2118126b22607a72c1d47c362c01a126edc34a623b77",
+      "worksheet": "NG Pipe Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "1f7a34036bb023fa0026ca3caaad8a0c315f1f3488620464fafb2acd7a5aba7b",
+      "worksheet": "Storm Tie In",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "2d7241a62a08cecb2a6abd4d6ea846a7c3d7560e9ae7006997e5cee9cce1d22f",
+      "worksheet": "Septic Tank Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "2fdc4dab8e68d4fa9ed0aad4f55c80f81dc88d17ecb163d066df32d8513b5c28",
+      "worksheet": "Catch Basin",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "3350633075fcc3971a3ed0fb8e9828bdebcdd2b58ce055314ddead06157d1dde",
+      "worksheet": "Overflow Lake Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "3350633075fcc3971a3ed0fb8e9828bdebcdd2b58ce055314ddead06157d1dde",
+      "worksheet": "Skimmer Lake Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "383eb791f8b787492c5772f535bcb4650c7abab56e0c7b2bd3a989b5e6964709",
+      "worksheet": "O2 Flow",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "383eb791f8b787492c5772f535bcb4650c7abab56e0c7b2bd3a989b5e6964709",
+      "worksheet": "N2O Flow",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "383eb791f8b787492c5772f535bcb4650c7abab56e0c7b2bd3a989b5e6964709",
+      "worksheet": "N2O-O2 Mix. Flow",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "383eb791f8b787492c5772f535bcb4650c7abab56e0c7b2bd3a989b5e6964709",
+      "worksheet": "MA4 Flow",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "383eb791f8b787492c5772f535bcb4650c7abab56e0c7b2bd3a989b5e6964709",
+      "worksheet": "SA7 Flow",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "383eb791f8b787492c5772f535bcb4650c7abab56e0c7b2bd3a989b5e6964709",
+      "worksheet": "MV Flow",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "383eb791f8b787492c5772f535bcb4650c7abab56e0c7b2bd3a989b5e6964709",
+      "worksheet": "AGSS Flow",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "3d2863341a151b2d6238b567911c4c202ba491edb09c006088392a88e69c7c08",
+      "worksheet": "Method-1",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "3d2863341a151b2d6238b567911c4c202ba491edb09c006088392a88e69c7c08",
+      "worksheet": "Method-2",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "3fd84768ab61220381d29080a0a5ab8c195a58caf319103ad489cb3779f21104",
+      "worksheet": "Individual Storage WH",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "420e77cd637634f0c2bc572a97cbbd93e4df0fc44b94c49a4c559e71f1494004",
+      "worksheet": "No. Of Person Guide",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "420e77cd637634f0c2bc572a97cbbd93e4df0fc44b94c49a4c559e71f1494004",
+      "worksheet": "Practical Plumbing Guide",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "420e77cd637634f0c2bc572a97cbbd93e4df0fc44b94c49a4c559e71f1494004",
+      "worksheet": "ASPE",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "420e77cd637634f0c2bc572a97cbbd93e4df0fc44b94c49a4c559e71f1494004",
+      "worksheet": "EGY.CODE (301-1)",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "420e77cd637634f0c2bc572a97cbbd93e4df0fc44b94c49a4c559e71f1494004",
+      "worksheet": "Qatar-Kahramaa",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "4553792addc88cdfe76b8e14fb39defaeb8cb5d542c3e516a6a081ce453f5540",
+      "worksheet": "Roof Gutter",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "4640082b9637f171324c489f4e59a9a62b1eec321efdcbecbcf775bbe2c401b4",
+      "worksheet": "Soakaway Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "48dc4f10be8771658d71491322c0d43a748472c0b4a5eb82163e75cf10d93b19",
+      "worksheet": "Method-1",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "48dc4f10be8771658d71491322c0d43a748472c0b4a5eb82163e75cf10d93b19",
+      "worksheet": "Method-2",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "517b150238e39ddbfa8d11554239b6312e3a9d29db7e042a87231011101fb760",
+      "worksheet": "Storm Pipe Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "67fef3997c3ad6fdf100473b1b83839f349f9508b515358f8e64bf92d20457c5",
+      "worksheet": "Jacuzzi Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "6b1af95bfbb64bcdadeb5a46a7b40dd222635d0cacec01131d201e10ca226e3b",
+      "worksheet": "Method-1",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "6b1af95bfbb64bcdadeb5a46a7b40dd222635d0cacec01131d201e10ca226e3b",
+      "worksheet": "Method-2",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "6b1af95bfbb64bcdadeb5a46a7b40dd222635d0cacec01131d201e10ca226e3b",
+      "worksheet": "Method-3",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "716c37d98e4222c0884d73784d340a70df224e8395d0c365d42cc25b0d69a0db",
+      "worksheet": "Sand Interceptor",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "77183000d9b6a04678c7792c3f787dbe9eb0c52da0491934c1bf7a71c2af3c52",
+      "worksheet": "Method-01",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "77183000d9b6a04678c7792c3f787dbe9eb0c52da0491934c1bf7a71c2af3c52",
+      "worksheet": "Method-02",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "77183000d9b6a04678c7792c3f787dbe9eb0c52da0491934c1bf7a71c2af3c52",
+      "worksheet": "Method-03",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "7d363bd3e79f53d6c44b976c27ea71d3bbd7ca0afd05a13e1552421108d5428a",
+      "worksheet": "Sump Pit Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "831428e482132918325d43fb180a6688db4a77dacff893bcd0ef97ace2b2a099",
+      "worksheet": "O2 Source",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "831428e482132918325d43fb180a6688db4a77dacff893bcd0ef97ace2b2a099",
+      "worksheet": "N2O Source",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "831428e482132918325d43fb180a6688db4a77dacff893bcd0ef97ace2b2a099",
+      "worksheet": "N2O-O2 Mix. Source",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "831428e482132918325d43fb180a6688db4a77dacff893bcd0ef97ace2b2a099",
+      "worksheet": "MA Source",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "831428e482132918325d43fb180a6688db4a77dacff893bcd0ef97ace2b2a099",
+      "worksheet": "SA Source",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "831428e482132918325d43fb180a6688db4a77dacff893bcd0ef97ace2b2a099",
+      "worksheet": "MA-SA Combined Source",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "831428e482132918325d43fb180a6688db4a77dacff893bcd0ef97ace2b2a099",
+      "worksheet": "MV Source",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "831428e482132918325d43fb180a6688db4a77dacff893bcd0ef97ace2b2a099",
+      "worksheet": "AGSS Source",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "8cdc87d4cb3e68a77d1230fd5c09dd429125c83d2bca0a97b4bc76888ee03092",
+      "worksheet": "Expansion Tank Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "8fa783b5261ab6b288712fb3e852ab5996301250924a000f9127bf6c677f4581",
+      "worksheet": "DR Pipe Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "9007ea6b9fe3ee2cbddc678f73e0bf6c9b8d52a0093c141bc3d318e6b2e07792",
+      "worksheet": "HW Circulation Pump Sizing-2",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "948489bd4a46f8900e310181f75e44728cb266f527d7f1e8c1f617f7d6ebf49e",
+      "worksheet": "Overflow Pool Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "948489bd4a46f8900e310181f75e44728cb266f527d7f1e8c1f617f7d6ebf49e",
+      "worksheet": "Skimmer Pool Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "97fa7a508f99c2e6393d41c23780270d8f2a196a27e2fcc4b01b58ab8ad13e88",
+      "worksheet": "CDP Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "982aa71de5cb84fcc15e7f230b8a91edc374912aad87667f4e184606cf4eab5a",
+      "worksheet": "Filter Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "9f5e81faf59c75dc7f255473834b7f15a7975f7033e4f43a4dcf01b68d106b08",
+      "worksheet": "Method-1",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "9f5e81faf59c75dc7f255473834b7f15a7975f7033e4f43a4dcf01b68d106b08",
+      "worksheet": "Method-2",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "9f5e81faf59c75dc7f255473834b7f15a7975f7033e4f43a4dcf01b68d106b08",
+      "worksheet": "Method-3",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "9f5e81faf59c75dc7f255473834b7f15a7975f7033e4f43a4dcf01b68d106b08",
+      "worksheet": "Method-4",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "a0378ab828485f2701c0c887a63830d61c1c3c8e4bc8bde21c04294cbd27c7ec",
+      "worksheet": "Central Electric WH",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "a0378ab828485f2701c0c887a63830d61c1c3c8e4bc8bde21c04294cbd27c7ec",
+      "worksheet": "Central Gas WH",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "a0378ab828485f2701c0c887a63830d61c1c3c8e4bc8bde21c04294cbd27c7ec",
+      "worksheet": "Central WH With Boiler",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "a0378ab828485f2701c0c887a63830d61c1c3c8e4bc8bde21c04294cbd27c7ec",
+      "worksheet": "Central Solar WH",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "a256fb286ddafc5c40656be897e053ea277813a916136a8e03e51e128110806d",
+      "worksheet": "Main Data",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "a256fb286ddafc5c40656be897e053ea277813a916136a8e03e51e128110806d",
+      "worksheet": "Fuel Type-1",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "a256fb286ddafc5c40656be897e053ea277813a916136a8e03e51e128110806d",
+      "worksheet": "Fuel Type-2",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "a256fb286ddafc5c40656be897e053ea277813a916136a8e03e51e128110806d",
+      "worksheet": "Fuel Type-3",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "a256fb286ddafc5c40656be897e053ea277813a916136a8e03e51e128110806d",
+      "worksheet": "Fuel Type-4",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "a256fb286ddafc5c40656be897e053ea277813a916136a8e03e51e128110806d",
+      "worksheet": "Fuel Type-5",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "a256fb286ddafc5c40656be897e053ea277813a916136a8e03e51e128110806d",
+      "worksheet": "Pipe Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "ab37e689fcd0814f2ea18b6c6438b5ce38f5c60db137fcdc49d5dbb3f9e5b4f7",
+      "worksheet": "NT Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "ae73a67814e717192c4af3f1af7d3cb54bf5df91d43644aa894bf32883ae573d",
+      "worksheet": "Central Electric WH",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "ae73a67814e717192c4af3f1af7d3cb54bf5df91d43644aa894bf32883ae573d",
+      "worksheet": "Central Gas WH",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "ae73a67814e717192c4af3f1af7d3cb54bf5df91d43644aa894bf32883ae573d",
+      "worksheet": "Central WH With Boiler",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "ae73a67814e717192c4af3f1af7d3cb54bf5df91d43644aa894bf32883ae573d",
+      "worksheet": "Central Solar WH",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "b2dc7d5898a1feda6439487188a8e5342b71c1b74e44497479ca0ada2dd020c9",
+      "worksheet": "Fountain Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "b31aaf170f18e8d9df5ca62f3afaf5e9abbe1abacb8e2ad23527abc4c6672f72",
+      "worksheet": "Boier HWCP Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "b59e39d693cfd1cc71f5b7f87fb06af7aebcbf8a1321f666566c1a163a3cb7e1",
+      "worksheet": "Calculations",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "b666305ccf536f114dad28bdc6109500712d978fc68db4e63bf49ca11d514cc3",
+      "worksheet": "LPG Tank Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "c5d5fb60c3bb42fca047daacf39b5631f05acdc7656b98059c2debe3c312f3c6",
+      "worksheet": "Terminal Units",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "d30418c759147367935970c471daaa108084a9f2159749a1771f4c5db053ae8a",
+      "worksheet": "Central Electric WH",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "d60cbeba6f50cf0abf7bb395e548ebc2065caf6d80266530731cba3b4b98a30c",
+      "worksheet": "LPG",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "d9b0522cf31992a567f2c018a53716a62b6ad0af89dbb88b45a023c2aa3a29eb",
+      "worksheet": "O2",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "d9b0522cf31992a567f2c018a53716a62b6ad0af89dbb88b45a023c2aa3a29eb",
+      "worksheet": "N2O",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "d9b0522cf31992a567f2c018a53716a62b6ad0af89dbb88b45a023c2aa3a29eb",
+      "worksheet": "N2O-O2 Mix",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "d9b0522cf31992a567f2c018a53716a62b6ad0af89dbb88b45a023c2aa3a29eb",
+      "worksheet": "MA",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "d9b0522cf31992a567f2c018a53716a62b6ad0af89dbb88b45a023c2aa3a29eb",
+      "worksheet": "He-O2",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "d9b0522cf31992a567f2c018a53716a62b6ad0af89dbb88b45a023c2aa3a29eb",
+      "worksheet": "SA7",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "d9b0522cf31992a567f2c018a53716a62b6ad0af89dbb88b45a023c2aa3a29eb",
+      "worksheet": "SA11",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "d9b0522cf31992a567f2c018a53716a62b6ad0af89dbb88b45a023c2aa3a29eb",
+      "worksheet": "MV",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "d9b0522cf31992a567f2c018a53716a62b6ad0af89dbb88b45a023c2aa3a29eb",
+      "worksheet": "AGSS",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "dd0d2f8fd76c64729bec09157f0360bb27e1297cb9354decc3e2c2708c99a6bb",
+      "worksheet": "Waterslide Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "df50cc4dd541dc2468c1a7db97a0668e22b96795a4a50b308936a813b8f4e06b",
+      "worksheet": "Softener Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "e27d8773738a0aaf85be40a0b78d0e5b34e599f259e2f03a856d49b6f644c073",
+      "worksheet": "Drinking CHW Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "e27d8773738a0aaf85be40a0b78d0e5b34e599f259e2f03a856d49b6f644c073",
+      "worksheet": "Drinking CHW Pipe Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "e4840a43442a57b3bd183cf7bc1da4c9dbbc41fa37c4c0fdc40d18bfe2c4a7c4",
+      "worksheet": "Calculations",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "f613a7a2414a097ee721d808a5e305482adc21dadc564c41a9538ee0ccec3a2e",
+      "worksheet": "Fuel Equipment Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    },
+    {
+      "package_sha256": "f613a7a2414a097ee721d808a5e305482adc21dadc564c41a9538ee0ccec3a2e",
+      "worksheet": "Pipe Sizing",
+      "engineering_status": "PENDING",
+      "software_reference": "EXECUTION_ONLY_NOT_INDEPENDENT_REFERENCE",
+      "gap": "Independent expected outputs and code/source authentication required; cached workbook values and successful formula execution are not reference validation"
+    }
+  ],
+  "scope_notes": [
+    "Native engineering calculations and mapped tree solvers are enumerated by AST; new functions block acceptance until registered.",
+    "Converted-library forms are enumerated individually; user-added packages also need project-specific reference review.",
+    "CAD/IFC/Revit ingestion, full compliance coverage, and arbitrary imported Excel formulas are not certified by numeric benchmark agreement."
+  ]
+}

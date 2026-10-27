@@ -1,0 +1,196 @@
+[
+  {
+    "code": "REFERENCE",
+    "domain": "water",
+    "name": "1_Fixture_Units",
+    "rows": [
+      {
+        "fixture": "Candidate fixture",
+        "cold": 2
+      }
+    ],
+    "reference": "AUTHOR-BASIS-1 fictional lookup fixture; NOT an IPC numeric table"
+  },
+  {
+    "code": "REFERENCE",
+    "domain": "water",
+    "name": "2_Demand_Conversion",
+    "rows": [
+      {
+        "wsfu": 0,
+        "flush_tank_lpm": 0,
+        "flush_valve_lpm": 0
+      },
+      {
+        "wsfu": 10,
+        "flush_tank_lpm": 60,
+        "flush_valve_lpm": 120
+      }
+    ],
+    "reference": "AUTHOR-BASIS-1 fictional lookup fixture; NOT an IPC numeric table"
+  },
+  {
+    "code": "REFERENCE",
+    "domain": "water",
+    "name": "3_Velocity_Limits",
+    "rows": [
+      {
+        "parameter": "recommended design velocity",
+        "value": 2
+      }
+    ],
+    "reference": "AUTHOR-BASIS-1 fictional lookup fixture; NOT an IPC numeric table"
+  },
+  {
+    "code": "REFERENCE",
+    "domain": "drainage",
+    "name": "5_Drainage_Sizing",
+    "rows": [
+      {
+        "pipe_mm": 50,
+        "max_dfu_horiz_branch": 6
+      },
+      {
+        "pipe_mm": 75,
+        "max_dfu_horiz_branch": 24
+      },
+      {
+        "pipe_mm": 100,
+        "max_dfu_horiz_branch": 100
+      }
+    ],
+    "reference": "AUTHOR-BASIS-1 fictional lookup fixture; NOT an IPC numeric table"
+  },
+  {
+    "code": "REFERENCE",
+    "domain": "drainage",
+    "name": "6_Min_Slope",
+    "rows": [
+      {
+        "pipe_size_mm": 50,
+        "min_slope_pct": 2
+      },
+      {
+        "pipe_size_mm": 75,
+        "min_slope_pct": 1
+      },
+      {
+        "pipe_size_mm": 100,
+        "min_slope_pct": 1
+      }
+    ],
+    "reference": "AUTHOR-BASIS-1 fictional lookup fixture; NOT an IPC numeric table"
+  },
+  {
+    "code": "REFERENCE",
+    "domain": "vent",
+    "name": "7_Vent_Sizing",
+    "rows": [
+      {
+        "fu": 4,
+        "vent_mm": 40
+      },
+      {
+        "fu": 20,
+        "vent_mm": 50
+      },
+      {
+        "trap_arm_in": 1.5,
+        "max_dist_trap_to_vent_ft": 3
+      },
+      {
+        "stack_in": 4,
+        "fu": 20,
+        "vent_in": 2,
+        "max_len_ft": 100
+      }
+    ],
+    "reference": "AUTHOR-BASIS-1 fictional lookup fixture; NOT an IPC numeric table"
+  },
+  {
+    "code": "IPC",
+    "domain": "hot_water",
+    "name": "9_Hot_Water_Basis [fixture+gph]",
+    "rows": [
+      {
+        "fixture": "Candidate fixture",
+        "gph": 10
+      }
+    ],
+    "reference": "AUTHOR-BASIS-1 fictional lookup fixture; NOT an IPC numeric table"
+  },
+  {
+    "code": "IPC",
+    "domain": "hot_water",
+    "name": "9_Hot_Water_Basis [parameter+value+unit+applicability]",
+    "rows": [
+      {
+        "parameter": "max hot water discharge",
+        "value": 43,
+        "unit": "C",
+        "applicability": "Fictional comparison fixture only"
+      }
+    ],
+    "reference": "AUTHOR-BASIS-1 fictional lookup fixture; NOT an IPC numeric table"
+  },
+  {
+    "code": "REFERENCE",
+    "domain": "storm",
+    "name": "Riyadh 24hr Design Rainfall Depth",
+    "rows": [
+      {
+        "return_period_yr": 10,
+        "riyadh_station_mm": 100
+      }
+    ],
+    "reference": "AUTHOR-BASIS-1 fictional lookup fixture; NOT an IPC numeric table"
+  },
+  {
+    "code": "REFERENCE",
+    "domain": "storm",
+    "name": "8_Rainfall_Intensity [duration+ratio_to_24hr]",
+    "rows": [
+      {
+        "duration": "15 min",
+        "ratio_to_24hr": 0.15
+      }
+    ],
+    "reference": "AUTHOR-BASIS-1 fictional lookup fixture; NOT an IPC numeric table"
+  },
+  {
+    "code": "REFERENCE",
+    "domain": "storm",
+    "name": "8_Rainfall_Intensity [leader_mm+25 mm/hr]",
+    "rows": [
+      {
+        "leader_mm": 50,
+        "25 mm/hr": 500,
+        "75 mm/hr": 100
+      },
+      {
+        "leader_mm": 100,
+        "25 mm/hr": 1000,
+        "75 mm/hr": 600
+      }
+    ],
+    "reference": "AUTHOR-BASIS-1 fictional lookup fixture; NOT an IPC numeric table"
+  },
+  {
+    "code": "REFERENCE",
+    "domain": "storm",
+    "name": "8_Rainfall_Intensity [pipe_mm+vertical_drain_lpm]",
+    "rows": [
+      {
+        "pipe_mm": 50,
+        "vertical_drain_lpm": 100,
+        "horiz_5mm_m": 50
+      },
+      {
+        "pipe_mm": 100,
+        "vertical_drain_lpm": 1000,
+        "horiz_5mm_m": 500
+      }
+    ],
+    "reference": "AUTHOR-BASIS-1 fictional lookup fixture; NOT an IPC numeric table"
+  }
+]

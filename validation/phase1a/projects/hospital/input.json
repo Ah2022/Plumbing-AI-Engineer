@@ -1,0 +1,268 @@
+{
+  "schema_version": "engineering-reference-input-1",
+  "project_id": "hospital",
+  "building_type": "Hospital",
+  "occupants": 240,
+  "provenance": "AUTHORED_ILLUSTRATIVE_REFERENCE_NOT_REAL_PROJECT",
+  "code_edition": "IPC 2024",
+  "code_adoption": "PENDING",
+  "source_ids": [
+    "EPA-EPANET-2.2",
+    "IPC-2024",
+    "AUTHOR-BASIS-1"
+  ],
+  "design_basis": "steady-state separate cold-water terminal flow envelope; other systems sampled independently, no inferred diversity",
+  "water_model": {
+    "schema_version": "1.0",
+    "units": "SI",
+    "code_id": "IPC",
+    "service": "cold_water",
+    "basis_reference": "AUTHOR-BASIS-1: Hospital candidate; IPC 2024 target, unapproved",
+    "root": "S",
+    "available_head_m": 30,
+    "velocity_limit_m_s": 3,
+    "velocity_reference": "AUTHOR-BASIS-1 stipulated criterion, not IPC limit",
+    "flow_basis": "explicit_terminal_flows",
+    "nodes": [
+      {
+        "id": "S",
+        "kind": "source",
+        "elevation_m": 0
+      },
+      {
+        "id": "J",
+        "kind": "junction",
+        "elevation_m": 1
+      },
+      {
+        "id": "A",
+        "kind": "fixture",
+        "elevation_m": 8,
+        "design_flow_lps": 2,
+        "required_residual_head_m": 10,
+        "demand_reference": "AUTHOR-BASIS-1: explicit design envelope, no occupancy inference"
+      },
+      {
+        "id": "B",
+        "kind": "fixture",
+        "elevation_m": 25,
+        "design_flow_lps": 1.5,
+        "required_residual_head_m": 12,
+        "demand_reference": "AUTHOR-BASIS-1: explicit design envelope, no occupancy inference"
+      }
+    ],
+    "pipes": [
+      {
+        "id": "P0",
+        "from_node": "S",
+        "to_node": "J",
+        "length_m": 35,
+        "material": "REFERENCE",
+        "selected_size_id": "R63",
+        "minimum_nominal_mm": 20,
+        "minimum_size_reference": "AUTHOR-BASIS-1: stipulated minimum",
+        "fittings_k": 1,
+        "equipment_loss_m": 0,
+        "losses_reference": "AUTHOR-BASIS-1: K=1 per pipe; no equipment in this envelope"
+      },
+      {
+        "id": "P1",
+        "from_node": "J",
+        "to_node": "A",
+        "length_m": 45,
+        "material": "REFERENCE",
+        "selected_size_id": "R50",
+        "minimum_nominal_mm": 20,
+        "minimum_size_reference": "AUTHOR-BASIS-1: stipulated minimum",
+        "fittings_k": 1,
+        "equipment_loss_m": 0,
+        "losses_reference": "AUTHOR-BASIS-1: K=1 per pipe; no equipment in this envelope"
+      },
+      {
+        "id": "P2",
+        "from_node": "J",
+        "to_node": "B",
+        "length_m": 60,
+        "material": "REFERENCE",
+        "selected_size_id": "R40",
+        "minimum_nominal_mm": 20,
+        "minimum_size_reference": "AUTHOR-BASIS-1: stipulated minimum",
+        "fittings_k": 1,
+        "equipment_loss_m": 0,
+        "losses_reference": "AUTHOR-BASIS-1: K=1 per pipe; no equipment in this envelope"
+      }
+    ],
+    "materials": {
+      "REFERENCE": {
+        "method": "hazen_williams",
+        "c_factor": 140,
+        "reference": "AUTHOR-BASIS-1: stipulated C=140"
+      }
+    },
+    "catalogues": {
+      "REFERENCE": [
+        {
+          "size_id": "R40",
+          "nominal_mm": 40,
+          "internal_mm": 36,
+          "reference": "AUTHOR-BASIS-1: stipulated geometric bore, no manufacturer claim"
+        },
+        {
+          "size_id": "R50",
+          "nominal_mm": 50,
+          "internal_mm": 46,
+          "reference": "AUTHOR-BASIS-1: stipulated geometric bore, no manufacturer claim"
+        },
+        {
+          "size_id": "R63",
+          "nominal_mm": 63,
+          "internal_mm": 58,
+          "reference": "AUTHOR-BASIS-1: stipulated geometric bore, no manufacturer claim"
+        }
+      ]
+    }
+  },
+  "drainage_model": {
+    "schema_version": "1.0",
+    "units": "SI",
+    "basis_reference": "AUTHOR-BASIS-1: fictional DFU data for regression only",
+    "root": "O",
+    "nodes": [
+      {
+        "id": "O",
+        "kind": "outlet",
+        "elevation_m": 0
+      },
+      {
+        "id": "D",
+        "kind": "junction",
+        "elevation_m": 1
+      },
+      {
+        "id": "F1",
+        "kind": "fixture",
+        "elevation_m": 2,
+        "drainage_dfu": 20,
+        "demand_reference": "AUTHOR-BASIS-1 stipulated DFU"
+      },
+      {
+        "id": "F2",
+        "kind": "fixture",
+        "elevation_m": 2,
+        "drainage_dfu": 28,
+        "demand_reference": "AUTHOR-BASIS-1 stipulated DFU"
+      }
+    ],
+    "pipes": [
+      {
+        "id": "D0",
+        "from_node": "D",
+        "to_node": "O",
+        "length_m": 21,
+        "horizontal_run_m": 20,
+        "nominal_mm": 100,
+        "context": "horizontal_branch",
+        "minimum_nominal_mm": 50,
+        "minimum_size_reference": "AUTHOR-BASIS-1",
+        "minimum_slope_pct": 1,
+        "minimum_slope_reference": "AUTHOR-BASIS-1"
+      },
+      {
+        "id": "D1",
+        "from_node": "F1",
+        "to_node": "D",
+        "length_m": 21,
+        "horizontal_run_m": 20,
+        "nominal_mm": 100,
+        "context": "horizontal_branch",
+        "minimum_nominal_mm": 50,
+        "minimum_size_reference": "AUTHOR-BASIS-1",
+        "minimum_slope_pct": 1,
+        "minimum_slope_reference": "AUTHOR-BASIS-1"
+      },
+      {
+        "id": "D2",
+        "from_node": "F2",
+        "to_node": "D",
+        "length_m": 21,
+        "horizontal_run_m": 20,
+        "nominal_mm": 100,
+        "context": "horizontal_branch",
+        "minimum_nominal_mm": 50,
+        "minimum_size_reference": "AUTHOR-BASIS-1",
+        "minimum_slope_pct": 1,
+        "minimum_slope_reference": "AUTHOR-BASIS-1"
+      }
+    ],
+    "vents": []
+  },
+  "systems": {
+    "heater_mass_flow_kg_s": 2,
+    "cold_c": 15,
+    "hot_c": 60,
+    "average_demand_lps": 0.875,
+    "storage_hours": 4,
+    "storage_margin_pct": 10,
+    "pump_flow_lps": 3.5,
+    "pump_head_components_m": [
+      25,
+      5,
+      2,
+      1,
+      12
+    ],
+    "pump_efficiency": 0.75,
+    "runoff_coefficient": 0.9,
+    "rainfall_mm_hr": 75,
+    "roof_area_m2": 1200
+  },
+  "hand_schedule": {
+    "pipe_flows_lps": {
+      "P0": 3.5,
+      "P1": 2,
+      "P2": 1.5
+    },
+    "terminal_paths": {
+      "A": [
+        "P0",
+        "P1"
+      ],
+      "B": [
+        "P0",
+        "P2"
+      ]
+    },
+    "drainage_expected": {
+      "total_drainage_dfu": 48,
+      "required_sizes_mm": {
+        "D0": 100,
+        "D1": 75,
+        "D2": 100
+      },
+      "actual_slopes_pct": {
+        "D0": 5,
+        "D1": 5,
+        "D2": 5
+      },
+      "technical_status": "WARNING",
+      "coverage_status": "PARTIAL"
+    }
+  },
+  "expected_warnings": [
+    "CODE_EDITION_AND_TABLES_UNVERIFIED",
+    "MANUFACTURER_CATALOGUE_UNVERIFIED",
+    "INDEPENDENT_ENGINEER_REVIEW_PENDING",
+    "DRAINAGE_PARTIAL_COVERAGE"
+  ],
+  "unevaluated_checks": [
+    "fixture diversity and WSFU-to-flow applicability",
+    "minimum-pressure survey and pressure zones",
+    "backflow and maximum static pressure",
+    "hot-water recirculation heat loss, balancing, scald and hygiene controls",
+    "pump curve/NPSH and tank operation",
+    "drainage vent/trap/cleanout/offset arrangement",
+    "storm secondary drainage and local rainfall adoption",
+    "CAD/IFC/Revit extraction completeness",
+    "all licensed code-table values and local amendments"
+  ]
+}

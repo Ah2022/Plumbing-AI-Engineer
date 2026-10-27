@@ -1,0 +1,16 @@
+{
+  "designated_reviewer_role": "BIM MANAGER",
+  "reviewer_name": null,
+  "credentials": null,
+  "qualified_plumbing_engineer": null,
+  "independent_of_implementation": null,
+  "decision": "PENDING",
+  "input_sha256": "633d338d75bc80ac2b3af4b35d1f6174efcd0c45c03dfca8056cdd33f544f8b6",
+  "expected_sha256": "7df1e2c2b9b0b7435ad8b52102eb4b7b745f8f80bae728c78fb29a9c7399cfcc",
+  "signed_at": null,
+  "signature_artifact_sha256": null,
+  "source_authentication_evidence": null,
+  "scope": "Review entire project inputs/expected outputs, each warning and unevaluated requirement; attach authenticated code/manufacturer sources and an independently signed calculation report",
+  "findings": [],
+  "signature_artifact_path": null
+}

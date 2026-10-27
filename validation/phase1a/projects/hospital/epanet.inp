@@ -1,0 +1,27 @@
+[TITLE]
+hospital - authored validation candidate, not approved
+[JUNCTIONS]
+;ID Elevation_m Demand_LPS
+J 1 0
+A 8 2
+B 25 1.5
+[RESERVOIRS]
+S 30
+[PIPES]
+;ID From To Length_m Internal_mm C MinorK
+P0 S J 35 58 140 1 OPEN
+P1 J A 45 46 140 1 OPEN
+P2 J B 60 36 140 1 OPEN
+[OPTIONS]
+UNITS LPS
+HEADLOSS H-W
+DEMAND MODEL DDA
+ACCURACY 0.000001
+TRIALS 100
+[TIMES]
+DURATION 0
+[REPORT]
+STATUS YES
+NODES ALL
+LINKS ALL
+[END]

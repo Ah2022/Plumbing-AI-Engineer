@@ -1,0 +1,27 @@
+[TITLE]
+residential - authored validation candidate, not approved
+[JUNCTIONS]
+;ID Elevation_m Demand_LPS
+J 1 0
+A 1 0.25
+B 6 0.35
+[RESERVOIRS]
+S 35
+[PIPES]
+;ID From To Length_m Internal_mm C MinorK
+P0 S J 12 20 140 1 OPEN
+P1 J A 16 20 140 1 OPEN
+P2 J B 24 20 140 1 OPEN
+[OPTIONS]
+UNITS LPS
+HEADLOSS H-W
+DEMAND MODEL DDA
+ACCURACY 0.000001
+TRIALS 100
+[TIMES]
+DURATION 0
+[REPORT]
+STATUS YES
+NODES ALL
+LINKS ALL
+[END]

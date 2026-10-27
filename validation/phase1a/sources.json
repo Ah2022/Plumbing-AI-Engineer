@@ -1,0 +1,23 @@
+[
+  {
+    "id": "EPA-EPANET-2.2",
+    "url": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P10113EM.TXT",
+    "locator": "Sections 3.1 Pipes and Minor Losses; Appendix C input format",
+    "status": "PUBLIC_METHOD_REFERENCE",
+    "scope": "Hydraulic equations, not building-code compliance"
+  },
+  {
+    "id": "IPC-2024",
+    "url": "https://codes.iccsafe.org/content/IPC2024P1",
+    "locator": "Chapters 6, 7, 9 and 11; Tables 604.3, 710.1 and 906.1 are review targets",
+    "status": "LICENSED_EDITION_REVIEW_PENDING",
+    "scope": "Edition target only; numeric tables not independently authenticated"
+  },
+  {
+    "id": "AUTHOR-BASIS-1",
+    "url": null,
+    "locator": "Each input.json and hand-calculations.md",
+    "status": "AUTHORED_CANDIDATE_NOT_APPROVED",
+    "scope": "Flows, bores, C=140, K=1, residual requirements and equipment criteria are stipulated test data, not code values"
+  }
+]

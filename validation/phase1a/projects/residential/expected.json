@@ -1,0 +1,94 @@
+{
+  "pipes": {
+    "P0": {
+      "flow_lps": 0.6,
+      "internal_mm": 20.0,
+      "velocity_m_s": 1.909859317102744,
+      "friction_loss_m": 2.7575041087647025,
+      "fitting_loss_m": 0.18597393662077058,
+      "nominal_mm": 25,
+      "selected_size_id": "R25",
+      "equipment_loss_m": 0
+    },
+    "P1": {
+      "flow_lps": 0.25,
+      "internal_mm": 20.0,
+      "velocity_m_s": 0.7957747154594766,
+      "friction_loss_m": 0.7266138725571621,
+      "fitting_loss_m": 0.03228714177443934,
+      "nominal_mm": 25,
+      "selected_size_id": "R25",
+      "equipment_loss_m": 0
+    },
+    "P2": {
+      "flow_lps": 0.35,
+      "internal_mm": 20.0,
+      "velocity_m_s": 1.1140846016432673,
+      "friction_loss_m": 2.032469636587597,
+      "fitting_loss_m": 0.0632827978779011,
+      "nominal_mm": 25,
+      "selected_size_id": "R25",
+      "equipment_loss_m": 0
+    }
+  },
+  "terminals": {
+    "A": {
+      "available_head_m": 30.297620940282926,
+      "required_head_m": 10,
+      "margin_m": 20.297620940282926,
+      "path": [
+        "P0",
+        "P1"
+      ]
+    },
+    "B": {
+      "available_head_m": 23.96076952014903,
+      "required_head_m": 12,
+      "margin_m": 11.960769520149029,
+      "path": [
+        "P0",
+        "P2"
+      ]
+    }
+  },
+  "governing_terminal": "B",
+  "minimum_pressure_margin_m": 11.960769520149029,
+  "technical_status": "PASS",
+  "review_status": "REVIEW_REQUIRED",
+  "heater_kw": 47.0925,
+  "domestic_storage_m3": 2.3760000000000003,
+  "pump_power_kw": 0.20397832,
+  "storm_flow_lps": 2.25,
+  "drainage": {
+    "total_drainage_dfu": 7,
+    "required_sizes_mm": {
+      "D0": 75,
+      "D1": 50,
+      "D2": 50
+    },
+    "actual_slopes_pct": {
+      "D0": 5,
+      "D1": 5,
+      "D2": 5
+    },
+    "technical_status": "WARNING",
+    "coverage_status": "PARTIAL"
+  },
+  "expected_warnings": [
+    "CODE_EDITION_AND_TABLES_UNVERIFIED",
+    "MANUFACTURER_CATALOGUE_UNVERIFIED",
+    "INDEPENDENT_ENGINEER_REVIEW_PENDING",
+    "DRAINAGE_PARTIAL_COVERAGE"
+  ],
+  "unevaluated_checks": [
+    "fixture diversity and WSFU-to-flow applicability",
+    "minimum-pressure survey and pressure zones",
+    "backflow and maximum static pressure",
+    "hot-water recirculation heat loss, balancing, scald and hygiene controls",
+    "pump curve/NPSH and tank operation",
+    "drainage vent/trap/cleanout/offset arrangement",
+    "storm secondary drainage and local rainfall adoption",
+    "CAD/IFC/Revit extraction completeness",
+    "all licensed code-table values and local amendments"
+  ]
+}
