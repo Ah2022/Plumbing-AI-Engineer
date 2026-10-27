@@ -48,14 +48,14 @@ def hot_water_demand(conn, fixtures: list[dict], calc_id: str,
     for fixture in fixtures: finite('quantity',fixture.get('quantity'),minimum=0)
     records = get_table_records(conn, "IPC", "hot_water", "9_Hot_Water_Basis [fixture+gph")
     total_gph = 0.0
+    schedule = []
     missing = []
     for f in fixtures:
-        match = None
-        for rec in records:
-            name = str(rec.get("fixture", (None, None, None))[1] or "")
-            if f["fixture_name"].lower() in name.lower() or name.lower() in f["fixture_name"].lower():
-                match = rec
-                break
+        matches = [rec for rec in records if str(rec.get('fixture', (None, None, None))[1] or '').strip().casefold()
+                   == str(f['fixture_name']).strip().casefold()]
+        if len(matches) > 1:
+            raise ValueError('Ambiguous hot-water fixture: ' + f['fixture_name'])
+        match = matches[0] if matches else None
         if match is None:
             missing.append(f["fixture_name"])
             continue
@@ -63,7 +63,10 @@ def hot_water_demand(conn, fixtures: list[dict], calc_id: str,
         if gph is None:
             missing.append(f["fixture_name"])
             continue
+        finite('source fixture GPH', gph, minimum=0)
         total_gph += gph * f["quantity"]
+        schedule.append(dict(fixture_name=f['fixture_name'], quantity=f['quantity'],
+            gph=gph, subtotal_gph=gph * f['quantity'], reference=match.get('_table_reference')))
 
     if missing:
         raise MissingCodeDataError(
@@ -79,7 +82,7 @@ def hot_water_demand(conn, fixtures: list[dict], calc_id: str,
         calc_type="hot_water_demand",
         formula="Design hourly demand = sum(fixture_gph * qty) * demand_factor; "
                 "Storage capacity = design hourly demand * storage_capacity_factor",
-        inputs={"demand_factor": (demand_factor, "-"), "storage_capacity_factor": (storage_capacity_factor, "-")},
+        inputs={"fixture_schedule": schedule, "demand_factor": (demand_factor, "-"), "storage_capacity_factor": (storage_capacity_factor, "-")},
         intermediate={"total_connected_demand_gph": total_gph},
         result_value=round(design_hourly_demand_gph, 1),
         result_unit="GPH",

@@ -21,6 +21,7 @@ def test_water_network_review_saves_full_trace(fresh_app):
 
 def test_invalid_network_json_is_actionable(fresh_app):
     at=open_network(fresh_app)
+    next(r for r in at.radio if r.label=='Network input method').set_value('Mapped network JSON').run(timeout=30)
     next(t for t in at.text_area if t.label=='Mapped network JSON').set_value('{not json}')
     next(b for b in at.button if b.label=='Run network review').click().run(timeout=30)
     assert not at.exception and at.error
@@ -38,8 +39,19 @@ def test_drainage_missing_data_never_crashes_or_claims_full_compliance(fresh_app
 
 def test_cross_code_network_request_is_rejected(fresh_app):
     at=open_network(fresh_app)
+    next(r for r in at.radio if r.label=='Network input method').set_value('Mapped network JSON').run(timeout=30)
     field=next(t for t in at.text_area if t.label=='Mapped network JSON')
     model=json.loads(field.value);model['code_id']='OTHER'
     field.set_value(json.dumps(model))
     next(b for b in at.button if b.label=='Run network review').click().run(timeout=30)
     assert not at.exception and at.error
+
+
+def test_edited_supply_head_reaches_review(fresh_app):
+    at=open_network(fresh_app)
+    next(n for n in at.number_input if n.label=='Available supply head (m)').set_value(1)
+    next(b for b in at.button if b.label=='Run network review').click().run(timeout=30)
+    assert not at.exception
+    assert at.session_state['network_result']['minimum_pressure_margin_m'] < 0
+    row=at.session_state['conn'].execute("SELECT inputs_json FROM calculations WHERE calc_type='water_network_check'").fetchone()
+    assert json.loads(row['inputs_json'])['network']['available_head_m']==1

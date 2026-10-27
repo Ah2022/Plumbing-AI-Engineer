@@ -37,7 +37,9 @@ from calculations.vent import size_vent_pipe, size_vent_pipe_multidim
 from calculations.hot_water import hot_water_demand, check_hot_water_temperature, heater_capacity, TEMPERATURE_CHECKS
 from calculations.tanks import size_domestic_water_tank, size_hot_water_storage_tank_from_demand
 from calculations.pumps import select_pump_duty
-from database.design_table_api import list_water_fixture_unit_choices
+from database.design_table_api import (list_water_fixture_unit_choices,
+    list_drainage_fixture_unit_choices, list_hot_water_demand_choices)
+from app.fixture_schedule import fixture_schedule
 from calculations.stormwater import design_rainfall_intensity, size_roof_drain, size_storm_drain_pipe
 from calculations.hydraulics import rational_method_peak_flow
 from reports.qaqc_dashboard import run_qaqc
@@ -355,8 +357,13 @@ def page_drainage_vent():
     tab1, tab2, tab3, tab4 = st.tabs(["Drainage sizing", "Min slope check", "Vent sizing (simple)", "Vent sizing (IPC Table 906.1)"])
 
     with tab1:
+        schedule, schedule_dfu = fixture_schedule(conn, project_id, code_id, 'Drainage',
+            list_drainage_fixture_unit_choices(conn, code_id), 'DFU')
+        use_schedule = st.checkbox('Use fixture list for drainage sizing', value=bool(schedule),
+                                   disabled=not schedule)
         with st.form("drainage_sizing"):
-            dfu = st.number_input("Total DFU", min_value=0.0, value=6.0)
+            dfu = st.number_input("Manual total DFU", min_value=0.0, value=6.0, disabled=use_schedule,
+                                  help="Ignored while the fixture list is selected.")
             context = st.selectbox("Context", [
                 "horizontal_branch", "stack_le3_branch_intervals",
                 "stack_gt3_branch_intervals", "branch_interval",
@@ -365,7 +372,9 @@ def page_drainage_vent():
         if run:
             try:
                 calc_id = next_calc_id(conn, project_id, "drainage_pipe_sizing")
-                r = size_drainage_pipe(conn, code_id, dfu, context, calc_id)
+                r = size_drainage_pipe(conn, code_id, schedule_dfu if use_schedule else dfu, context, calc_id)
+                if use_schedule:
+                    r.inputs['fixture_schedule'] = schedule
                 save_calculation(conn, project_id, r)
                 st.markdown(f"### {status_badge(r.status)} — {r.result_value} {r.result_unit}")
                 show_result_table(r)
@@ -439,19 +448,15 @@ def page_hot_water():
     tab1, tab2, tab3 = st.tabs(["Demand & storage", "Temperature checks", "Heater capacity"])
 
     with tab1:
-        with st.form("hw_fixture_row"):
-            c1, c2 = st.columns(2)
-            fname = c1.text_input("Fixture name (IPC table, e.g. 'Showers', 'Basins, private lavatory')", "Showers")
-            qty = c2.number_input("Quantity", min_value=1, value=20, step=1)
-            add = st.form_submit_button("Add to list")
-            if add:
-                st.session_state.setdefault("hw_fixture_list", []).append({"fixture_name": fname, "quantity": qty})
-        hw_fixtures = st.session_state.get("hw_fixture_list", [])
+        code_id = _project_code(conn, project_id)
+        with st.expander('Hot-water fixture units (WSFU)', expanded=True):
+            fixture_schedule(conn, project_id, code_id, 'Hot-water supply',
+                list_water_fixture_unit_choices(conn, code_id, service='hot'), 'hot WSFU')
+            st.caption('Hot WSFU supports supply-pipe demand assessment. It is separate from the GPH method below.')
+        st.caption('Hourly demand rates below use the ASPE hospital method held in the IPC workbook, including for projects using another code. Review that method against the project basis.')
+        hw_fixtures, connected_gph = fixture_schedule(conn, project_id, code_id, 'Hot-water demand',
+            list_hot_water_demand_choices(conn), 'GPH')
         if hw_fixtures:
-            st.dataframe(pd.DataFrame(hw_fixtures), width='stretch')
-            if st.button("Clear list", key="hw_clear"):
-                st.session_state["hw_fixture_list"] = []
-                st.rerun()
             if st.button("Calculate hot water demand & storage"):
                 try:
                     calc_id = next_calc_id(conn, project_id, "hot_water_demand")

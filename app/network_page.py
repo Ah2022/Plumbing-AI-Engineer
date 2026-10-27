@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 import streamlit as st
 
+from app.network_editor import parse_network, network_tables
 from app.db_helpers import next_calc_id,save_calculation
 from calculations.network import analyze_water_network,analyze_drainage_network
 from database.design_table_api import get_demand_from_wsfu
@@ -19,26 +20,51 @@ def page_network_review():
     conn=st.session_state.conn
     code=conn.execute('SELECT code_id FROM projects WHERE project_id=?',(pid,)).fetchone()[0]
     st.info('Examples use synthetic criteria and catalogues. Replace them with reviewed project/manufacturer '
-            'data. This page reads mapped network JSON; it does not yet scan raw CAD or IFC files.')
+            'data. Edit mapped nodes and pipes below, or import JSON. Raw CAD/IFC scanning is not yet supported.')
     kind=st.selectbox('Network type',['Domestic water','Drainage and vents'])
-    if st.session_state.get('_network_kind')!=kind:
-        st.session_state.pop('network_result',None)
-        st.session_state['_network_kind']=kind
     from compliance.governance import get_basis
     basis=get_basis(conn,pid)
     revision=basis['revision'] if basis else 0
     example='water_network.json' if kind=='Domestic water' else 'drainage_network.json'
     template=json.loads((ROOT/'examples'/example).read_text(encoding='utf-8'))
     template['code_id']=code
-    text=st.text_area('Mapped network JSON',json.dumps(template,indent=2),height=400,key=f'network_json_{pid}_{revision}_{code}_{kind}')
+    scope=f'{pid}_{revision}_{code}_{kind}'
+    if st.session_state.get('_network_scope') != scope:
+        st.session_state.pop('network_result', None)
+        st.session_state['_network_scope'] = scope
+    draft_key = 'network_draft_' + scope
+    model = st.session_state.setdefault(draft_key, template)
+    mode = st.radio('Network input method', ['Editable tables', 'Mapped network JSON'], horizontal=True)
+    model_error = None
+    if mode == 'Mapped network JSON':
+        upload = st.file_uploader('Import mapped network JSON', type=['json'], key='network_upload_' + scope)
+        text=st.text_area('Mapped network JSON', json.dumps(model, indent=2), height=300,
+                          key='network_json_' + scope)
+        try:
+            model = parse_network(upload.getvalue().decode('utf-8-sig') if upload else text, code)
+            if st.button('Load JSON into editable tables'):
+                st.session_state[draft_key] = model
+                st.session_state['network_editor_generation_' + scope] = st.session_state.get('network_editor_generation_' + scope, 0) + 1
+                st.success('JSON loaded. Select Editable tables to edit the imported network.')
+        except (ValueError, TypeError, UnicodeError) as error:
+            model_error = str(error)
+            st.error(model_error)
+    else:
+        try:
+            generation = st.session_state.get('network_editor_generation_' + scope, 0)
+            model = network_tables(model, scope + str(generation), kind == 'Domestic water')
+        except (ValueError, TypeError, KeyError) as error:
+            model_error = str(error)
+            st.error(model_error)
+    st.download_button('Download mapped network JSON', json.dumps(model, indent=2),
+                       file_name='mapped-network.json', mime='application/json')
     select=st.checkbox('Select available catalogue sizes against velocity and pressure',value=False,
                        disabled=kind!='Domestic water')
     if st.button('Run network review'):
         try:
-            def reject_constant(value): raise ValueError('Non-finite JSON constant: '+value)
-            model=json.loads(text,parse_constant=reject_constant)
-            if not isinstance(model,dict) or model.get('code_id')!=code:
-                raise ValueError('Network code_id must match the active project code')
+            if model_error:
+                raise ValueError(model_error)
+            model = parse_network(json.dumps(model), code)
             network_id=model.get('network_id')
             if not isinstance(network_id,str) or not network_id.strip(): raise ValueError('network_id is required')
             if kind=='Domestic water':
@@ -69,9 +95,12 @@ def page_network_review():
     report=st.session_state.get('network_result')
     if report:
         st.subheader('Last saved review')
-        st.write(dict(calc_id=report['calc_id'],technical_status=report['technical_status'],
-                      review_status=report['review_status'],input_sha256=report['input_sha256']))
-        st.caption('This is the last submitted network. Run again after editing the draft JSON.')
+        st.caption(f"Calculation: {report['calc_id']}")
+        st.metric('Technical result', report['technical_status'])
+        st.metric('Engineering review', report['review_status'])
+        with st.expander('Input verification hash'):
+            st.code(report['input_sha256'], language=None)
+        st.caption('This is the last submitted network. Run again after changing network inputs.')
         st.dataframe(report['pipes'],width='stretch',alt='Per-pipe design checks and references')
         if report.get('terminals'):
             st.dataframe(report['terminals'],width='stretch',alt='All supply-to-terminal pressure paths and margins')

@@ -467,7 +467,7 @@ def get_storm_drain_pipe_size(conn, code_id: str, design_flow_lpm: float,
     return None  # design_flow_lpm exceeds every tabulated size -- needs engineer judgement (parallel drains)
 
 
-def list_water_fixture_unit_choices(conn, code_id: str) -> list[dict]:
+def list_water_fixture_unit_choices(conn, code_id: str, service: str = 'cold') -> list[dict]:
     """
     Normalizes code_id's own '1_Fixture_Units' table into a flat list of
     pickable (fixture, occupancy) choices with a real WSFU value attached,
@@ -489,14 +489,16 @@ def list_water_fixture_unit_choices(conn, code_id: str) -> list[dict]:
     water-supply-FU shape -- callers must handle the empty-choices case
     (manual entry) rather than treat [] as an error.
     """
+    if service not in ('cold', 'hot'):
+        raise ValueError('Fixture-unit service must be cold or hot')
     records = get_table_records(conn, code_id, "water", "1_Fixture_Units")
     choices = []
     for rec in records:
         fixture = rec.get("fixture", (None, None, None))[1]
         if not fixture:
             continue
-        if "cold" in rec:  # SBC701-style
-            val, _, conf = rec.get("cold", (None, None, None))
+        if service in rec:  # Explicit service-specific WSFU only.
+            val, _, conf = rec.get(service, (None, None, None))
             if val is None:
                 continue
             occ = rec.get("occupancy", (None, None, None))[1] or ""
@@ -508,7 +510,7 @@ def list_water_fixture_unit_choices(conn, code_id: str) -> list[dict]:
                 "control": ctrl or None, "wsfu_value": val, "confidence": conf,
                 "table_reference": rec.get("_table_reference"),
             })
-        elif any(c in rec for c in ("private", "public", "assembly")):  # UPC-style
+        elif service == 'cold' and 'min_branch_in' in rec and any(c in rec for c in ("private", "public", "assembly")):  # UPC water table, not drainage traps
             for col, occ_label in (("private", "Private"), ("public", "Public"), ("assembly", "Assembly")):
                 if col not in rec:
                     continue
@@ -522,6 +524,48 @@ def list_water_fixture_unit_choices(conn, code_id: str) -> list[dict]:
                 })
         # else: this code's '1_Fixture_Units' rows for this fixture aren't in a
         # water-supply-FU shape -- skip, don't guess which column might be a WSFU value.
+    return choices
+
+
+def list_drainage_fixture_unit_choices(conn, code_id: str) -> list[dict]:
+    """Use only the active code's drainage columns; never borrow another code's DFU."""
+    choices = []
+    records = get_table_records(conn, code_id, 'water', '1_Fixture_Units')
+    records += get_table_records(conn, code_id, 'drainage', '1_Fixture_Units')
+    for rec in records:
+        fixture = rec.get('fixture', (None, None, None))[1]
+        columns = []
+        specific = {'IPC': 'dfu_ipc', 'UPC': 'dfu_upc'}.get(code_id)
+        if specific and specific in rec:
+            columns = [(specific, '')]
+        elif 'dfu' in rec:
+            if not fixture and rec.get('trap_size_mm', (None, None, None))[0] is not None:
+                fixture = f"Trap {rec['trap_size_mm'][0]:g} mm (verify fixture applicability)"
+            columns = [('dfu', '')]
+        elif code_id == 'UPC' and 'trap_in' in rec:
+            columns = [(col, col.title()) for col in ('private', 'public', 'assembly') if col in rec]
+        if not fixture:
+            continue
+        for col, occupancy in columns:
+            value, _, confidence = rec[col]
+            if value is None:
+                continue
+            choices.append(dict(label=f'{fixture} {occupancy} — {value:g} DFU'.strip(),
+                fixture_name=fixture, occupancy=occupancy, unit_value=value, unit='DFU',
+                confidence=confidence, table_reference=rec.get('_table_reference')))
+    return choices
+
+
+def list_hot_water_demand_choices(conn) -> list[dict]:
+    """ASPE demand rates held in the IPC workbook; these are GPH, not WSFU."""
+    choices = []
+    for rec in get_table_records(conn, 'IPC', 'hot_water', '9_Hot_Water_Basis [fixture+gph'):
+        name = rec.get('fixture', (None, None, None))[1]
+        value, _, confidence = rec.get('gph', (None, None, None))
+        if name and value is not None:
+            choices.append(dict(label=f'{name} — {value:g} GPH', fixture_name=name,
+                unit_value=value, unit='GPH', confidence=confidence,
+                table_reference=rec.get('_table_reference')))
     return choices
 
 
