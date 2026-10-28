@@ -1,0 +1,75 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "network_transient",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "Authored software example only; independent engineering acceptance pending",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "density_kg_m3": 1000,
+    "atmospheric_kpa": 100,
+    "vapour_absolute_kpa": 2,
+    "allowable_gauge_kpa": 3000,
+    "duration_s": 0.1,
+    "maximum_step_s": 0.01,
+    "report_step_s": 0.01,
+    "initial_tolerance_m": 0.001,
+    "nodes": [
+      {
+        "id": "S",
+        "source_id": "SYN",
+        "kind": "fixed_head",
+        "elevation_m": 0,
+        "initial_head_m": 100,
+        "fixed_head_m": 100
+      },
+      {
+        "id": "V",
+        "source_id": "SYN",
+        "kind": "valve",
+        "elevation_m": 0,
+        "initial_head_m": 100,
+        "downstream_head_m": 0,
+        "valve_resistance_m_per_m6_s2": 1621138.9382774043,
+        "opening": [
+          {
+            "time_s": 0,
+            "fraction": 1
+          },
+          {
+            "time_s": 0.01,
+            "fraction": 0
+          },
+          {
+            "time_s": 0.1,
+            "fraction": 0
+          }
+        ]
+      }
+    ],
+    "pipes": [
+      {
+        "id": "P",
+        "source_id": "SYN",
+        "from_node": "S",
+        "to_node": "V",
+        "length_m": 100,
+        "internal_mm": 100,
+        "wave_speed_m_s": 1000,
+        "friction_factor": 0,
+        "initial_flow_lps": 7.853981633974484,
+        "cells": 10
+      }
+    ]
+  }
+}

@@ -4,10 +4,11 @@ This reproduces formulas, including their source assumptions and mistakes.
 It does not verify engineering criteria, macros, drawings or code compliance.
 """
 from dataclasses import dataclass
-from decimal import Decimal,ROUND_HALF_UP,ROUND_UP
+from decimal import Decimal,ROUND_HALF_UP,ROUND_UP,ROUND_DOWN
 import math
 import operator
 import re
+import fnmatch
 
 from openpyxl.formula.tokenizer import Tokenizer,Token
 from openpyxl.utils.cell import range_boundaries,get_column_letter,column_index_from_string
@@ -81,7 +82,40 @@ class Parser:
 
 
 SUPPORTED={'IF','SUM','MAX','MIN','ISNUMBER','MATCH','INDEX','VLOOKUP','HLOOKUP','LOOKUP',
-           'ROUNDUP','ROUND','EVEN','SQRT','ABS','RADIANS','SIN','COS','CHAR','COLUMN','INDIRECT'}
+           'ROUNDUP','ROUND','EVEN','SQRT','ABS','RADIANS','SIN','COS','CHAR','COLUMN','INDIRECT',
+           'IFERROR','AVERAGE','COUNT','COUNTA','AND','OR','NOT','POWER','EXP','LN','LOG','LOG10','PI',
+           'ROUNDDOWN','TAN','ASIN','ACOS','ATAN','SUMPRODUCT','SUMIF','COUNTIF','SUMIFS','COUNTIFS'}
+
+
+def _criterion(value,criterion):
+    """Bounded ordinary Excel criteria; wildcard escaping is explicit."""
+    if criterion is None:criterion=0
+    if isinstance(criterion,(int,float,bool)):
+        return (0 if value is None else value)==criterion and not isinstance(value,str)
+    criterion=str(criterion);match=re.match(r'^(<=|>=|<>|=|<|>)(.*)$',criterion)
+    op,target=match.groups() if match else ('=',criterion)
+    try:number=float(target)
+    except ValueError:number=None
+    if number is not None:
+        if value is None:value=0
+        if not isinstance(value,(int,float)) or isinstance(value,bool):return op=='<>'
+        return {'=':operator.eq,'<>':operator.ne,'<':operator.lt,'>':operator.gt,'<=':operator.le,'>=':operator.ge}[op](value,number)
+    if op not in ('=','<>'):raise UnsupportedFormula('Text ordering criteria are outside the supported Excel subset')
+    if value is None:value=''
+    if not isinstance(value,str):return op=='<>'
+    pattern='';i=0
+    if len(target)>512 or len(value)>4000:raise UnsupportedFormula('Criteria text exceeds supported bounds')
+    while i<len(target):
+        if target[i]=='~' and i+1<len(target):
+            i+=1;char=target[i];pattern+=('[[]' if char=='[' else '[]]' if char==']' else '['+char+']' if char in '*?' else char)
+        elif target[i]=='*':pattern+='*'
+        elif target[i]=='?':pattern+='?'
+        else:pattern+=('[[]' if target[i]=='[' else '[]]' if target[i]==']' else target[i])
+        i+=1
+    # fnmatch translation uses atomic groups for interior stars (Python 3.12),
+    # avoiding regex backtracking from repeated wildcard criteria.
+    equal=re.fullmatch(fnmatch.translate(pattern.casefold()),value.casefold()) is not None
+    return equal if op=='=' else not equal
 
 
 class Evaluator:
@@ -244,6 +278,14 @@ class Evaluator:
         if name=='IF':
             if len(args) not in (2,3):raise FormulaError('IF requires 2 or 3 arguments')
             return ev(1) if self.truth(ev(0)) else ev(2) if len(args)>2 else False
+        if name=='IFERROR':
+            if len(args)!=2:raise FormulaError('IFERROR requires two arguments')
+            try:return self.scalar(ev(0))
+            except UnsupportedFormula:raise
+            except (FormulaError,ArithmeticError):return ev(1)
+        if name=='PI':
+            if args:raise FormulaError('PI takes no arguments')
+            return math.pi
         if name=='ISNUMBER':
             try:v=self.scalar(ev(0));return isinstance(v,(int,float)) and not isinstance(v,bool)
             except UnsupportedFormula:raise
@@ -280,20 +322,77 @@ class Evaluator:
             if not 1<=col<=(len(table[0]) if name=='VLOOKUP' else len(table)):raise FormulaError('#REF!: lookup column/row out of bounds')
             return table[index][col-1] if name=='VLOOKUP' else table[col-1][index]
         values=[ev(i) for i in range(len(args))]
-        if name in ('SUM','MAX','MIN'):
-            numbers=[]
+        if name in ('SUMIF','COUNTIF','SUMIFS','COUNTIFS'):
+            matrices=[];criteria=[]
+            if name in ('SUMIF','COUNTIF'):
+                if len(values) not in ((2,3) if name=='SUMIF' else (2,)):raise FormulaError('Invalid criteria function argument count')
+                matrices=[self.matrix(values[0])];criteria=[self.scalar(values[1])]
+                sums=self.matrix(values[2] if len(values)==3 else values[0]) if name=='SUMIF' else None
+            else:
+                start=1 if name=='SUMIFS' else 0
+                if len(values)<start+2 or (len(values)-start)%2:raise FormulaError('Criteria ranges and criteria must be paired')
+                sums=self.matrix(values[0]) if start else None
+                matrices=[self.matrix(values[i]) for i in range(start,len(values),2)]
+                criteria=[self.scalar(values[i]) for i in range(start+1,len(values),2)]
+            allmatrices=matrices+([sums] if sums is not None else [])
+            shape=(len(matrices[0]),len(matrices[0][0]))
+            if any((len(m),len(m[0]))!=shape for m in allmatrices):raise UnsupportedFormula('Criteria/sum ranges must have identical shape; implicit expansion is unsupported')
+            total=0
+            for r in range(shape[0]):
+                for c in range(shape[1]):
+                    if all(_criterion(m[r][c],criterion) for m,criterion in zip(matrices,criteria)):
+                        v=sums[r][c] if sums is not None else 1
+                        if isinstance(v,(int,float)) and not isinstance(v,bool):total+=v
+            return total
+        if name=='SUMPRODUCT':
+            if not values:raise FormulaError('SUMPRODUCT requires arguments')
+            matrices=[self.matrix(v) for v in values];shape=(len(matrices[0]),len(matrices[0][0]))
+            if any((len(m),len(m[0]))!=shape for m in matrices):raise FormulaError('SUMPRODUCT arrays must have identical dimensions')
+            return sum(math.prod(m[r][c] if isinstance(m[r][c],(int,float)) and not isinstance(m[r][c],bool) else 0 for m in matrices)
+                       for r in range(shape[0]) for c in range(shape[1]))
+        if name in ('AND','OR','NOT'):
+            if name=='NOT':
+                if len(values)!=1:raise FormulaError('NOT requires one argument')
+                return not self.truth(values[0])
+            logical=[]
             for v in values:
+                if not isinstance(v,Ref):logical.append(self.truth(v));continue
                 for row in self.matrix(v):
+                    logical.extend(self.truth(x) for x in row if isinstance(x,(bool,int,float)))
+            if not logical:raise FormulaError('Logical aggregate needs a numeric/logical input')
+            return all(logical) if name=='AND' else any(logical)
+        if name in ('SUM','MAX','MIN','AVERAGE','COUNT','COUNTA'):
+            numbers=[]
+            nonempty=0
+            for v in values:
+                if name!='COUNTA' and not isinstance(v,Ref):
+                    scalar=self.scalar(v)
+                    if scalar is not None:
+                        try:numbers.append(self.number(scalar))
+                        except FormulaError:
+                            if name!='COUNT':raise
+                    continue
+                for row in self.matrix(v):
+                    nonempty+=sum(x is not None for x in row)
                     numbers.extend(x for x in row if isinstance(x,(int,float)) and not isinstance(x,bool))
             if name=='SUM':return sum(numbers)
+            if name=='COUNT':return len(numbers)
+            if name=='COUNTA':return nonempty
+            if name=='AVERAGE':
+                if not numbers:raise FormulaError('AVERAGE has no numeric inputs')
+                return sum(numbers)/len(numbers)
             return (max(numbers) if name=='MAX' else min(numbers)) if numbers else 0
         x=self.number(values[0])
-        if name in ('ROUND','ROUNDUP'):
-            digits=int(self.number(values[1]));quantum=Decimal(10)**-digits
+        if name in ('ROUND','ROUNDUP','ROUNDDOWN'):
+            digits=int(self.number(values[1]))
             if abs(digits)>100:raise UnsupportedFormula('Rounding precision exceeds supported bounds')
-            return float(Decimal(str(x)).quantize(quantum,rounding=ROUND_UP if name=='ROUNDUP' else ROUND_HALF_UP))
+            quantum=Decimal(10)**-digits
+            return float(Decimal(str(x)).quantize(quantum,rounding={'ROUND':ROUND_HALF_UP,'ROUNDUP':ROUND_UP,'ROUNDDOWN':ROUND_DOWN}[name]))
+        if name=='POWER':return x**self.number(values[1])
+        if name=='LOG':return math.log(x,self.number(values[1]) if len(values)>1 else 10)
         if name=='EVEN':return math.copysign(2*math.ceil(abs(x)/2),x)
         if name=='CHAR':
             if not 1<=int(x)<=255:raise FormulaError('CHAR outside supported byte range')
             return bytes([int(x)]).decode('cp1252')
-        return {'SQRT':math.sqrt,'ABS':abs,'RADIANS':math.radians,'SIN':math.sin,'COS':math.cos}[name](x)
+        return {'SQRT':math.sqrt,'ABS':abs,'RADIANS':math.radians,'SIN':math.sin,'COS':math.cos,
+            'EXP':math.exp,'LN':math.log,'LOG10':math.log10,'TAN':math.tan,'ASIN':math.asin,'ACOS':math.acos,'ATAN':math.atan}[name](x)

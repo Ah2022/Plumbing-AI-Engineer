@@ -1632,5 +1632,1063 @@
     "absolute_tolerance": 1e-08,
     "derivation": "Selected10L below ideal gas acceptance requirement.",
     "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "medical-isothermal-pressure",
+    "module": "medical_gas",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "medical_gas",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "standard_basis": "HTM_02_01",
+        "standard_edition": "PROJECT ADOPTION PENDING; enter adopted edition",
+        "precedence_reference": "Fictional software example. No numerical HTM/NFPA/ISO rule is implied.",
+        "service": "O2",
+        "mode": "pressure",
+        "gas_constant_j_kgk": 300,
+        "gas_temperature_k": 300,
+        "compressibility": 1,
+        "heat_capacity_ratio": 1.4,
+        "reference_pressure_absolute_kpa": 100,
+        "reference_temperature_k": 300,
+        "reference_compressibility": 1,
+        "atmospheric_pressure_kpa": 100,
+        "source_pressure_absolute_kpa": 500,
+        "source_node": "S",
+        "minimum_terminal_absolute_kpa": 450,
+        "maximum_terminal_absolute_kpa": 550,
+        "maximum_velocity_m_s": 30,
+        "maximum_mach": 0.3,
+        "nodes": [
+          {
+            "id": "S",
+            "source_id": "SYN"
+          },
+          {
+            "id": "A",
+            "source_id": "SYN"
+          }
+        ],
+        "pipes": [
+          {
+            "id": "P1",
+            "source_id": "SYN",
+            "from_node": "S",
+            "to_node": "A",
+            "length_m": 10,
+            "internal_mm": 20,
+            "friction_factor": 0.02,
+            "fittings_k": 0
+          }
+        ],
+        "demand_groups": [
+          {
+            "id": "WARD",
+            "source_id": "SYN",
+            "node": "A",
+            "clinical_position": "Fictional clinical position, not an adopted demand",
+            "positions": 4,
+            "flow_per_position_lpm": 60,
+            "diversity": 0.5,
+            "continuous_lpm": 0
+          }
+        ],
+        "plant_units": [
+          {
+            "id": "PLANT1",
+            "source_id": "SYN",
+            "reference_capacity_lpm": 200,
+            "available": true
+          },
+          {
+            "id": "PLANT2",
+            "source_id": "SYN",
+            "reference_capacity_lpm": 200,
+            "available": true
+          }
+        ],
+        "required_reserve_min": 5,
+        "reserve_standard_l": 1200
+      }
+    },
+    "expected_values": {
+      "design_reference_flow_lpm": 120,
+      "mass_flow_kg_s": 0.0022222222222222222,
+      "minimum_terminal_absolute_kpa": 499.9549663347947,
+      "plant_n_minus_one_capacity_lpm": 200,
+      "reserve_duration_min": 10
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-07,
+    "derivation": "Independent arithmetic: 4*60*0.5=120 reference L/min; rho_ref=100000/(300*300); mdot=Q*rho_ref. p2=sqrt(p1\u00b2-(0.02*10/0.02)*mdot\u00b2*90000/A\u00b2). Two 200 L/min plant units leave 200 with one unavailable. 1200/120=10 min.",
+    "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
+  },
+  {
+    "id": "medical-isothermal-vacuum",
+    "module": "medical_gas",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "medical_gas",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "standard_basis": "HTM_02_01",
+        "standard_edition": "PROJECT ADOPTION PENDING; enter adopted edition",
+        "precedence_reference": "Fictional software example. No numerical HTM/NFPA/ISO rule is implied.",
+        "service": "VAC",
+        "mode": "vacuum",
+        "gas_constant_j_kgk": 300,
+        "gas_temperature_k": 300,
+        "compressibility": 1,
+        "heat_capacity_ratio": 1.4,
+        "reference_pressure_absolute_kpa": 100,
+        "reference_temperature_k": 300,
+        "reference_compressibility": 1,
+        "atmospheric_pressure_kpa": 100,
+        "source_pressure_absolute_kpa": 30,
+        "source_node": "S",
+        "minimum_terminal_absolute_kpa": 20,
+        "maximum_terminal_absolute_kpa": 80,
+        "maximum_velocity_m_s": 30,
+        "maximum_mach": 0.3,
+        "nodes": [
+          {
+            "id": "S",
+            "source_id": "SYN"
+          },
+          {
+            "id": "A",
+            "source_id": "SYN"
+          }
+        ],
+        "pipes": [
+          {
+            "id": "P1",
+            "source_id": "SYN",
+            "from_node": "S",
+            "to_node": "A",
+            "length_m": 10,
+            "internal_mm": 20,
+            "friction_factor": 0.02,
+            "fittings_k": 0
+          }
+        ],
+        "demand_groups": [
+          {
+            "id": "WARD",
+            "source_id": "SYN",
+            "node": "A",
+            "clinical_position": "Fictional clinical position, not an adopted demand",
+            "positions": 4,
+            "flow_per_position_lpm": 60,
+            "diversity": 0.5,
+            "continuous_lpm": 0
+          }
+        ],
+        "plant_units": [
+          {
+            "id": "PLANT1",
+            "source_id": "SYN",
+            "reference_capacity_lpm": 200,
+            "available": true
+          },
+          {
+            "id": "PLANT2",
+            "source_id": "SYN",
+            "reference_capacity_lpm": 200,
+            "available": true
+          }
+        ],
+        "required_reserve_min": 5,
+        "reserve_standard_l": 1200
+      }
+    },
+    "expected_values": {
+      "design_reference_flow_lpm": 120,
+      "minimum_terminal_absolute_kpa": 30.741366872251668
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-07,
+    "derivation": "Vacuum terminal pressure increases away from the plant: p_terminal\u00b2=30000\u00b2+same independently calculated resistance term. Pipe orientation is plant to terminal, opposite actual flow.",
+    "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
+  },
+  {
+    "id": "swmm-dry-network",
+    "module": "dynamic_drainage",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "dynamic_drainage",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "duration_s": 600,
+        "routing_step_s": 1,
+        "report_step_s": 50,
+        "minimum_node_area_m2": 0.1,
+        "maximum_continuity_error_pct": 1,
+        "nodes": [
+          {
+            "id": "J",
+            "source_id": "SYN",
+            "kind": "junction",
+            "invert_m": 1,
+            "maximum_depth_m": 2,
+            "initial_depth_m": 0
+          },
+          {
+            "id": "O",
+            "source_id": "SYN",
+            "kind": "outfall",
+            "invert_m": 0,
+            "outfall_type": "FREE",
+            "tailwater_head_m": 0
+          }
+        ],
+        "pipes": [
+          {
+            "id": "P1",
+            "source_id": "SYN",
+            "from_node": "J",
+            "to_node": "O",
+            "length_m": 100,
+            "internal_mm": 100,
+            "manning_n": 0.013,
+            "inlet_offset_m": 0,
+            "outlet_offset_m": 0,
+            "entry_loss_k": 0,
+            "exit_loss_k": 0,
+            "average_loss_k": 0
+          }
+        ],
+        "inflows": []
+      }
+    },
+    "expected_values": {
+      "flooding_volume_m3": 0,
+      "maximum_absolute_flow_lps": 0,
+      "report_periods": 12,
+      "nonconverging_steps": 0
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-05,
+    "derivation": "Independent boundary reference: zero initial liquid depth and no external inflow implies zero liquid flow/flooding. 600/50=12 output periods. This case alone does not validate loaded network hydraulics.",
+    "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
+  },
+  {
+    "id": "shared-circuits-isothermal",
+    "module": "recirculation_network",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "recirculation_network",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "heater_node": "H",
+        "supply_temperature_c": 60,
+        "initial_temperature_c": 60,
+        "minimum_return_temperature_c": 55,
+        "minimum_distribution_temperature_c": 50,
+        "maximum_distribution_temperature_c": 65,
+        "water_density_kg_m3": 1000,
+        "specific_heat_j_kgk": 4000,
+        "duration_s": 120,
+        "maximum_step_s": 1,
+        "report_step_s": 10,
+        "available_pump_head_m": 5,
+        "control": {
+          "mode": "continuous"
+        },
+        "pipes": [
+          {
+            "id": "SUP",
+            "source_id": "SYN",
+            "from_node": "H",
+            "to_node": "J",
+            "length_m": 10,
+            "internal_mm": 20,
+            "ua_w_k": 0,
+            "ambient_temperature_c": 20,
+            "friction_factor": 0.02,
+            "fittings_k": 0,
+            "cells": 2
+          },
+          {
+            "id": "A1",
+            "source_id": "SYN",
+            "from_node": "J",
+            "to_node": "A",
+            "length_m": 10,
+            "internal_mm": 20,
+            "ua_w_k": 0,
+            "ambient_temperature_c": 20,
+            "friction_factor": 0.02,
+            "fittings_k": 0,
+            "cells": 2
+          },
+          {
+            "id": "A2",
+            "source_id": "SYN",
+            "from_node": "A",
+            "to_node": "R",
+            "length_m": 10,
+            "internal_mm": 20,
+            "ua_w_k": 0,
+            "ambient_temperature_c": 20,
+            "friction_factor": 0.02,
+            "fittings_k": 0,
+            "cells": 2
+          },
+          {
+            "id": "B1",
+            "source_id": "SYN",
+            "from_node": "J",
+            "to_node": "B",
+            "length_m": 10,
+            "internal_mm": 20,
+            "ua_w_k": 0,
+            "ambient_temperature_c": 20,
+            "friction_factor": 0.02,
+            "fittings_k": 0,
+            "cells": 2
+          },
+          {
+            "id": "B2",
+            "source_id": "SYN",
+            "from_node": "B",
+            "to_node": "R",
+            "length_m": 10,
+            "internal_mm": 20,
+            "ua_w_k": 0,
+            "ambient_temperature_c": 20,
+            "friction_factor": 0.02,
+            "fittings_k": 0,
+            "cells": 2
+          },
+          {
+            "id": "RET",
+            "source_id": "SYN",
+            "from_node": "R",
+            "to_node": "H",
+            "length_m": 10,
+            "internal_mm": 20,
+            "ua_w_k": 0,
+            "ambient_temperature_c": 20,
+            "friction_factor": 0.02,
+            "fittings_k": 0,
+            "cells": 2
+          }
+        ],
+        "circuits": [
+          {
+            "id": "A",
+            "source_id": "SYN",
+            "selected_flow_lps": 0.05,
+            "pipe_ids": [
+              "SUP",
+              "A1",
+              "A2",
+              "RET"
+            ]
+          },
+          {
+            "id": "B",
+            "source_id": "SYN",
+            "selected_flow_lps": 0.05,
+            "pipe_ids": [
+              "SUP",
+              "B1",
+              "B2",
+              "RET"
+            ]
+          }
+        ]
+      }
+    },
+    "expected_values": {
+      "total_circulation_flow_lps": 0.1,
+      "governing_loop_head_m": 0.12914856709775738,
+      "final_return_temperature_c": 60,
+      "heater_energy_kwh": 0,
+      "ambient_heat_loss_kwh": 0,
+      "energy_residual_j": 0,
+      "pump_on_time_s": 120
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-07,
+    "derivation": "Both 0.05 L/s circuits share SUP and RET: those carry 0.1 L/s, other pipes 0.05. Each pipe fL/D=10. Each circuit head is twice high-flow loss plus twice branch loss. Isothermal initial/boundary state with UA=0 has exactly no energy transfer.",
+    "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
+  },
+  {
+    "id": "recirculation-off-cooling",
+    "module": "recirculation_network",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "recirculation_network",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "heater_node": "H",
+        "supply_temperature_c": 60,
+        "initial_temperature_c": 60,
+        "minimum_return_temperature_c": 55,
+        "minimum_distribution_temperature_c": 50,
+        "maximum_distribution_temperature_c": 65,
+        "water_density_kg_m3": 1000,
+        "specific_heat_j_kgk": 4000,
+        "duration_s": 100,
+        "maximum_step_s": 1,
+        "report_step_s": 10,
+        "available_pump_head_m": 5,
+        "control": {
+          "mode": "schedule",
+          "schedule": [
+            {
+              "time_s": 0,
+              "enabled": false
+            }
+          ]
+        },
+        "pipes": [
+          {
+            "id": "SUP",
+            "source_id": "SYN",
+            "from_node": "H",
+            "to_node": "J",
+            "length_m": 10,
+            "internal_mm": 20,
+            "ua_w_k": 1,
+            "ambient_temperature_c": 20,
+            "friction_factor": 0.02,
+            "fittings_k": 0,
+            "cells": 2
+          },
+          {
+            "id": "A1",
+            "source_id": "SYN",
+            "from_node": "J",
+            "to_node": "A",
+            "length_m": 10,
+            "internal_mm": 20,
+            "ua_w_k": 1,
+            "ambient_temperature_c": 20,
+            "friction_factor": 0.02,
+            "fittings_k": 0,
+            "cells": 2
+          },
+          {
+            "id": "A2",
+            "source_id": "SYN",
+            "from_node": "A",
+            "to_node": "R",
+            "length_m": 10,
+            "internal_mm": 20,
+            "ua_w_k": 1,
+            "ambient_temperature_c": 20,
+            "friction_factor": 0.02,
+            "fittings_k": 0,
+            "cells": 2
+          },
+          {
+            "id": "B1",
+            "source_id": "SYN",
+            "from_node": "J",
+            "to_node": "B",
+            "length_m": 10,
+            "internal_mm": 20,
+            "ua_w_k": 1,
+            "ambient_temperature_c": 20,
+            "friction_factor": 0.02,
+            "fittings_k": 0,
+            "cells": 2
+          },
+          {
+            "id": "B2",
+            "source_id": "SYN",
+            "from_node": "B",
+            "to_node": "R",
+            "length_m": 10,
+            "internal_mm": 20,
+            "ua_w_k": 1,
+            "ambient_temperature_c": 20,
+            "friction_factor": 0.02,
+            "fittings_k": 0,
+            "cells": 2
+          },
+          {
+            "id": "RET",
+            "source_id": "SYN",
+            "from_node": "R",
+            "to_node": "H",
+            "length_m": 10,
+            "internal_mm": 20,
+            "ua_w_k": 1,
+            "ambient_temperature_c": 20,
+            "friction_factor": 0.02,
+            "fittings_k": 0,
+            "cells": 2
+          }
+        ],
+        "circuits": [
+          {
+            "id": "A",
+            "source_id": "SYN",
+            "selected_flow_lps": 0.05,
+            "pipe_ids": [
+              "SUP",
+              "A1",
+              "A2",
+              "RET"
+            ]
+          },
+          {
+            "id": "B",
+            "source_id": "SYN",
+            "selected_flow_lps": 0.05,
+            "pipe_ids": [
+              "SUP",
+              "B1",
+              "B2",
+              "RET"
+            ]
+          }
+        ]
+      }
+    },
+    "expected_values": {
+      "final_return_temperature_c": 59.682940710323294,
+      "pump_on_time_s": 0,
+      "heater_energy_kwh": 0,
+      "control_switches": 1
+    },
+    "expected_status": "FAIL",
+    "complete": true,
+    "absolute_tolerance": 1e-07,
+    "derivation": "Independent discrete energy reference: each identical pipe cools with T_next-20=(T-20)*(1-UA*dt/(rho*cp*V)). 100 steps, no flow; heater adds zero heat. Return-temperature-while-running check deliberately fails when pump never runs.",
+    "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
+  },
+  {
+    "id": "moc-joukowsky-before-reflection",
+    "module": "network_transient",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "network_transient",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "density_kg_m3": 1000,
+        "atmospheric_kpa": 100,
+        "vapour_absolute_kpa": 2,
+        "allowable_gauge_kpa": 3000,
+        "duration_s": 0.1,
+        "maximum_step_s": 0.01,
+        "report_step_s": 0.01,
+        "initial_tolerance_m": 0.001,
+        "nodes": [
+          {
+            "id": "S",
+            "source_id": "SYN",
+            "kind": "fixed_head",
+            "elevation_m": 0,
+            "initial_head_m": 100,
+            "fixed_head_m": 100
+          },
+          {
+            "id": "V",
+            "source_id": "SYN",
+            "kind": "valve",
+            "elevation_m": 0,
+            "initial_head_m": 100,
+            "downstream_head_m": 0,
+            "valve_resistance_m_per_m6_s2": 1621138.9382774043,
+            "opening": [
+              {
+                "time_s": 0,
+                "fraction": 1
+              },
+              {
+                "time_s": 0.01,
+                "fraction": 0
+              },
+              {
+                "time_s": 0.1,
+                "fraction": 0
+              }
+            ]
+          }
+        ],
+        "pipes": [
+          {
+            "id": "P",
+            "source_id": "SYN",
+            "from_node": "S",
+            "to_node": "V",
+            "length_m": 100,
+            "internal_mm": 100,
+            "wave_speed_m_s": 1000,
+            "friction_factor": 0,
+            "initial_flow_lps": 7.853981633974484,
+            "cells": 10
+          }
+        ]
+      }
+    },
+    "expected_values": {
+      "maximum_gauge_kpa": 1980.665,
+      "minimum_absolute_kpa": 1080.665,
+      "simulated_duration_s": 0.1,
+      "cavitation_domain_exceeded": false
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-06,
+    "derivation": "Independent lossless Joukowsky solution before source reflection returns: initial v=1 m/s, rho*a*delta-v=1 MPa; initial gauge head100m=980.665 kPa. During t<2L/a=.2s, minimum is initial absolute1080.665kPa and maximum1980.665kPa.",
+    "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
+  },
+  {
+    "id": "acoustic-energy-sum",
+    "module": "acoustic_prediction",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "acoustic_prediction",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "limit_dba": 50,
+        "bands": [
+          {
+            "frequency_hz": 1000,
+            "a_weight_db": 0,
+            "room_constant_m2": 16
+          }
+        ],
+        "sources": [
+          {
+            "id": "A",
+            "source_id": "SYN",
+            "distance_m": 0.5641895835477563,
+            "directivity_factor": 1,
+            "condition_reference": "Fictional 1 kHz single-band source",
+            "spectrum": [
+              {
+                "frequency_hz": 1000,
+                "sound_power_db": 40,
+                "attenuation_db": 0
+              }
+            ]
+          },
+          {
+            "id": "B",
+            "source_id": "SYN",
+            "distance_m": 0.5641895835477563,
+            "directivity_factor": 1,
+            "condition_reference": "Fictional 1 kHz single-band source",
+            "spectrum": [
+              {
+                "frequency_hz": 1000,
+                "sound_power_db": 40,
+                "attenuation_db": 0
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "expected_values": {
+      "predicted_receiver_dba": 40,
+      "acoustic_margin_db": 10
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-07,
+    "derivation": "For each source Q/(4*pi*r\u00b2)=1/4 and 4/R=1/4, so transfer=1/2. Two identical incoherent sources sum to unity transfer. The sole 1kHz band has supplied A correction0dB, hence40dBA.",
+    "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
+  },
+  {
+    "id": "lame-thermal-restraint",
+    "module": "pipe_stress",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "pipe_stress",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "internal_mm": 100,
+        "external_mm": 120,
+        "internal_gauge_kpa": 1000,
+        "external_gauge_kpa": 0,
+        "length_m": 10,
+        "youngs_modulus_mpa": 200000,
+        "material_alpha_per_k": 1.2e-05,
+        "temperature_change_k": 50,
+        "restraint_fraction": 1,
+        "bending_moment_nm": 0,
+        "stress_intensification": 1,
+        "allowable_stress_mpa": 200,
+        "allowable_anchor_force_n": 500000
+      }
+    },
+    "expected_values": {
+      "maximum_von_mises_mpa": 120.13380969321234,
+      "thermal_axial_stress_mpa": -120,
+      "thermal_anchor_force_n": 414690.2302738525,
+      "free_expansion_mm": 6
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-07,
+    "derivation": "Independent exact ratios: inner hoop61/11 MPa, radial-1 MPa; closed-end axial25/11 MPa. Full thermal restraint adds -200000*12e-6*50=-120MPa. Von Mises from three principal stresses; free expansion6mm.",
+    "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
+  },
+  {
+    "id": "relief-matching-rating-basis",
+    "module": "relief_selection",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "relief_selection",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "service": "potable_water",
+        "rating_basis": "CSA_TEMPERATURE_RELIEF",
+        "normal_gauge_kpa": 400,
+        "maximum_permitted_gauge_kpa": 1000,
+        "required_capacity_kw": 100,
+        "maximum_temperature_c": 90,
+        "minimum_set_margin_kpa": 100,
+        "required_listing": "FICTIONAL_TEST_LISTING",
+        "catalogue": [
+          {
+            "model": "DEMO-TP",
+            "source_id": "SYN",
+            "service": "potable_water",
+            "rating_basis": "CSA_TEMPERATURE_RELIEF",
+            "set_gauge_kpa": 700,
+            "certified_capacity_kw": 150,
+            "rating_temperature_c": 100,
+            "listing": "FICTIONAL_TEST_LISTING",
+            "evidence_reference": "Fictional ratings, not real certification"
+          }
+        ]
+      }
+    },
+    "expected_values": {
+      "eligible_count": 1,
+      "eligible_models": [
+        "DEMO-TP"
+      ]
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-07,
+    "derivation": "Condition/action candidate: matching service/basis/listing, 500<=700<=1000kPa,150>=100kW,100>=90C. No real manufacturer/listing verification.",
+    "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
+  },
+  {
+    "id": "lumped-air-rc-pressure",
+    "module": "drainage_air",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "drainage_air",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "atmospheric_kpa": 100,
+        "air_exponent": 1,
+        "maximum_pressure_ratio": 0.01,
+        "allowable_positive_pa": 200,
+        "allowable_negative_pa": 200,
+        "duration_s": 100,
+        "step_s": 0.1,
+        "report_step_s": 10,
+        "nodes": [
+          {
+            "id": "A",
+            "source_id": "SYN",
+            "air_volume_m3": 5,
+            "initial_gauge_pa": 0
+          }
+        ],
+        "vents": [
+          {
+            "id": "DRY",
+            "source_id": "SYN",
+            "from_node": "A",
+            "to_node": "ATM",
+            "linear_resistance_pa_s_m3": 100000,
+            "kind": "open"
+          }
+        ],
+        "displacements": [
+          {
+            "id": "DIS",
+            "source_id": "SYN",
+            "node": "A",
+            "hydrograph": [
+              {
+                "time_s": 0,
+                "air_flow_lps": 1
+              },
+              {
+                "time_s": 100,
+                "air_flow_lps": 1
+              }
+            ]
+          }
+        ],
+        "traps": [
+          {
+            "id": "T1",
+            "source_id": "SYN",
+            "node": "A",
+            "seal_mm": 50,
+            "effective_liquid_length_m": 0.2,
+            "damping_pa_s_m": 1000,
+            "density_kg_m3": 1000
+          }
+        ]
+      }
+    },
+    "expected_values": {
+      "maximum_gauge_pa": 99.99999974891068,
+      "minimum_gauge_pa": 0,
+      "trap_seal_breach": false,
+      "small_pressure_domain_exceeded": false
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-07,
+    "derivation": "Independent backward-Euler RC solution: compliance5/(1*100000)=5e-5 m\u00b3/Pa; R=100000 -> tau5s. Constant1L/s -> equilibrium100Pa. At100s with0.1s steps, p=100*(1-(1+.1/5)^-1000). Trap steady one-leg displacement tends to100/(2*rho*g)=5.099mm, below50mm.",
+    "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
+  },
+  {
+    "id": "swmm-event-manning-plateau",
+    "module": "dynamic_drainage",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "dynamic_drainage",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "duration_s": 1200,
+        "routing_step_s": 1,
+        "report_step_s": 50,
+        "minimum_node_area_m2": 0.1,
+        "maximum_continuity_error_pct": 1,
+        "nodes": [
+          {
+            "id": "J",
+            "source_id": "SYN",
+            "kind": "junction",
+            "invert_m": 1,
+            "maximum_depth_m": 2,
+            "initial_depth_m": 0
+          },
+          {
+            "id": "O",
+            "source_id": "SYN",
+            "kind": "outfall",
+            "invert_m": 0,
+            "outfall_type": "FREE",
+            "tailwater_head_m": 0
+          }
+        ],
+        "pipes": [
+          {
+            "id": "P1",
+            "source_id": "SYN",
+            "from_node": "J",
+            "to_node": "O",
+            "length_m": 100,
+            "internal_mm": 100,
+            "manning_n": 0.013,
+            "inlet_offset_m": 0,
+            "outlet_offset_m": 0,
+            "entry_loss_k": 0,
+            "exit_loss_k": 0,
+            "average_loss_k": 0
+          }
+        ],
+        "inflows": [
+          {
+            "id": "I1",
+            "source_id": "SYN",
+            "node": "J",
+            "hydrograph": [
+              {
+                "time_s": 0,
+                "flow_lps": 0
+              },
+              {
+                "time_s": 60,
+                "flow_lps": 2.5827153230263296
+              },
+              {
+                "time_s": 600,
+                "flow_lps": 2.5827153230263296
+              },
+              {
+                "time_s": 660,
+                "flow_lps": 0
+              },
+              {
+                "time_s": 1200,
+                "flow_lps": 0
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "expected_values": {
+      "continuity_error_pct": 0,
+      "flooding_volume_m3": 0,
+      "maximum_depth_m": 0.05,
+      "maximum_absolute_flow_lps": 2.5827153230263296,
+      "report_periods": 24,
+      "nonconverging_steps": 0
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 0.002,
+    "derivation": "Independent uniform half-full Manning reference: A=pi*0.1^2/8, Rh=0.1/4, Q=A*Rh^(2/3)*sqrt(.01)/.013=2.582715323 L/s. A full ramp/plateau/drain-down event is supplied; transient sampled maximum approaches the uniform plateau within 0.002 L/s. Mass continuity criterion also checked; no engineering approval.",
+    "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
   }
 ]

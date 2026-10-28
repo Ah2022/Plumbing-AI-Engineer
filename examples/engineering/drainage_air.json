@@ -1,0 +1,74 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "drainage_air",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "Authored software example only; independent engineering acceptance pending",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "atmospheric_kpa": 100,
+    "air_exponent": 1,
+    "maximum_pressure_ratio": 0.01,
+    "allowable_positive_pa": 200,
+    "allowable_negative_pa": 200,
+    "duration_s": 100,
+    "step_s": 0.1,
+    "report_step_s": 10,
+    "nodes": [
+      {
+        "id": "A",
+        "source_id": "SYN",
+        "air_volume_m3": 5,
+        "initial_gauge_pa": 0
+      }
+    ],
+    "vents": [
+      {
+        "id": "DRY",
+        "source_id": "SYN",
+        "from_node": "A",
+        "to_node": "ATM",
+        "linear_resistance_pa_s_m3": 100000,
+        "kind": "open"
+      }
+    ],
+    "displacements": [
+      {
+        "id": "DIS",
+        "source_id": "SYN",
+        "node": "A",
+        "hydrograph": [
+          {
+            "time_s": 0,
+            "air_flow_lps": 1
+          },
+          {
+            "time_s": 100,
+            "air_flow_lps": 1
+          }
+        ]
+      }
+    ],
+    "traps": [
+      {
+        "id": "T1",
+        "source_id": "SYN",
+        "node": "A",
+        "seal_mm": 50,
+        "effective_liquid_length_m": 0.2,
+        "damping_pa_s_m": 1000,
+        "density_kg_m3": 1000
+      }
+    ]
+  }
+}

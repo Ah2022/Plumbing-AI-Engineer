@@ -19,6 +19,7 @@ The app initializes its database on first use. [localhost:8504](http://localhost
 | IFC, DXF and PDF parsing | Install `python -m pip install -r requirements-models.txt`, then restart the app. |
 | DWG geometry | Supply a confirmed companion DXF or configure a supported local converter; see [DWG/PDF intake](DWG_PDF_UPLOADS.md). |
 | Looped or extended-period hydraulics | Configure a trusted EPANET 2.2 native library using `PLUMBING_EPANET_LIBRARY`; see [solver setup](GENERAL_HYDRAULIC_SOLVER.md#configure-epanet). The interface and tree layer can run without it. |
+| Dynamic-wave liquid drainage | Install `python -m pip install -r requirements-hydraulics.txt`. This pins the isolated SWMM toolkit; see [extended methods](ADVANCED_PLUMBING.md). |
 | Revit extraction and result handoff | Install/load the repository's `bim/pyrevit/PlumbingEngine.extension`, configure repository/database paths, and bind the required PLM shared parameters. See the [native test procedure](BIM_INGESTION_PHASE4A.md#run-the-real-revit-harness). |
 | Private interactive calculation forms | Import XLSX/XLSM files or a converted library through **Calculation Sheets**. A synthetic demonstration is bundled; private forms are not included in a public clone. |
 
@@ -33,6 +34,8 @@ Formula-only and synthetic example features can run without private source workb
 - `SBC701_Saudi_Plumbing_Design_Data.xlsx`
 
 These files are excluded from the public repository. Loading a workbook does not authenticate its edition, numeric values or project applicability. Missing code tables remain missing; another code is not silently substituted. Restart after adding the applicable files and confirm their availability/review status in the app.
+
+The extended IPC 2024 fixture register is a separately flagged transcription candidate and is visible without private workbooks. It does not supply missing sizing tables or grant code adoption. Medical-gas standards/demand criteria and real manufacturer curves must be supplied and reviewed; no normative defaults are bundled.
 
 ## Project data and validation
 

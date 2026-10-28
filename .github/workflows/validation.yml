@@ -20,7 +20,7 @@ jobs:
           python-version: '3.12'
           cache: pip
       - name: Install audited dependencies
-        run: python -m pip install -r requirements.txt -r requirements-models.txt
+        run: python -m pip install -r requirements.txt -r requirements-models.txt -r requirements-hydraulics.txt
       - name: Regressions and known-defect reproductions
         run: python -m pytest tests/test_audit_benchmarks.py tests/test_bim_exchange.py tests/test_reports.py tests/test_runtime_safety.py tests/test_governance.py tests/test_governance_ui.py tests/test_foundations.py tests/test_networks.py tests/test_network_ui.py tests/test_fixture_schedules.py tests/test_workbooks.py tests/test_workbook_ui.py tests/test_interactive_packages.py -q
       - name: Public-checkout interface navigation
@@ -32,7 +32,7 @@ jobs:
       - name: General graph routing, backend diagnostics and governed interface
         run: python -m pytest tests/test_general_solver.py tests/test_general_solver_ui.py -q
       - name: Scoped engineering methods, source gates and interactive pages
-        run: python -m pytest tests/test_engineering_modules.py tests/test_engineering_modules_ui.py -q
+        run: python -m pytest tests/test_engineering_modules.py tests/test_engineering_modules_ui.py tests/test_advanced_engineering.py tests/test_formula_extensions.py -q
       - name: BIM mappings, extraction contracts and round-trip safeguards
         run: python -m pytest tests/test_bim_mapping.py tests/test_bim_mapping_ui.py tests/test_bim_round_trip.py tests/test_revit_extract_api.py tests/test_revit_real_model.py -q
       - name: Independent EPANET 2.2 rerun on Windows

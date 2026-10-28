@@ -1,0 +1,139 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "recirculation_network",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "Authored software example only; independent engineering acceptance pending",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "heater_node": "H",
+    "supply_temperature_c": 60,
+    "initial_temperature_c": 60,
+    "minimum_return_temperature_c": 55,
+    "minimum_distribution_temperature_c": 50,
+    "maximum_distribution_temperature_c": 65,
+    "water_density_kg_m3": 1000,
+    "specific_heat_j_kgk": 4000,
+    "duration_s": 120,
+    "maximum_step_s": 1,
+    "report_step_s": 10,
+    "available_pump_head_m": 5,
+    "control": {
+      "mode": "continuous"
+    },
+    "pipes": [
+      {
+        "id": "SUP",
+        "source_id": "SYN",
+        "from_node": "H",
+        "to_node": "J",
+        "length_m": 10,
+        "internal_mm": 20,
+        "ua_w_k": 0,
+        "ambient_temperature_c": 20,
+        "friction_factor": 0.02,
+        "fittings_k": 0,
+        "cells": 2
+      },
+      {
+        "id": "A1",
+        "source_id": "SYN",
+        "from_node": "J",
+        "to_node": "A",
+        "length_m": 10,
+        "internal_mm": 20,
+        "ua_w_k": 0,
+        "ambient_temperature_c": 20,
+        "friction_factor": 0.02,
+        "fittings_k": 0,
+        "cells": 2
+      },
+      {
+        "id": "A2",
+        "source_id": "SYN",
+        "from_node": "A",
+        "to_node": "R",
+        "length_m": 10,
+        "internal_mm": 20,
+        "ua_w_k": 0,
+        "ambient_temperature_c": 20,
+        "friction_factor": 0.02,
+        "fittings_k": 0,
+        "cells": 2
+      },
+      {
+        "id": "B1",
+        "source_id": "SYN",
+        "from_node": "J",
+        "to_node": "B",
+        "length_m": 10,
+        "internal_mm": 20,
+        "ua_w_k": 0,
+        "ambient_temperature_c": 20,
+        "friction_factor": 0.02,
+        "fittings_k": 0,
+        "cells": 2
+      },
+      {
+        "id": "B2",
+        "source_id": "SYN",
+        "from_node": "B",
+        "to_node": "R",
+        "length_m": 10,
+        "internal_mm": 20,
+        "ua_w_k": 0,
+        "ambient_temperature_c": 20,
+        "friction_factor": 0.02,
+        "fittings_k": 0,
+        "cells": 2
+      },
+      {
+        "id": "RET",
+        "source_id": "SYN",
+        "from_node": "R",
+        "to_node": "H",
+        "length_m": 10,
+        "internal_mm": 20,
+        "ua_w_k": 0,
+        "ambient_temperature_c": 20,
+        "friction_factor": 0.02,
+        "fittings_k": 0,
+        "cells": 2
+      }
+    ],
+    "circuits": [
+      {
+        "id": "A",
+        "source_id": "SYN",
+        "selected_flow_lps": 0.05,
+        "pipe_ids": [
+          "SUP",
+          "A1",
+          "A2",
+          "RET"
+        ]
+      },
+      {
+        "id": "B",
+        "source_id": "SYN",
+        "selected_flow_lps": 0.05,
+        "pipe_ids": [
+          "SUP",
+          "B1",
+          "B2",
+          "RET"
+        ]
+      }
+    ]
+  }
+}

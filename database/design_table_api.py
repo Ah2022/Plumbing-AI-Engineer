@@ -531,8 +531,11 @@ def list_water_fixture_unit_choices(conn, code_id: str, service: str = 'cold') -
     return choices
 
 
-def list_drainage_fixture_unit_choices(conn, code_id: str) -> list[dict]:
-    """Use only the active code's drainage columns; never borrow another code's DFU."""
+def list_drainage_fixture_unit_choices(conn, code_id: str, edition=None) -> list[dict]:
+    """Use only the active code/edition; never borrow another code's DFU."""
+    if code_id=='IPC' and str(edition)=='2024':
+        from database.ipc2024_fixtures import choices
+        return choices()
     choices = []
     records = get_table_records(conn, code_id, 'water', '1_Fixture_Units')
     records += get_table_records(conn, code_id, 'drainage', '1_Fixture_Units')

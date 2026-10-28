@@ -1,0 +1,88 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "dynamic_drainage",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "Authored software example only; independent engineering acceptance pending",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "duration_s": 1200,
+    "routing_step_s": 1,
+    "report_step_s": 50,
+    "minimum_node_area_m2": 0.1,
+    "maximum_continuity_error_pct": 1,
+    "nodes": [
+      {
+        "id": "J",
+        "source_id": "SYN",
+        "kind": "junction",
+        "invert_m": 1,
+        "maximum_depth_m": 2,
+        "initial_depth_m": 0
+      },
+      {
+        "id": "O",
+        "source_id": "SYN",
+        "kind": "outfall",
+        "invert_m": 0,
+        "outfall_type": "FREE",
+        "tailwater_head_m": 0
+      }
+    ],
+    "pipes": [
+      {
+        "id": "P1",
+        "source_id": "SYN",
+        "from_node": "J",
+        "to_node": "O",
+        "length_m": 100,
+        "internal_mm": 100,
+        "manning_n": 0.013,
+        "inlet_offset_m": 0,
+        "outlet_offset_m": 0,
+        "entry_loss_k": 0,
+        "exit_loss_k": 0,
+        "average_loss_k": 0
+      }
+    ],
+    "inflows": [
+      {
+        "id": "I1",
+        "source_id": "SYN",
+        "node": "J",
+        "hydrograph": [
+          {
+            "time_s": 0,
+            "flow_lps": 0
+          },
+          {
+            "time_s": 60,
+            "flow_lps": 2.5827153230263296
+          },
+          {
+            "time_s": 600,
+            "flow_lps": 2.5827153230263296
+          },
+          {
+            "time_s": 660,
+            "flow_lps": 0
+          },
+          {
+            "time_s": 1200,
+            "flow_lps": 0
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,8 +1,8 @@
 {
   "schema_version": "engineering-software-evidence-1",
   "software_status": "PASS",
-  "implementation_sha256": "46559dad7d1d16c3b52b4eeb9048f1dfae4e1cf0569a4bab625613e45f4d8414",
-  "reference_cases_sha256": "29af8199fae3e5ac3994462f9361c1dc8ef67f0c1d7e5e07cbb4ac246ecd7a2c",
+  "implementation_sha256": "068b909ef858a4fe152f35ceb140f190092e095b51a2c9316dc9def69e574a4e",
+  "reference_cases_sha256": "1bb5a53c59326d6567b5ab39f7fca79df27efdc0c57fa4181bd8b7694983d30c",
   "cases": [
     {
       "case": "pump-intersection",
@@ -181,6 +181,72 @@
     {
       "case": "thermal-vessel-too-small",
       "module": "thermal_expansion",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "medical-isothermal-pressure",
+      "module": "medical_gas",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "medical-isothermal-vacuum",
+      "module": "medical_gas",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "swmm-dry-network",
+      "module": "dynamic_drainage",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "shared-circuits-isothermal",
+      "module": "recirculation_network",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "recirculation-off-cooling",
+      "module": "recirculation_network",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "moc-joukowsky-before-reflection",
+      "module": "network_transient",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "acoustic-energy-sum",
+      "module": "acoustic_prediction",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "lame-thermal-restraint",
+      "module": "pipe_stress",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "relief-matching-rating-basis",
+      "module": "relief_selection",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "lumped-air-rc-pressure",
+      "module": "drainage_air",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "swmm-event-manning-plateau",
+      "module": "dynamic_drainage",
       "software_status": "PASS",
       "discrepancies": []
     }

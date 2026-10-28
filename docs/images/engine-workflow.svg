@@ -52,7 +52,7 @@
     <circle cx="61" cy="456" r="17" fill="#087f8c"/><text class="number" x="61" y="462">4</text>
     <text class="step" x="92" y="448">Run a supported calculation</text>
     <text class="body" x="92" y="471">Use the selected method, tree evaluator,</text>
-    <text class="body" x="92" y="491">or configured EPANET backend.</text>
+    <text class="body" x="92" y="491">or configured EPANET / SWMM backend.</text>
     <line class="connector" x1="61" y1="509" x2="61" y2="518"/>
   </g>
   <g>
@@ -75,10 +75,10 @@
     <rect x="518" y="136" width="450" height="172" rx="12" fill="#153b52"/>
     <rect x="518" y="136" width="5" height="172" rx="2" fill="#20b5b3"/>
     <text class="group" x="545" y="167">Plumbing calculations</text>
-    <text class="capability" x="545" y="197">Water demand, fixture and pipe checks</text>
-    <text class="capability" x="545" y="222">Drainage flow and supplied vent criteria</text>
-    <text class="capability" x="545" y="247">Hot water, recirculation, heaters and storage</text>
-    <text class="capability" x="545" y="272">Pump curves, storm storage and scoped screens</text>
+    <text class="capability" x="545" y="197">Water, drainage fixtures and medical gases</text>
+    <text class="capability" x="545" y="222">Shared recirculation and temperature controls</text>
+    <text class="capability" x="545" y="247">Air / trap response, acoustics and pipe stress</text>
+    <text class="capability" x="545" y="272">Pump / relief catalogues and storm storage</text>
   </g>
   <g>
     <rect x="518" y="332" width="450" height="172" rx="12" fill="#153b52"/>
@@ -86,7 +86,7 @@
     <text class="group" x="545" y="363">Network analysis</text>
     <text class="capability" x="545" y="393">Tree hydraulics and pressure margins</text>
     <text class="capability" x="545" y="418">Loops, pumps, tanks and valves via EPANET</text>
-    <text class="capability" x="545" y="443">Demand scenarios and time simulations</text>
+    <text class="capability" x="545" y="443">SWMM drainage and elastic water hammer</text>
     <text class="capability" x="545" y="468">Method scope, solver diagnostics and traces</text>
   </g>
   <g>

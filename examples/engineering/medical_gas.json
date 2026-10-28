@@ -1,0 +1,89 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "medical_gas",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "Authored software example only; independent engineering acceptance pending",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "standard_basis": "HTM_02_01",
+    "standard_edition": "PROJECT ADOPTION PENDING; enter adopted edition",
+    "precedence_reference": "Fictional software example. No numerical HTM/NFPA/ISO rule is implied.",
+    "service": "O2",
+    "mode": "pressure",
+    "gas_constant_j_kgk": 300,
+    "gas_temperature_k": 300,
+    "compressibility": 1,
+    "heat_capacity_ratio": 1.4,
+    "reference_pressure_absolute_kpa": 100,
+    "reference_temperature_k": 300,
+    "reference_compressibility": 1,
+    "atmospheric_pressure_kpa": 100,
+    "source_pressure_absolute_kpa": 500,
+    "source_node": "S",
+    "minimum_terminal_absolute_kpa": 450,
+    "maximum_terminal_absolute_kpa": 550,
+    "maximum_velocity_m_s": 30,
+    "maximum_mach": 0.3,
+    "nodes": [
+      {
+        "id": "S",
+        "source_id": "SYN"
+      },
+      {
+        "id": "A",
+        "source_id": "SYN"
+      }
+    ],
+    "pipes": [
+      {
+        "id": "P1",
+        "source_id": "SYN",
+        "from_node": "S",
+        "to_node": "A",
+        "length_m": 10,
+        "internal_mm": 20,
+        "friction_factor": 0.02,
+        "fittings_k": 0
+      }
+    ],
+    "demand_groups": [
+      {
+        "id": "WARD",
+        "source_id": "SYN",
+        "node": "A",
+        "clinical_position": "Fictional clinical position, not an adopted demand",
+        "positions": 4,
+        "flow_per_position_lpm": 60,
+        "diversity": 0.5,
+        "continuous_lpm": 0
+      }
+    ],
+    "plant_units": [
+      {
+        "id": "PLANT1",
+        "source_id": "SYN",
+        "reference_capacity_lpm": 200,
+        "available": true
+      },
+      {
+        "id": "PLANT2",
+        "source_id": "SYN",
+        "reference_capacity_lpm": 200,
+        "available": true
+      }
+    ],
+    "required_reserve_min": 5,
+    "reserve_standard_l": 1200
+  }
+}

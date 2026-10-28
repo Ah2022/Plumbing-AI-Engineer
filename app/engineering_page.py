@@ -13,7 +13,7 @@ from compliance.governance import get_basis
 
 def label(key):
     units={'_m_per_lps2':'m/(L/s)²','_kg_m3':'kg/m³','_j_kgk':'J/(kg·K)','_mm_day':'mm/day','_w_m':'W/m','_per_k':'1/K',
-        '_m05_s':'m^0.5/s','_m_s':'m/s','_lps':'L/s','_kpa':'kPa','_m3':'m³','_m2':'m²','_mm':'mm','_pa':'Pa','_pct':'%',
+        '_m05_s':'m^0.5/s','_m_s':'m/s','_lps':'L/s','_lpm':'reference L/min','_kg_s':'kg/s','_mpa':'MPa','_kpa':'kPa','_m3':'m³','_m2':'m²','_mm':'mm','_pa':'Pa','_pct':'%',
         '_db':'dB','_c':'°C','_k':'K','_s':'s','_l':'L','_m':'m'}
     for ending,unit in units.items():
         if key.endswith(ending):return key[:-len(ending)].replace('_',' ').capitalize()+' ('+unit+')'
@@ -34,7 +34,11 @@ def edit_data(data,key):
         if isinstance(value,bool):result[name]=st.checkbox(label(name),value=value,key=widget)
         elif isinstance(value,(int,float)):
             result[name]=st.number_input(label(name),value=float(value),key=widget,format='%.8g')
-        elif isinstance(value,str):result[name]=st.text_input(label(name),value=value,key=widget)
+        elif isinstance(value,str):
+            if name=='standard_basis':
+                from engineering.medical_gas import BASIS
+                result[name]=st.selectbox(label(name),list(BASIS),index=list(BASIS).index(value),format_func=BASIS.get,key=widget)
+            else:result[name]=st.text_input(label(name),value=value,key=widget)
         elif isinstance(value,dict):
             with st.expander(label(name)):
                 result[name]=edit_data(value,widget)
@@ -52,6 +56,11 @@ def edit_data(data,key):
 def _open_pressure():
     st.session_state['navigation']='Network Review'
     st.session_state['network_kind']='General pressure network'
+
+
+def open_engineering_module(identity):
+    st.session_state['navigation']='Engineering Modules'
+    st.session_state['engineering_module_choice']=identity
 
 
 def save_module_result(conn,pid,record_id,actor,report):
@@ -80,7 +89,7 @@ def page_engineering_modules():
             'Validation':'Software reference-tested; engineering review pending' if m['available'] else 'Matching evidence missing or stale'} for m in modules],
             width='stretch',alt='Prioritized engineering modules and matching software-validation availability')
         st.download_button('Download module scope register',json.dumps(modules,indent=2),file_name='engineering-module-scopes.json',mime='application/json')
-    chosen=st.selectbox('Engineering module',list(lookup),format_func=lambda k:f"{lookup[k]['priority']}. {lookup[k]['title']}")
+    chosen=st.selectbox('Engineering module',list(lookup),format_func=lambda k:f"{lookup[k]['priority']}. {lookup[k]['title']}",key='engineering_module_choice')
     metadata=lookup[chosen]
     st.subheader(metadata['title'])
     st.write('Calculation scope: '+metadata['scope'])
@@ -103,6 +112,18 @@ def page_engineering_modules():
     try:
         package=json.loads(upload.getvalue().decode('utf-8-sig')) if upload else deepcopy(template)
         if package.get('module')!=chosen:raise ValueError('Uploaded package module must match the selected module')
+        if chosen in ('equipment_selection','relief_selection'):
+            from engineering.catalogue import import_catalogue,export_catalogue
+            kind='relief' if chosen=='relief_selection' else package['data']['equipment_kind']
+            with st.expander('Import manufacturer catalogue CSV (explicit SI units)'):
+                st.caption('Use the two downloaded templates for pump models and H–Q points, or one for tanks/relief devices. Bind every source_id to a manufacturer source record below. Examples contain fictional ratings.')
+                model_csv,curve_csv=export_catalogue(package['data']['catalogue'],kind)
+                st.download_button('Download catalogue CSV template',model_csv,file_name=kind+'-models.csv',mime='text/csv')
+                if curve_csv is not None:st.download_button('Download pump curve CSV template',curve_csv,file_name='pump-curves.csv',mime='text/csv')
+                csvfile=st.file_uploader('Catalogue models (CSV)',type=['csv'],max_upload_size=2,key=scope+'_model_csv')
+                curvefile=st.file_uploader('Pump H–Q points (CSV)',type=['csv'],max_upload_size=2,key=scope+'_curve_csv') if kind=='pump' else None
+                if csvfile:
+                    package['data']['catalogue']=import_catalogue(csvfile.getvalue(),kind,curvefile.getvalue() if curvefile else None)
         key=scope+'_'+digest(package)[:12]
         if not upload:st.info('Loaded a fictional software example. Replace the inputs and source records with reviewed project/code/manufacturer data before design use.')
         package['basis_reference']=st.text_area('Calculation basis and assumptions',package['basis_reference'],key=key+'_basis')
@@ -140,6 +161,16 @@ def page_engineering_modules():
                 chart=frame.sort_values('flow_lps').rename(columns={'flow_lps':'Flow (L/s)','system_head_m':'System head (m)','pump_head_m':'Pump head (m)'})
                 st.line_chart(chart,x='Flow (L/s)',y=['System head (m)','Pump head (m)'],alt='Supplied pump head and quadratic system head versus flow L/s')
             if chosen=='storm_storage':st.line_chart(frame,x='time_s',y=['inflow_lps','outflow_lps'],alt='Routed inflow and outflow hydrographs in L/s over time in seconds')
+            if chosen=='recirculation_network':
+                times=frame[frame['kind']=='time']
+                st.line_chart(times,x='time_s',y=['return_temperature_c','minimum_water_temperature_c'],alt='Recirculation return and minimum distribution temperatures over time')
+            if chosen in ('network_transient','dynamic_drainage','drainage_air'):
+                kind='node' if chosen=='network_transient' else 'air_node' if chosen=='drainage_air' else 'pipe'
+                values=frame[frame['kind']==kind]
+                selected=st.selectbox('Result object',list(values['id'].unique()),key=scope+'_trace_object')
+                values=values[values['id']==selected]
+                y='gauge_kpa' if chosen=='network_transient' else 'gauge_pa' if chosen=='drainage_air' else 'flow_lps'
+                st.line_chart(values,x='time_s',y=y,alt='Selected object hydraulic result over time with declared units')
         for note in report['notes']:st.caption('• '+note)
         st.download_button('Download engineering result and evidence',json.dumps(report,indent=2,allow_nan=False),file_name=chosen+'-findings.json',mime='application/json')
         with st.form(scope+'_save_form'):

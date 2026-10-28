@@ -1,0 +1,41 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "relief_selection",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "Authored software example only; independent engineering acceptance pending",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "service": "potable_water",
+    "rating_basis": "CSA_TEMPERATURE_RELIEF",
+    "normal_gauge_kpa": 400,
+    "maximum_permitted_gauge_kpa": 1000,
+    "required_capacity_kw": 100,
+    "maximum_temperature_c": 90,
+    "minimum_set_margin_kpa": 100,
+    "required_listing": "FICTIONAL_TEST_LISTING",
+    "catalogue": [
+      {
+        "model": "DEMO-TP",
+        "source_id": "SYN",
+        "service": "potable_water",
+        "rating_basis": "CSA_TEMPERATURE_RELIEF",
+        "set_gauge_kpa": 700,
+        "certified_capacity_kw": 150,
+        "rating_temperature_c": 100,
+        "listing": "FICTIONAL_TEST_LISTING",
+        "evidence_reference": "Fictional ratings, not real certification"
+      }
+    ]
+  }
+}

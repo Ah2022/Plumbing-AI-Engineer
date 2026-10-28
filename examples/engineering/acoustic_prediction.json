@@ -1,0 +1,58 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "acoustic_prediction",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "Authored software example only; independent engineering acceptance pending",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "limit_dba": 50,
+    "bands": [
+      {
+        "frequency_hz": 1000,
+        "a_weight_db": 0,
+        "room_constant_m2": 16
+      }
+    ],
+    "sources": [
+      {
+        "id": "A",
+        "source_id": "SYN",
+        "distance_m": 0.5641895835477563,
+        "directivity_factor": 1,
+        "condition_reference": "Fictional 1 kHz single-band source",
+        "spectrum": [
+          {
+            "frequency_hz": 1000,
+            "sound_power_db": 40,
+            "attenuation_db": 0
+          }
+        ]
+      },
+      {
+        "id": "B",
+        "source_id": "SYN",
+        "distance_m": 0.5641895835477563,
+        "directivity_factor": 1,
+        "condition_reference": "Fictional 1 kHz single-band source",
+        "spectrum": [
+          {
+            "frequency_hz": 1000,
+            "sound_power_db": 40,
+            "attenuation_db": 0
+          }
+        ]
+      }
+    ]
+  }
+}

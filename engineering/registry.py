@@ -15,6 +15,38 @@ def module(identity,priority,title,scope,sources,omissions,method_url):
 
 
 MODULES=[
+ module('drainage_air',6,'Drainage air network and trap response','Lumped small-signal air compliance, linear vent resistance, one-way AAV admission and forced equal-leg trap oscillation.',
+    ['Independently supplied air-displacement hydrographs, volumes, vent resistance and atmospheric conditions','Trap effective length/damping/seal, pressure limits and initial conditions'],
+    ['Distributed stack acoustics, liquid-to-air entrainment prediction, two-phase coupling, self-siphonage, all trap geometry and code vent approval'],
+    'https://codes.iccsafe.org/content/IPC2024V2.0/chapter-9-vents'),
+ module('medical_gas',11,'Medical gas and vacuum networks','Clinical-position demand, supplied diversity, isothermal low-Mach tree pressure loss, reference-flow plant N+1 and reserve duration.',
+    ['HTM 02-01 / Saudi SBC-NFPA 99 / ISO 7396-1 basis, adopted editions and precedence','Approved clinical demands, pressure limits, gas properties, real bores/factors and manufacturer plant capacity at explicit reference conditions'],
+    ['Automatic standard demand tables or adoption, gas quality/cleanliness, clinical acceptance, AGSS, liquefiable gases, looped gas hydraulics and commissioning'],
+    'https://www.england.nhs.uk/publication/health-technical-memorandum-02-01-medical-gas-pipeline-systems/'),
+ module('dynamic_drainage',5,'Dynamic-wave drainage network','EPA SWMM liquid network routing with hydrographs, circular pipes, backwater, reverse flow, surcharge and flooding.',
+    ['Independent discharge hydrographs, bores, inverts, junction depths/storage, roughness and free/fixed tailwater','Optional swmm-toolkit backend and reviewed initial/boundary conditions'],
+    ['DFU-to-flow inference, vertical-stack annular/two-phase air flow, solids, surface flood re-entry and code approval'],
+    'https://www.epa.gov/water-research/storm-water-management-model-swmm'),
+ module('recirculation_network',3,'Shared-pipe hot-water recirculation','No-draw finite-volume thermal networks, mixed junctions, shared-pipe flow/losses, balancing, schedules and thermostatic hysteresis.',
+    ['Closed directed circuits, selected balanced flows, bores/factors/UA and ambient conditions','Heater boundary, initial water temperatures, control sensor/thresholds and reviewed temperature criteria'],
+    ['Fixture draw, microbial prediction/hygiene approval, stratified storage and variable hydraulic balancing'],
+    'https://www.caleffi.com/en-us/blog/2-single-loop-recirculation-systems'),
+ module('network_transient',12,'Elastic network water hammer','Interpolated liquid method of characteristics with continuity junctions, fixed heads and valve flow-coefficient histories; stops at vapour pressure.',
+    ['Converged steady heads/flows, wave speed, bore, Darcy factors, elevations and valve coefficient/opening histories','Pressure ratings and atmospheric/vapour pressure'],
+    ['Column separation/two-phase transients, entrained air, pump inertia, unsteady friction and fluid-structure interaction'],
+    'https://live-resources-e2e-sales.ksb.com/resource/blob/762108/b03ed4dd6aa0139a876090d66fe3b9f2/water-hammer-data.pdf'),
+ module('acoustic_prediction',12,'Airborne acoustic prediction','Band-by-band incoherent sound-power summation with direct and diffuse room-field transfer, attenuation and supplied A weighting.',
+    ['Duty-matched measured/manufacturer sound-power spectra','Distance/directivity, room constants, band attenuation, A weighting and receiver limit'],
+    ['Velocity-derived source power, structure-borne transmission, coherent/near-field effects and acoustic certification'],
+    'https://ebmpapst.se/sv/dat/media_manager/news/789/news-files/Brosch_Technologie_EN_screen.pdf'),
+ module('pipe_stress',12,'Straight-pipe pressure and thermal stress','Elastic thick-cylinder pressure, closed-end axial stress, specified thermal restraint and bending; equivalent stress and anchor reaction.',
+    ['Actual diameters, pressure/load cases, modulus/expansion at temperature','Reviewed restraint, moments, intensification, allowable stress and anchor reaction'],
+    ['Full piping-network flexibility, elbow/support local stress, fatigue, buckling, creep and ASME certification'],
+    'https://handbook.ashrae.org/Handbooks/S16/IP/s16_ch46/s16_ch46_ip.aspx'),
+ module('relief_selection',11,'Relief-device catalogue checks','Service/listing, set pressure/margin, matching capacity rating basis and temperature filtering of supplied certified data.',
+    ['Manufacturer/listing source, exact model and rated service/capacity basis','Required relief duty, permitted pressure, set margin and temperature'],
+    ['Generated certification, inlet/discharge loss, backpressure, accumulation, sensing and installation approval'],
+    'https://www.watts.com/dfsmedia/0533dbba17714b1ab581ab07a4cbb521/24279-source/pg-tp-asme-pdf.pdf'),
  module('general_pressure',1,'General pressure-network solver','Existing EPANET2.2 loops, equipment, PDA, EPS and scenario boundary.',
     ['Reviewed normalized graph, nodal demands, source heads, equipment curves and controls'],['Code approval, transients, thermal recirculation and gravity flow'],
     'https://www.epa.gov/water-research/epanet'),
@@ -58,6 +90,7 @@ MODULES=[
     ['Reviewed cold/hot densities, system volume and material expansion coefficient','Temperatures, vessel precharge/cold fill/maximum/atmospheric pressure and gas exponent'],['Relief margin, membrane/usable acceptance, glycol corrections and pipe restraint/flexibility'],
     'https://www.varem.com/en/technical-support/sizing-heating-expansion-vessels-vessels/'),
 ]
+MODULES.sort(key=lambda value:value['priority'])
 
 
 def implementation_fingerprint():

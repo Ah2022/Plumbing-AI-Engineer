@@ -355,11 +355,15 @@ def page_drainage_vent():
     code_id = _project_code(conn, project_id)
     st.caption(f"Active code: **{code_id}**")
 
+    from app.engineering_page import open_engineering_module
+    st.button('Open dynamic drainage hydraulics',on_click=open_engineering_module,args=('dynamic_drainage',))
+    st.button('Open air-network and trap response',on_click=open_engineering_module,args=('drainage_air',))
+
     tab1, tab2, tab3, tab4 = st.tabs(["Drainage sizing", "Min slope check", "Vent sizing (simple)", "Vent sizing (IPC Table 906.1)"])
 
     with tab1:
         schedule, schedule_dfu = fixture_schedule(conn, project_id, code_id, 'Drainage',
-            list_drainage_fixture_unit_choices(conn, code_id), 'DFU')
+            list_drainage_fixture_unit_choices(conn, code_id, conn.execute('SELECT code_edition FROM projects WHERE project_id=?',(project_id,)).fetchone()[0]), 'DFU')
         use_schedule = st.checkbox('Use fixture list for drainage sizing', value=bool(schedule),
                                    disabled=not schedule)
         with st.form("drainage_sizing"):
@@ -376,6 +380,9 @@ def page_drainage_vent():
                 r = size_drainage_pipe(conn, code_id, schedule_dfu if use_schedule else dfu, context, calc_id)
                 if use_schedule:
                     r.inputs['fixture_schedule'] = schedule
+                    if any(row.get('confidence')=='FLAGGED' for row in schedule):
+                        if r.status=='PASS':r.status='WARNING'
+                        r.notes=(r.notes or '')+' Fixture-load source/applicability review is outstanding; code adoption or a hydraulic PASS cannot approve the fixture catalogue.'
                 save_calculation(conn, project_id, r)
                 st.markdown(f"### {status_badge(r.status)} — {r.result_value} {r.result_unit}")
                 show_result_table(r)
@@ -442,6 +449,8 @@ def page_hot_water():
     project_id = _require_project()
     if project_id is None:
         return
+    from app.engineering_page import open_engineering_module
+    st.button('Open shared-pipe recirculation and controls',on_click=open_engineering_module,args=('recirculation_network',))
     st.caption("Demand/storage factors: ASPE Table 6-1 (confirmed by Ahmed as final for codes "
               "with no factors of their own). Temperature limits: IPC's confirmed hospital-specific "
               "figures — directly relevant to SMC-3.")

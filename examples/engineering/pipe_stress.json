@@ -1,0 +1,33 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "pipe_stress",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "Authored software example only; independent engineering acceptance pending",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "internal_mm": 100,
+    "external_mm": 120,
+    "internal_gauge_kpa": 1000,
+    "external_gauge_kpa": 0,
+    "length_m": 10,
+    "youngs_modulus_mpa": 200000,
+    "material_alpha_per_k": 1.2e-05,
+    "temperature_change_k": 50,
+    "restraint_fraction": 1,
+    "bending_moment_nm": 0,
+    "stress_intensification": 1,
+    "allowable_stress_mpa": 200,
+    "allowable_anchor_force_n": 500000
+  }
+}

@@ -10,11 +10,20 @@ from engineering.drainage import fixture_minimum,gravity_flow,trap_pressure,vent
 from engineering.storm import route_storage
 from engineering.fire import fire_separation
 from engineering.effects import noise_screen,water_hammer,thermal_expansion
+from engineering.medical_gas import medical_gas
+from engineering.dynamic_drainage import dynamic_drainage
+from engineering.recirculation_network import recirculation_network
+from engineering.transients import network_transient
+from engineering.acoustic_structural import acoustic_prediction,pipe_stress,relief_selection
+from engineering.drainage_air import drainage_air
 
 METHODS={'pump_system':operating_point,'recirculation':recirculation,'fixture_minimum':fixture_minimum,
     'gravity_flow':gravity_flow,'trap_pressure':trap_pressure,'vent_arrangement':vent_arrangement,
     'backwater_overflow':backwater_overflow,'storm_storage':route_storage,'fire_separation':fire_separation,
-    'equipment_selection':equipment_selection,'noise_screen':noise_screen,'water_hammer':water_hammer,'thermal_expansion':thermal_expansion}
+    'equipment_selection':equipment_selection,'noise_screen':noise_screen,'water_hammer':water_hammer,'thermal_expansion':thermal_expansion,
+    'medical_gas':medical_gas,'dynamic_drainage':dynamic_drainage,'recirculation_network':recirculation_network,
+    'network_transient':network_transient,'acoustic_prediction':acoustic_prediction,'pipe_stress':pipe_stress,'relief_selection':relief_selection,
+    'drainage_air':drainage_air}
 
 
 def digest(value):return hashlib.sha256(json.dumps(value,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()
@@ -49,7 +58,7 @@ def validate_envelope(package):
         elif isinstance(value,list):
             for child in value:walk(child)
     walk(data);digest(package)
-    if package['module']=='equipment_selection':
+    if package['module'] in ('equipment_selection','relief_selection'):
         for row in data.get('catalogue',[]):
             if not isinstance(row,dict) or row.get('source_id') not in byid:raise ValueError('Each catalogue entry needs its own source binding')
             if byid[row['source_id']]['type'] not in ('MANUFACTURER','SYNTHETIC'):raise ValueError('Catalogue rows require manufacturer evidence or an explicitly synthetic demonstration source')

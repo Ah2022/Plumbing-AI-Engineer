@@ -77,3 +77,41 @@ def test_stale_evidence_hides_controls_but_keeps_scope_explicit(fresh_app,monkey
     assert any('Calculation scope:' in str(m.value) for m in at.markdown)
     assert any('Validation:' in c.value for c in at.caption)
     assert not any(b.label=='Calculate scoped engineering result' for b in at.button)
+
+
+@pytest.mark.parametrize('page,button,identity',[
+    ('Drainage & Vent','Open dynamic drainage hydraulics','dynamic_drainage'),
+    ('Drainage & Vent','Open air-network and trap response','drainage_air'),
+    ('Hot Water','Open shared-pipe recirculation and controls','recirculation_network'),
+])
+def test_page_shortcuts_open_the_matching_scoped_method(fresh_app,page,button,identity):
+    at=_create_project(fresh_app)
+    at.sidebar.radio[0].set_value(page).run(timeout=30)
+    next(b for b in at.button if b.label==button).click().run(timeout=30)
+    assert not at.exception
+    assert next(s for s in at.selectbox if s.label=='Engineering module').value==identity
+
+
+def test_medical_gas_has_separate_named_basis_choices(fresh_app):
+    at=open_modules(fresh_app,'medical_gas')
+    basis=next(s for s in at.selectbox if s.label=='Standard basis')
+    assert len(basis.options)==3 and any('Saudi' in value for value in basis.options)
+    basis.set_value('ISO_7396_1').run(timeout=30)
+    next(b for b in at.button if b.label=='Calculate scoped engineering result').click().run(timeout=30)
+    assert not at.exception and not at.error
+    assert next(m for m in at.metric if m.label=='Supplied-criteria technical result').value=='PASS'
+
+
+def test_ipc2024_fixture_list_exposes_receptor_evidence_and_full_register(fresh_app):
+    at=fresh_app
+    next(s for s in at.selectbox if s.label=='Applicable code').set_value('IPC')
+    next(b for b in at.button if b.label=='Create project').click().run(timeout=30)
+    at.sidebar.radio[0].set_value('Drainage & Vent').run(timeout=30)
+    assert not at.exception
+    fixture=next(s for s in at.selectbox if s.label=='Fixture')
+    assert len(fixture.options)==33
+    assert any(t.label.startswith('Indirect-receptor load evidence') for t in at.text_input)
+    # A floor sink has no fixed code load; zero/default input cannot be added.
+    fixture.set_value(13)
+    next(b for b in at.button if b.label=='Add fixture').click().run(timeout=30)
+    assert at.error and next(m for m in at.metric if m.label=='Total DFU').value=='0'
