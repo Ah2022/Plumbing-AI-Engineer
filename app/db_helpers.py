@@ -54,7 +54,7 @@ def save_calculation(conn, project_id: int, result: CalculationResult,
     manifest = engine_manifest()
     governance = context(conn, project_id)
     # Pilot adapter/coverage acceptance is independent of the project's code adoption.
-    review_status = 'REVIEW_REQUIRED' if result.calc_type in ('model_design_check', 'model_document_review', 'general_network_check', 'engineering_module') else governance['review_status']
+    review_status = 'REVIEW_REQUIRED' if result.calc_type in ('bim_pipe_velocity', 'model_design_check', 'model_document_review', 'general_network_check', 'engineering_module') else governance['review_status']
     row.update(notes=result.notes, governance_json=json.dumps(governance, sort_keys=True),
                review_status=review_status)
     result.review_status = review_status

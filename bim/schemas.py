@@ -43,7 +43,7 @@ def validate_extract_payload(payload: dict) -> list[str]:
     if 'revit_model_id' in payload and (not isinstance(payload['revit_model_id'],str) or not payload['revit_model_id'].strip()):
         errors.append('Invalid revit_model_id')
     seen=set(); unique_ids=set(); count=0
-    definitions=[('pipes',REQUIRED_PIPE_FIELDS),('fixtures',REQUIRED_FIXTURE_FIELDS),('tanks',REQUIRED_TANK_FIELDS),('pumps',REQUIRED_PUMP_FIELDS)]
+    definitions=[('pipes',REQUIRED_PIPE_FIELDS),('fixtures',REQUIRED_FIXTURE_FIELDS),('tanks',REQUIRED_TANK_FIELDS),('pumps',REQUIRED_PUMP_FIELDS),('valves',REQUIRED_PUMP_FIELDS)]
     for group,required in definitions:
         items=payload.get(group,[])
         if not isinstance(items,list): errors.append(f'{group} must be an array');continue
@@ -77,6 +77,48 @@ def validate_extract_payload(payload: dict) -> list[str]:
             for key in required-{'revit_element_id','length_m','nominal_diameter_mm'}:
                 if not isinstance(item[key],str) or not item[key].strip(): errors.append(label+': invalid '+key)
     if count > 10000: errors.append('Partition extracts larger than 10000 objects; no silent truncation is supported')
+    if 'inventory' in payload:
+        try:
+            inventory=payload['inventory']
+            if not isinstance(inventory,dict) or not isinstance(inventory.get('objects'),list) or not isinstance(inventory.get('connections'),list):
+                raise ValueError('Inventory requires objects and connections arrays')
+            if len(inventory['objects'])>10000:raise ValueError('Inventory exceeds 10000 objects')
+            by_id={};port_ids=set();element_ids=set()
+            for obj in inventory['objects']:
+                uid=obj['source_id'];eid=obj['element_id']
+                if not isinstance(uid,str) or not uid or uid in by_id or not isinstance(eid,str) or not eid or eid in element_ids:
+                    raise ValueError('Duplicate/invalid inventory stable or element IDs')
+                by_id[uid]=obj;element_ids.add(eid)
+                if obj['kind'] not in ('pipe','fitting','fixture','pump','tank','valve'):raise ValueError('Unsupported inventory kind')
+                for key in ('nominal_mm','internal_mm','length_m'):
+                    if obj.get(key) is not None:finite(key,obj[key],positive=True)
+                for key in ('flow_lps','elevation_m','horizontal_run_m'):
+                    if obj.get(key) is not None:finite(key,obj[key])
+                for key in ('start_xyz_m','end_xyz_m'):
+                    if obj.get(key) is not None:
+                        if len(obj[key])!=3:raise ValueError('Source endpoint must have three SI coordinates')
+                        for value in obj[key]:finite(key,value)
+                for port in obj['ports']:
+                    port_id=port['source_id']
+                    if not isinstance(port_id,str) or not port_id or port_id in port_ids:raise ValueError('Duplicate/invalid inventory port ID')
+                    port_ids.add(port_id)
+                    if port.get('origin_xyz_m') is not None:
+                        if len(port['origin_xyz_m'])!=3:raise ValueError('Port origin needs three SI coordinates')
+                        for value in port['origin_xyz_m']:finite('port coordinate',value)
+            for group,_ in definitions:
+                for item in payload.get(group,[]):
+                    obj=by_id.get(item.get('revit_unique_id'))
+                    if obj is None or obj['element_id']!=item['revit_element_id']:
+                        raise ValueError('Linked extraction rows do not match inventory identities')
+                    if item.get('source_facts') is not None:
+                        from bim.revit_extract import source_facts
+                        if item['source_facts']!=source_facts(obj):
+                            raise ValueError('Linked source facts differ from physical inventory')
+            for link in inventory['connections']:
+                if not all(isinstance(link.get(k),str) and link[k] for k in ('from_port','to_port')):
+                    raise ValueError('Connection requires explicit port identities')
+        except (ValueError,KeyError,TypeError) as error:
+            errors.append('Invalid physical inventory: '+str(error))
     try: json.dumps(payload,allow_nan=False)
     except (TypeError,ValueError): errors.append('Payload must contain finite JSON-compatible data')
     return errors

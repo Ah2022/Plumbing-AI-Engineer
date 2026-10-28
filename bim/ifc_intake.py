@@ -41,7 +41,7 @@ def read_ifc(data):
         typed = element.get_type(obj)
         classification = obj.is_a() + ' ' + (typed.is_a() if typed else '')
         kind = next((name for token, name in [('PipeSegment', 'pipe'), ('PipeFitting', 'fitting'),
-            ('SanitaryTerminal', 'fixture'), ('Pump', 'pump'), ('Tank', 'tank')]
+            ('SanitaryTerminal', 'fixture'), ('Pump', 'pump'), ('Tank', 'tank'), ('Valve', 'valve')]
             if token in classification), None)
         if kind is None:
             ignored += 1

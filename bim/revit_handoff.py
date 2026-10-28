@@ -47,7 +47,7 @@ def build_handoff(conn, project_id, model_key):
     payload = export_results_for_revit(conn, project_id, model_key)
     model = conn.execute('SELECT payload_json FROM revit_model_imports WHERE project_id=? AND model_key=?', (project_id,model_key)).fetchone()
     snapshot = json.loads(model[0]) if model else {}
-    sources = {item['revit_element_id']: item for group in ('pipes','tanks','pumps','fixtures') for item in snapshot.get(group,[])}
+    sources = {item['revit_element_id']: item for group in ('pipes','tanks','pumps','fixtures','valves') for item in snapshot.get(group,[])}
     blocked = []
     pending = {p['calc_id'] for p in overrides(conn, project_id)}
     updates = []
@@ -105,6 +105,15 @@ def preflight_handoff(doc, DB, packet):
         source = update.get('source',{})
         if not isinstance(source,dict):
             raise ValueError('Handoff source evidence must be an object')
+        if source.get('source_facts') is not None:
+            from bim.revit_extract import extract_element,source_facts
+            try:
+                facts=source['source_facts']
+                current,_=extract_element(doc,DB,element,facts['kind'])
+                if checksum(source_facts(current))!=checksum(facts):
+                    errors.append('{}: source object/ports/equipment inputs changed; re-extract'.format(eid))
+            except Exception as error:
+                errors.append('{}: source facts cannot be validated: {}'.format(eid,error))
         if source.get('type_unique_id'):
             typed = doc.GetElement(element.GetTypeId())
             if typed is None or typed.UniqueId != source['type_unique_id']:

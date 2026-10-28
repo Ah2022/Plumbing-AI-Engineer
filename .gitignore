@@ -23,5 +23,7 @@ venv/
 *.dxf
 *.dwg
 *.pdf
+*.rvt
+*.rfa
 !examples/model_pilot.ifc
 !examples/model_pilot.dxf

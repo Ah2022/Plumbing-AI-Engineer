@@ -39,6 +39,7 @@ def import_revit_extract(conn, project_id: int, payload: dict) -> dict:
     identity=payload.get('revit_model_id') or payload['revit_model_name']
     model_key=hashlib.sha256(identity.encode()).hexdigest()
     counts={key:len(payload.get(key,[])) for key in ('pipes','fixtures','tanks','pumps')}
+    if 'valves' in payload: counts['valves']=len(payload['valves'])
     conn.execute('SAVEPOINT model_import')
     try:
         conn.execute('''INSERT INTO revit_model_imports(project_id,model_key,model_identity,model_name,source_sha256,payload_json)
@@ -47,7 +48,7 @@ def import_revit_extract(conn, project_id: int, payload: dict) -> dict:
             payload_json=excluded.payload_json,imported_at=CURRENT_TIMESTAMP''',
             (project_id,model_key,identity,payload['revit_model_name'],digest(payload),_to_json(payload)))
         conn.execute('DELETE FROM revit_element_identities WHERE project_id=? AND model_key=?',(project_id,model_key))
-        for group in ('pipes','fixtures','tanks','pumps'):
+        for group in ('pipes','fixtures','tanks','pumps','valves'):
             for item in payload.get(group,[]):
                 conn.execute('INSERT INTO revit_element_identities(project_id,model_key,element_id,unique_id) VALUES (?,?,?,?)',
                     (project_id,model_key,item['revit_element_id'],item.get('revit_unique_id')))

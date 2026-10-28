@@ -70,6 +70,9 @@ def page_model_review():
     if inventory.get('geometry_ready', True) is not True:
         drawing_review(conn, pid, inventory, st.session_state.get(key + '_pdf_bytes'), model_key)
         return
+    if inventory['format']=='IFC':
+        from app.bim_mapping_page import mapping_workspace
+        mapping_workspace(conn,pid,inventory,model_key+'_bim')
     if inventory.get('conversion'):
         st.caption('DWG geometry source: ' + inventory['conversion']['method'] + '. Review the exported entities and units before checking.')
     st.dataframe([{k: obj.get(k) for k in ('source_id', 'source_class', 'kind', 'name', 'system',

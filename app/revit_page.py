@@ -23,6 +23,8 @@ def page_revit_exchange():
     ensure_review_schema(conn)
     key = f'revit_exchange_{pid}'
     st.caption('Extract read-only in pyRevit → review/import here → calculate or attribute linked results → download a handoff → preview/dry-run in Revit. No geometry or native pipe sizes are written.')
+    from app.bim_mapping_page import mapping_workspace,round_trip_evidence
+    round_trip_evidence(key)
     upload = st.file_uploader('Revit extract JSON',type=['json'],max_upload_size=20,key=key+'_upload')
     if st.button('Preview extract',disabled=upload is None,key=key+'_preview'):
         try:
@@ -42,9 +44,11 @@ def page_revit_exchange():
     payload = st.session_state.get(key+'_payload')
     if payload:
         st.subheader('Extract preview')
-        st.caption(f"{payload['revit_model_name']} · " + ' · '.join(f'{group}: {len(payload.get(group,[]))}' for group in ('pipes','fixtures','tanks','pumps')))
+        st.caption(f"{payload['revit_model_name']} · " + ' · '.join(f'{group}: {len(payload.get(group,[]))}' for group in ('pipes','fixtures','tanks','pumps','valves')))
         with st.expander('Model identity, source values and skipped objects'):
             st.json(payload)
+        from bim.mapping import revit_inventory
+        mapping_workspace(conn,pid,revit_inventory(payload),key+'_bim')
         confirm_key = hashlib.sha256(json.dumps(payload,sort_keys=True).encode()).hexdigest()
         confirmed = st.checkbox('I reviewed this model identity and extract; importing will invalidate current project results and retain their history',key=key+'_confirm_'+confirm_key)
         if st.button('Import reviewed extract',disabled=not confirmed,key=key+'_import'):
