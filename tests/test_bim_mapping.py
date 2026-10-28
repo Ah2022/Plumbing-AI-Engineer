@@ -119,3 +119,13 @@ def test_connection_order_does_not_require_recalculation():
     inv=inventory();a=snapshot(inv,mapped(inv),[],'S','R1');inv['connections'].reverse()
     b=snapshot(inv,mapped(inv),[],'S','R2')
     assert not compare_snapshots(a,b)['recalculation_required']
+
+
+def test_missing_port_inventory_does_not_invent_disconnected_components():
+    inv=inventory();inv['connections']=[]
+    for obj in inv['objects']:obj['ports']=[]
+    report=diagnostics(inv,mapped(inv))
+    assert 'disconnected_components' not in checks(report)
+    assert 'component_coverage' in checks(report)
+    assert all(n['status']=='NOT_EVALUATED' and n['components']==[] for n in report['networks'])
+    assert all(f['status']=='NOT_EVALUATED' for f in report['findings'] if f['check']=='component_coverage')

@@ -178,6 +178,11 @@ def diagnostics(inventory, mapping, boundaries=()):
     networks=defaultdict(set)
     for i,r in active.items(): networks[(r.get('system',''),r['service'])].add(i)
     for (system,service),nodes in networks.items():
+        if any(not objects[i].get('ports') for i in nodes):
+            components.append(dict(system=system,service=service,components=[],status='NOT_EVALUATED',source_ids=sorted(nodes)))
+            issue('component_coverage','NOT_EVALUATED',system+' / '+service,
+                'Physical port inventory is missing for one or more mapped objects; disconnected components cannot be established.')
+            continue
         remaining=set(nodes);parts=[]
         while remaining:
             todo=[min(remaining)];part=set()
@@ -186,7 +191,7 @@ def diagnostics(inventory, mapping, boundaries=()):
                 if i in part:continue
                 part.add(i);todo.extend((adjacency[i]&nodes)-part)
             remaining-=part;parts.append(sorted(part))
-        components.append(dict(system=system,service=service,components=parts))
+        components.append(dict(system=system,service=service,components=parts,status='EVALUATED'))
         if len(parts)>1:issue('disconnected_components','WARNING',system+' / '+service,str(len(parts))+' physical components in this mapped network; separate supplies/partitions may be intentional.')
     if inventory.get('skipped'):
         issue('extract_completeness','MISSING_DATA','MODEL','Extractor skipped '+str(len(inventory['skipped']))+' objects; inspect recorded reasons.')
