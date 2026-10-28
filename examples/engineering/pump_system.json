@@ -1,0 +1,43 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "pump_system",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "Authored software example only; independent engineering acceptance pending",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "static_head_m": 10,
+    "resistance_m_per_lps2": 0.5,
+    "pump_curve": [
+      {
+        "flow_lps": 0,
+        "head_m": 40
+      },
+      {
+        "flow_lps": 4,
+        "head_m": 32
+      },
+      {
+        "flow_lps": 8,
+        "head_m": 8
+      }
+    ],
+    "sample_flows_lps": [
+      0,
+      2,
+      4,
+      6,
+      8
+    ]
+  }
+}

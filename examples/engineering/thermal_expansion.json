@@ -1,0 +1,32 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "thermal_expansion",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "Authored software example only; independent engineering acceptance pending",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "cold_water_volume_l": 1000,
+    "cold_density_kg_m3": 1000,
+    "hot_density_kg_m3": 980,
+    "pipe_length_m": 10,
+    "material_alpha_per_k": 1e-05,
+    "temperature_rise_k": 50,
+    "precharge_gauge_kpa": 200,
+    "cold_fill_gauge_kpa": 300,
+    "maximum_gauge_kpa": 600,
+    "atmospheric_kpa": 100,
+    "polytropic_exponent": 1,
+    "selected_vessel_l": 80
+  }
+}

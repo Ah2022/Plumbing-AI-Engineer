@@ -1,0 +1,194 @@
+{
+  "schema_version": "engineering-software-evidence-1",
+  "software_status": "PASS",
+  "implementation_sha256": "46559dad7d1d16c3b52b4eeb9048f1dfae4e1cf0569a4bab625613e45f4d8414",
+  "reference_cases_sha256": "29af8199fae3e5ac3994462f9361c1dc8ef67f0c1d7e5e07cbb4ac246ecd7a2c",
+  "cases": [
+    {
+      "case": "pump-intersection",
+      "module": "pump_system",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "pump-outside-curve",
+      "module": "pump_system",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "recirculation-thermal",
+      "module": "recirculation",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "recirculation-cold-return",
+      "module": "recirculation",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "fixture-criteria",
+      "module": "fixture_minimum",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "fixture-undersize",
+      "module": "fixture_minimum",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "gravity-half-full",
+      "module": "gravity_flow",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "gravity-capacity-exceeded",
+      "module": "gravity_flow",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "trap-static-budget",
+      "module": "trap_pressure",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "trap-pressure-exceeded",
+      "module": "trap_pressure",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "vent-wet",
+      "module": "vent_arrangement",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "vent-circuit",
+      "module": "vent_arrangement",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "vent-aav",
+      "module": "vent_arrangement",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "AAV-no-positive-pressure-relief",
+      "module": "vent_arrangement",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "free-weir",
+      "module": "backwater_overflow",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "submerged-weir-blocked",
+      "module": "backwater_overflow",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "orifice",
+      "module": "backwater_overflow",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "linear-storage-puls",
+      "module": "storm_storage",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "storage-rating-exceeded",
+      "module": "storm_storage",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "fire-separation",
+      "module": "fire_separation",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "fire-cross-connection",
+      "module": "fire_separation",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "pump-catalogue",
+      "module": "equipment_selection",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "tank-catalogue",
+      "module": "equipment_selection",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "noise-screen",
+      "module": "noise_screen",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "noise-measurement-fail",
+      "module": "noise_screen",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "rapid-surge",
+      "module": "water_hammer",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "slow-surge",
+      "module": "water_hammer",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "surge-cavitation-screen",
+      "module": "water_hammer",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "thermal-vessel",
+      "module": "thermal_expansion",
+      "software_status": "PASS",
+      "discrepancies": []
+    },
+    {
+      "case": "thermal-vessel-too-small",
+      "module": "thermal_expansion",
+      "software_status": "PASS",
+      "discrepancies": []
+    }
+  ],
+  "engineering_status": "REVIEW_REQUIRED",
+  "code_compliance_status": "NOT_EVALUATED",
+  "limitations": [
+    "Author-prepared arithmetic and condition-action candidates; not independently approved real-project/code/manufacturer validation.",
+    "Passing software evidence cannot grant code adoption, engineering approval or certification."
+  ]
+}

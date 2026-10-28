@@ -1,0 +1,33 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "fixture_minimum",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "Authored software example only; independent engineering acceptance pending",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "fixtures": [
+      {
+        "id": "F1",
+        "source_id": "SYN",
+        "selected_nominal_mm": 20,
+        "selected_internal_mm": 16,
+        "required_nominal_mm": 20,
+        "design_flow_lps": 0.2,
+        "minimum_flow_lps": 0.15,
+        "available_pressure_m": 15,
+        "minimum_pressure_m": 10
+      }
+    ]
+  }
+}

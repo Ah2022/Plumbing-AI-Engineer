@@ -1,0 +1,31 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "water_hammer",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "Authored software example only; independent engineering acceptance pending",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "water_density_kg_m3": 1000,
+    "wave_speed_m_s": 1000,
+    "pipe_length_m": 100,
+    "initial_velocity_m_s": 0.1,
+    "final_velocity_m_s": 0,
+    "closure_time_s": 0.1,
+    "operating_gauge_kpa": 300,
+    "allowable_gauge_kpa": 1600,
+    "atmospheric_kpa": 101.325,
+    "vapour_pressure_kpa": 2.3,
+    "closure_model": "linear_velocity"
+  }
+}

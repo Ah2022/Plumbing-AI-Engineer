@@ -1,0 +1,28 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "trap_pressure",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "Authored software example only; independent engineering acceptance pending",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "initial_seal_mm": 50,
+    "evaporation_mm_day": 1,
+    "exposure_days": 5,
+    "minimum_seal_mm": 25,
+    "peak_positive_pressure_pa": 100,
+    "peak_negative_pressure_pa": 150,
+    "allowable_pressure_pa": 250,
+    "water_density_kg_m3": 1000
+  }
+}

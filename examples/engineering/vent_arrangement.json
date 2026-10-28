@@ -1,0 +1,54 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "vent_arrangement",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "Authored software example only; independent engineering acceptance pending",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "arrangement": "wet",
+    "fixtures": [
+      {
+        "id": "WC",
+        "source_id": "SYN",
+        "fixture_type": "WC",
+        "floor": "L1",
+        "dfu": 4
+      },
+      {
+        "id": "B",
+        "source_id": "SYN",
+        "fixture_type": "basin",
+        "floor": "L1",
+        "dfu": 2
+      }
+    ],
+    "selected_vent_nominal_mm": 50,
+    "required_vent_nominal_mm": 50,
+    "maximum_fixtures": 4,
+    "maximum_dfu": 12,
+    "allowed_fixture_types": [
+      "WC",
+      "basin"
+    ],
+    "connection_position_verified": true,
+    "circuit_relief_verified": true,
+    "minimum_clearance_mm": 50,
+    "actual_clearance_mm": 100,
+    "listed_capacity_dfu": 10,
+    "atmospheric_relief_present": true,
+    "accessible": true,
+    "correctly_oriented": true,
+    "approved_product": true
+  }
+}

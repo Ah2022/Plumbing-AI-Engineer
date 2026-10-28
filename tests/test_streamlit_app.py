@@ -57,7 +57,7 @@ def test_create_project_succeeds(fresh_app):
 @pytest.mark.parametrize("page", [
     "Code Profiles", "Network Review", "CAD / IFC Checks", "Calculation Sheets",
     "Design Basis", "Fixtures & Water", "Drainage & Vent",
-    "Hot Water", "Tanks", "Pumps", "Stormwater",
+    "Hot Water", "Tanks", "Pumps", "Stormwater", "Engineering Modules",
     "Code Compliance / QA-QC", "QA/QC Dashboard", "Report / Export", "Revit Exchange", "Release Readiness",
 ])
 def test_every_page_loads_without_exceptions(fresh_app, page):

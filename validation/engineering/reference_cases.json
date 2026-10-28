@@ -1,0 +1,1636 @@
+[
+  {
+    "id": "pump-intersection",
+    "module": "pump_system",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "pump_system",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "static_head_m": 10,
+        "resistance_m_per_lps2": 0.5,
+        "pump_curve": [
+          {
+            "flow_lps": 0,
+            "head_m": 40
+          },
+          {
+            "flow_lps": 4,
+            "head_m": 32
+          },
+          {
+            "flow_lps": 8,
+            "head_m": 8
+          }
+        ],
+        "sample_flows_lps": [
+          0,
+          2,
+          4,
+          6,
+          8
+        ]
+      }
+    },
+    "expected_values": {
+      "operating_flow_lps": 5.313708498984761,
+      "operating_head_m": 24.117749006091444
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "On second pump segment H=56-6Q. Equate10+0.5Q\u00b2: Q=-6+sqrt128.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "pump-outside-curve",
+    "module": "pump_system",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "pump_system",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "static_head_m": 100,
+        "resistance_m_per_lps2": 0.5,
+        "pump_curve": [
+          {
+            "flow_lps": 0,
+            "head_m": 40
+          },
+          {
+            "flow_lps": 4,
+            "head_m": 32
+          },
+          {
+            "flow_lps": 8,
+            "head_m": 8
+          }
+        ],
+        "sample_flows_lps": [
+          0,
+          4,
+          8
+        ]
+      }
+    },
+    "expected_values": {
+      "operating_flow_lps": null
+    },
+    "expected_status": "NOT_EVALUATED",
+    "complete": false,
+    "absolute_tolerance": 1e-08,
+    "derivation": "Source curve head never reaches static100m; no extrapolation.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "recirculation-thermal",
+    "module": "recirculation",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "recirculation",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "supply_temperature_c": 60,
+        "minimum_return_temperature_c": 55,
+        "water_density_kg_m3": 1000,
+        "specific_heat_j_kgk": 4000,
+        "branches": [
+          {
+            "id": "L1",
+            "source_id": "SYN",
+            "length_m": 100,
+            "heat_loss_w_m": 10,
+            "selected_flow_lps": 0.1,
+            "internal_mm": 20,
+            "friction_factor": 0.02,
+            "fittings_k": 2,
+            "balancing_loss_m": 0.5
+          },
+          {
+            "id": "L2",
+            "source_id": "SYN",
+            "length_m": 50,
+            "heat_loss_w_m": 10,
+            "selected_flow_lps": 0.05,
+            "internal_mm": 20,
+            "friction_factor": 0.02,
+            "fittings_k": 2,
+            "balancing_loss_m": 0.2
+          }
+        ]
+      }
+    },
+    "expected_values": {
+      "total_heat_loss_w": 1500,
+      "required_total_flow_lps": 0.075,
+      "selected_total_flow_lps": 0.15
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "Qheat=100*10+50*10=1500W; flow=1500/(1000*4000*5)*1000=.075L/s. Both selected loops return57.5C.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "recirculation-cold-return",
+    "module": "recirculation",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "recirculation",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "supply_temperature_c": 60,
+        "minimum_return_temperature_c": 55,
+        "water_density_kg_m3": 1000,
+        "specific_heat_j_kgk": 4000,
+        "branches": [
+          {
+            "id": "L1",
+            "source_id": "SYN",
+            "length_m": 100,
+            "heat_loss_w_m": 10,
+            "selected_flow_lps": 0.01,
+            "internal_mm": 20,
+            "friction_factor": 0.02,
+            "fittings_k": 2,
+            "balancing_loss_m": 0.5
+          },
+          {
+            "id": "L2",
+            "source_id": "SYN",
+            "length_m": 50,
+            "heat_loss_w_m": 10,
+            "selected_flow_lps": 0.05,
+            "internal_mm": 20,
+            "friction_factor": 0.02,
+            "fittings_k": 2,
+            "balancing_loss_m": 0.2
+          }
+        ]
+      }
+    },
+    "expected_values": {
+      "total_heat_loss_w": 1500
+    },
+    "expected_status": "FAIL",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "First loop return60-1000/(1000*4000*.00001)=35C<55C.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "fixture-criteria",
+    "module": "fixture_minimum",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "fixture_minimum",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "fixtures": [
+          {
+            "id": "F1",
+            "source_id": "SYN",
+            "selected_nominal_mm": 20,
+            "selected_internal_mm": 16,
+            "required_nominal_mm": 20,
+            "design_flow_lps": 0.2,
+            "minimum_flow_lps": 0.15,
+            "available_pressure_m": 15,
+            "minimum_pressure_m": 10
+          }
+        ]
+      }
+    },
+    "expected_values": {
+      "fixtures_checked": 1
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "20>=20 nominal;0.2>=0.15L/s;15>=10m. Bore16 is not compared to nominal20.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "fixture-undersize",
+    "module": "fixture_minimum",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "fixture_minimum",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "fixtures": [
+          {
+            "id": "F1",
+            "source_id": "SYN",
+            "selected_nominal_mm": 15,
+            "selected_internal_mm": 16,
+            "required_nominal_mm": 20,
+            "design_flow_lps": 0.2,
+            "minimum_flow_lps": 0.15,
+            "available_pressure_m": 15,
+            "minimum_pressure_m": 10
+          }
+        ]
+      }
+    },
+    "expected_values": {
+      "fixtures_checked": 1
+    },
+    "expected_status": "FAIL",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "Selected nominal15<required20 regardless of bore.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "gravity-half-full",
+    "module": "gravity_flow",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "gravity_flow",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "internal_mm": 100,
+        "slope_pct": 1,
+        "manning_n": 0.013,
+        "design_flow_lps": 2.5827153230263296,
+        "maximum_fill_ratio": 0.8,
+        "minimum_velocity_m_s": 0.5
+      }
+    },
+    "expected_values": {
+      "normal_depth_m": 0.05,
+      "area_m2": 0.003926990816987242,
+      "hydraulic_radius_m": 0.025,
+      "velocity_m_s": 0.6576830564141144
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "Half-circle A=pi*D\u00b2/8,P=pi*D/2,R=D/4. V=R^(2/3)*sqrt(.01)/.013.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "gravity-capacity-exceeded",
+    "module": "gravity_flow",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "gravity_flow",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "internal_mm": 100,
+        "slope_pct": 1,
+        "manning_n": 0.013,
+        "design_flow_lps": 100,
+        "maximum_fill_ratio": 0.8,
+        "minimum_velocity_m_s": 0.5
+      }
+    },
+    "expected_values": {
+      "normal_depth_m": null
+    },
+    "expected_status": "FAIL",
+    "complete": false,
+    "absolute_tolerance": 1e-08,
+    "derivation": "100L/s exceeds capacity below0.8D; do not substitute a full-pipe solution.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "trap-static-budget",
+    "module": "trap_pressure",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "trap_pressure",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "initial_seal_mm": 50,
+        "evaporation_mm_day": 1,
+        "exposure_days": 5,
+        "minimum_seal_mm": 25,
+        "peak_positive_pressure_pa": 100,
+        "peak_negative_pressure_pa": 150,
+        "allowable_pressure_pa": 250,
+        "water_density_kg_m3": 1000
+      }
+    },
+    "expected_values": {
+      "estimated_remaining_seal_mm": 45,
+      "pressure_equivalent_water_head_mm": 15.295743194668924,
+      "initial_hydrostatic_head_pa": 490.3325
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "Remaining50-1*5=45mm; pressure equivalent150/(1000g)*1000; not a dynamic seal-break prediction.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "trap-pressure-exceeded",
+    "module": "trap_pressure",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "trap_pressure",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "initial_seal_mm": 50,
+        "evaporation_mm_day": 1,
+        "exposure_days": 5,
+        "minimum_seal_mm": 25,
+        "peak_positive_pressure_pa": 100,
+        "peak_negative_pressure_pa": 300,
+        "allowable_pressure_pa": 250,
+        "water_density_kg_m3": 1000
+      }
+    },
+    "expected_values": {
+      "pressure_limit_margin_pa": -50
+    },
+    "expected_status": "FAIL",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "300Pa>stipulated250Pa.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "vent-wet",
+    "module": "vent_arrangement",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "vent_arrangement",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "arrangement": "wet",
+        "fixtures": [
+          {
+            "id": "WC",
+            "source_id": "SYN",
+            "fixture_type": "WC",
+            "floor": "L1",
+            "dfu": 4
+          },
+          {
+            "id": "B",
+            "source_id": "SYN",
+            "fixture_type": "basin",
+            "floor": "L1",
+            "dfu": 2
+          }
+        ],
+        "selected_vent_nominal_mm": 50,
+        "required_vent_nominal_mm": 50,
+        "maximum_fixtures": 4,
+        "maximum_dfu": 12,
+        "allowed_fixture_types": [
+          "WC",
+          "basin"
+        ],
+        "connection_position_verified": true,
+        "circuit_relief_verified": true,
+        "minimum_clearance_mm": 50,
+        "actual_clearance_mm": 100,
+        "listed_capacity_dfu": 10,
+        "atmospheric_relief_present": true,
+        "accessible": true,
+        "correctly_oriented": true,
+        "approved_product": true
+      }
+    },
+    "expected_values": {
+      "total_dfu": 6,
+      "fixture_count": 2
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "Two fixtures,6 stipulated DFU; all explicitly supplied applicability/geometry/listing assertions satisfied. No code limits inferred.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "vent-circuit",
+    "module": "vent_arrangement",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "vent_arrangement",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "arrangement": "circuit",
+        "fixtures": [
+          {
+            "id": "WC",
+            "source_id": "SYN",
+            "fixture_type": "WC",
+            "floor": "L1",
+            "dfu": 4
+          },
+          {
+            "id": "B",
+            "source_id": "SYN",
+            "fixture_type": "basin",
+            "floor": "L1",
+            "dfu": 2
+          }
+        ],
+        "selected_vent_nominal_mm": 50,
+        "required_vent_nominal_mm": 50,
+        "maximum_fixtures": 4,
+        "maximum_dfu": 12,
+        "allowed_fixture_types": [
+          "WC",
+          "basin"
+        ],
+        "connection_position_verified": true,
+        "circuit_relief_verified": true,
+        "minimum_clearance_mm": 50,
+        "actual_clearance_mm": 100,
+        "listed_capacity_dfu": 10,
+        "atmospheric_relief_present": true,
+        "accessible": true,
+        "correctly_oriented": true,
+        "approved_product": true
+      }
+    },
+    "expected_values": {
+      "total_dfu": 6,
+      "fixture_count": 2
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "Two fixtures,6 stipulated DFU; all explicitly supplied applicability/geometry/listing assertions satisfied. No code limits inferred.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "vent-aav",
+    "module": "vent_arrangement",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "vent_arrangement",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "arrangement": "aav",
+        "fixtures": [
+          {
+            "id": "WC",
+            "source_id": "SYN",
+            "fixture_type": "WC",
+            "floor": "L1",
+            "dfu": 4
+          },
+          {
+            "id": "B",
+            "source_id": "SYN",
+            "fixture_type": "basin",
+            "floor": "L1",
+            "dfu": 2
+          }
+        ],
+        "selected_vent_nominal_mm": 50,
+        "required_vent_nominal_mm": 50,
+        "maximum_fixtures": 4,
+        "maximum_dfu": 12,
+        "allowed_fixture_types": [
+          "WC",
+          "basin"
+        ],
+        "connection_position_verified": true,
+        "circuit_relief_verified": true,
+        "minimum_clearance_mm": 50,
+        "actual_clearance_mm": 100,
+        "listed_capacity_dfu": 10,
+        "atmospheric_relief_present": true,
+        "accessible": true,
+        "correctly_oriented": true,
+        "approved_product": true
+      }
+    },
+    "expected_values": {
+      "total_dfu": 6,
+      "fixture_count": 2
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "Two fixtures,6 stipulated DFU; all explicitly supplied applicability/geometry/listing assertions satisfied. No code limits inferred.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "AAV-no-positive-pressure-relief",
+    "module": "vent_arrangement",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "vent_arrangement",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "arrangement": "aav",
+        "fixtures": [
+          {
+            "id": "WC",
+            "source_id": "SYN",
+            "fixture_type": "WC",
+            "floor": "L1",
+            "dfu": 4
+          },
+          {
+            "id": "B",
+            "source_id": "SYN",
+            "fixture_type": "basin",
+            "floor": "L1",
+            "dfu": 2
+          }
+        ],
+        "selected_vent_nominal_mm": 50,
+        "required_vent_nominal_mm": 50,
+        "maximum_fixtures": 4,
+        "maximum_dfu": 12,
+        "allowed_fixture_types": [
+          "WC",
+          "basin"
+        ],
+        "connection_position_verified": true,
+        "circuit_relief_verified": true,
+        "minimum_clearance_mm": 50,
+        "actual_clearance_mm": 100,
+        "listed_capacity_dfu": 10,
+        "atmospheric_relief_present": false,
+        "accessible": true,
+        "correctly_oriented": true,
+        "approved_product": true
+      }
+    },
+    "expected_values": {
+      "total_dfu": 6
+    },
+    "expected_status": "FAIL",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "An AAV is not a positive-pressure vent; supplied relief requirement is unsatisfied.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "free-weir",
+    "module": "backwater_overflow",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "backwater_overflow",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "downstream_design_hgl_m": 0,
+        "connection_invert_m": 1,
+        "lowest_flood_rim_m": 2,
+        "protective_device_reviewed": false,
+        "overflow_kind": "weir",
+        "upstream_water_level_m": 1.2,
+        "tailwater_level_m": 0.5,
+        "crest_m": 1,
+        "weir_width_m": 1,
+        "weir_coefficient_m05_s": 1.7,
+        "design_inflow_lps": 100
+      }
+    },
+    "expected_values": {
+      "overflow_capacity_lps": 152.05262246998572,
+      "flood_rim_margin_m": 2
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "Q=1.7*1*.2^1.5*1000L/s; external HGL0 below invert1.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "submerged-weir-blocked",
+    "module": "backwater_overflow",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "backwater_overflow",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "downstream_design_hgl_m": 0,
+        "connection_invert_m": 1,
+        "lowest_flood_rim_m": 2,
+        "protective_device_reviewed": false,
+        "overflow_kind": "weir",
+        "upstream_water_level_m": 1.2,
+        "tailwater_level_m": 1.1,
+        "crest_m": 1,
+        "weir_width_m": 1,
+        "weir_coefficient_m05_s": 1.7,
+        "design_inflow_lps": 100
+      }
+    },
+    "expected_values": {
+      "overflow_capacity_lps": null
+    },
+    "expected_status": "NOT_EVALUATED",
+    "complete": false,
+    "absolute_tolerance": 1e-08,
+    "derivation": "Tailwater above crest: unsupported submerged weir is not treated as free discharge.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "orifice",
+    "module": "backwater_overflow",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "backwater_overflow",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "downstream_design_hgl_m": 0,
+        "connection_invert_m": 0.5,
+        "lowest_flood_rim_m": 3,
+        "protective_device_reviewed": false,
+        "overflow_kind": "orifice",
+        "upstream_water_level_m": 2,
+        "tailwater_level_m": 0,
+        "orifice_center_m": 1,
+        "orifice_height_m": 0.2,
+        "orifice_area_m2": 0.01,
+        "discharge_coefficient": 0.6,
+        "design_inflow_lps": 20
+      }
+    },
+    "expected_values": {
+      "overflow_capacity_lps": 26.5721433083596
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "Fully wetted opening, free outlet:0.6*.01*sqrt(2g*1)*1000.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "linear-storage-puls",
+    "module": "storm_storage",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "storm_storage",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "initial_storage_m3": 0,
+        "maximum_permitted_level_m": 1,
+        "storage_rating": [
+          {
+            "level_m": 0,
+            "storage_m3": 0,
+            "outflow_lps": 0
+          },
+          {
+            "level_m": 1,
+            "storage_m3": 10,
+            "outflow_lps": 10
+          },
+          {
+            "level_m": 2,
+            "storage_m3": 20,
+            "outflow_lps": 20
+          },
+          {
+            "level_m": 3,
+            "storage_m3": 30,
+            "outflow_lps": 30
+          }
+        ],
+        "hydrograph": [
+          {
+            "time_s": 0,
+            "inflow_lps": 0
+          },
+          {
+            "time_s": 100,
+            "inflow_lps": 10
+          },
+          {
+            "time_s": 200,
+            "inflow_lps": 10
+          },
+          {
+            "time_s": 300,
+            "inflow_lps": 0
+          }
+        ]
+      }
+    },
+    "expected_values": {
+      "final_computed_storage_m3": 1.7276751970629523,
+      "routed_inflow_volume_m3": 2,
+      "overall_mass_balance_residual_m3": 0
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "Independent exact rational trapezoidal linear-reservoir recurrence with Q=S/1000m3/s; Sfinal=16000/9261",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "storage-rating-exceeded",
+    "module": "storm_storage",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "storm_storage",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "initial_storage_m3": 0,
+        "maximum_permitted_level_m": 1,
+        "storage_rating": [
+          {
+            "level_m": 0,
+            "storage_m3": 0,
+            "outflow_lps": 0
+          },
+          {
+            "level_m": 1,
+            "storage_m3": 10,
+            "outflow_lps": 10
+          },
+          {
+            "level_m": 2,
+            "storage_m3": 20,
+            "outflow_lps": 20
+          },
+          {
+            "level_m": 3,
+            "storage_m3": 30,
+            "outflow_lps": 30
+          }
+        ],
+        "hydrograph": [
+          {
+            "time_s": 0,
+            "inflow_lps": 1000
+          },
+          {
+            "time_s": 100,
+            "inflow_lps": 1000
+          }
+        ]
+      }
+    },
+    "expected_values": {
+      "unrouted_excess_at_first_failure_m3": 68.5
+    },
+    "expected_status": "FAIL",
+    "complete": false,
+    "absolute_tolerance": 1e-08,
+    "derivation": "Input100m3; max rating30m3 and trapezoidal outlet1.5m3: first unrouted excess68.5m3.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "fire-separation",
+    "module": "fire_separation",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "fire_separation",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "separation_policy": "shared_supply_with_backflow",
+        "nodes": [
+          {
+            "id": "S",
+            "service": "shared",
+            "source_id": "SYN"
+          },
+          {
+            "id": "D",
+            "service": "domestic",
+            "source_id": "SYN"
+          },
+          {
+            "id": "F",
+            "service": "fire",
+            "source_id": "SYN"
+          }
+        ],
+        "links": [
+          {
+            "id": "SD",
+            "from_node": "S",
+            "to_node": "D",
+            "barrier": "none",
+            "source_id": "SYN"
+          },
+          {
+            "id": "SF",
+            "from_node": "S",
+            "to_node": "F",
+            "barrier": "reviewed_one_way_backflow",
+            "source_id": "SYN"
+          }
+        ],
+        "available_fire_flow_lps": 20,
+        "required_fire_flow_lps": 15,
+        "available_fire_pressure_m": 30,
+        "required_fire_pressure_m": 25,
+        "tank_usable_m3": 100,
+        "domestic_reserved_m3": 20,
+        "fire_reserved_m3": 60,
+        "required_fire_storage_m3": 50
+      }
+    },
+    "expected_values": {
+      "fire_flow_margin_lps": 5,
+      "fire_pressure_margin_m": 5,
+      "unprotected_paths": 0,
+      "unallocated_storage_m3": 20
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "Reverse F->S blocked by attributed reviewed one-way device; reserves20+60<=100.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "fire-cross-connection",
+    "module": "fire_separation",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "fire_separation",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "separation_policy": "shared_supply_with_backflow",
+        "nodes": [
+          {
+            "id": "S",
+            "service": "shared",
+            "source_id": "SYN"
+          },
+          {
+            "id": "D",
+            "service": "domestic",
+            "source_id": "SYN"
+          },
+          {
+            "id": "F",
+            "service": "fire",
+            "source_id": "SYN"
+          }
+        ],
+        "links": [
+          {
+            "id": "SD",
+            "from_node": "S",
+            "to_node": "D",
+            "barrier": "none",
+            "source_id": "SYN"
+          },
+          {
+            "id": "SF",
+            "from_node": "S",
+            "to_node": "F",
+            "barrier": "none",
+            "source_id": "SYN"
+          }
+        ],
+        "available_fire_flow_lps": 20,
+        "required_fire_flow_lps": 15,
+        "available_fire_pressure_m": 30,
+        "required_fire_pressure_m": 25,
+        "tank_usable_m3": 100,
+        "domestic_reserved_m3": 20,
+        "fire_reserved_m3": 60,
+        "required_fire_storage_m3": 50
+      }
+    },
+    "expected_values": {
+      "unprotected_paths": 1
+    },
+    "expected_status": "FAIL",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "Unprotected path F->S->D exists.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "pump-catalogue",
+    "module": "equipment_selection",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "equipment_selection",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "equipment_kind": "pump",
+        "duty_flow_lps": 4,
+        "duty_head_m": 30,
+        "design_pressure_kpa": 500,
+        "design_temperature_c": 60,
+        "fluid": "potable_water",
+        "npsha_m": 4,
+        "required_npsh_margin_m": 1,
+        "catalogue": [
+          {
+            "model_id": "DEMO-P1",
+            "manufacturer": "SYNTHETIC ONLY",
+            "source_id": "SYN",
+            "fluid": "potable_water",
+            "max_pressure_kpa": 600,
+            "min_temperature_c": 5,
+            "max_temperature_c": 90,
+            "pump_curve": [
+              {
+                "flow_lps": 0,
+                "head_m": 40
+              },
+              {
+                "flow_lps": 4,
+                "head_m": 32
+              },
+              {
+                "flow_lps": 8,
+                "head_m": 8
+              }
+            ],
+            "efficiency": 0.8,
+            "npshr_m": 2
+          },
+          {
+            "model_id": "DEMO-P2",
+            "manufacturer": "SYNTHETIC ONLY",
+            "source_id": "SYN",
+            "fluid": "potable_water",
+            "max_pressure_kpa": 400,
+            "min_temperature_c": 5,
+            "max_temperature_c": 90,
+            "pump_curve": [
+              {
+                "flow_lps": 0,
+                "head_m": 40
+              },
+              {
+                "flow_lps": 4,
+                "head_m": 32
+              },
+              {
+                "flow_lps": 8,
+                "head_m": 8
+              }
+            ],
+            "efficiency": 0.8,
+            "npshr_m": 2
+          }
+        ]
+      }
+    },
+    "expected_values": {
+      "eligible_models": [
+        "DEMO-P1"
+      ],
+      "eligible_count": 1
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "P1 head32>=30, rating600>=500, NPSHa4>=2+1; P2 pressure rating fails.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "tank-catalogue",
+    "module": "equipment_selection",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "equipment_selection",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "equipment_kind": "tank",
+        "required_usable_volume_l": 80,
+        "design_pressure_kpa": 500,
+        "design_temperature_c": 60,
+        "fluid": "potable_water",
+        "catalogue": [
+          {
+            "model_id": "DEMO-T1",
+            "manufacturer": "SYNTHETIC ONLY",
+            "source_id": "SYN",
+            "fluid": "potable_water",
+            "max_pressure_kpa": 600,
+            "min_temperature_c": 5,
+            "max_temperature_c": 90,
+            "usable_volume_l": 100
+          },
+          {
+            "model_id": "DEMO-T2",
+            "manufacturer": "SYNTHETIC ONLY",
+            "source_id": "SYN",
+            "fluid": "potable_water",
+            "max_pressure_kpa": 600,
+            "min_temperature_c": 5,
+            "max_temperature_c": 90,
+            "usable_volume_l": 50
+          }
+        ]
+      }
+    },
+    "expected_values": {
+      "eligible_models": [
+        "DEMO-T1"
+      ],
+      "eligible_count": 1
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "Usable100>=80; second tank usable50<80.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "noise-screen",
+    "module": "noise_screen",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "noise_screen",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "flow_lps": 1,
+        "internal_mm": 50,
+        "reviewed_velocity_limit_m_s": 2,
+        "measured_noise_db": 40,
+        "acoustic_limit_db": 45,
+        "measurement_metric": "dBA LAeq",
+        "limit_metric": "dBA LAeq",
+        "operating_condition_reference": "SYN: same measurement position and steady-flow condition"
+      }
+    },
+    "expected_values": {
+      "velocity_m_s": 0.5092958178940651,
+      "measured_noise_db": 40
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "Q/A velocity and measured40<=45dB; no sound generation prediction.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "noise-measurement-fail",
+    "module": "noise_screen",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "noise_screen",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "flow_lps": 1,
+        "internal_mm": 50,
+        "reviewed_velocity_limit_m_s": 2,
+        "measured_noise_db": 50,
+        "acoustic_limit_db": 45,
+        "measurement_metric": "dBA LAeq",
+        "limit_metric": "dBA LAeq",
+        "operating_condition_reference": "SYN: same measurement position and steady-flow condition"
+      }
+    },
+    "expected_values": {
+      "measured_noise_db": 50
+    },
+    "expected_status": "FAIL",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "Supplied like-for-like measured50>limit45dB.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "rapid-surge",
+    "module": "water_hammer",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "water_hammer",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "water_density_kg_m3": 1000,
+        "wave_speed_m_s": 1000,
+        "pipe_length_m": 100,
+        "initial_velocity_m_s": 0.1,
+        "final_velocity_m_s": 0,
+        "closure_time_s": 0.1,
+        "operating_gauge_kpa": 300,
+        "allowable_gauge_kpa": 1600,
+        "atmospheric_kpa": 101.325,
+        "vapour_pressure_kpa": 2.3,
+        "closure_model": "linear_velocity"
+      }
+    },
+    "expected_values": {
+      "critical_closure_time_s": 0.2,
+      "screened_surge_kpa": 100,
+      "maximum_gauge_kpa": 400,
+      "minimum_absolute_kpa": 301.325
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "rho*a*dV=100kPa; closure0.1<2L/a0.2s.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "slow-surge",
+    "module": "water_hammer",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "water_hammer",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "water_density_kg_m3": 1000,
+        "wave_speed_m_s": 1000,
+        "pipe_length_m": 100,
+        "initial_velocity_m_s": 0.1,
+        "final_velocity_m_s": 0,
+        "closure_time_s": 2,
+        "operating_gauge_kpa": 300,
+        "allowable_gauge_kpa": 1600,
+        "atmospheric_kpa": 101.325,
+        "vapour_pressure_kpa": 2.3,
+        "closure_model": "linear_velocity"
+      }
+    },
+    "expected_values": {
+      "screened_surge_kpa": 10
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "Slow linear-velocity factor0.2/2=0.1 applied to100kPa.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "surge-cavitation-screen",
+    "module": "water_hammer",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "water_hammer",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "water_density_kg_m3": 1000,
+        "wave_speed_m_s": 1000,
+        "pipe_length_m": 100,
+        "initial_velocity_m_s": 1,
+        "final_velocity_m_s": 0,
+        "closure_time_s": 0.1,
+        "operating_gauge_kpa": 300,
+        "allowable_gauge_kpa": 1600,
+        "atmospheric_kpa": 101.325,
+        "vapour_pressure_kpa": 2.3,
+        "closure_model": "linear_velocity"
+      }
+    },
+    "expected_values": {
+      "minimum_absolute_kpa": -598.675
+    },
+    "expected_status": "FAIL",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "Low envelope300+101.325-1000=-598.675kPa absolute flags cavitation; no column-separation simulation.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "thermal-vessel",
+    "module": "thermal_expansion",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "thermal_expansion",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "cold_water_volume_l": 1000,
+        "cold_density_kg_m3": 1000,
+        "hot_density_kg_m3": 980,
+        "pipe_length_m": 10,
+        "material_alpha_per_k": 1e-05,
+        "temperature_rise_k": 50,
+        "precharge_gauge_kpa": 200,
+        "cold_fill_gauge_kpa": 300,
+        "maximum_gauge_kpa": 600,
+        "atmospheric_kpa": 100,
+        "polytropic_exponent": 1,
+        "selected_vessel_l": 80
+      }
+    },
+    "expected_values": {
+      "water_expansion_l": 20.408163265306143,
+      "free_pipe_elongation_mm": 5,
+      "ideal_vessel_acceptance_fraction": 0.32142857142857145,
+      "minimum_ideal_vessel_l": 63.49206349206355
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "DeltaV=V*(rhoCold/rhoHot-1); gas acceptance300/400-300/700; elongation alpha*L*dT.",
+    "engineering_status": "REVIEW_REQUIRED"
+  },
+  {
+    "id": "thermal-vessel-too-small",
+    "module": "thermal_expansion",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "thermal_expansion",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "Authored software example only; independent engineering acceptance pending",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "cold_water_volume_l": 1000,
+        "cold_density_kg_m3": 1000,
+        "hot_density_kg_m3": 980,
+        "pipe_length_m": 10,
+        "material_alpha_per_k": 1e-05,
+        "temperature_rise_k": 50,
+        "precharge_gauge_kpa": 200,
+        "cold_fill_gauge_kpa": 300,
+        "maximum_gauge_kpa": 600,
+        "atmospheric_kpa": 100,
+        "polytropic_exponent": 1,
+        "selected_vessel_l": 10
+      }
+    },
+    "expected_values": {
+      "minimum_ideal_vessel_l": 63.49206349206355
+    },
+    "expected_status": "FAIL",
+    "complete": true,
+    "absolute_tolerance": 1e-08,
+    "derivation": "Selected10L below ideal gas acceptance requirement.",
+    "engineering_status": "REVIEW_REQUIRED"
+  }
+]

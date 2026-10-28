@@ -792,6 +792,7 @@ def main():
     from app.workbook_page import page_calculation_sheets
     from app.revit_page import page_revit_exchange
     from app.release_page import page_release_readiness
+    from app.engineering_page import page_engineering_modules
     if "conn" not in st.session_state:
         st.session_state.conn = get_conn()
     schema_token=(id(st.session_state.conn),'interactive-packages-1')
@@ -805,9 +806,9 @@ def main():
                "model completeness and engineering acceptance still require review.")
     page = st.sidebar.radio("Navigate", [
         "Project", "Code Profiles", "Network Review", "CAD / IFC Checks", "Calculation Sheets", "Design Basis", "Fixtures & Water", "Drainage & Vent",
-        "Hot Water", "Tanks", "Pumps", "Stormwater",
+        "Hot Water", "Tanks", "Pumps", "Stormwater", "Engineering Modules",
         "Code Compliance / QA-QC", "QA/QC Dashboard", "Report / Export", "Revit Exchange", "Release Readiness",
-    ])
+    ],key='navigation')
     st.sidebar.divider()
     st.sidebar.caption("Revit Exchange supports file import, linked calculations and a guarded result handoff. "
                       "Live writeback requires validated PLM bindings and explicit review in Revit.")
@@ -819,7 +820,7 @@ def main():
         if st.session_state.get('_governance_token') != token:
             clear_result_session()
             st.session_state['_governance_token'] = token
-        st.sidebar.caption('Engineering review pending' if governance['review_status']=='REVIEW_REQUIRED' else 'Verification complete')
+        st.sidebar.caption('Engineering review pending' if governance['review_status']=='REVIEW_REQUIRED' else 'Project basis verified; check each result for engineering review requirements')
         row = st.session_state.conn.execute(
             "SELECT project_name, code_id FROM projects WHERE project_id=?", (pid,)
         ).fetchone()
@@ -838,6 +839,7 @@ def main():
         "Tanks": page_tanks,
         "Pumps": page_pumps,
         "Stormwater": page_stormwater,
+        "Engineering Modules": page_engineering_modules,
         "Code Compliance / QA-QC": page_compliance,
         "QA/QC Dashboard": page_qaqc_dashboard,
         "Report / Export": page_report,

@@ -31,6 +31,8 @@ jobs:
         run: python -m pytest tests/test_engineering_validation.py -q
       - name: General graph routing, backend diagnostics and governed interface
         run: python -m pytest tests/test_general_solver.py tests/test_general_solver_ui.py -q
+      - name: Scoped engineering methods, source gates and interactive pages
+        run: python -m pytest tests/test_engineering_modules.py tests/test_engineering_modules_ui.py -q
       - name: Independent EPANET 2.2 rerun on Windows
         if: runner.os == 'Windows'
         shell: pwsh

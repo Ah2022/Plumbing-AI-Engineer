@@ -66,6 +66,14 @@ def validation_gate(data=DATA):
         if expected_forms!=registered_forms:issues.append('Interactive form coverage registry differs from installed-library inventory')
         pending=[r for group in ('core_calculations','interactive_forms') for r in coverage[group] if not _entry_accepted(r)]
         if pending:issues.append(f'{len(pending)} calculation/form entries lack accepted independent engineering references')
+        pending_modules=0
+        if (ROOT/'engineering/registry.py').is_file():
+            from engineering.registry import MODULES
+            reviews_path=ROOT/'.review/engineering_validation/module_reviews.json'
+            module_reviews=json.loads(reviews_path.read_text(encoding='utf-8')) if reviews_path.is_file() else []
+            approved={r.get('id') for r in module_reviews if isinstance(r,dict) and _entry_accepted(r)}
+            pending_modules=sum(m['id'] not in approved for m in MODULES)
+            if pending_modules:issues.append(f'{pending_modules} scoped engineering modules need accepted independent reference/source evidence; software examples do not approve them')
         projects=[]
         for folder in sorted((data/'projects').iterdir()):
             if not folder.is_dir():continue
@@ -90,7 +98,7 @@ def validation_gate(data=DATA):
         return dict(schema_version='engineering-validation-gate-1',release_label='ENGINEERING_VALIDATION_PENDING' if issues else 'ENGINEERING_ACCEPTED',
             engineering_status='REVIEW_REQUIRED' if issues else 'ACCEPTED',authoritative=not issues,
             core_calculations=len(registered),unregistered_calculations=unregistered,
-            interactive_forms=len(registered_forms),pending_reference_entries=len(pending),
+            interactive_forms=len(registered_forms),pending_reference_entries=len(pending),pending_module_scopes=pending_modules,
             projects=projects,issues=issues,reviewer='BIM MANAGER',
             limitation='Checks evidence completeness and integrity; external signature authenticity and professional qualifications require human verification.')
     except (OSError,ValueError,KeyError,TypeError) as error:

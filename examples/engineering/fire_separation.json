@@ -1,0 +1,62 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "fire_separation",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "Authored software example only; independent engineering acceptance pending",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "separation_policy": "shared_supply_with_backflow",
+    "nodes": [
+      {
+        "id": "S",
+        "service": "shared",
+        "source_id": "SYN"
+      },
+      {
+        "id": "D",
+        "service": "domestic",
+        "source_id": "SYN"
+      },
+      {
+        "id": "F",
+        "service": "fire",
+        "source_id": "SYN"
+      }
+    ],
+    "links": [
+      {
+        "id": "SD",
+        "from_node": "S",
+        "to_node": "D",
+        "barrier": "none",
+        "source_id": "SYN"
+      },
+      {
+        "id": "SF",
+        "from_node": "S",
+        "to_node": "F",
+        "barrier": "reviewed_one_way_backflow",
+        "source_id": "SYN"
+      }
+    ],
+    "available_fire_flow_lps": 20,
+    "required_fire_flow_lps": 15,
+    "available_fire_pressure_m": 30,
+    "required_fire_pressure_m": 25,
+    "tank_usable_m3": 100,
+    "domestic_reserved_m3": 20,
+    "fire_reserved_m3": 60,
+    "required_fire_storage_m3": 50
+  }
+}

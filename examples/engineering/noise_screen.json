@@ -1,0 +1,28 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "noise_screen",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "Authored software example only; independent engineering acceptance pending",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "flow_lps": 1,
+    "internal_mm": 50,
+    "reviewed_velocity_limit_m_s": 2,
+    "measured_noise_db": 40,
+    "acoustic_limit_db": 45,
+    "measurement_metric": "dBA LAeq",
+    "limit_metric": "dBA LAeq",
+    "operating_condition_reference": "SYN: same measurement position and steady-flow condition"
+  }
+}

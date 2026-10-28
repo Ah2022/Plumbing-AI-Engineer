@@ -1,0 +1,26 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "gravity_flow",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "Authored software example only; independent engineering acceptance pending",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "internal_mm": 100,
+    "slope_pct": 1,
+    "manning_n": 0.013,
+    "design_flow_lps": 2.5827153230263296,
+    "maximum_fill_ratio": 0.8,
+    "minimum_velocity_m_s": 0.5
+  }
+}

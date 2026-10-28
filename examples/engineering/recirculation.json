@@ -1,0 +1,48 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "recirculation",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "Authored software example only; independent engineering acceptance pending",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "supply_temperature_c": 60,
+    "minimum_return_temperature_c": 55,
+    "water_density_kg_m3": 1000,
+    "specific_heat_j_kgk": 4000,
+    "branches": [
+      {
+        "id": "L1",
+        "source_id": "SYN",
+        "length_m": 100,
+        "heat_loss_w_m": 10,
+        "selected_flow_lps": 0.1,
+        "internal_mm": 20,
+        "friction_factor": 0.02,
+        "fittings_k": 2,
+        "balancing_loss_m": 0.5
+      },
+      {
+        "id": "L2",
+        "source_id": "SYN",
+        "length_m": 50,
+        "heat_loss_w_m": 10,
+        "selected_flow_lps": 0.05,
+        "internal_mm": 20,
+        "friction_factor": 0.02,
+        "fittings_k": 2,
+        "balancing_loss_m": 0.2
+      }
+    ]
+  }
+}

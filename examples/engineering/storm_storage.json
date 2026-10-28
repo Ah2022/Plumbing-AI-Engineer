@@ -1,0 +1,62 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "storm_storage",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "Authored software example only; independent engineering acceptance pending",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "initial_storage_m3": 0,
+    "maximum_permitted_level_m": 1,
+    "storage_rating": [
+      {
+        "level_m": 0,
+        "storage_m3": 0,
+        "outflow_lps": 0
+      },
+      {
+        "level_m": 1,
+        "storage_m3": 10,
+        "outflow_lps": 10
+      },
+      {
+        "level_m": 2,
+        "storage_m3": 20,
+        "outflow_lps": 20
+      },
+      {
+        "level_m": 3,
+        "storage_m3": 30,
+        "outflow_lps": 30
+      }
+    ],
+    "hydrograph": [
+      {
+        "time_s": 0,
+        "inflow_lps": 0
+      },
+      {
+        "time_s": 100,
+        "inflow_lps": 10
+      },
+      {
+        "time_s": 200,
+        "inflow_lps": 10
+      },
+      {
+        "time_s": 300,
+        "inflow_lps": 0
+      }
+    ]
+  }
+}

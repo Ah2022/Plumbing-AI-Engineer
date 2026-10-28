@@ -1,0 +1,80 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "equipment_selection",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "Authored software example only; independent engineering acceptance pending",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "equipment_kind": "pump",
+    "duty_flow_lps": 4,
+    "duty_head_m": 30,
+    "design_pressure_kpa": 500,
+    "design_temperature_c": 60,
+    "fluid": "potable_water",
+    "npsha_m": 4,
+    "required_npsh_margin_m": 1,
+    "catalogue": [
+      {
+        "model_id": "DEMO-P1",
+        "manufacturer": "SYNTHETIC ONLY",
+        "source_id": "SYN",
+        "fluid": "potable_water",
+        "max_pressure_kpa": 600,
+        "min_temperature_c": 5,
+        "max_temperature_c": 90,
+        "pump_curve": [
+          {
+            "flow_lps": 0,
+            "head_m": 40
+          },
+          {
+            "flow_lps": 4,
+            "head_m": 32
+          },
+          {
+            "flow_lps": 8,
+            "head_m": 8
+          }
+        ],
+        "efficiency": 0.8,
+        "npshr_m": 2
+      },
+      {
+        "model_id": "DEMO-P2",
+        "manufacturer": "SYNTHETIC ONLY",
+        "source_id": "SYN",
+        "fluid": "potable_water",
+        "max_pressure_kpa": 400,
+        "min_temperature_c": 5,
+        "max_temperature_c": 90,
+        "pump_curve": [
+          {
+            "flow_lps": 0,
+            "head_m": 40
+          },
+          {
+            "flow_lps": 4,
+            "head_m": 32
+          },
+          {
+            "flow_lps": 8,
+            "head_m": 8
+          }
+        ],
+        "efficiency": 0.8,
+        "npshr_m": 2
+      }
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "backwater_overflow",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "Authored software example only; independent engineering acceptance pending",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "downstream_design_hgl_m": 0,
+    "connection_invert_m": 1,
+    "lowest_flood_rim_m": 2,
+    "protective_device_reviewed": false,
+    "overflow_kind": "weir",
+    "upstream_water_level_m": 1.2,
+    "tailwater_level_m": 0.5,
+    "crest_m": 1,
+    "weir_width_m": 1,
+    "weir_coefficient_m05_s": 1.7,
+    "design_inflow_lps": 100
+  }
+}
