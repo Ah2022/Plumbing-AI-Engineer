@@ -47,6 +47,7 @@ def page_model_review():
             inventory = inspect_model(data, filename, dxf_unit=None if unit == 'Use declared file units' else unit,
                 dwg_dxf_data=companion.getvalue() if companion else None, dwg_pair_confirmed=pair_confirmed)
             st.session_state[key] = inventory
+            st.session_state.pop(key + '_saved_mapping', None)
             st.session_state[key + '_pdf_bytes'] = data if inventory['format'] == 'PDF' else None
             st.session_state.pop(key + '_report', None)
         except (ValueError, OSError, RuntimeError) as error:
@@ -54,9 +55,35 @@ def page_model_review():
             st.session_state.pop(key + '_pdf_bytes', None)
             st.session_state.pop(key + '_report', None)
             st.error(str(error))
+    if conn.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='bim_extraction_snapshots'").fetchone():
+        saved = conn.execute('SELECT * FROM bim_extraction_snapshots WHERE project_id=? ORDER BY rowid DESC LIMIT 200', (pid,)).fetchall()
+        if saved:
+            with st.expander('Open saved model extraction'):
+                lookup = {r['snapshot_sha256']: r for r in saved}
+                selected = st.selectbox('Saved model snapshot', list(lookup),
+                    format_func=lambda k: lookup[k]['model_id'] + ' · ' + lookup[k]['created_at'] + ' · ' + k[:10], key=key + '_saved_choice')
+                if st.button('Open saved model snapshot', key=key + '_open_saved'):
+                    try:
+                        from bim.mapping import validate_snapshot
+                        packet = json.loads(lookup[selected]['packet_json'])
+                        body = validate_snapshot(packet)
+                        st.session_state[key] = body['inventory']
+                        st.session_state[key + '_saved_mapping'] = packet
+                        st.session_state.pop(key + '_report', None)
+                    except (ValueError, TypeError, KeyError) as error:
+                        st.error('The saved extraction could not be verified. Re-import its source: ' + str(error))
     inventory = st.session_state.get(key)
     if inventory is None:
         st.caption('Inspect a model to see source geometry, units, connections and editable engineering mappings.')
+        return
+    if inventory.get('format') == 'REVIT':
+        from app.model_viewer import render_model_viewer
+        from app.bim_mapping_page import mapping_workspace
+        st.caption('Saved Revit extraction: ' + inventory.get('filename', inventory.get('model_id', 'Model')))
+        render_model_viewer(inventory, key + '_saved_revit_viewer')
+        mapping_workspace(conn, pid, inventory, key + '_saved_revit_mapping', saved_packet=st.session_state.get(key + '_saved_mapping'))
+        from app.workspace import action
+        action('Open Revit exchange and calculations', 'Revit Exchange', key + '_open_revit')
         return
     digest = inventory['source_sha256']
     input_identity = dict(source=digest, conversion=inventory.get('conversion'), adapter=inventory['adapter_revision'])
@@ -70,14 +97,25 @@ def page_model_review():
     if inventory.get('geometry_ready', True) is not True:
         drawing_review(conn, pid, inventory, st.session_state.get(key + '_pdf_bytes'), model_key)
         return
-    if inventory['format']=='IFC':
+    tasks = ['Explore model', 'Map & diagnose', 'Design checks'] if inventory['format']=='IFC' else ['Explore model', 'Design checks']
+    if st.session_state.get('workspace_model_focus', {}).get('project_id') == pid:
+        st.session_state[model_key + '_task'] = 'Explore model'
+    task = st.segmented_control('Model task', tasks, default='Explore model', key=model_key + '_task')
+    if task == 'Explore model':
+        from app.model_viewer import render_model_viewer
+        render_model_viewer(inventory, model_key + '_viewer')
+        st.caption('Next: select Map & diagnose to review source-object mapping and connectivity, then Design checks to run the supported calculations.')
+        return
+    if task == 'Map & diagnose':
         from app.bim_mapping_page import mapping_workspace
-        mapping_workspace(conn,pid,inventory,model_key+'_bim')
+        mapping_workspace(conn,pid,inventory,model_key+'_bim', saved_packet=st.session_state.get(key + '_saved_mapping'))
+        return
     if inventory.get('conversion'):
         st.caption('DWG geometry source: ' + inventory['conversion']['method'] + '. Review the exported entities and units before checking.')
-    st.dataframe([{k: obj.get(k) for k in ('source_id', 'source_class', 'kind', 'name', 'system',
-        'length_m', 'horizontal_run_m', 'axis_segment_count', 'geometry_status', 'start_xyz_m', 'end_xyz_m')}
-        for obj in inventory['objects']], width='stretch', alt='Read-only source objects and extracted geometry in metres')
+    with st.expander('Source-object inventory'):
+        st.dataframe([{k: obj.get(k) for k in ('source_id', 'source_class', 'kind', 'name', 'system',
+            'length_m', 'horizontal_run_m', 'axis_segment_count', 'geometry_status', 'start_xyz_m', 'end_xyz_m')}
+            for obj in inventory['objects']], width='stretch', alt='Read-only source objects and extracted geometry in metres')
     st.download_button('Download extracted model evidence', json.dumps(inventory, indent=2, allow_nan=False),
         file_name='model-evidence.json', mime='application/json')
     identity = st.text_input('Model identifier (keep stable across revisions)',
@@ -99,7 +137,8 @@ def page_model_review():
                 'invert_start_m', 'invert_end_m', 'direction_confirmed', 'input_reference', 'exclusion_reason',
                 'source_id', 'source_system'],
             width='stretch', key=model_key + '_mapping', alt='Per-object scope, service, engineering inputs and evidence references')
-        mapping_reference = st.text_input('Mapping reviewer / evidence reference', key=model_key + '_reviewer')
+        from app.workspace import evidence_field
+        mapping_reference = evidence_field('Mapping reviewer / evidence reference', model_key + '_reviewer')
         velocity_limit = st.number_input('Project water velocity limit (m/s; 0 means missing)', min_value=0.0, value=0.0)
         velocity_reference = st.text_input('Water velocity criterion reference')
         reviewed = st.checkbox('I reviewed the selected scope, service, units, inputs and their evidence')

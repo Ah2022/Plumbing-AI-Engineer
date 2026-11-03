@@ -40,7 +40,8 @@ def page_network_review():
         st.session_state['_network_scope'] = scope
     draft_key = 'network_draft_' + scope
     model = st.session_state.setdefault(draft_key, template)
-    mode = st.radio('Network input method', ['Editable tables', 'Mapped network JSON'], horizontal=True)
+    mode = st.radio('Network input method', ['Graphical editor', 'Editable tables', 'Mapped network JSON'], horizontal=True,
+                    help='Arrange and connect nodes visually; use tables for full properties and JSON for advanced exchange.')
     preview = st.container()
     model_error = None
     if mode == 'Mapped network JSON':
@@ -58,6 +59,14 @@ def page_network_review():
         except (ValueError, TypeError, UnicodeError) as error:
             model_error = str(error)
             st.error(model_error)
+    elif mode == 'Graphical editor':
+        try:
+            from app.graph_editor import graphical_network
+            generation = st.session_state.get('network_editor_generation_' + scope, 0)
+            model = graphical_network(model, scope + str(generation), draft_key, scope, kind == 'Domestic water')
+        except (ValueError, TypeError, KeyError) as error:
+            model_error = str(error)
+            st.error(model_error + ' Use Editable tables to correct the source network.')
     else:
         try:
             generation = st.session_state.get('network_editor_generation_' + scope, 0)
@@ -65,8 +74,11 @@ def page_network_review():
         except (ValueError, TypeError, KeyError) as error:
             model_error = str(error)
             st.error(model_error)
+    if not model_error:
+        st.session_state[draft_key] = model
     with preview:
-        render_network_preview(model, model_error)
+        if mode != 'Graphical editor':
+            render_network_preview(model, model_error)
     st.download_button('Download mapped network JSON', json.dumps(model, indent=2),
                        file_name='mapped-network.json', mime='application/json', disabled=bool(model_error))
     select=st.checkbox('Select available catalogue sizes against velocity and pressure',value=False,

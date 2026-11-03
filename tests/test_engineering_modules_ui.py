@@ -1,3 +1,4 @@
+from tests.test_streamlit_app import navigate
 import json
 import pytest
 from tests.test_streamlit_app import fresh_app,_create_project
@@ -9,7 +10,7 @@ from app.engineering_page import save_module_result
 
 def open_modules(at,identity):
     at=_create_project(at)
-    at.sidebar.radio[0].set_value('Engineering Modules').run(timeout=30)
+    navigate(at, 'Engineering Modules')
     next(s for s in at.selectbox if s.label=='Engineering module').set_value(identity).run(timeout=30)
     assert not at.exception
     return at
@@ -32,7 +33,8 @@ def test_pressure_module_opens_existing_general_solver(fresh_app):
     at=open_modules(fresh_app,'general_pressure')
     next(b for b in at.button if b.label=='Open general pressure-network solver').click().run(timeout=30)
     assert not at.exception
-    assert at.sidebar.radio[0].value=='Network Review'
+    assert at.sidebar.radio[0].value=='Models & networks'
+    assert next(s for s in at.sidebar.selectbox if s.label=='Tool').value=='Network Review'
     assert next(s for s in at.selectbox if s.label=='Network type').value=='General pressure network'
 
 
@@ -86,7 +88,7 @@ def test_stale_evidence_hides_controls_but_keeps_scope_explicit(fresh_app,monkey
 ])
 def test_page_shortcuts_open_the_matching_scoped_method(fresh_app,page,button,identity):
     at=_create_project(fresh_app)
-    at.sidebar.radio[0].set_value(page).run(timeout=30)
+    navigate(at, page)
     next(b for b in at.button if b.label==button).click().run(timeout=30)
     assert not at.exception
     assert next(s for s in at.selectbox if s.label=='Engineering module').value==identity
@@ -106,7 +108,7 @@ def test_ipc2024_fixture_list_exposes_receptor_evidence_and_full_register(fresh_
     at=fresh_app
     next(s for s in at.selectbox if s.label=='Applicable code').set_value('IPC')
     next(b for b in at.button if b.label=='Create project').click().run(timeout=30)
-    at.sidebar.radio[0].set_value('Drainage & Vent').run(timeout=30)
+    navigate(at, 'Drainage & Vent')
     assert not at.exception
     fixture=next(s for s in at.selectbox if s.label=='Fixture')
     assert len(fixture.options)==33

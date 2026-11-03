@@ -48,7 +48,15 @@ def page_revit_exchange():
         with st.expander('Model identity, source values and skipped objects'):
             st.json(payload)
         from bim.mapping import revit_inventory
-        mapping_workspace(conn,pid,revit_inventory(payload),key+'_bim')
+        task = st.segmented_control('Revit task', ['Exchange & calculate', 'Explore model', 'Map & diagnose'],
+                                    default='Exchange & calculate', key=key + '_task')
+        if task == 'Explore model':
+            from app.model_viewer import render_model_viewer
+            render_model_viewer(revit_inventory(payload), key + '_viewer')
+            return
+        if task == 'Map & diagnose':
+            mapping_workspace(conn,pid,revit_inventory(payload),key+'_bim')
+            return
         confirm_key = hashlib.sha256(json.dumps(payload,sort_keys=True).encode()).hexdigest()
         confirmed = st.checkbox('I reviewed this model identity and extract; importing will invalidate current project results and retain their history',key=key+'_confirm_'+confirm_key)
         if st.button('Import reviewed extract',disabled=not confirmed,key=key+'_import'):

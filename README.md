@@ -4,6 +4,8 @@
 
 A Python/SQLite engine with a Streamlit interface for plumbing engineers and BIM reviewers. Review project data, run supported calculations, and retain the sources, findings and revision history.
 
+**Project workspace:** six grouped workspaces, a readiness dashboard, guided next actions, assigned issues and revision-bound review routing. Explore extracted model centrelines in 3D/plan/elevation and edit network schematics visually. See the [workspace guide and limits](docs/PROJECT_WORKSPACE.md).
+
 **Status: engineering review build.** Regression tests and EPANET comparisons are available. Independent engineering acceptance and a completed native Revit round trip remain pending. A technical **PASS** does not establish code compliance or approval.
 
 Eight new **experimental research methods** start the coupled drainage, 3D frame/acoustic, tank draw/TMV, AGSS, liquid-source, commissioning-evidence and pressure-zone work. Signed-source verification is also available. See the [research workflow and validation boundaries](docs/COUPLED_RESEARCH.md).
@@ -28,18 +30,22 @@ The engine separates **source facts**, **engineering inputs**, **results** and *
 | **Physical effects and safety equipment** | Elastic water hammer, airborne acoustics, stress/expansion and relief checks; experimental 3D frame flexibility and structure-borne path response. |
 | **Source and pressure-service review** | Detached source signatures with independently enrolled trust keys; model-matched zone pressure, control-boundary and PDA delivery audits. |
 | **Models and drawings** | IFC/Revit mapping, physical-port diagnostics, snapshots and revision comparison; DXF, DWG conversion intake and PDF review. |
+| **Project coordination** | Readiness/model-health dashboard; team/evidence registers; issue ownership, due dates and audit history; staged Designer → Checker → BIM coordinator → Approver routing. |
+| **Visual navigation** | Local centreline explorer with object selection and plan/elevation views; schematic node arrangement, connection and property editing. |
 | **Sheets and evidence** | Interactive workbook forms, saved calculations, QA/QC, evidence packets, revision history and guarded Revit result handoffs. |
 | **Public software benchmarks** | Pinned repository/source register, screened SWMM and IFC inputs, local-only EPANET mapping comparison, retained failed checks and non-approval safeguards. |
 
-Each scoped tool states its source requirements, validation status and unevaluated checks. See the [extended methods and medical-gas guide](docs/ADVANCED_PLUMBING.md) for the new workflows and [original method guide](docs/PLUMBING_ENGINEERING_MODULES.md) for the baseline tools. All bundled examples are fictional.
+Each scoped tool states its source requirements, validation status and unevaluated checks. See the [extended methods and medical-gas guide](docs/ADVANCED_PLUMBING.md) and [original method guide](docs/PLUMBING_ENGINEERING_MODULES.md). Calculation examples are fictional; public benchmark sources retain their separate provenance and software-only status.
 
 ## Use the engine
 
-1. **Define the project.** Set code edition, jurisdiction, units, criteria and references in **Code Profiles / Design Basis**. IPC 2024 is the first verification target.
-2. **Choose a workspace.** Use calculation pages / **Engineering Modules**, **Network Review**, **Calculation Sheets**, **CAD / IFC Checks**, or **Revit Exchange**.
-3. **Review inputs.** Confirm service, bore, flow, elevations, connectivity, reviewer and evidence. Nominal diameter does not substitute for internal bore.
-4. **Run and revise.** Inspect results, margins, warnings and missing/unevaluated checks. Correct inputs and rerun.
-5. **Save for review.** Use **Report / Export** and **Release Readiness** for evidence and acceptance gaps. Native Revit handoffs require configured bindings and preflight.
+1. **Start at Overview.** Select a project and follow its readiness blockers and next actions.
+2. **Set up the project.** In **Project setup**, confirm code edition/adoption, criteria, team roles and reusable evidence references. IPC 2024 is the first verification target.
+3. **Review the model.** In **Models & networks**, inspect geometry, map services/bores/flows and save connectivity diagnostics. Use the visual schematic editor for explicit network connections.
+4. **Calculate and resolve.** Run tools in **Calculations**; inspect margins and unevaluated checks. Track owners, due dates and resolutions in **Review & approval → Issues**.
+5. **Route and export.** Record the four review stages in **Approval workflow**; use **Reports** for evidence packets. Final approval requires resolved source blockers and independent engineering acceptance. Data changes supersede earlier routing steps.
+
+Roles are attributed workflow responsibilities, not authenticated permissions or digital signatures. The viewer shows extracted centrelines and the editor handles schematics; native BIM authoring and enterprise simultaneous collaboration remain outside this interface.
 
 | Result label | Meaning |
 | --- | --- |

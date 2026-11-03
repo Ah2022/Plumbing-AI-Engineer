@@ -1,3 +1,4 @@
+from tests.test_streamlit_app import navigate
 """DWG intake contracts and real PDF extraction/rendering; all source data is synthetic."""
 from hashlib import sha256
 from pathlib import Path
@@ -115,7 +116,7 @@ def test_local_conversion_contract_and_timeout(monkeypatch):
 
 def open_drawing(at, inventory, data=None):
     at = _create_project(at)
-    at.sidebar.radio[0].set_value('CAD / IFC Checks').run(timeout=30)
+    navigate(at, 'CAD / IFC Checks')
     key = next(key.removesuffix('_upload') for key in at.session_state if key.startswith('model_intake_') and key.endswith('_upload'))
     at.session_state[key] = inventory
     at.session_state[key+'_pdf_bytes'] = data

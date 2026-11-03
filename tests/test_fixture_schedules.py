@@ -1,3 +1,4 @@
+from tests.test_streamlit_app import navigate
 """Synthetic schedule benchmarks; no private workbook data is required."""
 import json
 import pytest
@@ -65,7 +66,7 @@ def choice(value, unit):
 def test_drainage_fixture_list_totals_and_removal(fresh_app, monkeypatch):
     monkeypatch.setattr(api, 'list_drainage_fixture_unit_choices', lambda *args: [choice(3, 'DFU')])
     at = _create_project(fresh_app)
-    at.sidebar.radio[0].set_value('Drainage & Vent').run(timeout=30)
+    navigate(at, 'Drainage & Vent')
     next(n for n in at.number_input if n.label == 'Fixture quantity').set_value(4)
     next(b for b in at.button if b.label == 'Add fixture').click().run(timeout=30)
     assert not at.exception
@@ -79,7 +80,7 @@ def test_hot_water_has_separate_wsfu_and_gph_lists(fresh_app, monkeypatch):
     monkeypatch.setattr(api, 'list_water_fixture_unit_choices', lambda *args, **kwargs: [choice(2, 'WSFU')])
     monkeypatch.setattr(api, 'list_hot_water_demand_choices', lambda *args: [choice(10, 'GPH')])
     at = _create_project(fresh_app)
-    at.sidebar.radio[0].set_value('Hot Water').run(timeout=30)
+    navigate(at, 'Hot Water')
     assert not at.exception
     add = [b for b in at.button if b.label == 'Add fixture']
     add[0].click().run(timeout=30)

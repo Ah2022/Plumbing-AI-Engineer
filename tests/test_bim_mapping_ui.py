@@ -1,10 +1,12 @@
+from tests.test_streamlit_app import navigate
 """Real Streamlit mapping actions, using disposable databases and synthetic extracts."""
 from tests.test_streamlit_app import fresh_app,_create_project
 
 
 def open_mapping(at):
-    at=_create_project(at);at.sidebar.radio[0].set_value('Revit Exchange').run(timeout=30)
+    at=_create_project(at);navigate(at, 'Revit Exchange')
     next(b for b in at.button if b.label=='Preview synthetic Revit extract').click().run(timeout=30)
+    next(s for s in at.segmented_control if s.label=='Revit task').set_value('Map & diagnose').run(timeout=30)
     assert not at.exception
     return at
 

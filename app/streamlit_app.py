@@ -1,23 +1,12 @@
-"""
-app/streamlit_app.py
------------------------
-Run with:  streamlit run app/streamlit_app.py   (from the plumbing_engine/ directory)
+"""Guided project workspaces over traceable plumbing calculations and review tools.
 
-Navigation follows the spec's own UI section (Section 35): PROJECT,
-DESIGN BASIS, FIXTURES, WATER, DRAINAGE, VENT, CODE CHECK, QA/QC, REPORT.
-Only pages backed by real, tested calculation logic are enabled — Hot
-Water / Storm / Tanks / Pumps are shown as "not yet available" (Phase 4/5)
-rather than faked with placeholder math.
-
-Every result shown is a CalculationResult: formula, inputs, required vs
-selected, status, and code reference are always displayed together — no
-number appears without its full trace, matching the spec's core principle
-(Section 2).
+Run `streamlit run app/streamlit_app.py` from the project source directory.
 """
 
 from __future__ import annotations
 
 import sys
+import sqlite3
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -52,7 +41,7 @@ from app.model_page import page_model_review
 from compliance.governance import profile_for_code, set_basis, context, seed_review_inventory
 from database.governance_schema import ensure_governance_schema
 
-st.set_page_config(page_title="Plumbing Design Engine", layout="wide")
+st.set_page_config(page_title="Plumbing Design Engine", page_icon=":material/plumbing:", layout="wide")
 
 DB_PATH = get_db_path()
 
@@ -156,6 +145,9 @@ def page_project():
 
         submitted = st.form_submit_button("Create project")
         if submitted:
+            if not name.strip() or not engineer.strip():
+                st.error('Enter a project name and design engineer before creating the project.')
+                return
             cur = conn.execute(
                 """INSERT INTO projects (project_name, project_number, project_location, building_type,
                      gross_area_m2, num_floors, occupancy, design_stage, code_id, design_engineer, revision)
@@ -213,10 +205,16 @@ def page_design_basis():
         st.info("No design basis items yet.")
 
     st.subheader("Add a design basis item")
+    templates = {'Custom criterion': ('', ''), 'Available supply head': ('available_head_m', 'm'),
+                 'Water velocity limit': ('velocity_limit_m_s', 'm/s'),
+                 'Design rainfall intensity': ('rainfall_intensity_mm_hr', 'mm/h'),
+                 'Hot-water design temperature': ('hot_water_temperature_c', '°C')}
+    template = st.selectbox('Criterion template', list(templates),
+        help='Templates supply a name and unit only. Enter values from reviewed project or code evidence.')
     with st.form("new_basis_item"):
-        key = st.text_input("Item key (e.g. static_pressure_psi, rainfall_intensity_mm_hr)")
+        key = st.text_input("Item key (e.g. static_pressure_psi, rainfall_intensity_mm_hr)", templates[template][0], key='criterion_key_' + template)
         value = st.text_input("Value")
-        unit = st.text_input("Unit", "")
+        unit = st.text_input("Unit", templates[template][1], key='criterion_unit_' + template)
         source = st.selectbox("Source classification", ["CODE", "PROJECT", "USER_INPUT", "MANUFACTURER", "ASSUMED"])
         if st.form_submit_button("Add") and key and value:
             conn.execute(
@@ -802,25 +800,42 @@ def main():
     from app.revit_page import page_revit_exchange
     from app.release_page import page_release_readiness
     from app.engineering_page import page_engineering_modules
+    from app.workspace import (WORKSPACES, project_context, page_dashboard, page_team, page_issues,
+                               page_approval, action)
+    from reports.project_workspace import ensure_workspace_schema, rows
     if "conn" not in st.session_state:
         st.session_state.conn = get_conn()
-    schema_token=(id(st.session_state.conn),'interactive-packages-1')
+    schema_token=(id(st.session_state.conn),'project-workspace-1')
     if st.session_state.get('_schema_token')!=schema_token:
         ensure_governance_schema(st.session_state.conn)
+        ensure_workspace_schema(st.session_state.conn)
+        st.session_state.conn.commit()
         st.session_state['_schema_token']=schema_token
 
-    st.sidebar.title("🔧 Plumbing Design Engine")
-    st.sidebar.caption("v0.6.2 — Interactive plumbing calculations")
-    st.warning("Review build: calculation benchmarks pass, but code adoption, numeric-table applicability, "
-               "model completeness and engineering acceptance still require review.")
-    page = st.sidebar.radio("Navigate", [
-        "Project", "Code Profiles", "Network Review", "CAD / IFC Checks", "Calculation Sheets", "Design Basis", "Fixtures & Water", "Drainage & Vent",
-        "Hot Water", "Tanks", "Pumps", "Stormwater", "Engineering Modules",
-        "Code Compliance / QA-QC", "QA/QC Dashboard", "Report / Export", "Revit Exchange", "Release Readiness",
-    ],key='navigation')
+    st.sidebar.title(":material/plumbing: Plumbing Engine")
+    st.sidebar.caption("PROJECT WORKSPACE · v0.6.2")
+    project_context()
+    group = st.sidebar.radio('Workspace', list(WORKSPACES), key='workspace')
+    pages = WORKSPACES[group]
+    page = st.sidebar.selectbox('Tool', pages, key='tool_' + group) if len(pages) > 1 else pages[0]
     st.sidebar.divider()
-    st.sidebar.caption("Revit Exchange supports file import, linked calculations and a guarded result handoff. "
-                      "Live writeback requires validated PLM bindings and explicit review in Revit.")
+    if st.session_state.get('project_id'):
+        members = rows(st.session_state.conn, 'project_team', st.session_state.project_id)
+        members_by_id = {m['member_id']: m for m in members}
+        if st.session_state.get('workspace_actor') not in members_by_id:
+            st.session_state.pop('workspace_actor', None)
+        if members:
+            st.sidebar.selectbox('Acting team member', [None] + list(members_by_id), key='workspace_actor',
+                format_func=lambda k: (members_by_id[k]['name'] + ' · ' + members_by_id[k]['role']) if k else 'Choose your role',
+                help='Attribution for coordination tasks. This is not sign-in or access control.')
+    with st.sidebar.popover('Terms & help', icon=':material/help:'):
+        st.markdown('**WSFU / DFU:** water-supply / drainage fixture units. These express probable demand, not a direct flow rate.\n\n'
+                    '**Internal bore:** actual pipe inside diameter; it differs from nominal size.\n\n'
+                    '**Technical PASS:** the implemented calculation passed its checks.\n\n'
+                    '**Review required:** adoption, source evidence or engineering acceptance is incomplete.\n\n'
+                    '**Current result:** matches the recorded basis; it may still need review.\n\n'
+                    '**Model health:** extraction and mapping diagnostics, not complete code compliance.')
+    st.sidebar.caption('Engineering review build · Technical results and professional approval are separate.')
 
     pid = st.session_state.get("project_id")
     if pid:
@@ -833,9 +848,14 @@ def main():
         row = st.session_state.conn.execute(
             "SELECT project_name, code_id FROM projects WHERE project_id=?", (pid,)
         ).fetchone()
-        st.sidebar.success(f"Active: #{pid} {row['project_name']} ({row['code_id']})")
+        if row:
+            st.caption(f"{row['project_name']} / {group} / {page}")
 
-    {
+    routes = {
+        "Project dashboard": page_dashboard,
+        "Team & evidence": page_team,
+        "Issues": page_issues,
+        "Approval workflow": page_approval,
         "Project": page_project,
         "Code Profiles": page_code_profiles,
         "Network Review": page_network_review,
@@ -854,7 +874,17 @@ def main():
         "Report / Export": page_report,
         "Revit Exchange": page_revit_exchange,
         "Release Readiness": page_release_readiness,
-    }[page]()
+    }
+    try:
+        routes[page]()
+    except sqlite3.OperationalError:
+        import logging
+        from uuid import uuid4
+        incident = uuid4().hex[:10]
+        logging.getLogger(__name__).exception('Workspace database operation failed: %s', incident)
+        st.error('The project database is busy or unavailable. Your last saved records remain available. '
+                 'Retry the operation; if it persists, share support reference ' + incident + '.')
+        action('Return to project overview', 'Project dashboard', 'database_recovery')
 
 
 if __name__ == "__main__":

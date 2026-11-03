@@ -1,9 +1,10 @@
+from tests.test_streamlit_app import navigate
 import pytest
 from tests.test_streamlit_app import fresh_app,_create_project
 
 
 def open_public(at):
-    at=_create_project(at);at.sidebar.radio[0].set_value('Release Readiness').run(timeout=30)
+    at=_create_project(at);navigate(at, 'Release Readiness')
     assert not at.exception
     return at
 

@@ -11,7 +11,7 @@ def _rows(frame):
     return [{k:None if pd.isna(v) else v for k,v in row.items()} for row in frame.to_dict('records')]
 
 
-def mapping_workspace(conn,pid,inventory,key):
+def mapping_workspace(conn,pid,inventory,key, saved_packet=None):
     st.subheader('BIM mapping, connectivity and revisions')
     st.caption('Scope: reviewed source objects and extracted physical ports; topology diagnostics and revision comparison. '
         'Source data: object IDs, source systems, geometry and connector references. '
@@ -26,7 +26,11 @@ def mapping_workspace(conn,pid,inventory,key):
             width='stretch',alt='Source geometry, equipment properties, elevations and connector evidence before mapping')
     base=initial_mapping(inventory)
     uploaded=st.file_uploader('Restore reviewed mapping snapshot',type=['json'],max_upload_size=20,key=scope+'_restore')
-    restored=None
+    restored=validate_snapshot(saved_packet) if saved_packet else None
+    if restored:
+        if checksum(restored['inventory'])!=checksum(inventory):
+            st.error('The saved mapping is from another extraction. Open its matching source revision.');return None
+        base=restored['mapping']
     if uploaded is not None:
         try:
             restored=validate_snapshot(json.loads(uploaded.getvalue().decode('utf-8-sig')))
@@ -55,8 +59,9 @@ def mapping_workspace(conn,pid,inventory,key):
             edited_boundaries=st.data_editor(pd.DataFrame(boundary_base),disabled=['port_id'],hide_index=True,width='stretch',
                 key=mapping_identity+'_boundary_map',alt='Per-port intentional terminal decisions with reviewer and evidence')
             boundaries=_rows(edited_boundaries)
-    reviewer=st.text_input('Snapshot engineering reviewer',value=restored['engineering_reviewer'] if restored else '',key=mapping_identity+'_reviewer')
-    evidence=st.text_input('Snapshot evidence reference / revision',value=restored['evidence_reference'] if restored else '',key=mapping_identity+'_evidence')
+    from app.workspace import reviewer_field, evidence_field
+    reviewer=reviewer_field('Snapshot engineering reviewer',mapping_identity+'_reviewer',restored['engineering_reviewer'] if restored else '')
+    evidence=evidence_field('Snapshot evidence reference / revision',mapping_identity+'_evidence',restored['evidence_reference'] if restored else '')
     try:
         rows=_rows(edited)
         current=checksum(dict(mapping=rows,boundaries=boundaries,reviewer=reviewer,evidence=evidence))

@@ -1,13 +1,14 @@
+from tests.test_streamlit_app import navigate
 """Real UI actions on disposable projects; no live Revit writes."""
 from tests.test_streamlit_app import fresh_app, _create_project
 
 
 def test_report_review_packet_revision_and_proposal(fresh_app):
     at=_create_project(fresh_app)
-    at.sidebar.radio[0].set_value('Hot Water').run(timeout=30)
+    navigate(at, 'Hot Water')
     next(b for b in at.button if b.label=='Calculate heater capacity').click().run(timeout=30)
     assert not at.exception
-    at.sidebar.radio[0].set_value('Report / Export').run(timeout=30)
+    navigate(at, 'Report / Export')
     next(b for b in at.button if b.label=='Build reproducible review packet').click().run(timeout=30)
     assert not at.exception
     assert any(b.label=='Download review packet (JSON)' for b in at.get('download_button'))
@@ -25,7 +26,7 @@ def test_report_review_packet_revision_and_proposal(fresh_app):
 
 def test_revit_preview_import_linked_check_and_handoff(fresh_app):
     at=_create_project(fresh_app)
-    at.sidebar.radio[0].set_value('Revit Exchange').run(timeout=30)
+    navigate(at, 'Revit Exchange')
     next(b for b in at.button if b.label=='Preview synthetic Revit extract').click().run(timeout=30)
     assert not at.exception
     next(c for c in at.checkbox if c.label.startswith('I reviewed this model identity')).set_value(True).run(timeout=30)
@@ -43,7 +44,7 @@ def test_revit_preview_import_linked_check_and_handoff(fresh_app):
 
 def test_release_page_runs_independent_benchmarks(fresh_app):
     at=_create_project(fresh_app)
-    at.sidebar.radio[0].set_value('Release Readiness').run(timeout=30)
+    navigate(at, 'Release Readiness')
     next(b for b in at.button if b.label=='Run remaining-system benchmarks').click().run(timeout=30)
     assert not at.exception and next(m for m in at.metric if m.label=='Software benchmark status').value=='PASS'
     assert at.session_state['conn'].execute('SELECT COUNT(*) FROM calculations').fetchone()[0]==0

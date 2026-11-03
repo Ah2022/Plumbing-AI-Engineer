@@ -3,3 +3,28 @@ runOnSave = true
 
 [browser]
 gatherUsageStats = false
+
+[theme]
+base = "light"
+primaryColor = "#147D92"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F2F6F8"
+textColor = "#152A3B"
+font = "sans serif"
+baseRadius = "0.5rem"
+showWidgetBorder = true
+showSidebarBorder = true
+
+[theme.sidebar]
+backgroundColor = "#EDF3F6"
+secondaryBackgroundColor = "#FFFFFF"
+
+[theme.dark]
+primaryColor = "#42B7C7"
+backgroundColor = "#0F1923"
+secondaryBackgroundColor = "#182735"
+textColor = "#E5EDF2"
+
+[theme.dark.sidebar]
+backgroundColor = "#13212D"
+secondaryBackgroundColor = "#1B3040"

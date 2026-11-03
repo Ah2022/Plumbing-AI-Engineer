@@ -29,11 +29,22 @@ def fresh_app(tmp_path, monkeypatch):
     monkeypatch.setenv("PLUMBING_ENGINE_DB_PATH", str(db_path))
     at = AppTest.from_file(str(APP_PATH))
     at.run(timeout=30)
+    navigate(at, 'Project')
     try:
         yield at
     finally:
         if "conn" in at.session_state:
             at.session_state["conn"].close()
+
+
+def navigate(at, page):
+    from app.workspace import WORKSPACES
+    group = next(k for k, pages in WORKSPACES.items() if page in pages)
+    at.sidebar.radio[0].set_value(group).run(timeout=30)
+    tool = next((s for s in at.sidebar.selectbox if s.label == 'Tool'), None)
+    if tool:
+        tool.set_value(page).run(timeout=30)
+    return at
 
 
 def _create_project(at):
@@ -55,6 +66,7 @@ def test_create_project_succeeds(fresh_app):
 
 
 @pytest.mark.parametrize("page", [
+    "Project dashboard", "Team & evidence", "Issues", "Approval workflow",
     "Code Profiles", "Network Review", "CAD / IFC Checks", "Calculation Sheets",
     "Design Basis", "Fixtures & Water", "Drainage & Vent",
     "Hot Water", "Tanks", "Pumps", "Stormwater", "Engineering Modules",
@@ -62,13 +74,13 @@ def test_create_project_succeeds(fresh_app):
 ])
 def test_every_page_loads_without_exceptions(fresh_app, page):
     at = _create_project(fresh_app)
-    at.sidebar.radio[0].set_value(page).run(timeout=30)
+    navigate(at, page)
     assert list(at.exception) == []
 
 
 def test_velocity_check_with_manufacturer_material_succeeds(fresh_app):
     at = _create_project(fresh_app)
-    at.sidebar.radio[0].set_value("Fixtures & Water").run(timeout=30)
+    navigate(at, "Fixtures & Water")
     mat = [t for t in at.text_input if t.label == "Material (optional, e.g. PPR)"][0]
     mat.set_value("PPR")
     run_btn = [b for b in at.button if b.label == "Run velocity check"][0]
@@ -79,7 +91,7 @@ def test_velocity_check_with_manufacturer_material_succeeds(fresh_app):
 
 def test_drainage_sizing_button_succeeds(fresh_app):
     at = _create_project(fresh_app)
-    at.sidebar.radio[0].set_value("Drainage & Vent").run(timeout=30)
+    navigate(at, "Drainage & Vent")
     btn = [b for b in at.button if b.label == "Size the pipe"][0]
     btn.click().run(timeout=30)
     assert list(at.exception) == []
@@ -87,7 +99,7 @@ def test_drainage_sizing_button_succeeds(fresh_app):
 
 def test_compliance_run_button_succeeds(fresh_app):
     at = _create_project(fresh_app)
-    at.sidebar.radio[0].set_value("Code Compliance / QA-QC").run(timeout=30)
+    navigate(at, "Code Compliance / QA-QC")
     btn = [b for b in at.button if "Run full compliance" in b.label][0]
     btn.click().run(timeout=30)
     assert list(at.exception) == []
@@ -95,7 +107,7 @@ def test_compliance_run_button_succeeds(fresh_app):
 
 def test_pipe_sizing_from_demand_button_succeeds(fresh_app):
     at = _create_project(fresh_app)
-    at.sidebar.radio[0].set_value("Fixtures & Water").run(timeout=30)
+    navigate(at, "Fixtures & Water")
     btn = [b for b in at.button if b.label == "Size the pipe from demand"][0]
     btn.click().run(timeout=30)
     assert list(at.exception) == []
@@ -103,7 +115,7 @@ def test_pipe_sizing_from_demand_button_succeeds(fresh_app):
 
 def test_hot_water_temperature_check_button_succeeds(fresh_app):
     at = _create_project(fresh_app)
-    at.sidebar.radio[0].set_value("Hot Water").run(timeout=30)
+    navigate(at, "Hot Water")
     btn = [b for b in at.button if b.label == "Check"][0]
     btn.click().run(timeout=30)
     assert list(at.exception) == []
@@ -111,7 +123,7 @@ def test_hot_water_temperature_check_button_succeeds(fresh_app):
 
 def test_heater_capacity_button_succeeds(fresh_app):
     at = _create_project(fresh_app)
-    at.sidebar.radio[0].set_value("Hot Water").run(timeout=30)
+    navigate(at, "Hot Water")
     btn = [b for b in at.button if b.label == "Calculate heater capacity"][0]
     btn.click().run(timeout=30)
     assert list(at.exception) == []
@@ -119,7 +131,7 @@ def test_heater_capacity_button_succeeds(fresh_app):
 
 def test_tank_sizing_button_succeeds(fresh_app):
     at = _create_project(fresh_app)
-    at.sidebar.radio[0].set_value("Tanks").run(timeout=30)
+    navigate(at, "Tanks")
     btn = [b for b in at.button if b.label == "Size the tank"][0]
     btn.click().run(timeout=30)
     assert list(at.exception) == []
@@ -127,7 +139,7 @@ def test_tank_sizing_button_succeeds(fresh_app):
 
 def test_pump_duty_button_succeeds(fresh_app):
     at = _create_project(fresh_app)
-    at.sidebar.radio[0].set_value("Pumps").run(timeout=30)
+    navigate(at, "Pumps")
     btn = [b for b in at.button if b.label == "Calculate duty point"][0]
     btn.click().run(timeout=30)
     assert list(at.exception) == []
@@ -135,7 +147,7 @@ def test_pump_duty_button_succeeds(fresh_app):
 
 def test_stormwater_rainfall_intensity_button_succeeds(fresh_app):
     at = _create_project(fresh_app)
-    at.sidebar.radio[0].set_value("Stormwater").run(timeout=30)
+    navigate(at, "Stormwater")
     btn = [b for b in at.button if b.label == "Calculate intensity"][0]
     btn.click().run(timeout=30)
     assert list(at.exception) == []
@@ -145,7 +157,7 @@ def test_stormwater_rainfall_intensity_button_succeeds(fresh_app):
 def test_stormwater_full_chain_buttons_succeed(fresh_app):
     """Runs all four Stormwater steps in sequence, as an engineer would."""
     at = _create_project(fresh_app)
-    at.sidebar.radio[0].set_value("Stormwater").run(timeout=30)
+    navigate(at, "Stormwater")
 
     at = [b for b in at.button if b.label == "Calculate intensity"][0].click().run(timeout=30)
     assert list(at.exception) == []
@@ -165,7 +177,7 @@ def test_stormwater_full_chain_buttons_succeed(fresh_app):
 
 def test_qaqc_dashboard_button_succeeds(fresh_app):
     at = _create_project(fresh_app)
-    at.sidebar.radio[0].set_value("QA/QC Dashboard").run(timeout=30)
+    navigate(at, "QA/QC Dashboard")
     btn = [b for b in at.button if "Run QA/QC checks" in b.label][0]
     at = btn.click().run(timeout=30)
     assert list(at.exception) == []
@@ -177,11 +189,11 @@ def test_report_page_download_after_qaqc_and_compliance(fresh_app):
     """Report page must render the Markdown report without exceptions even
     after other pages have populated calculations/compliance/qaqc data."""
     at = _create_project(fresh_app)
-    at.sidebar.radio[0].set_value("Code Compliance / QA-QC").run(timeout=30)
+    navigate(at, "Code Compliance / QA-QC")
     at = [b for b in at.button if "Run full compliance" in b.label][0].click().run(timeout=30)
-    at.sidebar.radio[0].set_value("QA/QC Dashboard").run(timeout=30)
+    navigate(at, "QA/QC Dashboard")
     at = [b for b in at.button if "Run QA/QC checks" in b.label][0].click().run(timeout=30)
-    at.sidebar.radio[0].set_value("Report / Export").run(timeout=30)
+    navigate(at, "Report / Export")
     assert list(at.exception) == []
 
 
@@ -189,7 +201,7 @@ def test_fixture_unit_dropdown_add_and_total_succeeds(fresh_app):
     """Default project code is SAUDI_SBC_701, which has real WSFU choices --
     the dropdown path (not the manual-entry fallback) should be exercised."""
     at = _create_project(fresh_app)
-    at.sidebar.radio[0].set_value("Fixtures & Water").run(timeout=30)
+    navigate(at, "Fixtures & Water")
     assert len(at.selectbox) >= 1
     at.selectbox[0].select_index(0).run(timeout=30)
     add_btn = [b for b in at.button if b.label == "Add to list"][0]

@@ -1,10 +1,12 @@
+from tests.test_streamlit_app import navigate
 import json
 from tests.test_streamlit_app import fresh_app
 
 
 def open_network(at):
     next(b for b in at.button if b.label=='Create project').click().run(timeout=30)
-    at.sidebar.radio[0].set_value('Network Review').run(timeout=30)
+    navigate(at, 'Network Review')
+    next(r for r in at.radio if r.label=='Network input method').set_value('Editable tables').run(timeout=30)
     assert not at.exception
     return at
 

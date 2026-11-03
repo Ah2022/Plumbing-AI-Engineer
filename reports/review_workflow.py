@@ -83,7 +83,12 @@ def build_review_packet(conn, project_id):
     provenance = [dict(r) for r in conn.execute('''SELECT p.* FROM calculation_provenance p JOIN calculations c ON c.calc_id=p.calc_id
                                                  WHERE c.project_id=? ORDER BY p.calc_id''', (project_id,))]
     packages = [dict(r) for r in conn.execute('SELECT * FROM project_calculation_packages WHERE project_id=? ORDER BY package_sha256', (project_id,))]
+    from reports.project_workspace import ensure_workspace_schema, rows
+    ensure_workspace_schema(conn)
+    coordination = {name: rows(conn, name, project_id) for name in
+                    ('project_team', 'project_evidence', 'project_issues', 'project_issue_events', 'project_workflow_events')}
     payload = dict(schema_version='review-packet-1', exported_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        coordination=coordination,
         report=report, readiness=review_readiness(conn, project_id), override_proposals=overrides(conn, project_id),
         calculation_provenance=provenance, runtime_at_export=engine_manifest(),
         numeric_tables=tables, numeric_values=source_values, interactive_packages=packages,

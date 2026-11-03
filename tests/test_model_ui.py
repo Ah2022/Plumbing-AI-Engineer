@@ -1,3 +1,4 @@
+from tests.test_streamlit_app import navigate
 """Model-intake UI checks with real synthetic files and throwaway project DBs."""
 import json
 import pytest
@@ -6,7 +7,7 @@ from tests.test_streamlit_app import fresh_app, _create_project
 
 def open_model_page(at):
     at = _create_project(at)
-    at.sidebar.radio[0].set_value('CAD / IFC Checks').run(timeout=30)
+    navigate(at, 'CAD / IFC Checks')
     assert not at.exception
     return at
 
@@ -14,6 +15,7 @@ def open_model_page(at):
 def load_example(at):
     pytest.importorskip('ifcopenshell')
     next(b for b in at.button if b.label == 'Load synthetic model').click().run(timeout=30)
+    next(s for s in at.segmented_control if s.label == 'Model task').set_value('Design checks').run(timeout=30)
     assert not at.exception and not at.error
     return at
 
@@ -59,8 +61,8 @@ def test_model_review_saves_trace_partial_coverage_and_scope(fresh_app, monkeypa
     assert conn.execute("SELECT COUNT(*) FROM calculations WHERE calc_type='model_design_check'").fetchone()[0] == 2
     assert conn.execute("SELECT COUNT(*) FROM calculations WHERE calc_type='model_design_check' AND is_current=1").fetchone()[0] == 1
     # Changing projects cannot display another project's imported model or findings.
-    at.sidebar.radio[0].set_value('Project').run(timeout=30)
+    navigate(at, 'Project')
     next(b for b in at.button if b.label == 'Create project').click().run(timeout=30)
-    at.sidebar.radio[0].set_value('CAD / IFC Checks').run(timeout=30)
+    navigate(at, 'CAD / IFC Checks')
     assert not at.exception
     assert not any(b.label == 'Run and save model checks' for b in at.button)

@@ -40,6 +40,8 @@ The extended IPC 2024 fixture register is a separately flagged transcription can
 
 ## Project data and validation
 
+The app opens on **Overview**. Choose an active project, then use six grouped workspaces and their contextual tool selector. See [project workspace setup, review controls and visual limits](PROJECT_WORKSPACE.md). Existing databases receive additive coordination tables; project/calculation rows are retained.
+
 The default database is `database/plumbing_engine.db`. Set `PLUMBING_ENGINE_DB_PATH` to a separate database file in an existing writable directory for isolated reviews. Retain project/model evidence and backups locally. Private workbooks, calculation packages, model files, credentials and databases must not be published.
 
 The full local test suite uses private workbooks and optional native-library evidence. GitHub Actions runs the public-checkout checks defined in [the validation workflow](../.github/workflows/validation.yml). A native committed Revit execution record is required for the opt-in real-model round-trip test; a skipped test or rollback probe is not a completed round trip.

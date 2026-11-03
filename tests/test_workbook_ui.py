@@ -1,3 +1,4 @@
+from tests.test_streamlit_app import navigate
 import json
 import pytest
 from tests.test_streamlit_app import fresh_app
@@ -11,7 +12,7 @@ def reference_ui(tmp_path,monkeypatch):
 
 def open_page(at):
     next(b for b in at.button if b.label=='Create project').click().run(timeout=30)
-    at.sidebar.radio[0].set_value('Calculation Sheets').run(timeout=30)
+    navigate(at, 'Calculation Sheets')
     assert not at.exception
     return at
 
@@ -35,8 +36,8 @@ def test_changed_draft_is_identified_and_retained_across_navigation(fresh_app,re
     next(b for b in at.button if b.label=='Calculate and save').click().run(timeout=30)
     next(n for n in at.number_input if n.label=='Flow rate (L/s)').set_value(4).run(timeout=30)
     assert any('Inputs have changed' in w.value for w in at.warning)
-    at.sidebar.radio[0].set_value('Code Profiles').run(timeout=30)
-    at.sidebar.radio[0].set_value('Calculation Sheets').run(timeout=30)
+    navigate(at, 'Code Profiles')
+    navigate(at, 'Calculation Sheets')
     assert next(n for n in at.number_input if n.label=='Flow rate (L/s)').value==4
 
 
@@ -47,7 +48,7 @@ def test_imported_package_runs_without_local_excel_files(fresh_app,reference_ui)
     next(b for b in at.button if b.label=='Create project').click().run(timeout=30)
     p=build_package(demo_package()['workbook'],'Project-specific calculator.xlsx')
     install_project_packages(at.session_state['conn'],1,[p])
-    at.sidebar.radio[0].set_value('Calculation Sheets').run(timeout=30)
+    navigate(at, 'Calculation Sheets')
     picker=next(s for s in at.selectbox if s.label=='Calculation')
     picker.set_value(p['package_sha256']).run(timeout=30)
     next(b for b in at.button if b.label=='Calculate and save').click().run(timeout=30)
@@ -92,7 +93,7 @@ def test_saved_legacy_package_opens_and_saves_with_upgraded_identity(fresh_app,r
                  (1,old_hash,p['title'],encode_package(p).decode('utf-8')));conn.commit()
     at.session_state['calculation_picker_1']=old_hash
     at.session_state['calculation_draft_1:1:'+old_hash+':Flow and duration']={'G10':3.,'G11':20.}
-    at.sidebar.radio[0].set_value('Calculation Sheets').run(timeout=30)
+    navigate(at, 'Calculation Sheets')
     assert not at.exception and not at.error
     assert next(n for n in at.number_input if n.label=='Flow rate (L/s)').value==3
     next(b for b in at.button if b.label=='Calculate and save').click().run(timeout=30)

@@ -54,12 +54,14 @@ def edit_data(data,key):
 
 
 def _open_pressure():
-    st.session_state['navigation']='Network Review'
+    from app.workspace import go
+    go('Network Review')
     st.session_state['network_kind']='General pressure network'
 
 
 def open_engineering_module(identity):
-    st.session_state['navigation']='Engineering Modules'
+    from app.workspace import go
+    go('Engineering Modules')
     st.session_state['engineering_module_choice']=identity
 
 

@@ -18,6 +18,7 @@ def clear_result_session():
 
 
 def page_code_profiles():
+    from app.workspace import reviewer_field, evidence_field
     st.header('Code profiles and verification')
     conn = st.session_state.conn
     pid = st.session_state.get('project_id')
@@ -53,7 +54,7 @@ def page_code_profiles():
         method = st.text_area('Selected methods and references', criteria.get('method', ''))
         exclusions = st.text_area('Exclusions / unsupported arrangements', criteria.get('exclusions', ''))
         precedence = st.text_area('Requirement precedence / conflict resolution', criteria.get('precedence', ''))
-        actor = st.text_input('Recorded by')
+        actor = reviewer_field('Recorded by', f'basis_actor_{pid}_{revision}')
         if st.form_submit_button('Save draft code basis'):
             try:
                 set_basis(conn, pid, profile_id, dict(jurisdiction=jurisdiction, authority=authority,
@@ -79,8 +80,8 @@ def page_code_profiles():
     elif g['basis']['basis_status']=='APPROVED':
         st.caption('Adoption recorded by '+str(g['basis'].get('reviewer') or 'the named reviewer')+'. '+str(g['basis'].get('adoption_evidence') or ''))
     with st.form(f'approve_code_basis_{pid}_{revision}'):
-        reviewer = st.text_input('Adoption reviewer')
-        evidence = st.text_area('Project adoption evidence / approved design-basis reference')
+        reviewer = reviewer_field('Adoption reviewer', f'adoption_actor_{pid}_{revision}')
+        evidence = evidence_field('Project adoption evidence / approved design-basis reference', f'adoption_evidence_{pid}_{revision}')
         confirmed = st.checkbox('I reviewed the project adoption and design-basis criteria')
         if st.form_submit_button('Approve project adoption'):
             try:
