@@ -6,6 +6,8 @@ A Python/SQLite engine with a Streamlit interface for plumbing engineers and BIM
 
 **Status: engineering review build.** Regression tests and EPANET comparisons are available. Independent engineering acceptance and a completed native Revit round trip remain pending. A technical **PASS** does not establish code compliance or approval.
 
+Eight new **experimental research methods** start the coupled drainage, 3D frame/acoustic, tank draw/TMV, AGSS, liquid-source, commissioning-evidence and pressure-zone work. Signed-source verification is also available. See the [research workflow and validation boundaries](docs/COUPLED_RESEARCH.md).
+
 [Open the local app](http://localhost:8504/) · [Quick start](#quick-start) · [Capabilities](#capabilities) · [Detailed guides](#detailed-guides)
 
 ## How it works
@@ -19,11 +21,12 @@ The engine separates **source facts**, **engineering inputs**, **results** and *
 | Area | Available tools |
 | --- | --- |
 | **Water and fixtures** | Fixture schedules, demand calculations, supported pipe sizing, velocity and fixture minimum-size checks. |
-| **Hot water and equipment** | Demand, heaters, storage; shared-pipe recirculation, temperatures, balancing and pump controls; pump/system curves and manufacturer CSV import. |
-| **Drainage and stormwater** | Expanded IPC 2024 fixture-load register; DFU, slope and vent checks; Manning and SWMM dynamic-wave liquid networks; bounded air/trap response; runoff and storage. |
+| **Hot water and equipment** | Demand, heaters, shared-pipe recirculation and controls; experimental stratified storage, fixture draws/TMV behavior; pump/system curves and manufacturer CSV import. |
+| **Drainage and stormwater** | IPC 2024 fixture-load register; DFU/slope/vent checks; Manning and SWMM liquid networks; air/trap checks; experimental conservative liquid/air/dilute-solids coupling. |
 | **Pressure networks** | Tree hydraulics; EPANET 2.2 loops, pumps, tanks, valves, pressure-dependent demand, extended-period simulation and scenarios. |
-| **Medical gas and vacuum** | Source-bound clinical demand, diversity, isothermal tree pressure loss, terminal margins, plant N+1 and reserve duration; separate HTM / Saudi SBC-NFPA / ISO bases. |
-| **Physical effects and safety equipment** | Elastic-network water hammer, supplied-spectrum airborne acoustics, straight-pipe thermal/pressure stress, thermal expansion and relief-rating checks. |
+| **Medical gas and vacuum** | Clinical demand, isothermal tree pressure, plant N+1/reserve; separate HTM / Saudi SBC-NFPA / ISO bases; experimental AGSS interfaces, liquid-source inventory and commissioning/quality-evidence audits. |
+| **Physical effects and safety equipment** | Elastic water hammer, airborne acoustics, stress/expansion and relief checks; experimental 3D frame flexibility and structure-borne path response. |
+| **Source and pressure-service review** | Detached source signatures with independently enrolled trust keys; model-matched zone pressure, control-boundary and PDA delivery audits. |
 | **Models and drawings** | IFC/Revit mapping, physical-port diagnostics, snapshots and revision comparison; DXF, DWG conversion intake and PDF review. |
 | **Sheets and evidence** | Interactive workbook forms, saved calculations, QA/QC, evidence packets, revision history and guarded Revit result handoffs. |
 
@@ -66,10 +69,11 @@ See [setup and data requirements](docs/SETUP.md) for parsers, private workbooks,
 ## Current limits
 
 - **Sources:** code editions, numeric tables, manufacturer data and project applicability require review.
-- **Drainage:** liquid dynamic-wave and lumped air/trap models are separate. Coupled vertical-stack two-phase flow, solids and complete vent arrangements remain outside scope; failed continuity invalidates hydraulic acceptance.
-- **Medical gas:** adopted editions, clinical criteria and Saudi precedence need source-backed review. No AGSS/liquefiable-gas solver, gas-quality verification or commissioning certification is provided.
-- **Physical effects:** surge stops at vapour pressure; full column separation, structure-borne acoustics, 3D piping flexibility and relief-device certification remain outside scope.
-- **Hot water:** shared trunks and controls are modeled for prescribed balanced no-draw flows; hygiene/scald approval, fixture draws and stratified storage require separate work.
+- **Drainage:** the coupled prototype uses chambers/flooded links and dilute tracers. Annular/slug stack transitions, discrete solids/blockage and complete vent arrangements remain outside scope; failed continuity invalidates acceptance.
+- **Medical gas:** adopted editions/clinical criteria need review. AGSS and liquid inventory are bounded prototypes; gas assays, patient-interface/plant certification and authorized commissioning require actual evidence.
+- **Physical effects:** surge stops at vapour pressure. Linear frame/radiation prototypes exclude elbow ovalization, nonlinear supports, full building flanking paths, fatigue and certified code stress/relief design.
+- **Hot water:** modeled temperatures/age/TMV response do not establish microbial safety or certified scald protection; measured validation and a project water-safety process remain required.
+- **Trust and zones:** signed data needs independently enrolled issuer keys. EPANET 2.2 cannot represent heterogeneous zone PDA curves through its global demand parameters.
 - **Drawings:** IFC requires explicit mapping; missing ports remain unevaluated. DWG needs conversion, PDF needs drawing review, and large models need partitions.
 - **Revit:** live property reads and rollback probes do not establish a completed native extraction/write-back/re-extraction test.
 - **Deployment:** trusted local use; public multi-user project access control is not implemented.
@@ -81,6 +85,7 @@ See [setup and data requirements](docs/SETUP.md) for parsers, private workbooks,
 | [Setup and data](docs/SETUP.md) | Installation, optional dependencies, private workbooks and project databases. |
 | [Engineering methods](docs/PLUMBING_ENGINEERING_MODULES.md) | Formulas, source requirements and boundaries for the scoped modules. |
 | [Extended methods and medical gases](docs/ADVANCED_PLUMBING.md) | Shared recirculation, SWMM, air/trap response, gas bases, surge, acoustics, stress, relief and CSV workflows. |
+| [Coupled research and source authentication](docs/COUPLED_RESEARCH.md) | Eight experimental methods, actual calculation boundaries, source-signature setup and pressure-zone treatment. |
 | [Hydraulic solver](docs/GENERAL_HYDRAULIC_SOLVER.md) | EPANET setup, network inputs, scenarios and diagnostics. |
 | [BIM ingestion](docs/BIM_INGESTION_PHASE4A.md) | IFC/Revit mapping, connectivity, snapshots and the native test procedure. |
 | [Interactive calculations](docs/INTERACTIVE_CALCULATIONS.md) | Import and use converted calculation forms. |

@@ -2690,5 +2690,1689 @@
     "absolute_tolerance": 0.002,
     "derivation": "Independent uniform half-full Manning reference: A=pi*0.1^2/8, Rh=0.1/4, Q=A*Rh^(2/3)*sqrt(.01)/.013=2.582715323 L/s. A full ramp/plateau/drain-down event is supplied; transient sampled maximum approaches the uniform plateau within 0.002 L/s. Mass continuity criterion also checked; no engineering approval.",
     "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
+  },
+  {
+    "id": "coupled-sealed-compression",
+    "module": "coupled_drainage",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "coupled_drainage",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "EXPERIMENTAL fictional software example. Not an adopted code/manufacturer/clinical result.",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "density_kg_m3": 1000,
+        "air_constant_j_kgk": 287,
+        "atmospheric_kpa": 100,
+        "duration_s": 1,
+        "maximum_step_s": 0.01,
+        "report_step_s": 0.1,
+        "maximum_air_gauge_pa": 1000,
+        "maximum_concentration_kg_m3": 10,
+        "nodes": [
+          {
+            "id": "C1",
+            "source_id": "SYN",
+            "kind": "chamber",
+            "invert_m": 0,
+            "area_m2": 1,
+            "total_volume_m3": 1,
+            "initial_liquid_m3": 0.5,
+            "initial_air_absolute_kpa": 100,
+            "air_temperature_k": 300,
+            "initial_concentration_kg_m3": 1,
+            "initial_bed_kg": 0,
+            "settling_rate_per_s": 0,
+            "resuspension_rate_per_s": 0,
+            "resuspension_velocity_m_s": 1
+          }
+        ],
+        "pipes": [],
+        "vents": [],
+        "traps": [],
+        "inflows": [
+          {
+            "id": "IN",
+            "source_id": "SYN",
+            "node": "C1",
+            "concentration_kg_m3": 2,
+            "hydrograph": [
+              {
+                "time_s": 0,
+                "flow_lps": 1
+              },
+              {
+                "time_s": 1,
+                "flow_lps": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "expected_values": {
+      "final_liquid_m3": 0.501,
+      "final_air_mass_kg": 0.5807200929152149,
+      "maximum_air_gauge_magnitude_pa": 200.40080160320213,
+      "final_suspended_kg": 0.502,
+      "liquid_balance_error_m3": 0,
+      "air_balance_error_kg": 0,
+      "solids_balance_error_kg": 0
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-07,
+    "derivation": "Independent ideal-gas inventory: one litre added to0.5m3 water leaves0.499m3 air, p=100kPa*0.5/0.499. Air mass is fixed. Initial0.5kg tracer plus0.001m3*2kg/m3 gives0.502kg. No vent/link or settling.",
+    "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
+  },
+  {
+    "id": "coupled-solids-settling",
+    "module": "coupled_drainage",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "coupled_drainage",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "EXPERIMENTAL fictional software example. Not an adopted code/manufacturer/clinical result.",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "density_kg_m3": 1000,
+        "air_constant_j_kgk": 287,
+        "atmospheric_kpa": 100,
+        "duration_s": 2,
+        "maximum_step_s": 0.01,
+        "report_step_s": 0.1,
+        "maximum_air_gauge_pa": 1000,
+        "maximum_concentration_kg_m3": 10,
+        "nodes": [
+          {
+            "id": "C1",
+            "source_id": "SYN",
+            "kind": "chamber",
+            "invert_m": 0,
+            "area_m2": 1,
+            "total_volume_m3": 1,
+            "initial_liquid_m3": 0.5,
+            "initial_air_absolute_kpa": 100,
+            "air_temperature_k": 300,
+            "initial_concentration_kg_m3": 1,
+            "initial_bed_kg": 0,
+            "settling_rate_per_s": 0.1,
+            "resuspension_rate_per_s": 0,
+            "resuspension_velocity_m_s": 1
+          }
+        ],
+        "pipes": [],
+        "vents": [],
+        "traps": [],
+        "inflows": []
+      }
+    },
+    "expected_values": {
+      "final_suspended_kg": 0.4093653901947385,
+      "final_deposited_kg": 0.0906346098052615,
+      "solids_balance_error_kg": 0,
+      "final_liquid_m3": 0.5
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-07,
+    "derivation": "Independent conservative two-compartment first-order settling: Heun recurrence M_next=M*(1-k*dt+(k*dt)^2/2),200 steps. Deposited mass=initial minus suspended; no water/air exchange.",
+    "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
+  },
+  {
+    "id": "frame-cantilever-hand-solution",
+    "module": "piping_flexibility",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "piping_flexibility",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "EXPERIMENTAL fictional software example. Not an adopted code/manufacturer/clinical result.",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "frame": {
+          "nodes": [
+            {
+              "id": "A",
+              "source_id": "SYN",
+              "x_m": 0,
+              "y_m": 0,
+              "z_m": 0
+            },
+            {
+              "id": "B",
+              "source_id": "SYN",
+              "x_m": 2,
+              "y_m": 0,
+              "z_m": 0
+            }
+          ],
+          "elements": [
+            {
+              "id": "E1",
+              "source_id": "SYN",
+              "from_node": "A",
+              "to_node": "B",
+              "internal_mm": 80,
+              "external_mm": 100,
+              "youngs_modulus_mpa": 200000,
+              "poisson_ratio": 0.3,
+              "density_kg_m3": 7800,
+              "fluid_density_kg_m3": 1000,
+              "alpha_per_k": 1.2e-05,
+              "temperature_change_k": 0,
+              "stress_intensification": 1,
+              "internal_gauge_kpa": 0
+            }
+          ],
+          "constraints": [
+            {
+              "node": "A",
+              "dof": "ux",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "A",
+              "dof": "uy",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "A",
+              "dof": "uz",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "A",
+              "dof": "rx",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "A",
+              "dof": "ry",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "A",
+              "dof": "rz",
+              "value": 0,
+              "source_id": "SYN"
+            }
+          ],
+          "springs": [],
+          "loads": [
+            {
+              "node": "B",
+              "source_id": "SYN",
+              "fx_n": 0,
+              "fy_n": 100,
+              "fz_n": 0,
+              "mx_nm": 0,
+              "my_nm": 0,
+              "mz_nm": 0
+            }
+          ],
+          "gravity_x_m_s2": 0,
+          "gravity_y_m_s2": 0,
+          "gravity_z_m_s2": 0
+        },
+        "allowable_stress_mpa": 200,
+        "maximum_translation_mm": 10,
+        "maximum_rotation_rad": 0.05
+      }
+    },
+    "expected_values": {
+      "maximum_translation_mm": 0.4600684895158672,
+      "maximum_rotation_rad": 0.0003450513671369004,
+      "maximum_screened_von_mises_mpa": 3.4505136713690034
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-07,
+    "derivation": "Independent Euler-Bernoulli cantilever: tip delta=F L^3/(3EI),theta=F L^2/(2EI),fixed-end bending stress=FL*ro/I. Gravity/pressure/temperature zero.",
+    "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
+  },
+  {
+    "id": "frame-free-thermal-strain",
+    "module": "piping_flexibility",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "piping_flexibility",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "EXPERIMENTAL fictional software example. Not an adopted code/manufacturer/clinical result.",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "frame": {
+          "nodes": [
+            {
+              "id": "A",
+              "source_id": "SYN",
+              "x_m": 0,
+              "y_m": 0,
+              "z_m": 0
+            },
+            {
+              "id": "B",
+              "source_id": "SYN",
+              "x_m": 2,
+              "y_m": 0,
+              "z_m": 0
+            }
+          ],
+          "elements": [
+            {
+              "id": "E1",
+              "source_id": "SYN",
+              "from_node": "A",
+              "to_node": "B",
+              "internal_mm": 80,
+              "external_mm": 100,
+              "youngs_modulus_mpa": 200000,
+              "poisson_ratio": 0.3,
+              "density_kg_m3": 7800,
+              "fluid_density_kg_m3": 1000,
+              "alpha_per_k": 1.2e-05,
+              "temperature_change_k": 50,
+              "stress_intensification": 1,
+              "internal_gauge_kpa": 0
+            }
+          ],
+          "constraints": [
+            {
+              "node": "A",
+              "dof": "ux",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "A",
+              "dof": "uy",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "A",
+              "dof": "uz",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "A",
+              "dof": "rx",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "A",
+              "dof": "ry",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "A",
+              "dof": "rz",
+              "value": 0,
+              "source_id": "SYN"
+            }
+          ],
+          "springs": [],
+          "loads": [],
+          "gravity_x_m_s2": 0,
+          "gravity_y_m_s2": 0,
+          "gravity_z_m_s2": 0
+        },
+        "allowable_stress_mpa": 200,
+        "maximum_translation_mm": 10,
+        "maximum_rotation_rad": 0.05
+      }
+    },
+    "expected_values": {
+      "maximum_translation_mm": 1.2000000000000002,
+      "maximum_screened_von_mises_mpa": 0
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-06,
+    "derivation": "Independent free heated cantilever: extension alpha*deltaT*L=1.2mm with zero end axial force/stress.",
+    "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
+  },
+  {
+    "id": "frame-fully-restrained-thermal",
+    "module": "piping_flexibility",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "piping_flexibility",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "EXPERIMENTAL fictional software example. Not an adopted code/manufacturer/clinical result.",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "frame": {
+          "nodes": [
+            {
+              "id": "A",
+              "source_id": "SYN",
+              "x_m": 0,
+              "y_m": 0,
+              "z_m": 0
+            },
+            {
+              "id": "B",
+              "source_id": "SYN",
+              "x_m": 2,
+              "y_m": 0,
+              "z_m": 0
+            }
+          ],
+          "elements": [
+            {
+              "id": "E1",
+              "source_id": "SYN",
+              "from_node": "A",
+              "to_node": "B",
+              "internal_mm": 80,
+              "external_mm": 100,
+              "youngs_modulus_mpa": 200000,
+              "poisson_ratio": 0.3,
+              "density_kg_m3": 7800,
+              "fluid_density_kg_m3": 1000,
+              "alpha_per_k": 1.2e-05,
+              "temperature_change_k": 50,
+              "stress_intensification": 1,
+              "internal_gauge_kpa": 0
+            }
+          ],
+          "constraints": [
+            {
+              "node": "A",
+              "dof": "ux",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "A",
+              "dof": "uy",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "A",
+              "dof": "uz",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "A",
+              "dof": "rx",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "A",
+              "dof": "ry",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "A",
+              "dof": "rz",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "B",
+              "dof": "ux",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "B",
+              "dof": "uy",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "B",
+              "dof": "uz",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "B",
+              "dof": "rx",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "B",
+              "dof": "ry",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "B",
+              "dof": "rz",
+              "value": 0,
+              "source_id": "SYN"
+            }
+          ],
+          "springs": [],
+          "loads": [],
+          "gravity_x_m_s2": 0,
+          "gravity_y_m_s2": 0,
+          "gravity_z_m_s2": 0
+        },
+        "allowable_stress_mpa": 200,
+        "maximum_translation_mm": 10,
+        "maximum_rotation_rad": 0.05
+      }
+    },
+    "expected_values": {
+      "maximum_translation_mm": 0,
+      "maximum_screened_von_mises_mpa": 120
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-07,
+    "derivation": "Independent restrained thermal stress=-E alpha deltaT=-120MPa. Both end translations/rotations fixed, so zero displacement.",
+    "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
+  },
+  {
+    "id": "structure-borne-sdof-mobility",
+    "module": "structure_borne",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "structure_borne",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "EXPERIMENTAL fictional software example. Not an adopted code/manufacturer/clinical result.",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "frame": {
+          "nodes": [
+            {
+              "id": "A",
+              "source_id": "SYN",
+              "x_m": 0,
+              "y_m": 0,
+              "z_m": 0
+            },
+            {
+              "id": "B",
+              "source_id": "SYN",
+              "x_m": 2,
+              "y_m": 0,
+              "z_m": 0
+            }
+          ],
+          "elements": [
+            {
+              "id": "E1",
+              "source_id": "SYN",
+              "from_node": "A",
+              "to_node": "B",
+              "internal_mm": 80,
+              "external_mm": 100,
+              "youngs_modulus_mpa": 200000,
+              "poisson_ratio": 0.3,
+              "density_kg_m3": 7800,
+              "fluid_density_kg_m3": 1000,
+              "alpha_per_k": 1.2e-05,
+              "temperature_change_k": 0,
+              "stress_intensification": 1,
+              "internal_gauge_kpa": 0
+            }
+          ],
+          "constraints": [
+            {
+              "node": "A",
+              "dof": "ux",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "A",
+              "dof": "uy",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "A",
+              "dof": "uz",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "A",
+              "dof": "rx",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "A",
+              "dof": "ry",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "A",
+              "dof": "rz",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "B",
+              "dof": "ux",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "B",
+              "dof": "uz",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "B",
+              "dof": "rx",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "B",
+              "dof": "ry",
+              "value": 0,
+              "source_id": "SYN"
+            },
+            {
+              "node": "B",
+              "dof": "rz",
+              "value": 0,
+              "source_id": "SYN"
+            }
+          ],
+          "springs": [],
+          "loads": [],
+          "gravity_x_m_s2": 0,
+          "gravity_y_m_s2": 0,
+          "gravity_z_m_s2": 0
+        },
+        "inertias": [
+          {
+            "node": "B",
+            "source_id": "SYN",
+            "mass_kg": 1,
+            "jx_kg_m2": 0,
+            "jy_kg_m2": 0,
+            "jz_kg_m2": 0
+          }
+        ],
+        "mass_damping_per_s": 10,
+        "stiffness_damping_s": 0,
+        "radiation_area_m2": 0.1,
+        "radiation_efficiency": 0.1,
+        "air_density_kg_m3": 1.2,
+        "sound_speed_m_s": 343,
+        "receiver_distance_m": 1,
+        "directivity_factor": 1,
+        "room_constant_m2": 16,
+        "limit_dba": 100,
+        "receiver_node": "B",
+        "receiver_dof": "uy",
+        "spectrum": [
+          {
+            "frequency_hz": 10,
+            "source_id": "SYN",
+            "a_weight_db": 0,
+            "excitations": [
+              {
+                "node": "B",
+                "dof": "uy",
+                "rms_amplitude": 10,
+                "phase_rad": 0
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "expected_values": {
+      "maximum_normal_rms_velocity_m_s": 0.0007259701110887867,
+      "predicted_receiver_dba": 58.54270365150806
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-07,
+    "derivation": "Independent fixed-guided single translational DOF: K=12EI/L^3,m=1kg,c=10N*s/m. RMS velocity=omega*F/sqrt((K-m*omega^2)^2+(c*omega)^2). W=sigma*rho*c*A*v_RMS^2. Supplied single-band A correction0dB.",
+    "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
+  },
+  {
+    "id": "hot-draw-conservative-mixing",
+    "module": "hot_water_draw",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "hot_water_draw",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "EXPERIMENTAL fictional software example. Not an adopted code/manufacturer/clinical result.",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "duration_s": 10,
+        "maximum_step_s": 0.1,
+        "report_step_s": 1,
+        "density_kg_m3": 1000,
+        "specific_heat_j_kgk": 4000,
+        "cold_temperature_c": 20,
+        "tank_ambient_c": 20,
+        "layer_conductance_w_k": 0,
+        "heater_on_below_c": 55,
+        "heater_off_above_c": 65,
+        "heater_sensor_layer": 0,
+        "minimum_storage_c": 40,
+        "hygiene_band_low_c": 20,
+        "hygiene_band_high_c": 45,
+        "disinfection_temperature_c": 45,
+        "required_dwell_s": 5,
+        "maximum_water_age_s": 100,
+        "minimum_delivered_fraction": 1,
+        "layers": [
+          {
+            "id": "BOTTOM",
+            "source_id": "SYN",
+            "volume_l": 100,
+            "initial_temperature_c": 60,
+            "initial_age_s": 0,
+            "heater_power_w": 0,
+            "ua_w_k": 0
+          },
+          {
+            "id": "TOP",
+            "source_id": "SYN",
+            "volume_l": 100,
+            "initial_temperature_c": 60,
+            "initial_age_s": 0,
+            "heater_power_w": 0,
+            "ua_w_k": 0
+          }
+        ],
+        "fixtures": [
+          {
+            "id": "SHOWER",
+            "source_id": "SYN",
+            "hot_line_volume_l": 1,
+            "cells": 2,
+            "initial_temperature_c": 60,
+            "initial_age_s": 0,
+            "ua_w_k": 0,
+            "ambient_c": 20,
+            "target_temperature_c": 40,
+            "scald_limit_c": 44,
+            "minimum_delivery_c": 39,
+            "response_time_s": 0,
+            "initial_hot_fraction": 0.5,
+            "cold_failure_close_s": 0
+          }
+        ],
+        "events": [
+          {
+            "fixture": "SHOWER",
+            "source_id": "SYN",
+            "start_s": 0,
+            "end_s": 10,
+            "mixed_flow_lps": 0.1,
+            "cold_available": true
+          }
+        ]
+      }
+    },
+    "expected_values": {
+      "mixed_delivery_l": 1,
+      "requested_draw_l": 1,
+      "unmet_draw_l": 0,
+      "maximum_outlet_c": 40,
+      "scald_exposure_fixture_s": 0,
+      "under_temperature_fixture_s": 0,
+      "energy_balance_residual_j": 0
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-05,
+    "derivation": "Independent service/energy references:0.1L/s over10s=1L. Ideal TMV at40C between supplied hot/cold feeds delivers40C. Whole storage+hot-line energy change equals heating minus losses plus makeup enthalpy minus withdrawn hot enthalpy.",
+    "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
+  },
+  {
+    "id": "tmv-immediate-cold-loss-shutoff",
+    "module": "hot_water_draw",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "hot_water_draw",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "EXPERIMENTAL fictional software example. Not an adopted code/manufacturer/clinical result.",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "duration_s": 10,
+        "maximum_step_s": 0.1,
+        "report_step_s": 1,
+        "density_kg_m3": 1000,
+        "specific_heat_j_kgk": 4000,
+        "cold_temperature_c": 20,
+        "tank_ambient_c": 20,
+        "layer_conductance_w_k": 0,
+        "heater_on_below_c": 55,
+        "heater_off_above_c": 65,
+        "heater_sensor_layer": 0,
+        "minimum_storage_c": 40,
+        "hygiene_band_low_c": 20,
+        "hygiene_band_high_c": 45,
+        "disinfection_temperature_c": 45,
+        "required_dwell_s": 5,
+        "maximum_water_age_s": 100,
+        "minimum_delivered_fraction": 1,
+        "layers": [
+          {
+            "id": "BOTTOM",
+            "source_id": "SYN",
+            "volume_l": 100,
+            "initial_temperature_c": 60,
+            "initial_age_s": 0,
+            "heater_power_w": 0,
+            "ua_w_k": 0
+          },
+          {
+            "id": "TOP",
+            "source_id": "SYN",
+            "volume_l": 100,
+            "initial_temperature_c": 60,
+            "initial_age_s": 0,
+            "heater_power_w": 0,
+            "ua_w_k": 0
+          }
+        ],
+        "fixtures": [
+          {
+            "id": "SHOWER",
+            "source_id": "SYN",
+            "hot_line_volume_l": 1,
+            "cells": 2,
+            "initial_temperature_c": 60,
+            "initial_age_s": 0,
+            "ua_w_k": 0,
+            "ambient_c": 20,
+            "target_temperature_c": 40,
+            "scald_limit_c": 44,
+            "minimum_delivery_c": 39,
+            "response_time_s": 0,
+            "initial_hot_fraction": 0.5,
+            "cold_failure_close_s": 0
+          }
+        ],
+        "events": [
+          {
+            "fixture": "SHOWER",
+            "source_id": "SYN",
+            "start_s": 0,
+            "end_s": 10,
+            "mixed_flow_lps": 0.1,
+            "cold_available": false
+          }
+        ]
+      }
+    },
+    "expected_values": {
+      "mixed_delivery_l": 0,
+      "hot_draw_l": 0,
+      "unmet_draw_l": 1,
+      "scald_exposure_fixture_s": 0
+    },
+    "expected_status": "FAIL",
+    "complete": true,
+    "absolute_tolerance": 1e-07,
+    "derivation": "Ideal supplied zero-delay cold-loss shutoff: no hot or mixed flow and no scald exposure. Demand is unmet, so service check fails; safe shutoff is not mislabeled as adequate delivery.",
+    "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
+  },
+  {
+    "id": "agss-source-bound-interface",
+    "module": "agss_network",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "agss_network",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "EXPERIMENTAL fictional software example. Not an adopted code/manufacturer/clinical result.",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "network": {
+          "standard_basis": "HTM_02_01",
+          "standard_edition": "PROJECT ADOPTION PENDING; enter adopted edition",
+          "precedence_reference": "Fictional software example. No numerical HTM/NFPA/ISO rule is implied.",
+          "service": "AGSS",
+          "mode": "vacuum",
+          "gas_constant_j_kgk": 300,
+          "gas_temperature_k": 300,
+          "compressibility": 1,
+          "heat_capacity_ratio": 1.4,
+          "reference_pressure_absolute_kpa": 100,
+          "reference_temperature_k": 300,
+          "reference_compressibility": 1,
+          "atmospheric_pressure_kpa": 100,
+          "source_pressure_absolute_kpa": 99,
+          "source_node": "S",
+          "minimum_terminal_absolute_kpa": 98,
+          "maximum_terminal_absolute_kpa": 100,
+          "maximum_velocity_m_s": 30,
+          "maximum_mach": 0.3,
+          "nodes": [
+            {
+              "id": "S",
+              "source_id": "SYN"
+            },
+            {
+              "id": "A",
+              "source_id": "SYN"
+            }
+          ],
+          "pipes": [
+            {
+              "id": "P1",
+              "source_id": "SYN",
+              "from_node": "S",
+              "to_node": "A",
+              "length_m": 10,
+              "internal_mm": 20,
+              "friction_factor": 0.02,
+              "fittings_k": 0
+            }
+          ],
+          "demand_groups": [
+            {
+              "id": "WARD",
+              "source_id": "SYN",
+              "node": "A",
+              "clinical_position": "Fictional clinical position, not an adopted demand",
+              "positions": 1,
+              "flow_per_position_lpm": 60,
+              "diversity": 1,
+              "continuous_lpm": 0
+            }
+          ],
+          "plant_units": [
+            {
+              "id": "PLANT1",
+              "source_id": "SYN",
+              "reference_capacity_lpm": 200,
+              "available": true
+            },
+            {
+              "id": "PLANT2",
+              "source_id": "SYN",
+              "reference_capacity_lpm": 200,
+              "available": true
+            }
+          ],
+          "required_reserve_min": 5,
+          "reserve_standard_l": 1200,
+          "source_id": "SYN"
+        },
+        "interfaces": [
+          {
+            "node": "A",
+            "source_id": "SYN",
+            "minimum_reference_flow_lpm": 50,
+            "maximum_reference_flow_lpm": 70,
+            "minimum_suction_kpa": 0.5,
+            "maximum_suction_kpa": 1.5,
+            "interface_listing_reference": "Fictional interface criteria; not a manufacturer listing"
+          }
+        ],
+        "exhaust_evidence_reference": "Fictional routing record; review pending"
+      }
+    },
+    "expected_values": {
+      "design_reference_flow_lpm": 60,
+      "minimum_terminal_absolute_kpa": 99.05684180960745,
+      "reserve_duration_min": 20
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-07,
+    "derivation": "Independent isothermal air-network p_terminal^2=p_plant^2+resistance*mdot^2*R*T/A^2; one60 referenceL/min interface. 1200 referenceL/60=20min reserve. Supplied suction/flow range is fictional, not a medical-vacuum substitution.",
+    "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
+  },
+  {
+    "id": "liquid-source-inventory-heat-capacity",
+    "module": "liquid_gas_inventory",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "liquid_gas_inventory",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "EXPERIMENTAL fictional software example. Not an adopted code/manufacturer/clinical result.",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "service": "O2",
+        "source_approval_reference": "Fictional supplier authorization placeholder",
+        "tank_liquid_l": 1000,
+        "fill_fraction": 0.8,
+        "unusable_fraction": 0.1,
+        "liquid_density_kg_l": 1,
+        "reference_gas_density_kg_m3": 2,
+        "peak_reference_flow_lpm": 1000,
+        "average_reference_flow_lpm": 500,
+        "required_reserve_h": 5,
+        "latent_heat_j_kg": 200000,
+        "parasitic_heat_w": 0,
+        "vaporizers": [
+          {
+            "id": "V1",
+            "source_id": "SYN",
+            "available": true,
+            "rated_mass_kg_h": 200,
+            "rated_heat_w": 20000,
+            "rating_condition_reference": "Fictional rated ambient condition"
+          },
+          {
+            "id": "V2",
+            "source_id": "SYN",
+            "available": true,
+            "rated_mass_kg_h": 200,
+            "rated_heat_w": 20000,
+            "rating_condition_reference": "Fictional rated ambient condition"
+          }
+        ]
+      }
+    },
+    "expected_values": {
+      "usable_liquid_mass_kg": 700,
+      "usable_reference_gas_m3": 350,
+      "peak_mass_demand_kg_h": 120,
+      "n_minus_one_vaporization_kg_h": 200,
+      "reserve_duration_h": 11.666666666666666
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-07,
+    "derivation": "Independent inventory:1000*(0.8-0.1)*1=700kg ->350m3 at2kg/m3. Peak1000L/min=120kg/h. Per vaporizer min(200kg/h,20000W/200000J/kg*3600)=200kg/h; N+1 leaves200. Average60kg/h gives700/60h.",
+    "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
+  },
+  {
+    "id": "medical-commissioning-declared-envelope",
+    "module": "medical_commissioning",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "medical_commissioning",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "EXPERIMENTAL fictional software example. Not an adopted code/manufacturer/clinical result.",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "standard_reference": "Declared HTM/ISO project test scope, not a standard-completeness assertion",
+        "adopted_edition": "PROJECT ADOPTION PENDING",
+        "system_revision": "SYN-R1",
+        "evaluation_date": "2026-11-03",
+        "required_tests": [
+          {
+            "id": "O2-ID",
+            "source_id": "SYN",
+            "kind": "gas_quality",
+            "location": "TEST-OUTLET",
+            "unit": "percent",
+            "minimum": 99,
+            "maximum": 100,
+            "maximum_uncertainty": 0.1,
+            "required_method": "Fictional laboratory method"
+          }
+        ],
+        "measurements": [
+          {
+            "test_id": "O2-ID",
+            "source_id": "SYN",
+            "value": 99.5,
+            "uncertainty": 0.1,
+            "unit": "percent",
+            "method": "Fictional laboratory method",
+            "location": "TEST-OUTLET",
+            "system_revision": "SYN-R1",
+            "measured_on": "2026-11-01",
+            "calibration_valid_until": "2027-01-01",
+            "operator": "Fictional operator",
+            "laboratory": "Fictional laboratory",
+            "evidence_reference": "Fictional report; not clinical evidence"
+          }
+        ],
+        "required_roles": [
+          "AP_MGPS",
+          "QC"
+        ],
+        "signoffs": [
+          {
+            "role": "AP_MGPS",
+            "source_id": "SYN",
+            "name": "Fictional AP_MGPS",
+            "credential_reference": "Example only",
+            "appointment_reference": "Example only",
+            "system_revision": "SYN-R1",
+            "signed_on": "2026-11-02",
+            "evidence_reference": "No genuine appointment/signature is represented"
+          },
+          {
+            "role": "QC",
+            "source_id": "SYN",
+            "name": "Fictional QC",
+            "credential_reference": "Example only",
+            "appointment_reference": "Example only",
+            "system_revision": "SYN-R1",
+            "signed_on": "2026-11-02",
+            "evidence_reference": "No genuine appointment/signature is represented"
+          }
+        ]
+      }
+    },
+    "expected_values": {
+      "required_test_count": 1,
+      "reported_test_count": 1,
+      "missing_test_count": 0,
+      "certification_status": "NOT_ISSUED"
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-07,
+    "derivation": "Condition/action reference only: reported99.5 +/-0.1 is inside fictional[99,100], method/location/revision/date match, two declared role records exist. This is NOT a complete standard test matrix, authentic gas assay or medical certificate.",
+    "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
+  },
+  {
+    "id": "medical-missing-test-blocks-evidence",
+    "module": "medical_commissioning",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "medical_commissioning",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "EXPERIMENTAL fictional software example. Not an adopted code/manufacturer/clinical result.",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "standard_reference": "Declared HTM/ISO project test scope, not a standard-completeness assertion",
+        "adopted_edition": "PROJECT ADOPTION PENDING",
+        "system_revision": "SYN-R1",
+        "evaluation_date": "2026-11-03",
+        "required_tests": [
+          {
+            "id": "O2-ID",
+            "source_id": "SYN",
+            "kind": "gas_quality",
+            "location": "TEST-OUTLET",
+            "unit": "percent",
+            "minimum": 99,
+            "maximum": 100,
+            "maximum_uncertainty": 0.1,
+            "required_method": "Fictional laboratory method"
+          }
+        ],
+        "measurements": [],
+        "required_roles": [
+          "AP_MGPS",
+          "QC"
+        ],
+        "signoffs": [
+          {
+            "role": "AP_MGPS",
+            "source_id": "SYN",
+            "name": "Fictional AP_MGPS",
+            "credential_reference": "Example only",
+            "appointment_reference": "Example only",
+            "system_revision": "SYN-R1",
+            "signed_on": "2026-11-02",
+            "evidence_reference": "No genuine appointment/signature is represented"
+          },
+          {
+            "role": "QC",
+            "source_id": "SYN",
+            "name": "Fictional QC",
+            "credential_reference": "Example only",
+            "appointment_reference": "Example only",
+            "system_revision": "SYN-R1",
+            "signed_on": "2026-11-02",
+            "evidence_reference": "No genuine appointment/signature is represented"
+          }
+        ]
+      }
+    },
+    "expected_values": {
+      "missing_test_count": 1,
+      "certification_status": "NOT_ISSUED"
+    },
+    "expected_status": "FAIL",
+    "complete": false,
+    "absolute_tolerance": 1e-07,
+    "derivation": "Missing required measurement must block declared-scope completeness and cannot issue certification.",
+    "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
+  },
+  {
+    "id": "pressure-zone-full-demand-envelope",
+    "module": "pressure_zones",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "pressure_zones",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "EXPERIMENTAL fictional software example. Not an adopted code/manufacturer/clinical result.",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "model": {
+          "schema_version": "pressure-network-1",
+          "units": "SI",
+          "code_id": "IPC",
+          "basis_reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+          "nodes": [
+            {
+              "id": "S",
+              "kind": "source",
+              "elevation_m": 0,
+              "head_m": 40,
+              "reference": "Synthetic Phase2A software example; project/code/manufacturer review required"
+            },
+            {
+              "id": "A",
+              "kind": "junction",
+              "elevation_m": 0,
+              "demand_lps": 2,
+              "required_pressure_m": 20,
+              "demand_reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+              "reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+              "fire_demand_lps": 0
+            }
+          ],
+          "links": [
+            {
+              "id": "P1",
+              "kind": "pipe",
+              "from_node": "S",
+              "to_node": "A",
+              "length_m": 100,
+              "internal_mm": 50,
+              "roughness": 140,
+              "roughness_unit": "C",
+              "minor_loss_k": 1,
+              "reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+              "status": "OPEN"
+            }
+          ],
+          "demand_model": {
+            "type": "PDA",
+            "minimum_pressure_m": 0,
+            "required_pressure_m": 20,
+            "exponent": 0.5,
+            "reference": "Synthetic Phase2A software example; project/code/manufacturer review required"
+          },
+          "controls": [],
+          "curves": {},
+          "patterns": {},
+          "simulation": {
+            "duration_s": 0,
+            "hydraulic_step_s": 3600,
+            "pattern_step_s": 3600,
+            "trials": 100,
+            "headloss": "H-W",
+            "accuracy": 1e-06
+          },
+          "scenarios": []
+        },
+        "solver_report": {
+          "schema_version": "pressure-network-result-1",
+          "backend": "epanet",
+          "normalized_model": {
+            "schema_version": "pressure-network-1",
+            "units": "SI",
+            "code_id": "IPC",
+            "basis_reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+            "nodes": [
+              {
+                "id": "S",
+                "kind": "source",
+                "elevation_m": 0,
+                "head_m": 40,
+                "reference": "Synthetic Phase2A software example; project/code/manufacturer review required"
+              },
+              {
+                "id": "A",
+                "kind": "junction",
+                "elevation_m": 0,
+                "demand_lps": 2,
+                "required_pressure_m": 20,
+                "demand_reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+                "reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+                "fire_demand_lps": 0
+              }
+            ],
+            "links": [
+              {
+                "id": "P1",
+                "kind": "pipe",
+                "from_node": "S",
+                "to_node": "A",
+                "length_m": 100,
+                "internal_mm": 50,
+                "roughness": 140,
+                "roughness_unit": "C",
+                "minor_loss_k": 1,
+                "reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+                "status": "OPEN"
+              }
+            ],
+            "demand_model": {
+              "type": "PDA",
+              "minimum_pressure_m": 0,
+              "required_pressure_m": 20,
+              "exponent": 0.5,
+              "reference": "Synthetic Phase2A software example; project/code/manufacturer review required"
+            },
+            "controls": [],
+            "curves": {},
+            "patterns": {},
+            "simulation": {
+              "duration_s": 0,
+              "hydraulic_step_s": 3600,
+              "pattern_step_s": 3600,
+              "trials": 100,
+              "headloss": "H-W",
+              "accuracy": 1e-06
+            },
+            "scenarios": []
+          },
+          "input_sha256": "8ac24b07cd8471905557faaa88777fe325578f66bf9cab3a2c185c8c23314599",
+          "complete": true,
+          "solver_status": "CONVERGED",
+          "diagnostics": [],
+          "snapshots": [
+            {
+              "time_s": 0,
+              "nodes": [
+                {
+                  "node_id": "S",
+                  "kind": "source",
+                  "head_m": 40
+                },
+                {
+                  "node_id": "A",
+                  "kind": "junction",
+                  "head_m": 37.47982418455974,
+                  "pressure_m": 37.47982418455974,
+                  "requested_demand_lps": 2,
+                  "delivered_demand_lps": 2.0
+                }
+              ]
+            }
+          ]
+        },
+        "pressure_tolerance_m": 0.001,
+        "flow_tolerance_lps": 0.0001,
+        "zones": [
+          {
+            "id": "Z1",
+            "source_id": "SYN",
+            "nodes": [
+              "S",
+              "A"
+            ],
+            "minimum_supply_m": 20,
+            "maximum_supply_m": 60,
+            "minimum_delivered_fraction": 1,
+            "pda_minimum_m": 0,
+            "pda_required_m": 20,
+            "pda_exponent": 0.5,
+            "calibration_reference": "Fictional global PDA demonstration, no field calibration"
+          }
+        ],
+        "boundaries": []
+      }
+    },
+    "expected_values": {
+      "reviewed_snapshots": 1,
+      "minimum_service_fraction": 1,
+      "maximum_pressure_m": 40,
+      "maximum_demand_curve_discrepancy_lps": 0,
+      "zone_pda_profiles_represented": true
+    },
+    "expected_status": "PASS",
+    "complete": true,
+    "absolute_tolerance": 1e-07,
+    "derivation": "Independent hand hydraulic report, not an executed EPANET run: published EPANET H-W constants and PDA equation solved by scalar bisection. At40m source the2L/s request is fully supplied; source/junction inside20-60m. Backend-report provenance is explicitly supplied, not authenticated.",
+    "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
+  },
+  {
+    "id": "pressure-zone-shortfall-not-compliance",
+    "module": "pressure_zones",
+    "input": {
+      "schema_version": "engineering-input-1",
+      "module": "pressure_zones",
+      "code_id": "IPC",
+      "code_edition": "2024",
+      "basis_reference": "EXPERIMENTAL fictional software example. Not an adopted code/manufacturer/clinical result.",
+      "sources": [
+        {
+          "id": "SYN",
+          "type": "SYNTHETIC",
+          "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+          "revision": "candidate-1",
+          "locator": "This complete input package and its independently prepared arithmetic reference",
+          "verification_status": "UNVERIFIED"
+        }
+      ],
+      "data": {
+        "source_id": "SYN",
+        "model": {
+          "schema_version": "pressure-network-1",
+          "units": "SI",
+          "code_id": "IPC",
+          "basis_reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+          "nodes": [
+            {
+              "id": "S",
+              "kind": "source",
+              "elevation_m": 0,
+              "head_m": 5,
+              "reference": "Synthetic Phase2A software example; project/code/manufacturer review required"
+            },
+            {
+              "id": "A",
+              "kind": "junction",
+              "elevation_m": 0,
+              "demand_lps": 2,
+              "required_pressure_m": 20,
+              "demand_reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+              "reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+              "fire_demand_lps": 0
+            }
+          ],
+          "links": [
+            {
+              "id": "P1",
+              "kind": "pipe",
+              "from_node": "S",
+              "to_node": "A",
+              "length_m": 100,
+              "internal_mm": 50,
+              "roughness": 140,
+              "roughness_unit": "C",
+              "minor_loss_k": 1,
+              "reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+              "status": "OPEN"
+            }
+          ],
+          "demand_model": {
+            "type": "PDA",
+            "minimum_pressure_m": 0,
+            "required_pressure_m": 20,
+            "exponent": 0.5,
+            "reference": "Synthetic Phase2A software example; project/code/manufacturer review required"
+          },
+          "controls": [],
+          "curves": {},
+          "patterns": {},
+          "simulation": {
+            "duration_s": 0,
+            "hydraulic_step_s": 3600,
+            "pattern_step_s": 3600,
+            "trials": 100,
+            "headloss": "H-W",
+            "accuracy": 1e-06
+          },
+          "scenarios": []
+        },
+        "solver_report": {
+          "schema_version": "pressure-network-result-1",
+          "backend": "epanet",
+          "normalized_model": {
+            "schema_version": "pressure-network-1",
+            "units": "SI",
+            "code_id": "IPC",
+            "basis_reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+            "nodes": [
+              {
+                "id": "S",
+                "kind": "source",
+                "elevation_m": 0,
+                "head_m": 5,
+                "reference": "Synthetic Phase2A software example; project/code/manufacturer review required"
+              },
+              {
+                "id": "A",
+                "kind": "junction",
+                "elevation_m": 0,
+                "demand_lps": 2,
+                "required_pressure_m": 20,
+                "demand_reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+                "reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+                "fire_demand_lps": 0
+              }
+            ],
+            "links": [
+              {
+                "id": "P1",
+                "kind": "pipe",
+                "from_node": "S",
+                "to_node": "A",
+                "length_m": 100,
+                "internal_mm": 50,
+                "roughness": 140,
+                "roughness_unit": "C",
+                "minor_loss_k": 1,
+                "reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+                "status": "OPEN"
+              }
+            ],
+            "demand_model": {
+              "type": "PDA",
+              "minimum_pressure_m": 0,
+              "required_pressure_m": 20,
+              "exponent": 0.5,
+              "reference": "Synthetic Phase2A software example; project/code/manufacturer review required"
+            },
+            "controls": [],
+            "curves": {},
+            "patterns": {},
+            "simulation": {
+              "duration_s": 0,
+              "hydraulic_step_s": 3600,
+              "pattern_step_s": 3600,
+              "trials": 100,
+              "headloss": "H-W",
+              "accuracy": 1e-06
+            },
+            "scenarios": []
+          },
+          "input_sha256": "6307a1f6fac6a3cb1654c546db77c0dcd5fffd95e84489d9c36611b797e9b4cd",
+          "complete": true,
+          "solver_status": "CONVERGED",
+          "diagnostics": [],
+          "snapshots": [
+            {
+              "time_s": 0,
+              "nodes": [
+                {
+                  "node_id": "S",
+                  "kind": "source",
+                  "head_m": 5
+                },
+                {
+                  "node_id": "A",
+                  "kind": "junction",
+                  "head_m": 4.383372480661971,
+                  "pressure_m": 4.383372480661971,
+                  "requested_demand_lps": 2,
+                  "delivered_demand_lps": 0.9363089747152882
+                }
+              ]
+            }
+          ]
+        },
+        "pressure_tolerance_m": 0.001,
+        "flow_tolerance_lps": 0.0001,
+        "zones": [
+          {
+            "id": "Z1",
+            "source_id": "SYN",
+            "nodes": [
+              "S",
+              "A"
+            ],
+            "minimum_supply_m": 20,
+            "maximum_supply_m": 60,
+            "minimum_delivered_fraction": 1,
+            "pda_minimum_m": 0,
+            "pda_required_m": 20,
+            "pda_exponent": 0.5,
+            "calibration_reference": "Fictional global PDA demonstration, no field calibration"
+          }
+        ],
+        "boundaries": []
+      }
+    },
+    "expected_values": {
+      "minimum_service_fraction": 0.4681544873576441,
+      "maximum_demand_curve_discrepancy_lps": 0
+    },
+    "expected_status": "FAIL",
+    "complete": true,
+    "absolute_tolerance": 1e-07,
+    "derivation": "Independent low-pressure scalar balance solves q=2*sqrt(max(0,p(q))/20). Partial delivered demand is physically consistent with PDA but fails full-service zone criteria.",
+    "evidence_class": "AUTHOR_PREPARED_SYNTHETIC_CANDIDATE_ENGINEERING_PENDING"
   }
 ]

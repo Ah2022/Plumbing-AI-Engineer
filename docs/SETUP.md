@@ -20,6 +20,7 @@ The app initializes its database on first use. [localhost:8504](http://localhost
 | DWG geometry | Supply a confirmed companion DXF or configure a supported local converter; see [DWG/PDF intake](DWG_PDF_UPLOADS.md). |
 | Looped or extended-period hydraulics | Configure a trusted EPANET 2.2 native library using `PLUMBING_EPANET_LIBRARY`; see [solver setup](GENERAL_HYDRAULIC_SOLVER.md#configure-epanet). The interface and tree layer can run without it. |
 | Dynamic-wave liquid drainage | Install `python -m pip install -r requirements-hydraulics.txt`. This pins the isolated SWMM toolkit; see [extended methods](ADVANCED_PLUMBING.md). |
+| Signed manufacturer/reviewer source evidence | Install `python -m pip install -r requirements-source-authentication.txt`; independently enroll issuer keys in the private server file configured by `PLUMBING_SOURCE_TRUST_STORE`. See [trust setup](COUPLED_RESEARCH.md#source-authentication-setup). An uploaded key is never automatically trusted. |
 | Revit extraction and result handoff | Install/load the repository's `bim/pyrevit/PlumbingEngine.extension`, configure repository/database paths, and bind the required PLM shared parameters. See the [native test procedure](BIM_INGESTION_PHASE4A.md#run-the-real-revit-harness). |
 | Private interactive calculation forms | Import XLSX/XLSM files or a converted library through **Calculation Sheets**. A synthetic demonstration is bundled; private forms are not included in a public clone. |
 

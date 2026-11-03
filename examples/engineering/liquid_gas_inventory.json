@@ -1,0 +1,50 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "liquid_gas_inventory",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "EXPERIMENTAL fictional software example. Not an adopted code/manufacturer/clinical result.",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "service": "O2",
+    "source_approval_reference": "Fictional supplier authorization placeholder",
+    "tank_liquid_l": 1000,
+    "fill_fraction": 0.8,
+    "unusable_fraction": 0.1,
+    "liquid_density_kg_l": 1,
+    "reference_gas_density_kg_m3": 2,
+    "peak_reference_flow_lpm": 1000,
+    "average_reference_flow_lpm": 500,
+    "required_reserve_h": 5,
+    "latent_heat_j_kg": 200000,
+    "parasitic_heat_w": 0,
+    "vaporizers": [
+      {
+        "id": "V1",
+        "source_id": "SYN",
+        "available": true,
+        "rated_mass_kg_h": 200,
+        "rated_heat_w": 20000,
+        "rating_condition_reference": "Fictional rated ambient condition"
+      },
+      {
+        "id": "V2",
+        "source_id": "SYN",
+        "available": true,
+        "rated_mass_kg_h": 200,
+        "rated_heat_w": 20000,
+        "rating_condition_reference": "Fictional rated ambient condition"
+      }
+    ]
+  }
+}

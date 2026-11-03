@@ -14,6 +14,10 @@ BASIS = {
 
 
 def medical_gas(data):
+    return _gas_network(data)
+
+
+def _gas_network(data, *, agss=False):
     fields(data, 'source_id standard_basis standard_edition precedence_reference service mode '
         'gas_constant_j_kgk gas_temperature_k compressibility heat_capacity_ratio '
         'reference_pressure_absolute_kpa reference_temperature_k reference_compressibility '
@@ -25,9 +29,10 @@ def medical_gas(data):
         raise ValueError('Select HTM_02_01, SBC_NFPA_99 or ISO_7396_1; standards are not interchangeable')
     edition = text(data, 'standard_edition'); precedence = text(data, 'precedence_reference')
     service = text(data, 'service')
-    if service.upper() in ('AGSS', 'N2O', 'CO2'):
+    if service.upper() in ('N2O', 'CO2') or service.upper()=='AGSS' and not agss:
         raise ValueError('AGSS and liquefiable-gas services require a service-specific validated model; not supported here')
     mode = data.get('mode')
+    if agss and (service!='AGSS' or mode!='vacuum'):raise ValueError('AGSS calculation requires explicit AGSS service and vacuum mode')
     if mode not in ('pressure', 'vacuum'): raise ValueError('mode must be pressure or vacuum')
     r = num(data, 'gas_constant_j_kgk', positive=True)
     temp = num(data, 'gas_temperature_k', positive=True)

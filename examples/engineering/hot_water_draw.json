@@ -1,0 +1,86 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "hot_water_draw",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "EXPERIMENTAL fictional software example. Not an adopted code/manufacturer/clinical result.",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "duration_s": 10,
+    "maximum_step_s": 0.1,
+    "report_step_s": 1,
+    "density_kg_m3": 1000,
+    "specific_heat_j_kgk": 4000,
+    "cold_temperature_c": 20,
+    "tank_ambient_c": 20,
+    "layer_conductance_w_k": 0,
+    "heater_on_below_c": 55,
+    "heater_off_above_c": 65,
+    "heater_sensor_layer": 0,
+    "minimum_storage_c": 40,
+    "hygiene_band_low_c": 20,
+    "hygiene_band_high_c": 45,
+    "disinfection_temperature_c": 45,
+    "required_dwell_s": 5,
+    "maximum_water_age_s": 100,
+    "minimum_delivered_fraction": 1,
+    "layers": [
+      {
+        "id": "BOTTOM",
+        "source_id": "SYN",
+        "volume_l": 100,
+        "initial_temperature_c": 60,
+        "initial_age_s": 0,
+        "heater_power_w": 0,
+        "ua_w_k": 0
+      },
+      {
+        "id": "TOP",
+        "source_id": "SYN",
+        "volume_l": 100,
+        "initial_temperature_c": 60,
+        "initial_age_s": 0,
+        "heater_power_w": 0,
+        "ua_w_k": 0
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "SHOWER",
+        "source_id": "SYN",
+        "hot_line_volume_l": 1,
+        "cells": 2,
+        "initial_temperature_c": 60,
+        "initial_age_s": 0,
+        "ua_w_k": 0,
+        "ambient_c": 20,
+        "target_temperature_c": 40,
+        "scald_limit_c": 44,
+        "minimum_delivery_c": 39,
+        "response_time_s": 0,
+        "initial_hot_fraction": 0.5,
+        "cold_failure_close_s": 0
+      }
+    ],
+    "events": [
+      {
+        "fixture": "SHOWER",
+        "source_id": "SYN",
+        "start_s": 0,
+        "end_s": 10,
+        "mixed_flow_lps": 0.1,
+        "cold_available": true
+      }
+    ]
+  }
+}

@@ -1,5 +1,7 @@
 # Extended plumbing calculations and medical gases
 
+This guide describes the original extended scopes. The next eight experimental methods for coupling, frame/vibration, tank draws, AGSS/inventory/evidence and zones are described in [the coupled research guide](COUPLED_RESEARCH.md). There are now 30 registered module scopes and 55 frozen software reference candidates; engineering acceptance remains pending.
+
 Engineering review build. The added methods have synthetic analytical/regression checks; they have **not** been independently accepted for real-project design. The nominated BIM MANAGER review remains pending signed engineering evidence and applicable credentials. No numerical standard is adopted merely by selecting its title.
 
 ## Workflow
@@ -102,4 +104,4 @@ python -m tools.validate_engineering
 python -m pytest tests/test_engineering_modules.py tests/test_engineering_modules_ui.py tests/test_advanced_engineering.py tests/test_formula_extensions.py -q
 ```
 
-The optional native toolkit is pinned to `swmm-toolkit==0.17.0`; the local executed engine reported SWMM `52004` (5.2.4). Examples and references contain fictional data only. Frozen references now include 41 author-prepared candidates; they are not signed independent engineering results. Existing tree/EPANET regression checks remain unchanged. Independent project references and documented source/engineering acceptance are required before any verified release.
+The optional native toolkit is pinned to `swmm-toolkit==0.17.0`; the local executed engine reported SWMM `52004` (5.2.4). Examples and references contain fictional data only. The original 41 references are preserved in the expanded 55 author-prepared candidates; they are not signed independent engineering results. Existing tree/EPANET regression checks remain unchanged. Independent project references and documented source/engineering acceptance are required before any verified release.

@@ -90,12 +90,48 @@ MODULES=[
     ['Reviewed cold/hot densities, system volume and material expansion coefficient','Temperatures, vessel precharge/cold fill/maximum/atmospheric pressure and gas exponent'],['Relief margin, membrane/usable acceptance, glycol corrections and pipe restraint/flexibility'],
     'https://www.varem.com/en/technical-support/sizing-heating-expansion-vessels-vessels/'),
 ]
+EXPERIMENTAL=[
+ module('coupled_drainage',5,'Coupled drainage: liquid, air and dilute solids','Reduced-order conservative liquid storage/momentum, compressible air, open vents/AAVs, trap feedback and empirical solids exchange.',
+    ['Submerged liquid-link/chamber geometry, gas state and initial liquid/solids inventory','Measured vent resistance, deposition/resuspension rates, trap geometry and independent event hydrographs'],
+    ['Annular/slug/free-surface transitions, vertical entrainment closure, pipe beds/blockage, distributed air waves and complete vent-code approval'],
+    'https://researchportal.hw.ac.uk/en/publications/numerical-modelling-of-air-pressure-transient-propagation-in-buil/'),
+ module('piping_flexibility',12,'3D pipe-frame flexibility prototype','Linear six-DOF straight-element pipe frame with axial/bending/torsion, thermal strain, loads, gravity, supports and springs.',
+    ['3D coordinates/connectivity, actual sections and material properties at temperature','Loads, restraints/settlements, spring stiffness, temperature changes and reviewed allowables'],
+    ['Elbow ovalization/flexibility, pressure-thrust/Poisson displacement coupling, nonlinear supports, fatigue/buckling and certified code stress categories'],
+    'https://doc.comsol.com/6.3/doc/com.comsol.help.sme/sme_ug_theory.06.163.html'),
+ module('structure_borne',12,'Structure-borne frame/acoustic path prototype','Harmonic frame mobility, explicit lumped inertia/Rayleigh damping and supplied radiator coupling to airborne receiver levels.',
+    ['Measured RMS excitation phasors, support/frame model and complete nodal inertias','Calibrated damping/radiation efficiency, receiver and room/path transfer data'],
+    ['Full building flanking/shell-mode networks, nonlinear contacts, stochastic excitation and certified noise prediction'],
+    'https://www.comsol.com/pipe-flow-module'),
+ module('hot_water_draw',3,'Stratified storage, fixture draws and TMV protection','Conservative tank/line thermal advection, inversion mixing, heater control, TMV response/cold-loss closure, water age and exposure indicators.',
+    ['Tank layers, heater/UA/conduction, cold supply, real fixture draw events and hot-line inventory','Measured TMV response/shutoff data and applicable storage/delivery/scald/hygiene criteria'],
+    ['Pathogen growth/kill certification, real valve reliability, hydraulic pressure/capacity and clinical hygiene approval'],
+    'https://www.hse.gov.uk/legionnaires/hot-and-cold.htm'),
+ module('agss_network',11,'AGSS plant and terminal-interface checks','Service-specific isothermal air-network approximation plus attributed interface flow/suction/listing and exhaust evidence.',
+    ['Explicit AGSS reference flow, plant conditions and hydraulic model','Manufacturer interface limits/listing, exhaust routing and commissioning measurements'],
+    ['Patient breathing-circuit safety, capture/dispersion/exposure prediction and certified scavenging performance'],
+    'https://www.england.nhs.uk/publication/health-technical-memorandum-02-01-medical-gas-pipeline-systems/'),
+ module('liquid_gas_inventory',11,'Liquefied-gas inventory and vaporization','Source-bound usable inventory/reference gas, boiloff energy budget, reserve duration and vaporizer N+1 capacity.',
+    ['Supplier-approved service-specific densities, latent heat, fill/reserve and demand','Condition-rated mass/heat vaporizer capacities and supplier authorization'],
+    ['Two-phase pipe/phase-equilibrium, icing/ambient de-rating, oxygen compatibility, relief/site risk and certified liquid-source plant design'],
+    'https://www.england.nhs.uk/publication/health-technical-memorandum-02-01-medical-gas-pipeline-systems/'),
+ module('medical_commissioning',11,'Medical-gas commissioning evidence and quality tests','Declared test-scope audit of measurements, units/methods/locations, uncertainty, calibration validity, system revision and role signoffs.',
+    ['Adopted standard/edition, complete project test matrix and laboratory/clinical criteria','Actual identity/cross-connection/leakage/quality/plant/AGSS reports and authorized signoffs'],
+    ['Issuing certificates, proving actual test execution, laboratory accreditation, professional authority and unmeasured gas quality'],
+    'https://www.england.nhs.uk/publication/health-technical-memorandum-02-01-medical-gas-pipeline-systems/'),
+ module('pressure_zones',1,'Pressure-zone and demand-service engineering review','Hash-matched hydraulic report audit for zone pressure envelopes, boundary controls, delivered demand and PDA-profile representability.',
+    ['Normalized network, converged time-stamped EPANET report and source/min-max scenarios','Explicit zone memberships, boundaries, calibrated PDA curves and service criteria'],
+    ['Heterogeneous per-zone PDA in EPANET 2.2, post-solution flow patching, valve reliability and field calibration/engineering acceptance'],
+    'https://www.epa.gov/water-research/epanet'),
+]
+for metadata in EXPERIMENTAL:metadata['development_stage']='EXPERIMENTAL_RESEARCH_ENGINEERING_PENDING'
+MODULES.extend(EXPERIMENTAL)
 MODULES.sort(key=lambda value:value['priority'])
 
 
 def implementation_fingerprint():
     files={p.relative_to(ROOT).as_posix():hashlib.sha256(p.read_text(encoding='utf-8').encode()).hexdigest()
-        for p in sorted((ROOT/'engineering').glob('*.py'))}
+        for p in sorted([*(ROOT/'engineering').glob('*.py'),*(ROOT/'solvers').glob('*.py')])}
     return hashlib.sha256(json.dumps(files,sort_keys=True).encode()).hexdigest()
 
 

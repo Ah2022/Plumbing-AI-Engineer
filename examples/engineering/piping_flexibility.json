@@ -1,0 +1,113 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "piping_flexibility",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "EXPERIMENTAL fictional software example. Not an adopted code/manufacturer/clinical result.",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "frame": {
+      "nodes": [
+        {
+          "id": "A",
+          "source_id": "SYN",
+          "x_m": 0,
+          "y_m": 0,
+          "z_m": 0
+        },
+        {
+          "id": "B",
+          "source_id": "SYN",
+          "x_m": 2,
+          "y_m": 0,
+          "z_m": 0
+        }
+      ],
+      "elements": [
+        {
+          "id": "E1",
+          "source_id": "SYN",
+          "from_node": "A",
+          "to_node": "B",
+          "internal_mm": 80,
+          "external_mm": 100,
+          "youngs_modulus_mpa": 200000,
+          "poisson_ratio": 0.3,
+          "density_kg_m3": 7800,
+          "fluid_density_kg_m3": 1000,
+          "alpha_per_k": 1.2e-05,
+          "temperature_change_k": 0,
+          "stress_intensification": 1,
+          "internal_gauge_kpa": 0
+        }
+      ],
+      "constraints": [
+        {
+          "node": "A",
+          "dof": "ux",
+          "value": 0,
+          "source_id": "SYN"
+        },
+        {
+          "node": "A",
+          "dof": "uy",
+          "value": 0,
+          "source_id": "SYN"
+        },
+        {
+          "node": "A",
+          "dof": "uz",
+          "value": 0,
+          "source_id": "SYN"
+        },
+        {
+          "node": "A",
+          "dof": "rx",
+          "value": 0,
+          "source_id": "SYN"
+        },
+        {
+          "node": "A",
+          "dof": "ry",
+          "value": 0,
+          "source_id": "SYN"
+        },
+        {
+          "node": "A",
+          "dof": "rz",
+          "value": 0,
+          "source_id": "SYN"
+        }
+      ],
+      "springs": [],
+      "loads": [
+        {
+          "node": "B",
+          "source_id": "SYN",
+          "fx_n": 0,
+          "fy_n": 100,
+          "fz_n": 0,
+          "mx_nm": 0,
+          "my_nm": 0,
+          "mz_nm": 0
+        }
+      ],
+      "gravity_x_m_s2": 0,
+      "gravity_y_m_s2": 0,
+      "gravity_z_m_s2": 0
+    },
+    "allowable_stress_mpa": 200,
+    "maximum_translation_mm": 10,
+    "maximum_rotation_rad": 0.05
+  }
+}

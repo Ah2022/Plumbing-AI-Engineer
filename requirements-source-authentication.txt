@@ -1,0 +1,5 @@
+# Optional detached manufacturer/reviewer source-attestation verification.
+# Public keys must be independently enrolled in the server-owned trust store.
+cryptography==50.0.2
+cffi==2.1.1
+pycparser==3.12

@@ -1,0 +1,186 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "pressure_zones",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "EXPERIMENTAL fictional software example. Not an adopted code/manufacturer/clinical result.",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "model": {
+      "schema_version": "pressure-network-1",
+      "units": "SI",
+      "code_id": "IPC",
+      "basis_reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+      "nodes": [
+        {
+          "id": "S",
+          "kind": "source",
+          "elevation_m": 0,
+          "head_m": 40,
+          "reference": "Synthetic Phase2A software example; project/code/manufacturer review required"
+        },
+        {
+          "id": "A",
+          "kind": "junction",
+          "elevation_m": 0,
+          "demand_lps": 2,
+          "required_pressure_m": 20,
+          "demand_reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+          "reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+          "fire_demand_lps": 0
+        }
+      ],
+      "links": [
+        {
+          "id": "P1",
+          "kind": "pipe",
+          "from_node": "S",
+          "to_node": "A",
+          "length_m": 100,
+          "internal_mm": 50,
+          "roughness": 140,
+          "roughness_unit": "C",
+          "minor_loss_k": 1,
+          "reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+          "status": "OPEN"
+        }
+      ],
+      "demand_model": {
+        "type": "PDA",
+        "minimum_pressure_m": 0,
+        "required_pressure_m": 20,
+        "exponent": 0.5,
+        "reference": "Synthetic Phase2A software example; project/code/manufacturer review required"
+      },
+      "controls": [],
+      "curves": {},
+      "patterns": {},
+      "simulation": {
+        "duration_s": 0,
+        "hydraulic_step_s": 3600,
+        "pattern_step_s": 3600,
+        "trials": 100,
+        "headloss": "H-W",
+        "accuracy": 1e-06
+      },
+      "scenarios": []
+    },
+    "solver_report": {
+      "schema_version": "pressure-network-result-1",
+      "backend": "epanet",
+      "normalized_model": {
+        "schema_version": "pressure-network-1",
+        "units": "SI",
+        "code_id": "IPC",
+        "basis_reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+        "nodes": [
+          {
+            "id": "S",
+            "kind": "source",
+            "elevation_m": 0,
+            "head_m": 40,
+            "reference": "Synthetic Phase2A software example; project/code/manufacturer review required"
+          },
+          {
+            "id": "A",
+            "kind": "junction",
+            "elevation_m": 0,
+            "demand_lps": 2,
+            "required_pressure_m": 20,
+            "demand_reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+            "reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+            "fire_demand_lps": 0
+          }
+        ],
+        "links": [
+          {
+            "id": "P1",
+            "kind": "pipe",
+            "from_node": "S",
+            "to_node": "A",
+            "length_m": 100,
+            "internal_mm": 50,
+            "roughness": 140,
+            "roughness_unit": "C",
+            "minor_loss_k": 1,
+            "reference": "Synthetic Phase2A software example; project/code/manufacturer review required",
+            "status": "OPEN"
+          }
+        ],
+        "demand_model": {
+          "type": "PDA",
+          "minimum_pressure_m": 0,
+          "required_pressure_m": 20,
+          "exponent": 0.5,
+          "reference": "Synthetic Phase2A software example; project/code/manufacturer review required"
+        },
+        "controls": [],
+        "curves": {},
+        "patterns": {},
+        "simulation": {
+          "duration_s": 0,
+          "hydraulic_step_s": 3600,
+          "pattern_step_s": 3600,
+          "trials": 100,
+          "headloss": "H-W",
+          "accuracy": 1e-06
+        },
+        "scenarios": []
+      },
+      "input_sha256": "8ac24b07cd8471905557faaa88777fe325578f66bf9cab3a2c185c8c23314599",
+      "complete": true,
+      "solver_status": "CONVERGED",
+      "diagnostics": [],
+      "snapshots": [
+        {
+          "time_s": 0,
+          "nodes": [
+            {
+              "node_id": "S",
+              "kind": "source",
+              "head_m": 40
+            },
+            {
+              "node_id": "A",
+              "kind": "junction",
+              "head_m": 37.47982418455974,
+              "pressure_m": 37.47982418455974,
+              "requested_demand_lps": 2,
+              "delivered_demand_lps": 2.0
+            }
+          ]
+        }
+      ]
+    },
+    "pressure_tolerance_m": 0.001,
+    "flow_tolerance_lps": 0.0001,
+    "zones": [
+      {
+        "id": "Z1",
+        "source_id": "SYN",
+        "nodes": [
+          "S",
+          "A"
+        ],
+        "minimum_supply_m": 20,
+        "maximum_supply_m": 60,
+        "minimum_delivered_fraction": 1,
+        "pda_minimum_m": 0,
+        "pda_required_m": 20,
+        "pda_exponent": 0.5,
+        "calibration_reference": "Fictional global PDA demonstration, no field calibration"
+      }
+    ],
+    "boundaries": []
+  }
+}

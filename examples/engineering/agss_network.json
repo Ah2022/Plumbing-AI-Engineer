@@ -1,0 +1,104 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "agss_network",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "EXPERIMENTAL fictional software example. Not an adopted code/manufacturer/clinical result.",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "network": {
+      "standard_basis": "HTM_02_01",
+      "standard_edition": "PROJECT ADOPTION PENDING; enter adopted edition",
+      "precedence_reference": "Fictional software example. No numerical HTM/NFPA/ISO rule is implied.",
+      "service": "AGSS",
+      "mode": "vacuum",
+      "gas_constant_j_kgk": 300,
+      "gas_temperature_k": 300,
+      "compressibility": 1,
+      "heat_capacity_ratio": 1.4,
+      "reference_pressure_absolute_kpa": 100,
+      "reference_temperature_k": 300,
+      "reference_compressibility": 1,
+      "atmospheric_pressure_kpa": 100,
+      "source_pressure_absolute_kpa": 99,
+      "source_node": "S",
+      "minimum_terminal_absolute_kpa": 98,
+      "maximum_terminal_absolute_kpa": 100,
+      "maximum_velocity_m_s": 30,
+      "maximum_mach": 0.3,
+      "nodes": [
+        {
+          "id": "S",
+          "source_id": "SYN"
+        },
+        {
+          "id": "A",
+          "source_id": "SYN"
+        }
+      ],
+      "pipes": [
+        {
+          "id": "P1",
+          "source_id": "SYN",
+          "from_node": "S",
+          "to_node": "A",
+          "length_m": 10,
+          "internal_mm": 20,
+          "friction_factor": 0.02,
+          "fittings_k": 0
+        }
+      ],
+      "demand_groups": [
+        {
+          "id": "WARD",
+          "source_id": "SYN",
+          "node": "A",
+          "clinical_position": "Fictional clinical position, not an adopted demand",
+          "positions": 1,
+          "flow_per_position_lpm": 60,
+          "diversity": 1,
+          "continuous_lpm": 0
+        }
+      ],
+      "plant_units": [
+        {
+          "id": "PLANT1",
+          "source_id": "SYN",
+          "reference_capacity_lpm": 200,
+          "available": true
+        },
+        {
+          "id": "PLANT2",
+          "source_id": "SYN",
+          "reference_capacity_lpm": 200,
+          "available": true
+        }
+      ],
+      "required_reserve_min": 5,
+      "reserve_standard_l": 1200,
+      "source_id": "SYN"
+    },
+    "interfaces": [
+      {
+        "node": "A",
+        "source_id": "SYN",
+        "minimum_reference_flow_lpm": 50,
+        "maximum_reference_flow_lpm": 70,
+        "minimum_suction_kpa": 0.5,
+        "maximum_suction_kpa": 1.5,
+        "interface_listing_reference": "Fictional interface criteria; not a manufacturer listing"
+      }
+    ],
+    "exhaust_evidence_reference": "Fictional routing record; review pending"
+  }
+}

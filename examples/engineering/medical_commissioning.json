@@ -1,0 +1,80 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "medical_commissioning",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "EXPERIMENTAL fictional software example. Not an adopted code/manufacturer/clinical result.",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "standard_reference": "Declared HTM/ISO project test scope, not a standard-completeness assertion",
+    "adopted_edition": "PROJECT ADOPTION PENDING",
+    "system_revision": "SYN-R1",
+    "evaluation_date": "2026-11-03",
+    "required_tests": [
+      {
+        "id": "O2-ID",
+        "source_id": "SYN",
+        "kind": "gas_quality",
+        "location": "TEST-OUTLET",
+        "unit": "percent",
+        "minimum": 99,
+        "maximum": 100,
+        "maximum_uncertainty": 0.1,
+        "required_method": "Fictional laboratory method"
+      }
+    ],
+    "measurements": [
+      {
+        "test_id": "O2-ID",
+        "source_id": "SYN",
+        "value": 99.5,
+        "uncertainty": 0.1,
+        "unit": "percent",
+        "method": "Fictional laboratory method",
+        "location": "TEST-OUTLET",
+        "system_revision": "SYN-R1",
+        "measured_on": "2026-11-01",
+        "calibration_valid_until": "2027-01-01",
+        "operator": "Fictional operator",
+        "laboratory": "Fictional laboratory",
+        "evidence_reference": "Fictional report; not clinical evidence"
+      }
+    ],
+    "required_roles": [
+      "AP_MGPS",
+      "QC"
+    ],
+    "signoffs": [
+      {
+        "role": "AP_MGPS",
+        "source_id": "SYN",
+        "name": "Fictional AP_MGPS",
+        "credential_reference": "Example only",
+        "appointment_reference": "Example only",
+        "system_revision": "SYN-R1",
+        "signed_on": "2026-11-02",
+        "evidence_reference": "No genuine appointment/signature is represented"
+      },
+      {
+        "role": "QC",
+        "source_id": "SYN",
+        "name": "Fictional QC",
+        "credential_reference": "Example only",
+        "appointment_reference": "Example only",
+        "system_revision": "SYN-R1",
+        "signed_on": "2026-11-02",
+        "evidence_reference": "No genuine appointment/signature is represented"
+      }
+    ]
+  }
+}

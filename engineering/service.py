@@ -16,6 +16,12 @@ from engineering.recirculation_network import recirculation_network
 from engineering.transients import network_transient
 from engineering.acoustic_structural import acoustic_prediction,pipe_stress,relief_selection
 from engineering.drainage_air import drainage_air
+from engineering.coupled_drainage import coupled_drainage
+from engineering.pipe_frame import piping_flexibility,structure_borne
+from engineering.hot_water_draw import hot_water_draw
+from engineering.medical_evidence import agss_network,liquid_gas_inventory,medical_commissioning
+from engineering.pressure_zones import pressure_zones
+from engineering.source_authentication import verify_package_sources
 
 METHODS={'pump_system':operating_point,'recirculation':recirculation,'fixture_minimum':fixture_minimum,
     'gravity_flow':gravity_flow,'trap_pressure':trap_pressure,'vent_arrangement':vent_arrangement,
@@ -23,14 +29,16 @@ METHODS={'pump_system':operating_point,'recirculation':recirculation,'fixture_mi
     'equipment_selection':equipment_selection,'noise_screen':noise_screen,'water_hammer':water_hammer,'thermal_expansion':thermal_expansion,
     'medical_gas':medical_gas,'dynamic_drainage':dynamic_drainage,'recirculation_network':recirculation_network,
     'network_transient':network_transient,'acoustic_prediction':acoustic_prediction,'pipe_stress':pipe_stress,'relief_selection':relief_selection,
-    'drainage_air':drainage_air}
+    'drainage_air':drainage_air,'coupled_drainage':coupled_drainage,'piping_flexibility':piping_flexibility,
+    'structure_borne':structure_borne,'hot_water_draw':hot_water_draw,'agss_network':agss_network,
+    'liquid_gas_inventory':liquid_gas_inventory,'medical_commissioning':medical_commissioning,'pressure_zones':pressure_zones}
 
 
 def digest(value):return hashlib.sha256(json.dumps(value,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()
 
 
 def validate_envelope(package):
-    fields(package,'schema_version module code_id code_edition basis_reference sources data')
+    fields(package,'schema_version module code_id code_edition basis_reference sources data source_attestations')
     if package.get('schema_version')!='engineering-input-1' or package.get('module') not in METHODS:raise ValueError('Unsupported engineering input version/module')
     for field in ('code_id','code_edition','basis_reference'):text(package,field)
     sources=package.get('sources')
@@ -58,6 +66,7 @@ def validate_envelope(package):
         elif isinstance(value,list):
             for child in value:walk(child)
     walk(data);digest(package)
+    if package['module']=='pressure_zones' and data.get('model',{}).get('code_id')!=package['code_id']:raise ValueError('Pressure-zone network code must match the engineering package/project code')
     if package['module'] in ('equipment_selection','relief_selection'):
         for row in data.get('catalogue',[]):
             if not isinstance(row,dict) or row.get('source_id') not in byid:raise ValueError('Each catalogue entry needs its own source binding')
@@ -67,6 +76,7 @@ def validate_envelope(package):
 
 def run_module(package):
     package=validate_envelope(package);metadata=next(m for m in MODULES if m['id']==package['module'])
+    authenticated=verify_package_sources(package)
     try:output=METHODS[package['module']](package['data']);digest(output)
     except ArithmeticError as error:raise ValueError('Inputs exceed the supported numerical domain') from error
     statuses=[c['status'] for c in output['checks']]
@@ -75,5 +85,7 @@ def run_module(package):
         review_status='REVIEW_REQUIRED',code_compliance_status='NOT_EVALUATED',coverage_status='PARTIAL',
         input_sha256=digest(package),input_package=package,scope=metadata['scope'],required_source_data=metadata['required_source_data'],
         not_evaluated=metadata['not_evaluated'],validation_status=metadata['validation_status'],
+        development_stage=metadata.get('development_stage','SCOPED_ENGINEERING_REVIEW_BUILD'),
         source_status='SYNTHETIC' if any(s['type']=='SYNTHETIC' for s in package['sources']) else 'UNVERIFIED' if any(s['verification_status']=='UNVERIFIED' for s in package['sources']) else 'REVIEWED_AS_REPORTED',
+        source_authentication=authenticated,
         **output)

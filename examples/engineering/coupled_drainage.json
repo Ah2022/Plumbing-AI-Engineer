@@ -1,0 +1,67 @@
+{
+  "schema_version": "engineering-input-1",
+  "module": "coupled_drainage",
+  "code_id": "IPC",
+  "code_edition": "2024",
+  "basis_reference": "EXPERIMENTAL fictional software example. Not an adopted code/manufacturer/clinical result.",
+  "sources": [
+    {
+      "id": "SYN",
+      "type": "SYNTHETIC",
+      "document": "Explicit fictional engineering inputs; not a code/manufacturer dataset",
+      "revision": "candidate-1",
+      "locator": "This complete input package and its independently prepared arithmetic reference",
+      "verification_status": "UNVERIFIED"
+    }
+  ],
+  "data": {
+    "source_id": "SYN",
+    "density_kg_m3": 1000,
+    "air_constant_j_kgk": 287,
+    "atmospheric_kpa": 100,
+    "duration_s": 1,
+    "maximum_step_s": 0.01,
+    "report_step_s": 0.1,
+    "maximum_air_gauge_pa": 1000,
+    "maximum_concentration_kg_m3": 10,
+    "nodes": [
+      {
+        "id": "C1",
+        "source_id": "SYN",
+        "kind": "chamber",
+        "invert_m": 0,
+        "area_m2": 1,
+        "total_volume_m3": 1,
+        "initial_liquid_m3": 0.5,
+        "initial_air_absolute_kpa": 100,
+        "air_temperature_k": 300,
+        "initial_concentration_kg_m3": 1,
+        "initial_bed_kg": 0,
+        "settling_rate_per_s": 0,
+        "resuspension_rate_per_s": 0,
+        "resuspension_velocity_m_s": 1
+      }
+    ],
+    "pipes": [],
+    "vents": [],
+    "traps": [],
+    "inflows": [
+      {
+        "id": "IN",
+        "source_id": "SYN",
+        "node": "C1",
+        "concentration_kg_m3": 2,
+        "hydrograph": [
+          {
+            "time_s": 0,
+            "flow_lps": 1
+          },
+          {
+            "time_s": 1,
+            "flow_lps": 1
+          }
+        ]
+      }
+    ]
+  }
+}

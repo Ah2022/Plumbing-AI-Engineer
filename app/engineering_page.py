@@ -92,6 +92,8 @@ def page_engineering_modules():
     chosen=st.selectbox('Engineering module',list(lookup),format_func=lambda k:f"{lookup[k]['priority']}. {lookup[k]['title']}",key='engineering_module_choice')
     metadata=lookup[chosen]
     st.subheader(metadata['title'])
+    if metadata.get('development_stage'):
+        st.warning('Experimental research implementation. Analytical software checks are available; laboratory, manufacturer and independent engineering validation remain pending. Read the limits before interpreting results.')
     st.write('Calculation scope: '+metadata['scope'])
     st.caption('Validation: software reference checks passed; independent engineering acceptance pending.' if metadata['available']
         else 'Validation: matching reference evidence is missing or stale; calculation controls are disabled.')
@@ -108,6 +110,12 @@ def page_engineering_modules():
     scope=f'engineering_{pid}_{project["code_id"]}_{project["code_edition"]}_{revision}_{chosen}'
     template=json.loads((ROOT/'examples/engineering'/f'{chosen}.json').read_text(encoding='utf-8'))
     template.update(code_id=project['code_id'],code_edition=project['code_edition'] or template['code_edition'])
+    if chosen=='pressure_zones':
+        from solvers.graph import normalize_graph
+        from solvers.service import fingerprint
+        template['data']['model']['code_id']=project['code_id']
+        normalized,_=normalize_graph(template['data']['model'])
+        template['data']['solver_report'].update(normalized_model=normalized,input_sha256=fingerprint(normalized))
     upload=st.file_uploader('Upload engineering input package (including catalogue sources)',type=['json'],max_upload_size=10,key=scope+'_upload')
     try:
         package=json.loads(upload.getvalue().decode('utf-8-sig')) if upload else deepcopy(template)
@@ -131,11 +139,39 @@ def page_engineering_modules():
         st.caption('Source records — reviewer status is recorded as supplied; no authentication or engineering approval is inferred.')
         source_frame=st.data_editor(pd.DataFrame(package['sources']),num_rows='dynamic',key=key+'_sources',width='stretch',alt='Explicit calculation source documents, revisions, locators and supplied verification states')
         package['sources']=[clean(row) for row in source_frame.to_dict('records')]
-        mode=st.radio('Engineering input method',['Interactive fields and tables','Structured input JSON'],horizontal=True,key=key+'_mode')
+        modes=['Structured input JSON','Interactive fields and tables'] if chosen=='pressure_zones' else ['Interactive fields and tables','Structured input JSON']
+        mode=st.radio('Engineering input method',modes,horizontal=True,key=key+'_mode')
         if mode=='Interactive fields and tables':
             with st.expander('Calculation inputs',expanded=True):package['data']=edit_data(package['data'],key+'_data')
         else:
             package['data']=json.loads(st.text_area('Engineering calculation data (JSON)',json.dumps(package['data'],indent=2),height=320,key=key+'_raw'))
+        if chosen in ('equipment_selection','relief_selection','liquid_gas_inventory'):
+            from engineering.source_authentication import source_payload,canonical
+            import base64
+            with st.expander('Authenticate source document and numerical data'):
+                st.caption('Verification requires a detached Ed25519 attestation and an independently enrolled server trust key. A checksum alone does not authenticate a manufacturer, and reviewer attestations remain distinct from manufacturer releases. Maximum source document size: 2 MB.')
+                ids=sorted({r['source_id'] for r in package['data'].get('vaporizers' if chosen=='liquid_gas_inventory' else 'catalogue',[])})
+                if ids:
+                    source_id=st.selectbox('Source to authenticate',ids,key=scope+'_auth_source')
+                    st.download_button('Download exact source/data signing payload',canonical(source_payload(package,source_id)),file_name='source-data-payload.json',mime='application/json')
+                    attfile=st.file_uploader('Detached source attestation (JSON)',type=['json'],max_upload_size=1,key=scope+'_attestation')
+                    docfile=st.file_uploader('Attested source document',type=['pdf','json','csv','txt'],max_upload_size=2,key=scope+'_attested_document')
+                    if attfile:
+                        att=json.loads(attfile.getvalue().decode('utf-8-sig'))
+                        if not isinstance(att,dict) or att.get('source_id')!=source_id:raise ValueError('Attestation source_id must match the selected source')
+                        if not docfile:raise ValueError('Attach the exact source document named by the signed checksum')
+                        att['document_base64']=base64.b64encode(docfile.getvalue()).decode('ascii')
+                        package['source_attestations']=[a for a in package.get('source_attestations',[]) if a.get('source_id')!=source_id]+[att]
+        if chosen=='pressure_zones':
+            from solvers.service import solve_network
+            modeltoken=digest(package['data']['model'])
+            st.caption('The bundled report is an explicitly fictional hand reference. Regenerate a native EPANET report after editing the network. No delivered flow is adjusted after hydraulic solution.')
+            if st.button('Solve current model with EPANET for zone review',key=scope+'_native_zones'):
+                native=solve_network(package['data']['model'],backend='epanet')
+                st.session_state[scope+'_native_zone_report']=(modeltoken,native)
+                if not native.get('complete'):st.error('EPANET did not complete: '+str(native.get('diagnostics',[])))
+            cached=st.session_state.get(scope+'_native_zone_report')
+            if cached and cached[0]==modeltoken:package['data']['solver_report']=cached[1]
         package=validate_envelope(package)
         if package['code_id']!=project['code_id'] or project['code_edition'] and package['code_edition']!=project['code_edition']:raise ValueError('Input code/edition must match the active project basis')
     except (ValueError,TypeError,KeyError,UnicodeError) as error:
@@ -152,6 +188,9 @@ def page_engineering_modules():
         st.metric('Supplied-criteria technical result',report['technical_status'])
         source_label={'SYNTHETIC':'fictional software example','UNVERIFIED':'unverified source records','REVIEWED_AS_REPORTED':'reviewed as reported by the source provider'}[report['source_status']]
         st.caption('Sources: '+source_label+'. Engineering review required. Code compliance not evaluated. Calculation scope is partial.')
+        auth=report.get('source_authentication',{})
+        st.caption('Source authentication: '+auth.get('status','NOT_PROVIDED')+'. Signer role and content integrity do not confer engineering acceptance.')
+        if auth.get('sources'):st.dataframe(auth['sources'],width='stretch',alt='Authenticated source IDs, signer roles, document/data checksums and explicit trust limitations')
         st.dataframe([{'Result':label(k),'Value':str(v),'Unit':report['units'][k]} for k,v in report['values'].items()],width='stretch',alt='Calculated engineering values with explicit units')
         if report['checks']:st.dataframe([dict(c,actual=json.dumps(c['actual']),limit=json.dumps(c['limit'])) for c in report['checks']],width='stretch',alt='Each supplied engineering criterion, comparison, status and source binding')
         if report['trace']:
@@ -164,6 +203,14 @@ def page_engineering_modules():
             if chosen=='recirculation_network':
                 times=frame[frame['kind']=='time']
                 st.line_chart(times,x='time_s',y=['return_temperature_c','minimum_water_temperature_c'],alt='Recirculation return and minimum distribution temperatures over time')
+            if chosen in ('coupled_drainage','hot_water_draw','pressure_zones'):
+                kind={'coupled_drainage':'chamber','hot_water_draw':'layer','pressure_zones':'zone_service'}[chosen]
+                values=frame[frame['kind']==kind]
+                if not values.empty:
+                    selected=st.selectbox('Research result object',list(values['id'].unique()),key=scope+'_research_trace_object')
+                    values=values[values['id']==selected]
+                    column={'coupled_drainage':'air_gauge_pa','hot_water_draw':'temperature_c','pressure_zones':'pressure_m'}[chosen]
+                    st.line_chart(values,x='time_s',y=column,alt='Selected experimental model object result over time; declared units and limits apply')
             if chosen in ('network_transient','dynamic_drainage','drainage_air'):
                 kind='node' if chosen=='network_transient' else 'air_node' if chosen=='drainage_air' else 'pipe'
                 values=frame[frame['kind']==kind]

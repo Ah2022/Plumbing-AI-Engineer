@@ -115,3 +115,35 @@ def test_ipc2024_fixture_list_exposes_receptor_evidence_and_full_register(fresh_
     fixture.set_value(13)
     next(b for b in at.button if b.label=='Add fixture').click().run(timeout=30)
     assert at.error and next(m for m in at.metric if m.label=='Total DFU').value=='0'
+
+
+@pytest.mark.parametrize('identity',['coupled_drainage','hot_water_draw','piping_flexibility','structure_borne','agss_network','liquid_gas_inventory','medical_commissioning','pressure_zones'])
+def test_research_scope_is_explicit_before_inputs(fresh_app,identity):
+    at=open_modules(fresh_app,identity)
+    assert any('Experimental research implementation' in str(w.value) for w in at.warning)
+    assert any('Unevaluated scope:' in str(m.value) for m in at.markdown)
+
+
+def test_pressure_zone_native_report_action_and_pending_governance(fresh_app,monkeypatch):
+    import copy
+    from tests.test_coupled_research import example
+    native=example('pressure_zones')['data']['solver_report']
+    def solve(model,**kwargs):
+        from solvers.graph import normalize_graph
+        from solvers.service import fingerprint
+        report=copy.deepcopy(native);model,_=normalize_graph(model)
+        report.update(normalized_model=model,input_sha256=fingerprint(model));return report
+    monkeypatch.setattr('solvers.service.solve_network',solve)
+    at=open_modules(fresh_app,'pressure_zones')
+    next(b for b in at.button if b.label=='Solve current model with EPANET for zone review').click().run(timeout=30)
+    next(b for b in at.button if b.label=='Calculate scoped engineering result').click().run(timeout=30)
+    assert not at.exception and not at.error
+    assert next(m for m in at.metric if m.label=='Supplied-criteria technical result').value=='PASS'
+    assert any('Code compliance not evaluated' in c.value for c in at.caption)
+
+
+@pytest.mark.parametrize('identity',['equipment_selection','relief_selection','liquid_gas_inventory'])
+def test_source_authentication_panel_explains_external_trust(fresh_app,identity):
+    at=open_modules(fresh_app,identity)
+    assert any('independently enrolled server trust key' in str(c.value) for c in at.caption)
+    assert any(b.label=='Download exact source/data signing payload' for b in at.get('download_button'))
