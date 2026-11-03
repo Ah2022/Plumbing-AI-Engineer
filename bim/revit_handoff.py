@@ -20,7 +20,7 @@ def checksum(value):
 def model_identity(doc):
     if getattr(doc, 'IsModelInCloud', False):
         path = doc.GetCloudModelPath()
-        return 'cloud:{}:{}'.format(path.GetProjectGUID(), doc.CloudModelGUID)
+        return 'cloud:{}:{}'.format(path.GetProjectGUID(), path.GetModelGUID())
     return '{}:{}'.format(doc.ProjectInformation.UniqueId, doc.PathName or 'unsaved')
 
 
@@ -102,6 +102,12 @@ def preflight_handoff(doc, DB, packet):
         element = doc.GetElement(unique_id) if isinstance(unique_id,str) and unique_id else None
         if element is None or str(element.Id.Value if hasattr(element.Id,'Value') else element.Id.IntegerValue) != eid:
             errors.append('{}: element identity no longer matches'.format(eid)); continue
+        if getattr(doc, 'IsWorkshared', False):
+            try:
+                if DB.WorksharingUtils.GetCheckoutStatus(doc, element.Id) == DB.CheckoutStatus.OwnedByOtherUser:
+                    errors.append('{}: element is owned by another worksharing user'.format(eid)); continue
+            except Exception as error:
+                errors.append('{}: worksharing ownership cannot be validated: {}'.format(eid,error)); continue
         source = update.get('source',{})
         if not isinstance(source,dict):
             raise ValueError('Handoff source evidence must be an object')
@@ -142,6 +148,10 @@ def preflight_handoff(doc, DB, packet):
             parameter = element.LookupParameter(name)
             if parameter is None or parameter.IsReadOnly or parameter.StorageType != expected:
                 errors.append('{}: missing, read-only or incorrectly typed {}'.format(eid,name)); continue
+            from bim.revit_bindings import validate_result_binding
+            binding_error = validate_result_binding(doc, DB, element, name, parameter)
+            if binding_error:
+                errors.append('{}: {}: {}'.format(eid, name, binding_error)); continue
             if name in NUMBER_FIELDS and parameter.Definition.GetDataType() != DB.SpecTypeId.Number:
                 errors.append('{}: {} must be a dimensionless Number parameter, not a native length/flow'.format(eid,name)); continue
             if name in TEXT_FIELDS and not isinstance(value,str):

@@ -1,0 +1,2 @@
+title: Native Evidence
+tooltip: Read the open model and loaded links, benchmark partitioned extraction, then test bindings, rollback, committed PLM writes and stale identities in a detached local copy. Never saves or syncs the open production model. Private evidence stays local.

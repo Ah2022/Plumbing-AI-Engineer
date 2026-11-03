@@ -50,6 +50,8 @@ class Parameter:
     def __init__(self,name):
         self.StorageType='String' if name in TEXT_FIELDS else 'Integer' if name in FLAG_FIELDS else 'Double'
         self.IsReadOnly=False; self.value='old' if self.StorageType=='String' else 99
+        from bim.revit_bindings import shared_parameter_guids
+        self.IsShared=True; self.GUID=shared_parameter_guids()[name]
         self.Definition=NS(GetDataType=lambda:'Number')
         self.fail=False
     def Set(self,value):
@@ -67,6 +69,10 @@ class Document:
         self.started=0; self.length_ft=1/.3048
         self.element=NS(UniqueId='uid-1',Id=NS(Value=1),LookupParameter=lambda name:self.parameters.get(name),
             get_Parameter=lambda name:NS(HasValue=True,AsDouble=lambda:25/304.8))
+        self.element.GetParameters=lambda name: [self.parameters[name]] if name in self.parameters else []
+        self.element.Category='Pipes'
+        self.binding=InstanceBinding()
+        self.ParameterBindings=NS(get_Item=lambda definition:self.binding)
         self.element.Location=NS(Curve=NS(Length=self.length_ft,
             GetEndPoint=lambda i:NS(X=self.length_ft*i,Y=0.,Z=0.)))
     def GetElement(self,identity):
@@ -87,7 +93,12 @@ class Transaction:
     def Dispose(self): pass
 
 
+class InstanceBinding:
+    def __init__(self):self.Categories=NS(Contains=lambda category:category=='Pipes')
+
+
 DB=NS(StorageType=NS(String='String',Integer='Integer',Double='Double'),SpecTypeId=NS(Number='Number'),
+    InstanceBinding=InstanceBinding,
     BuiltInParameter=NS(RBS_PIPE_DIAMETER_PARAM='diameter'),UnitTypeId=NS(Meters='m',Millimeters='mm'),
     UnitUtils=NS(ConvertFromInternalUnits=lambda v,unit:v*(.3048 if unit=='m' else 304.8)),
     Transaction=Transaction,TransactionStatus=NS(Started='Started',Committed='Committed',RolledBack='RolledBack'))
@@ -144,3 +155,31 @@ def test_unverified_code_pass_cannot_be_written():
     p=packet(); p['payload']['updates'][0]['parameters']['PLM_Code_Status']='PASS'; p['sha256']=checksum(p['payload'])
     with pytest.raises(ValueError,match='Unverified'):
         preflight_handoff(Document(),DB,p)
+
+
+@pytest.mark.parametrize('fault', ['not_shared','wrong_guid','ambiguous','type_binding','wrong_category','binding_api_error'])
+def test_real_shared_definition_and_binding_are_required(fault):
+    doc=Document(); parameter=doc.parameters['PLM_Result_Value']
+    if fault=='not_shared':parameter.IsShared=False
+    elif fault=='wrong_guid':parameter.GUID='00000000-0000-0000-0000-000000000000'
+    elif fault=='ambiguous':doc.element.GetParameters=lambda name:[parameter,parameter]
+    elif fault=='type_binding':doc.binding=object()
+    elif fault=='wrong_category':doc.binding.Categories.Contains=lambda category:False
+    else:doc.ParameterBindings=NS()
+    result=apply_handoff(doc,DB,packet(),commit=True)
+    assert result['status']=='BLOCKED' and doc.started==0
+
+
+def test_other_users_worksharing_ownership_blocks_before_transaction():
+    doc=Document();doc.IsWorkshared=True
+    api=NS(**vars(DB));api.CheckoutStatus=NS(OwnedByOtherUser='other')
+    api.WorksharingUtils=NS(GetCheckoutStatus=lambda doc,eid:'other')
+    assert apply_handoff(doc,api,packet(),commit=True)['status']=='BLOCKED'
+    assert doc.started==0
+
+
+def test_cloud_identity_uses_the_native_model_path_guids():
+    from bim.revit_handoff import model_identity
+    doc=NS(IsModelInCloud=True,GetCloudModelPath=lambda:NS(
+        GetProjectGUID=lambda:'project-guid',GetModelGUID=lambda:'model-guid'))
+    assert model_identity(doc)=='cloud:project-guid:model-guid'

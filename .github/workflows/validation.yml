@@ -38,7 +38,7 @@ jobs:
       - name: Scoped engineering methods, source gates and interactive pages
         run: python -m pytest tests/test_engineering_modules.py tests/test_engineering_modules_ui.py tests/test_advanced_engineering.py tests/test_formula_extensions.py tests/test_coupled_research.py tests/test_source_authentication.py -q
       - name: BIM mappings, extraction contracts and round-trip safeguards
-        run: python -m pytest tests/test_bim_mapping.py tests/test_bim_mapping_ui.py tests/test_bim_round_trip.py tests/test_revit_extract_api.py tests/test_revit_real_model.py -q
+        run: python -m pytest tests/test_bim_mapping.py tests/test_bim_mapping_ui.py tests/test_bim_round_trip.py tests/test_revit_extract_api.py tests/test_revit_real_model.py tests/test_revit_native_suite.py -q
       - name: Independent EPANET 2.2 rerun on Windows
         if: runner.os == 'Windows'
         shell: pwsh
