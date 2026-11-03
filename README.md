@@ -29,6 +29,7 @@ The engine separates **source facts**, **engineering inputs**, **results** and *
 | **Source and pressure-service review** | Detached source signatures with independently enrolled trust keys; model-matched zone pressure, control-boundary and PDA delivery audits. |
 | **Models and drawings** | IFC/Revit mapping, physical-port diagnostics, snapshots and revision comparison; DXF, DWG conversion intake and PDF review. |
 | **Sheets and evidence** | Interactive workbook forms, saved calculations, QA/QC, evidence packets, revision history and guarded Revit result handoffs. |
+| **Public software benchmarks** | Pinned repository/source register, screened SWMM and IFC inputs, local-only EPANET mapping comparison, retained failed checks and non-approval safeguards. |
 
 Each scoped tool states its source requirements, validation status and unevaluated checks. See the [extended methods and medical-gas guide](docs/ADVANCED_PLUMBING.md) for the new workflows and [original method guide](docs/PLUMBING_ENGINEERING_MODULES.md) for the baseline tools. All bundled examples are fictional.
 
@@ -91,6 +92,7 @@ See [setup and data requirements](docs/SETUP.md) for parsers, private workbooks,
 | [Interactive calculations](docs/INTERACTIVE_CALCULATIONS.md) | Import and use converted calculation forms. |
 | [DWG / PDF intake](docs/DWG_PDF_UPLOADS.md) | Drawing conversion and review workflow. |
 | [Engineering validation](docs/ENGINEERING_VALIDATION.md) | Independent reference candidates and acceptance requirements. |
+| [Public benchmark candidates](docs/PUBLIC_BENCHMARKS.md) | Source terms/provenance, pinned imports, executed comparison scope and failed-model diagnostics. |
 | [Reports and release review](docs/REVIEW_AND_RELEASE.md) | Provenance, evidence packets, revisions and guarded handoffs. |
 
 GitHub Actions runs [public-checkout validation](.github/workflows/validation.yml). Full local tests require private sources and optional solver evidence. Native Revit acceptance requires its own execution record. Software tests do not grant engineering approval.

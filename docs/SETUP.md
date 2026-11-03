@@ -44,6 +44,8 @@ The default database is `database/plumbing_engine.db`. Set `PLUMBING_ENGINE_DB_P
 
 The full local test suite uses private workbooks and optional native-library evidence. GitHub Actions runs the public-checkout checks defined in [the validation workflow](../.github/workflows/validation.yml). A native committed Revit execution record is required for the opt-in real-model round-trip test; a skipped test or rollback probe is not a completed round trip.
 
+Public software candidates appear under **Release Readiness → Public benchmark candidates**. Licensed source files/notices are explicitly bundled; local-only files are under ignored `local_sources/public_benchmarks/`. Results stay under private `.review/public_benchmarks/`. See [public benchmark setup and scope](PUBLIC_BENCHMARKS.md); no public candidate grants engineering acceptance.
+
 ```bash
 python -m pytest tests/ -q
 ```

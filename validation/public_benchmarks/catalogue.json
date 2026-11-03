@@ -1,0 +1,292 @@
+{
+  "schema_version": "public-benchmarks-1",
+  "sources": [
+    {
+      "repository": "Zhonghao1995/SWMMCanada",
+      "url": "https://github.com/Zhonghao1995/SWMMCanada",
+      "commit": "70658dada223cab139dbfe33f8ef9c4285a38057",
+      "source_license": "MIT",
+      "engineering_status": "ENGINEERING_REVIEW_REQUIRED",
+      "approval_eligible": false,
+      "provenance_screening": "Generated real-open-data models remain uncalibrated; bundled DWF fixture is software-only"
+    },
+    {
+      "repository": "KIOS-Research/EPANET-Benchmarks",
+      "url": "https://github.com/KIOS-Research/EPANET-Benchmarks",
+      "commit": "aaa7346607f080ecea7fae834944739b3385ba32",
+      "source_license": "NO_REPOSITORY_LICENSE_IDENTIFIED",
+      "engineering_status": "ENGINEERING_REVIEW_REQUIRED",
+      "approval_eligible": false,
+      "provenance_screening": "Link/local-use candidate only; no public asset redistribution until file-specific terms are established"
+    },
+    {
+      "repository": "OpenWaterAnalytics/epanet-example-networks",
+      "url": "https://github.com/OpenWaterAnalytics/epanet-example-networks",
+      "commit": "4f0ceb2641c35adece59145881f10232c40c26b7",
+      "source_license": "NO_REPOSITORY_LICENSE_IDENTIFIED",
+      "engineering_status": "ENGINEERING_REVIEW_REQUIRED",
+      "approval_eligible": false,
+      "provenance_screening": "Link/local-use candidate only; no public asset redistribution until file-specific terms are established"
+    },
+    {
+      "repository": "SWMMEnablement/1729-SWMM5-Models",
+      "url": "https://github.com/SWMMEnablement/1729-SWMM5-Models",
+      "commit": "3725238554579ec6cd85e732096156e66d78918d",
+      "source_license": "Unlicense",
+      "engineering_status": "ENGINEERING_REVIEW_REQUIRED",
+      "approval_eligible": false,
+      "provenance_screening": "EPA-folder candidates only; contributed Greenville, Simon_EPA and Special folders need separate review"
+    },
+    {
+      "repository": "Taz33m/coordproof-openbim-mep",
+      "url": "https://github.com/Taz33m/coordproof-openbim-mep",
+      "commit": "918ebdae025fd2b6e44485e9ce46d859be967729",
+      "source_license": "Apache-2.0",
+      "engineering_status": "ENGINEERING_REVIEW_REQUIRED",
+      "approval_eligible": false,
+      "provenance_screening": "Source terms recorded; software/coordination evidence only"
+    },
+    {
+      "repository": "AaltoUrbanWater/GisToSWMM5",
+      "url": "https://github.com/AaltoUrbanWater/GisToSWMM5",
+      "commit": "b3435006e084a14f6f0f325c0962a4c2a5213559",
+      "source_license": "MIT",
+      "engineering_status": "ENGINEERING_REVIEW_REQUIRED",
+      "approval_eligible": false,
+      "provenance_screening": "Source terms recorded; software/coordination evidence only"
+    }
+  ],
+  "cases": [
+    {
+      "id": "swmmcanada-dwf-fixture",
+      "repository": "Zhonghao1995/SWMMCanada",
+      "runner": "swmm",
+      "title": "SWMMCanada DWF regression fixture",
+      "evidence_class": "PUBLIC_BENCHMARK",
+      "modules": [
+        "dynamic_drainage"
+      ],
+      "license_status": "MIT_SOURCE_TERMS_RECORDED",
+      "expected": {
+        "node_count": 5,
+        "link_count": 3
+      },
+      "numeric_tolerance": 0.002,
+      "continuity_limit_pct": 1,
+      "limitation": "Software fixture, not a real municipal calibrated design. Runoff/routing conservation and source structure do not establish plumbing code compliance.",
+      "commit": "70658dada223cab139dbfe33f8ef9c4285a38057",
+      "engineering_status": "ENGINEERING_REVIEW_REQUIRED",
+      "acceptance_eligible": false,
+      "artifacts": [
+        {
+          "role": "model",
+          "source_path": "backend/tests/fixtures/dwf/single_pattern_baseline.inp",
+          "local_path": "assets/swmmcanada-dwf.inp",
+          "redistribute": true,
+          "sha256": "c81edf809bd4e22db4e78f4f7b7b89fd781a1b46b23a5b7798b0d3f135082c2b",
+          "bytes": 2793,
+          "git_blob_sha": "57e7e904926afe3509a3013655d48893fa7904fb",
+          "url": "https://raw.githubusercontent.com/Zhonghao1995/SWMMCanada/70658dada223cab139dbfe33f8ef9c4285a38057/backend/tests/fixtures/dwf/single_pattern_baseline.inp"
+        },
+        {
+          "role": "license",
+          "source_path": "LICENSE",
+          "local_path": "licenses/SWMMCanada-MIT.txt",
+          "redistribute": true,
+          "sha256": "f7ea7586a4a441a4c6d0096c5dd0d072952bbcd3714efcea0d4d4baa4c5e0f56",
+          "bytes": 1071,
+          "git_blob_sha": "02b1bd74e6dcd3c581046edd70d11be2c484c4c1",
+          "url": "https://raw.githubusercontent.com/Zhonghao1995/SWMMCanada/70658dada223cab139dbfe33f8ef9c4285a38057/LICENSE"
+        }
+      ]
+    },
+    {
+      "id": "swmm-epa-linear-links",
+      "repository": "SWMMEnablement/1729-SWMM5-Models",
+      "runner": "swmm",
+      "title": "EPA-folder linear links, fixed tailwater",
+      "evidence_class": "PUBLIC_BENCHMARK",
+      "modules": [
+        "dynamic_drainage"
+      ],
+      "license_status": "EPA_FOLDER_SCREENED_UNLICENSE_NOTICE_RETAINED",
+      "expected": {
+        "node_count": 9,
+        "link_count": 8,
+        "final_link": "23",
+        "final_flow_lps": 14.158423296
+      },
+      "numeric_tolerance": 0.02,
+      "continuity_limit_pct": 1,
+      "limitation": "EPA-folder software candidate only; no contributed folders assumed licensed. Constant declared 0.5 CFS inflow gives an independent steady outfall-flow invariant.",
+      "commit": "3725238554579ec6cd85e732096156e66d78918d",
+      "engineering_status": "ENGINEERING_REVIEW_REQUIRED",
+      "acceptance_eligible": false,
+      "artifacts": [
+        {
+          "role": "model",
+          "source_path": "EPA/linear_links.inp",
+          "local_path": "assets/epa-linear-links.inp",
+          "redistribute": true,
+          "sha256": "12fa6c56444fb6b781803073f85fe4be331abb8cc422cbdc427726ccdb703120",
+          "bytes": 3821,
+          "git_blob_sha": "377c645f7ee936c2707ac76d0829d5484a6f16da",
+          "url": "https://raw.githubusercontent.com/SWMMEnablement/1729-SWMM5-Models/3725238554579ec6cd85e732096156e66d78918d/EPA/linear_links.inp"
+        },
+        {
+          "role": "license",
+          "source_path": "LICENSE",
+          "local_path": "licenses/1729-Unlicense.txt",
+          "redistribute": true,
+          "sha256": "a57c8dfc60e60358d44f932a728db986d2343e3d82ff1b65b6c3d91abbe5c066",
+          "bytes": 1208,
+          "git_blob_sha": "9502aa6e51f2c1fcc6909dec55a2ff8d0ef428ae",
+          "url": "https://raw.githubusercontent.com/SWMMEnablement/1729-SWMM5-Models/3725238554579ec6cd85e732096156e66d78918d/LICENSE"
+        }
+      ]
+    },
+    {
+      "id": "coordproof-ifc-semantic",
+      "repository": "Taz33m/coordproof-openbim-mep",
+      "runner": "ifc",
+      "title": "CoordProof mechanical-room semantic IFC",
+      "evidence_class": "PUBLIC_BENCHMARK",
+      "modules": [
+        "bim_ifc_connectivity"
+      ],
+      "license_status": "APACHE_2_0_LICENSE_AND_NOTICE_RETAINED",
+      "expected": {},
+      "limitation": "Semantic/identity/unit adapter comparison against upstream CSV. Declared ports and missing axis coverage are reported; not a hydraulic plumbing design or certification.",
+      "commit": "918ebdae025fd2b6e44485e9ce46d859be967729",
+      "engineering_status": "ENGINEERING_REVIEW_REQUIRED",
+      "acceptance_eligible": false,
+      "artifacts": [
+        {
+          "role": "model",
+          "source_path": "bim/mechanical_room.ifc",
+          "local_path": "assets/coordproof-mechanical-room.ifc",
+          "redistribute": true,
+          "sha256": "1c008dda548a7a2477acc1a0dc76f75cb720da193f2fa505da65b46fcd32888d",
+          "bytes": 140999,
+          "git_blob_sha": "f2a365b0add6a07c37c7ec470cc97be2e10caf76",
+          "url": "https://raw.githubusercontent.com/Taz33m/coordproof-openbim-mep/918ebdae025fd2b6e44485e9ce46d859be967729/bim/mechanical_room.ifc"
+        },
+        {
+          "role": "inventory",
+          "source_path": "bim/openbim_semantic_inventory.csv",
+          "local_path": "assets/coordproof-semantic-inventory.csv",
+          "redistribute": true,
+          "sha256": "b3ee3a5a1f92027729091234693560cc1168840c4244961bc152bbed3a0b1b8a",
+          "bytes": 3354,
+          "git_blob_sha": "cd18e3ec4130015f5faa660bf8a5b93abbf27501",
+          "url": "https://raw.githubusercontent.com/Taz33m/coordproof-openbim-mep/918ebdae025fd2b6e44485e9ce46d859be967729/bim/openbim_semantic_inventory.csv"
+        },
+        {
+          "role": "license",
+          "source_path": "LICENSE",
+          "local_path": "licenses/CoordProof-Apache-2.0.txt",
+          "redistribute": true,
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "bytes": 11357,
+          "git_blob_sha": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+          "url": "https://raw.githubusercontent.com/Taz33m/coordproof-openbim-mep/918ebdae025fd2b6e44485e9ce46d859be967729/LICENSE"
+        },
+        {
+          "role": "notice",
+          "source_path": "NOTICE",
+          "local_path": "licenses/CoordProof-NOTICE.txt",
+          "redistribute": true,
+          "sha256": "ba4f4d89857bfec963f085cb5864ecb9dffb7f88620afe3cde6e0b1c4b795581",
+          "bytes": 450,
+          "git_blob_sha": "7328b8b5b723c27eb543216519a1cd1b524e2e25",
+          "url": "https://raw.githubusercontent.com/Taz33m/coordproof-openbim-mep/918ebdae025fd2b6e44485e9ce46d859be967729/NOTICE"
+        }
+      ]
+    },
+    {
+      "id": "epanet-hanoi-local",
+      "repository": "KIOS-Research/EPANET-Benchmarks",
+      "runner": "epanet",
+      "title": "Hanoi H-W/LPS mapping comparison (local source)",
+      "evidence_class": "PUBLIC_BENCHMARK",
+      "modules": [
+        "general_pressure"
+      ],
+      "license_status": "NO_REPOSITORY_LICENSE_IDENTIFIED_LOCAL_ONLY",
+      "expected": {
+        "node_count": 32,
+        "link_count": 34
+      },
+      "numeric_tolerance": 0.002,
+      "limitation": "Original native solve versus explicitly converted engine graph uses the same EPANET 2.2 backend. Software mapping regression, not independently approved engineering evidence. Raw model remains local.",
+      "commit": "aaa7346607f080ecea7fae834944739b3385ba32",
+      "engineering_status": "ENGINEERING_REVIEW_REQUIRED",
+      "acceptance_eligible": false,
+      "artifacts": [
+        {
+          "role": "model",
+          "source_path": "asce-tf-wdst/Hanoi/Hanoi.inp",
+          "local_path": "hanoi.inp",
+          "redistribute": false,
+          "sha256": "941a08e1d9d2a698eb74e482a37df794affd059e3e0f462c8b3c77ba5f0fbe9c",
+          "bytes": 9860,
+          "git_blob_sha": "9ecd83a8031fa036c6f463c6a0accfa9ece1e566",
+          "url": "https://raw.githubusercontent.com/KIOS-Research/EPANET-Benchmarks/aaa7346607f080ecea7fae834944739b3385ba32/asce-tf-wdst/Hanoi/Hanoi.inp"
+        }
+      ]
+    },
+    {
+      "id": "swmmcanada-graham-creek",
+      "repository": "Zhonghao1995/SWMMCanada",
+      "runner": "registered",
+      "title": "Graham Creek observed-data study (not reproduced)",
+      "evidence_class": "REAL_OPEN_DATA_UNCALIBRATED",
+      "modules": [
+        "dynamic_drainage",
+        "storm_storage"
+      ],
+      "license_status": "MODEL_AND_EXTERNAL_DATA_TERMS_REQUIRE_CASE_REVIEW",
+      "expected": {},
+      "limitation": "Repository contains a study and reproduction script; complete model/rain/gauge bundle has not been imported or reproduced here. A rebuild and per-source data rights/calibration review are required.",
+      "commit": "70658dada223cab139dbfe33f8ef9c4285a38057",
+      "engineering_status": "ENGINEERING_REVIEW_REQUIRED",
+      "acceptance_eligible": false,
+      "artifacts": []
+    },
+    {
+      "id": "owa-epanet-example-source",
+      "repository": "OpenWaterAnalytics/epanet-example-networks",
+      "runner": "registered",
+      "title": "OWA example-network source register",
+      "evidence_class": "PUBLIC_BENCHMARK",
+      "modules": [
+        "general_pressure"
+      ],
+      "license_status": "NO_REPOSITORY_LICENSE_IDENTIFIED_LINKS_ONLY",
+      "expected": {},
+      "limitation": "Example networks registered by pinned commit. Unit/pump/quality/control differences need explicit mapping, and file-specific source/redistribution terms remain to be established.",
+      "commit": "4f0ceb2641c35adece59145881f10232c40c26b7",
+      "engineering_status": "ENGINEERING_REVIEW_REQUIRED",
+      "acceptance_eligible": false,
+      "artifacts": []
+    },
+    {
+      "id": "gis-to-swmm-source",
+      "repository": "AaltoUrbanWater/GisToSWMM5",
+      "runner": "registered",
+      "title": "GIS-to-SWMM reproducible-generation source",
+      "evidence_class": "PUBLIC_BENCHMARK",
+      "modules": [
+        "dynamic_drainage",
+        "storm_storage"
+      ],
+      "license_status": "MIT_CODE_TERMS_RECORDED_DATA_TERMS_SEPARATE",
+      "expected": {},
+      "limitation": "Generation workflow registered; external DEM/land-use/rain files and generated model are not executed or imported. Catchment generation is not a professional design approval.",
+      "commit": "b3435006e084a14f6f0f325c0962a4c2a5213559",
+      "engineering_status": "ENGINEERING_REVIEW_REQUIRED",
+      "acceptance_eligible": false,
+      "artifacts": []
+    }
+  ]
+}

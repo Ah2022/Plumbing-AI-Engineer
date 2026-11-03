@@ -1,0 +1,87 @@
+{
+  "schema_version": "public-benchmark-result-1",
+  "case_id": "swmm-epa-linear-links",
+  "evidence_class": "PUBLIC_BENCHMARK",
+  "evidence_tags": [
+    "PUBLIC_BENCHMARK",
+    "SOFTWARE_REFERENCE_ONLY",
+    "ENGINEERING_REVIEW_REQUIRED"
+  ],
+  "engineering_status": "ENGINEERING_REVIEW_REQUIRED",
+  "acceptance_eligible": false,
+  "code_compliance_status": "NOT_EVALUATED",
+  "executed_at_utc": "2026-11-03T09:57:40.811609+00:00",
+  "source_commit": "3725238554579ec6cd85e732096156e66d78918d",
+  "repository": "SWMMEnablement/1729-SWMM5-Models",
+  "runner_sha256": "309644d8b0f8facb31d477995a694c37423fb03fd5bef48b0fa5c59477df51a5",
+  "catalogue_sha256": "c4d94981b7b653ebfa547a2e5c4f1f684b435b65f212eda8ff4220365fe48a83",
+  "input_sha256": {
+    "model": "12fa6c56444fb6b781803073f85fe4be331abb8cc422cbdc427726ccdb703120",
+    "license": "a57c8dfc60e60358d44f932a728db986d2343e3d82ff1b65b6c3d91abbe5c066"
+  },
+  "software_status": "FAIL",
+  "comparisons": [
+    {
+      "check": "pinned_node_count",
+      "status": "PASS",
+      "actual": 9,
+      "expected": 9,
+      "absolute_tolerance": 0
+    },
+    {
+      "check": "pinned_link_count",
+      "status": "PASS",
+      "actual": 8,
+      "expected": 8,
+      "absolute_tolerance": 0
+    },
+    {
+      "check": "routing_continuity_within_limit",
+      "status": "FAIL",
+      "actual": false,
+      "expected": true,
+      "absolute_tolerance": 0
+    },
+    {
+      "check": "no_node_nonconvergence",
+      "status": "FAIL",
+      "actual": 48,
+      "expected": 0,
+      "absolute_tolerance": 0
+    },
+    {
+      "check": "declared_steady_inflow_reaches_outfall_lps",
+      "status": "PASS",
+      "actual": 14.158423296,
+      "expected": 14.158423296,
+      "absolute_tolerance": 0.02
+    }
+  ],
+  "issues": [
+    "routing_continuity_within_limit failed; retain original source/settings and review timestep, boundaries and initialization",
+    "no_node_nonconvergence failed; retain original source/settings and review timestep, boundaries and initialization"
+  ],
+  "native_version": 52004,
+  "execution_input_sha256": "5b70bfd60677027da4fc7bc8411021aa346e64a3872f135f29751198294ab071",
+  "execution_changes": [
+    "Append explicit node/link/subcatchment reporting directives; source hydraulic parameters and event are unchanged"
+  ],
+  "source_flow_units": "CFS",
+  "normalized_flow_units": "L/s",
+  "routing_continuity_error_pct": 3.3983373641967773,
+  "runoff_continuity_error_pct": 0.0,
+  "flooding_volume_m3": 0.0,
+  "nonconverged_node_steps": 48,
+  "maximum_absolute_flow_lps": 39.066574416192445,
+  "final_link_flows_lps": {
+    "11": 14.158423296,
+    "13": 14.158423296,
+    "17": 14.158423296,
+    "19": 14.158423296,
+    "21": 14.158423296,
+    "23": 14.158423296,
+    "25": 14.158423296,
+    "43": 14.158423296
+  },
+  "coverage": "Pinned external model native execution, input invariants and conservation; no automatic claim of field calibration, drainage-module equivalence or building-plumbing compliance"
+}

@@ -17,7 +17,7 @@ venv/
 .env.*
 !.env.example
 .streamlit/secrets.toml
-# Project models stay local. Only generated synthetic parser fixtures are public.
+# Project models stay local. Explicit licensed benchmark exceptions retain notices.
 *.ifc
 *.ifczip
 *.dxf
@@ -27,3 +27,4 @@ venv/
 *.rfa
 !examples/model_pilot.ifc
 !examples/model_pilot.dxf
+!validation/public_benchmarks/assets/coordproof-mechanical-room.ifc

@@ -32,6 +32,10 @@ def _signed_evidence_exists(review):
 
 def _entry_accepted(entry):
     """An ACCEPTED flag alone cannot fill a missing independent reference."""
+    public_tags={'PUBLIC_BENCHMARK','REAL_OPEN_DATA_UNCALIBRATED','SOFTWARE_REFERENCE_ONLY','ENGINEERING_REVIEW_REQUIRED'}
+    tags=entry.get('evidence_tags',[])
+    if not isinstance(tags,list) or not all(isinstance(t,str) for t in tags):return False
+    if public_tags.intersection(tags) or entry.get('provenance_origin') in public_tags:return False
     if entry.get('engineering_status')!='ACCEPTED' or entry.get('evidence_class')!='AUTHENTICATED_CODE_OR_APPROVED_PROJECT_REFERENCE':return False
     review=entry.get('review',{})
     name=entry.get('independent_reference_path')
@@ -96,6 +100,7 @@ def validation_gate(data=DATA):
         discrepancies=json.loads((data/'discrepancies.json').read_text(encoding='utf-8'))
         if any(r['engineering_review']!='ACCEPTED' for r in discrepancies):issues.append('EPANET convention differences and warning decisions await engineering acceptance')
         return dict(schema_version='engineering-validation-gate-1',release_label='ENGINEERING_VALIDATION_PENDING' if issues else 'ENGINEERING_ACCEPTED',
+            public_benchmarks_acceptance_eligible=False,
             engineering_status='REVIEW_REQUIRED' if issues else 'ACCEPTED',authoritative=not issues,
             core_calculations=len(registered),unregistered_calculations=unregistered,
             interactive_forms=len(registered_forms),pending_reference_entries=len(pending),pending_module_scopes=pending_modules,

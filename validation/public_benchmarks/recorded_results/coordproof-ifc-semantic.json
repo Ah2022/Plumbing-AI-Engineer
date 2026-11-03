@@ -1,0 +1,161 @@
+{
+  "schema_version": "public-benchmark-result-1",
+  "case_id": "coordproof-ifc-semantic",
+  "evidence_class": "PUBLIC_BENCHMARK",
+  "evidence_tags": [
+    "PUBLIC_BENCHMARK",
+    "SOFTWARE_REFERENCE_ONLY",
+    "ENGINEERING_REVIEW_REQUIRED"
+  ],
+  "engineering_status": "ENGINEERING_REVIEW_REQUIRED",
+  "acceptance_eligible": false,
+  "code_compliance_status": "NOT_EVALUATED",
+  "executed_at_utc": "2026-11-03T09:57:41.276117+00:00",
+  "source_commit": "918ebdae025fd2b6e44485e9ce46d859be967729",
+  "repository": "Taz33m/coordproof-openbim-mep",
+  "runner_sha256": "309644d8b0f8facb31d477995a694c37423fb03fd5bef48b0fa5c59477df51a5",
+  "catalogue_sha256": "c4d94981b7b653ebfa547a2e5c4f1f684b435b65f212eda8ff4220365fe48a83",
+  "input_sha256": {
+    "model": "1c008dda548a7a2477acc1a0dc76f75cb720da193f2fa505da65b46fcd32888d",
+    "inventory": "b3ee3a5a1f92027729091234693560cc1168840c4244961bc152bbed3a0b1b8a",
+    "license": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "notice": "ba4f4d89857bfec963f085cb5864ecb9dffb7f88620afe3cde6e0b1c4b795581"
+  },
+  "software_status": "PASS",
+  "comparisons": [
+    {
+      "check": "upstream_supported_semantic_inventory",
+      "status": "PASS",
+      "actual": [
+        [
+          "PipeFitting_CHWR_Elbow_01",
+          "IfcPipeFitting"
+        ],
+        [
+          "PipeFitting_CHWS_Elbow_01",
+          "IfcPipeFitting"
+        ],
+        [
+          "Pipe_Return_01",
+          "IfcPipeSegment"
+        ],
+        [
+          "Pipe_Return_Drop_01",
+          "IfcPipeSegment"
+        ],
+        [
+          "Pipe_Supply_01",
+          "IfcPipeSegment"
+        ],
+        [
+          "Pipe_Supply_Drop_01",
+          "IfcPipeSegment"
+        ],
+        [
+          "Pump_CHWS_Duty_01",
+          "IfcPump"
+        ],
+        [
+          "Pump_CHWS_Standby_01",
+          "IfcPump"
+        ],
+        [
+          "Valve_CHWR_Balancing_01",
+          "IfcValve"
+        ],
+        [
+          "Valve_CHWR_Isolation_01",
+          "IfcValve"
+        ],
+        [
+          "Valve_CHWS_Balancing_01",
+          "IfcValve"
+        ],
+        [
+          "Valve_CHWS_Isolation_01",
+          "IfcValve"
+        ]
+      ],
+      "expected": [
+        [
+          "PipeFitting_CHWR_Elbow_01",
+          "IfcPipeFitting"
+        ],
+        [
+          "PipeFitting_CHWS_Elbow_01",
+          "IfcPipeFitting"
+        ],
+        [
+          "Pipe_Return_01",
+          "IfcPipeSegment"
+        ],
+        [
+          "Pipe_Return_Drop_01",
+          "IfcPipeSegment"
+        ],
+        [
+          "Pipe_Supply_01",
+          "IfcPipeSegment"
+        ],
+        [
+          "Pipe_Supply_Drop_01",
+          "IfcPipeSegment"
+        ],
+        [
+          "Pump_CHWS_Duty_01",
+          "IfcPump"
+        ],
+        [
+          "Pump_CHWS_Standby_01",
+          "IfcPump"
+        ],
+        [
+          "Valve_CHWR_Balancing_01",
+          "IfcValve"
+        ],
+        [
+          "Valve_CHWR_Isolation_01",
+          "IfcValve"
+        ],
+        [
+          "Valve_CHWS_Balancing_01",
+          "IfcValve"
+        ],
+        [
+          "Valve_CHWS_Isolation_01",
+          "IfcValve"
+        ]
+      ],
+      "absolute_tolerance": 0
+    },
+    {
+      "check": "source_millimetres_to_m",
+      "status": "PASS",
+      "actual": 0.001,
+      "expected": 0.001,
+      "absolute_tolerance": 0
+    },
+    {
+      "check": "stable_ids_unique",
+      "status": "PASS",
+      "actual": 12,
+      "expected": 12,
+      "absolute_tolerance": 0
+    }
+  ],
+  "issues": [
+    "12 objects have no supported measured Axis/IfcPolyline; hydraulic geometry remains unevaluated",
+    "2 declared port relations cross unsupported MEP classes; this is not a complete hydraulic topology"
+  ],
+  "supported_object_count": 12,
+  "declared_connection_count": 12,
+  "measured_axis_count": 0,
+  "unresolved_cross_scope_connections": 2,
+  "coverage": "Upstream semantic CSV versus plumbing IFC adapter identities/classes/units; ports across unsupported MEP classes and unavailable axis geometry remain unevaluated",
+  "limitations": [
+    "Only explicit polyline Axis geometry is measured; swept bodies/mapped representations are unevaluated.",
+    "Ports and declared flow directions are evidence only; no complete hydraulic topology is inferred.",
+    "Property sets, nominal diameter, outside diameter and internal bore are distinct; engineering mapping is required.",
+    "Centreline elevations do not establish drainage invert elevations."
+  ]
+}

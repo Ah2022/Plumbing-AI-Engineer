@@ -12,6 +12,8 @@ def page_release_readiness():
     pid = st.session_state.get('project_id')
     if not pid:
         st.info('Create or open a project first.'); return
+    from app.public_benchmarks_page import public_benchmarks_panel
+    public_benchmarks_panel()
     st.subheader('Phase 1 A: independent engineering validation')
     gate=validation_gate()
     st.warning('Engineering validation pending. Numerical agreement alone does not verify a release.')

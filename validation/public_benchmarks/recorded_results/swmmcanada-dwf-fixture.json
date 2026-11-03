@@ -1,0 +1,72 @@
+{
+  "schema_version": "public-benchmark-result-1",
+  "case_id": "swmmcanada-dwf-fixture",
+  "evidence_class": "PUBLIC_BENCHMARK",
+  "evidence_tags": [
+    "PUBLIC_BENCHMARK",
+    "SOFTWARE_REFERENCE_ONLY",
+    "ENGINEERING_REVIEW_REQUIRED"
+  ],
+  "engineering_status": "ENGINEERING_REVIEW_REQUIRED",
+  "acceptance_eligible": false,
+  "code_compliance_status": "NOT_EVALUATED",
+  "executed_at_utc": "2026-11-03T09:57:40.514076+00:00",
+  "source_commit": "70658dada223cab139dbfe33f8ef9c4285a38057",
+  "repository": "Zhonghao1995/SWMMCanada",
+  "runner_sha256": "309644d8b0f8facb31d477995a694c37423fb03fd5bef48b0fa5c59477df51a5",
+  "catalogue_sha256": "c4d94981b7b653ebfa547a2e5c4f1f684b435b65f212eda8ff4220365fe48a83",
+  "input_sha256": {
+    "model": "c81edf809bd4e22db4e78f4f7b7b89fd781a1b46b23a5b7798b0d3f135082c2b",
+    "license": "f7ea7586a4a441a4c6d0096c5dd0d072952bbcd3714efcea0d4d4baa4c5e0f56"
+  },
+  "software_status": "PASS",
+  "comparisons": [
+    {
+      "check": "pinned_node_count",
+      "status": "PASS",
+      "actual": 5,
+      "expected": 5,
+      "absolute_tolerance": 0
+    },
+    {
+      "check": "pinned_link_count",
+      "status": "PASS",
+      "actual": 3,
+      "expected": 3,
+      "absolute_tolerance": 0
+    },
+    {
+      "check": "routing_continuity_within_limit",
+      "status": "PASS",
+      "actual": true,
+      "expected": true,
+      "absolute_tolerance": 0
+    },
+    {
+      "check": "no_node_nonconvergence",
+      "status": "PASS",
+      "actual": 0,
+      "expected": 0,
+      "absolute_tolerance": 0
+    }
+  ],
+  "issues": [],
+  "native_version": 52004,
+  "execution_input_sha256": "7c6a955e3a1b3e4b9d509ce84898cdad7b4be22bd4ea77791687daab6ff5cebc",
+  "execution_changes": [
+    "Append explicit node/link/subcatchment reporting directives; source hydraulic parameters and event are unchanged"
+  ],
+  "source_flow_units": "CMS",
+  "normalized_flow_units": "L/s",
+  "routing_continuity_error_pct": -0.034699149429798126,
+  "runoff_continuity_error_pct": 9.999999974752427e-07,
+  "flooding_volume_m3": 0.0,
+  "nonconverged_node_steps": 0,
+  "maximum_absolute_flow_lps": 3.3344023395329714,
+  "final_link_flows_lps": {
+    "C1": 0.0,
+    "SAN_C1": 0.7305493927560747,
+    "SAN_C2": 1.201269798912108
+  },
+  "coverage": "Pinned external model native execution, input invariants and conservation; no automatic claim of field calibration, drainage-module equivalence or building-plumbing compliance"
+}
